@@ -1,0 +1,85 @@
+(function () {
+  'use strict';
+  const root = document.querySelector('.wcip-admin');
+  if (!root || !window.wcipAdmin) return;
+  const notice = root.querySelector('.wcip-async-notice');
+  const request = async (path, options = {}) => {
+    const response = await fetch(wcipAdmin.restUrl + path, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': wcipAdmin.nonce, ...(options.headers || {}) }
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.message || wcipAdmin.strings.failed);
+    return data;
+  };
+  const setNotice = (message, type = '') => {
+    if (!notice) return;
+    notice.className = 'wcip-async-notice ' + (type ? 'is-' + type : '');
+    notice.textContent = message;
+  };
+  root.addEventListener('click', async (event) => {
+    const button = event.target.closest('[data-wcip-action], [data-wcip-job], [data-wcip-bulk-print]');
+    if (!button || button.disabled) return;
+    button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
+    const original = button.textContent;
+    button.textContent = wcipAdmin.strings.working;
+    try {
+      if (button.dataset.wcipAction === 'test-connection') {
+        await request('/connection/test', { method: 'POST' });
+        setNotice(wcipAdmin.strings.connectionOk, 'success');
+      } else if (button.dataset.wcipAction === 'refresh-printers') {
+        const data = await request('/printers?refresh=true');
+        const select = root.querySelector('#wcip-printer-select');
+        select.replaceChildren();
+        if (!data.printers.length) {
+          select.add(new Option(wcipAdmin.strings.noPrinters, ''));
+          setNotice(wcipAdmin.strings.noPrinters, 'warning');
+        } else {
+          data.printers.forEach((printer) => select.add(new Option(printer.name + (printer.state ? ' · ' + printer.state : ''), printer.id)));
+          select.dispatchEvent(new Event('change'));
+          setNotice(wcipAdmin.strings.printersFound.replace('%d', data.printers.length), 'success');
+        }
+      } else if (button.dataset.wcipAction === 'test-print') {
+        const printerId = root.querySelector('#wcip-printer-select').value;
+        await request('/test-print', { method: 'POST', body: JSON.stringify({ printer_id: printerId }) });
+        setNotice(wcipAdmin.strings.submitted, 'success');
+      } else if (button.dataset.wcipJob) {
+        await request('/jobs/' + button.dataset.jobId + '/' + button.dataset.wcipJob, { method: 'POST' });
+        window.location.reload();
+      } else if (button.hasAttribute('data-wcip-bulk-print')) {
+        const orderIds = button.dataset.orderIds.split(',').map(Number);
+        const templateId = root.querySelector('#wcip-bulk_template').value;
+        const output = root.querySelector('#wcip-bulk-output').value;
+        const copies = Number(root.querySelector('#wcip-bulk_copies').value);
+        if (output === 'browser') {
+          const url = new URL(button.dataset.previewUrl);
+          url.searchParams.set('template', templateId);
+          url.searchParams.set('copies', String(copies));
+          window.open(url.toString(), '_blank', 'noopener');
+        } else {
+          const data = await request('/print', { method: 'POST', body: JSON.stringify({ order_ids: orderIds, template_id: templateId, provider_id: 'printnode', printer_id: wcipAdmin.printerId, copies }) });
+          setNotice(wcipAdmin.strings.jobsQueued.replace('%d', data.queued), 'success');
+        }
+      }
+    } catch (error) {
+      setNotice(error.message, 'error');
+    } finally {
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+      button.textContent = original;
+    }
+  });
+  root.addEventListener('change', (event) => {
+    if (event.target.id === 'wcip-printer-select') {
+      const hidden = root.querySelector('#wcip-printer-name');
+      hidden.value = event.target.selectedOptions[0]?.textContent.replace(/ · .+$/, '') || '';
+    }
+    if (event.target.id === 'wcip-auto-enabled') {
+      const dependent = root.querySelector('[data-auto-settings]');
+      dependent.hidden = !event.target.checked;
+    }
+  });
+  const auto = root.querySelector('#wcip-auto-enabled');
+  if (auto) auto.dispatchEvent(new Event('change'));
+})();

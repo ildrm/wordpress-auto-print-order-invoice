@@ -1,0 +1,24 @@
+{
+  "name": "wc-invoice-printer/wc-invoice-printer",
+  "description": "Secure manual and automatic invoice printing for WooCommerce.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.1",
+    "mpdf/mpdf": "^8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5 || ^11.0"
+  },
+  "autoload": {
+    "psr-4": {"WCInvoicePrinter\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {"WCInvoicePrinter\\Tests\\": "tests/"}
+  },
+  "scripts": {
+    "test": "phpunit",
+    "lint": "find . -path ./vendor -prune -o -path ./build -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l"
+  },
+  "config": {"allow-plugins": {}, "sort-packages": true}
+}

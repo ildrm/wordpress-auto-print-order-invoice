@@ -1,0 +1,125 @@
+<?php
+
+namespace WCInvoicePrinter\Invoice;
+
+use WCInvoicePrinter\Settings\SettingsRepository;
+
+final class InvoiceFactory {
+	public function __construct( private readonly SettingsRepository $settings ) {}
+
+	public function from_order( \WC_Order $order ): InvoiceData {
+		$items = array();
+		foreach ( $order->get_items() as $item ) {
+			$product = $item->get_product();
+			$items[] = array(
+				'name'       => $item->get_name(),
+				'variation'  => $this->variation_text( $item ),
+				'sku'        => $product ? $product->get_sku() : '',
+				'quantity'   => (int) $item->get_quantity(),
+				'unit_price' => $this->price( $order->get_item_subtotal( $item, true, false ), $order ),
+				'subtotal'   => $this->price( $item->get_subtotal(), $order ),
+				'discount'   => '',
+				'tax'        => $this->price( $item->get_total_tax(), $order ),
+				'total'      => wp_kses( $order->get_formatted_line_subtotal( $item ), $this->price_tags() ),
+			);
+		}
+
+		$totals = array();
+		foreach ( $order->get_order_item_totals() as $total ) {
+			$totals[] = array(
+				'label' => wp_strip_all_tags( (string) $total['label'] ),
+				'value' => wp_kses( (string) $total['value'], array( 'span' => array( 'class' => true ), 'small' => array() ) ),
+			);
+		}
+
+		$data = new InvoiceData(
+			array(
+				'id'             => $order->get_id(),
+				'number'         => $order->get_order_number(),
+				'date'           => $order->get_date_created() ? wc_format_datetime( $order->get_date_created() ) : '',
+				'paid_date'      => $order->get_date_paid() ? wc_format_datetime( $order->get_date_paid() ) : '',
+				'currency'       => $order->get_currency(),
+				'status'         => wc_get_order_status_name( $order->get_status() ),
+			),
+			array(
+				'name'       => (string) $this->settings->get( 'business_name' ),
+				'details'    => (string) $this->settings->get( 'business_details' ),
+				'phone'      => (string) $this->settings->get( 'business_phone' ),
+				'email'      => (string) $this->settings->get( 'business_email' ),
+				'logo_data_uri' => $this->safe_logo_data_uri( (string) $this->settings->get( 'logo_url' ) ),
+				'address'    => $this->store_address(),
+			),
+			array(
+				'name'             => $order->get_formatted_billing_full_name(),
+				'company'          => $order->get_billing_company(),
+				'billing_address'  => wp_strip_all_tags( $order->get_formatted_billing_address() ),
+				'shipping_address' => wp_strip_all_tags( $order->get_formatted_shipping_address() ),
+				'phone'            => $order->get_billing_phone(),
+				'email'            => $order->get_billing_email(),
+			),
+			$items,
+			$totals,
+			array(
+				'payment_method' => $order->get_payment_method_title(),
+				'shipping_method'=> $order->get_shipping_method(),
+				'note'           => $this->settings->get( 'show_customer_note' ) ? $order->get_customer_note() : '',
+			),
+			is_rtl()
+		);
+		return apply_filters( 'wcip_invoice_data', $data, $order );
+	}
+
+	public function sample( bool $rtl = false ): InvoiceData {
+		return new InvoiceData(
+			array( 'id' => 1042, 'number' => '1042', 'date' => 'September 15, 2026', 'paid_date' => 'September 15, 2026', 'currency' => 'USD', 'status' => 'Processing' ),
+			array( 'name' => $rtl ? 'فروشگاه نمونه' : 'Northstar Supply Co.', 'details' => __( 'Business registration and tax details', 'wc-invoice-printer' ), 'phone' => '+1 555 0142', 'email' => 'billing@example.com', 'logo_data_uri' => '', 'address' => $rtl ? 'تهران، خیابان ولیعصر، پلاک ۲۴' : '24 Market Street, Portland, OR' ),
+			array( 'name' => $rtl ? 'آرمان رضایی' : 'Alex Morgan', 'company' => $rtl ? 'شرکت راهکار نو' : 'Morgan Studio', 'billing_address' => $rtl ? 'تهران، بلوار کشاورز، واحد ۱۲' : '840 Evergreen Terrace, Seattle, WA', 'shipping_address' => '', 'phone' => '+1 555 0199', 'email' => 'alex@example.com' ),
+			array(
+				array( 'name' => $rtl ? 'دفتر برنامه‌ریزی حرفه‌ای با نام محصول بسیار طولانی' : 'Professional planning notebook with an intentionally long product name', 'variation' => 'Color: Midnight / Size: Large', 'sku' => 'PLAN-XL-01', 'quantity' => 2, 'unit_price' => '$42.00', 'subtotal' => '$84.00', 'discount' => '$8.40', 'tax' => '$6.05', 'total' => '$81.65' ),
+				array( 'name' => $rtl ? 'خودکار ژله‌ای' : 'Fine gel pen set', 'variation' => '', 'sku' => 'PEN-06', 'quantity' => 1, 'unit_price' => '$18.00', 'subtotal' => '$18.00', 'discount' => '$0.00', 'tax' => '$1.44', 'total' => '$19.44' ),
+			),
+			array( array( 'label' => 'Subtotal:', 'value' => '$102.00' ), array( 'label' => 'Discount:', 'value' => '−$8.40' ), array( 'label' => 'Shipping:', 'value' => '$7.00' ), array( 'label' => 'Tax:', 'value' => '$7.49' ), array( 'label' => 'Total:', 'value' => '<strong>$108.09</strong>' ) ),
+			array( 'payment_method' => 'Credit card', 'shipping_method' => 'Ground shipping', 'note' => $rtl ? 'لطفاً بسته را به نگهبانی تحویل دهید.' : 'Please leave the parcel at reception.' ),
+			$rtl
+		);
+	}
+
+	private function price( float|string $amount, \WC_Order $order ): string {
+		return wp_kses( wc_price( $amount, array( 'currency' => $order->get_currency() ) ), $this->price_tags() );
+	}
+
+	private function store_address(): string {
+		$parts = array_filter( array( get_option( 'woocommerce_store_address' ), get_option( 'woocommerce_store_address_2' ), get_option( 'woocommerce_store_city' ), get_option( 'woocommerce_store_postcode' ) ) );
+		return implode( ', ', array_map( 'sanitize_text_field', $parts ) );
+	}
+
+	private function variation_text( \WC_Order_Item_Product $item ): string {
+		$parts = array();
+		foreach ( $item->get_formatted_meta_data( '' ) as $meta ) {
+			$parts[] = wp_strip_all_tags( $meta->display_key . ': ' . $meta->display_value );
+		}
+		return implode( ' · ', $parts );
+	}
+
+	private function price_tags(): array {
+		return array( 'span' => array( 'class' => true ), 'bdi' => array(), 'small' => array(), 'del' => array(), 'ins' => array() );
+	}
+
+	private function safe_logo_data_uri( string $url ): string {
+		if ( '' === $url || ! wp_http_validate_url( $url ) ) { return ''; }
+		$key    = 'wcip_logo_' . hash( 'sha256', $url );
+		$cached = get_transient( $key );
+		if ( is_string( $cached ) ) { return $cached; }
+		$response = wp_safe_remote_get( $url, array( 'timeout' => 8, 'redirection' => 2, 'limit_response_size' => 2 * MB_IN_BYTES ) );
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) { return ''; }
+		$mime = strtolower( trim( strtok( wp_remote_retrieve_header( $response, 'content-type' ), ';' ) ?: '' ) );
+		if ( ! in_array( $mime, array( 'image/png', 'image/jpeg', 'image/gif', 'image/webp' ), true ) ) { return ''; }
+		$body = wp_remote_retrieve_body( $response );
+		if ( '' === $body || strlen( $body ) > 2 * MB_IN_BYTES ) { return ''; }
+		$image = @getimagesizefromstring( $body ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Invalid remote image data is an expected failure.
+		if ( ! is_array( $image ) || $image[0] > 5000 || $image[1] > 5000 ) { return ''; }
+		$data_uri = 'data:' . $mime . ';base64,' . base64_encode( $body );
+		set_transient( $key, $data_uri, DAY_IN_SECONDS );
+		return $data_uri;
+	}
+}
