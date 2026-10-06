@@ -9,30 +9,54 @@ final class MpdfRenderer implements PdfRendererInterface {
 		if ( ! class_exists( \Mpdf\Mpdf::class ) ) {
 			throw new \RuntimeException( __( 'PDF support is unavailable. Install the Composer dependencies.', 'wc-invoice-printer' ) );
 		}
-		$temp_dir = trailingslashit( get_temp_dir() ) . 'wcip-mpdf';
-		if ( ! wp_mkdir_p( $temp_dir ) ) {
+		$temp_dir = trailingslashit( get_temp_dir() ) . 'wcip-mpdf-' . bin2hex( random_bytes( 16 ) );
+		// A private, per-render directory prevents other sites/users reading cached
+		// images and avoids mPDF cleanup races between concurrent print workers.
+		if ( ! @mkdir( $temp_dir, 0700 ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- A safe user-facing error is emitted below.
 			throw new \RuntimeException( __( 'A secure PDF working directory could not be created.', 'wc-invoice-printer' ) );
 		}
-		$format = '80mm' === $template->paper_size ? array( 80, $this->thermal_height( $html ) ) : $template->paper_size;
-		$mpdf   = new \Mpdf\Mpdf(
-			array(
-				'mode'             => 'utf-8',
-				'format'           => $format,
-				'orientation'      => strtoupper( substr( $template->orientation, 0, 1 ) ),
-				'tempDir'          => $temp_dir,
-				'autoScriptToLang' => true,
-				// DejaVu Sans covers Latin, Persian, and Arabic; pinning it keeps the
-				// distributable deterministic and avoids mPDF selecting optional fonts.
-				'autoLangToFont'   => false,
-				'default_font'     => 'dejavusans',
-				'margin_left'      => '80mm' === $template->paper_size ? 4 : 10,
-				'margin_right'     => '80mm' === $template->paper_size ? 4 : 10,
-				'margin_top'       => '80mm' === $template->paper_size ? 4 : 10,
-				'margin_bottom'    => '80mm' === $template->paper_size ? 4 : 10,
-			)
-		);
-		$mpdf->WriteHTML( $html );
-		return $mpdf->Output( '', \Mpdf\Output\Destination::STRING_RETURN );
+		try {
+			$format = '80mm' === $template->paper_size ? array( 80, $this->thermal_height( $html ) ) : $template->paper_size;
+			$mpdf   = new \Mpdf\Mpdf(
+				array(
+					'mode'             => 'utf-8',
+					'format'           => $format,
+					'orientation'      => strtoupper( substr( $template->orientation, 0, 1 ) ),
+					'tempDir'          => $temp_dir,
+					'autoScriptToLang' => true,
+					// DejaVu Sans covers Latin, Persian, and Arabic; pinning it keeps the
+					// distributable deterministic and avoids mPDF selecting optional fonts.
+					'autoLangToFont'   => false,
+					'default_font'     => 'dejavusans',
+					'margin_left'      => '80mm' === $template->paper_size ? 4 : 10,
+					'margin_right'     => '80mm' === $template->paper_size ? 4 : 10,
+					'margin_top'       => '80mm' === $template->paper_size ? 4 : 10,
+					'margin_bottom'    => '80mm' === $template->paper_size ? 4 : 10,
+				)
+			);
+			$mpdf->WriteHTML( $html );
+			return $mpdf->Output( '', \Mpdf\Output\Destination::STRING_RETURN );
+		} finally {
+			$this->remove_temp_directory( $temp_dir );
+		}
+	}
+
+	private function remove_temp_directory( string $directory ): void {
+		$entries = @scandir( $directory ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Cleanup must not replace a generation error.
+		if ( false !== $entries ) {
+			foreach ( $entries as $entry ) {
+				if ( '.' === $entry || '..' === $entry ) {
+					continue;
+				}
+				$path = $directory . DIRECTORY_SEPARATOR . $entry;
+				if ( is_dir( $path ) && ! is_link( $path ) ) {
+					$this->remove_temp_directory( $path );
+				} else {
+					@unlink( $path ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Cleanup must not replace a generation error.
+				}
+			}
+		}
+		@rmdir( $directory ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Best-effort cleanup.
 	}
 
 	private function thermal_height( string $html ): int {

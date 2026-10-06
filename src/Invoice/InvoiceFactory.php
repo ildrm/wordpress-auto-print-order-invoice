@@ -15,12 +15,14 @@ final class InvoiceFactory {
 				'name'       => $item->get_name(),
 				'variation'  => $this->variation_text( $item ),
 				'sku'        => $product ? $product->get_sku() : '',
-				'quantity'   => (int) $item->get_quantity(),
-				'unit_price' => $this->price( $order->get_item_subtotal( $item, true, false ), $order ),
+				'quantity'   => $item->get_quantity(),
+				// Keep unit/subtotal/discount exclusive of tax; total is the amount
+				// actually charged for this line after discounts, including line tax.
+				'unit_price' => $this->price( $order->get_item_subtotal( $item, false, false ), $order ),
 				'subtotal'   => $this->price( $item->get_subtotal(), $order ),
-				'discount'   => '',
+				'discount'   => $this->price( max( 0, (float) $item->get_subtotal() - (float) $item->get_total() ), $order ),
 				'tax'        => $this->price( $item->get_total_tax(), $order ),
-				'total'      => wp_kses( $order->get_formatted_line_subtotal( $item ), $this->price_tags() ),
+				'total'      => $this->price( (float) $item->get_total() + (float) $item->get_total_tax(), $order ),
 			);
 		}
 
@@ -28,7 +30,7 @@ final class InvoiceFactory {
 		foreach ( $order->get_order_item_totals() as $total ) {
 			$totals[] = array(
 				'label' => wp_strip_all_tags( (string) $total['label'] ),
-				'value' => wp_kses( (string) $total['value'], array( 'span' => array( 'class' => true ), 'small' => array() ) ),
+				'value' => wp_kses( (string) $total['value'], $this->price_tags() ),
 			);
 		}
 
@@ -52,8 +54,8 @@ final class InvoiceFactory {
 			array(
 				'name'             => $order->get_formatted_billing_full_name(),
 				'company'          => $order->get_billing_company(),
-				'billing_address'  => wp_strip_all_tags( $order->get_formatted_billing_address() ),
-				'shipping_address' => wp_strip_all_tags( $order->get_formatted_shipping_address() ),
+				'billing_address'  => $this->plain_address( $order->get_formatted_billing_address() ),
+				'shipping_address' => $this->plain_address( $order->get_formatted_shipping_address() ),
 				'phone'            => $order->get_billing_phone(),
 				'email'            => $order->get_billing_email(),
 			),
@@ -95,14 +97,20 @@ final class InvoiceFactory {
 
 	private function variation_text( \WC_Order_Item_Product $item ): string {
 		$parts = array();
-		foreach ( $item->get_formatted_meta_data( '' ) as $meta ) {
-			$parts[] = wp_strip_all_tags( $meta->display_key . ': ' . $meta->display_value );
+		foreach ( $item->get_formatted_meta_data() as $meta ) {
+			$parts[] = html_entity_decode( wp_strip_all_tags( $meta->display_key . ': ' . $meta->display_value ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 		}
 		return implode( ' · ', $parts );
 	}
 
 	private function price_tags(): array {
-		return array( 'span' => array( 'class' => true ), 'bdi' => array(), 'small' => array(), 'del' => array(), 'ins' => array() );
+		return array( 'span' => array( 'class' => true ), 'bdi' => array(), 'small' => array( 'class' => true ), 'strong' => array(), 'del' => array(), 'ins' => array() );
+	}
+
+	private function plain_address( string $address ): string {
+		// WooCommerce joins address lines with <br>; removing tags directly
+		// concatenates the name, street and locality into an unusable address.
+		return trim( html_entity_decode( wp_strip_all_tags( (string) preg_replace( '/<br\s*\/?\s*>/i', "\n", $address ) ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
 	}
 
 	private function safe_logo_data_uri( string $url ): string {
@@ -117,7 +125,7 @@ final class InvoiceFactory {
 		$body = wp_remote_retrieve_body( $response );
 		if ( '' === $body || strlen( $body ) > 2 * MB_IN_BYTES ) { return ''; }
 		$image = @getimagesizefromstring( $body ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Invalid remote image data is an expected failure.
-		if ( ! is_array( $image ) || $image[0] > 5000 || $image[1] > 5000 ) { return ''; }
+		if ( ! is_array( $image ) || $image[0] > 5000 || $image[1] > 5000 || ( $image['mime'] ?? '' ) !== $mime ) { return ''; }
 		$data_uri = 'data:' . $mime . ';base64,' . base64_encode( $body );
 		set_transient( $key, $data_uri, DAY_IN_SECONDS );
 		return $data_uri;

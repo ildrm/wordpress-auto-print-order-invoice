@@ -15,7 +15,11 @@ WooCommerce Invoice Printer creates invoices from WooCommerce's public order API
 
 PrintNode receives the generated invoice PDF when selected. This may include customer names, addresses, contact details, and purchased items. Configure PrintNode and your privacy disclosures accordingly.
 
-The plugin does not claim jurisdiction-specific fiscal or tax compliance. WooCommerce order numbers are displayed as invoice references.
+Automatic printing is disabled by default and follows WooCommerce's paid state. A payment-complete hook and optional paid-status fallback create one automatic job per order. Pending/on-hold orders are not automatically printed. Offline gateways may assign paid statuses before cash collection; extensions can disable the fallback or apply stricter eligibility rules.
+
+PrintNode acceptance is not confirmation of paper output. HTTP 429 rejections receive bounded safe retries. Transport errors, HTTP 408/5xx submission responses, and unreadable successful responses are unknown and require checking PrintNode before intentionally reprinting.
+
+The plugin does not claim jurisdiction-specific fiscal or tax compliance. WooCommerce order numbers are displayed as invoice references. See README.md for complete configuration, recovery, API, extension, and testing documentation.
 
 == Installation ==
 
@@ -27,7 +31,7 @@ The plugin does not claim jurisdiction-specific fiscal or tax compliance. WooCom
 
 == Data retention ==
 
-Deactivation preserves settings and print history. Uninstall also preserves data unless the `wcip_delete_data_on_uninstall` option is explicitly enabled by an operator. Print jobs retain operational references and sanitized errors, but no duplicated invoice/customer payload.
+Deactivation cancels pending plugin actions and preserves settings/history for recovery on reactivation. Uninstall removes plugin role capabilities and preserves data unless the `wcip_delete_data_on_uninstall` option is explicitly enabled by an operator. Print jobs retain operational references and sanitized errors, but no duplicated invoice/customer payload.
 
 == Changelog ==
 

@@ -35,7 +35,10 @@ final class Plugin {
 		if ( ! class_exists( \Mpdf\Mpdf::class ) ) {
 			add_action( 'admin_notices', array( self::class, 'dependency_notice' ) );
 		}
-		Activator::maybe_upgrade();
+		if ( ! Activator::maybe_upgrade() ) {
+			add_action( 'admin_notices', array( self::class, 'database_notice' ) );
+			return;
+		}
 		$settings  = new SettingsRepository();
 		$templates = new TemplateRegistry();
 		$invoices  = new InvoiceFactory( $settings );
@@ -56,6 +59,10 @@ final class Plugin {
 		add_action( 'woocommerce_payment_complete', array( $automatic, 'payment_complete' ) );
 		add_action( 'woocommerce_order_status_changed', array( $automatic, 'paid_status_fallback' ), 10, 4 );
 		add_action( Scheduler::HOOK, array( $worker, 'process' ) );
+		add_action( 'action_scheduler_init', array( $scheduler, 'recover' ) );
+		add_action( 'action_scheduler_failed_action', array( $worker, 'interrupted' ) );
+		add_action( 'action_scheduler_failed_execution', array( $worker, 'interrupted' ) );
+		add_action( 'action_scheduler_unexpected_shutdown', array( $worker, 'interrupted' ) );
 		add_action( 'rest_api_init', array( $rest, 'register' ) );
 		add_action( 'admin_menu', array( $admin, 'register_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $admin, 'enqueue_assets' ) );
@@ -79,5 +86,9 @@ final class Plugin {
 
 	public static function dependency_notice(): void {
 		if ( current_user_can( 'activate_plugins' ) ) { echo '<div class="notice notice-warning"><p>' . esc_html__( 'WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available.', 'wc-invoice-printer' ) . '</p></div>'; }
+	}
+
+	public static function database_notice(): void {
+		if ( current_user_can( 'activate_plugins' ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin.', 'wc-invoice-printer' ) . '</p></div>'; }
 	}
 }

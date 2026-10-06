@@ -13,14 +13,22 @@ final class TemplateRegistry {
 	}
 
 	public function register( TemplateDefinition $template ): void {
-		if ( ! preg_match( '/^[a-z0-9_-]+$/', $template->id ) || ! is_readable( $template->path ) ) {
-			throw new \InvalidArgumentException( 'Invalid invoice template.' );
-		}
+		$this->validate( $template );
 		$this->templates[ $template->id ] = $template;
 	}
 
 	public function all(): array {
-		return apply_filters( 'wcip_invoice_templates', $this->templates );
+		$templates = apply_filters( 'wcip_invoice_templates', $this->templates );
+		if ( ! is_array( $templates ) ) {
+			throw new \InvalidArgumentException( 'Invalid invoice templates.' );
+		}
+		foreach ( $templates as $id => $template ) {
+			if ( ! $template instanceof TemplateDefinition || (string) $id !== $template->id ) {
+				throw new \InvalidArgumentException( 'Invalid invoice template.' );
+			}
+			$this->validate( $template );
+		}
+		return $templates;
 	}
 
 	public function get( string $id ): TemplateDefinition {
@@ -37,6 +45,12 @@ final class TemplateRegistry {
 			return true;
 		} catch ( \InvalidArgumentException ) {
 			return false;
+		}
+	}
+
+	private function validate( TemplateDefinition $template ): void {
+		if ( ! preg_match( '/^[a-z0-9_-]+$/', $template->id ) || ! is_file( $template->path ) || ! is_readable( $template->path ) || '' === trim( $template->paper_size ) || ! in_array( $template->orientation, array( 'portrait', 'landscape' ), true ) ) {
+			throw new \InvalidArgumentException( 'Invalid invoice template.' );
 		}
 	}
 }

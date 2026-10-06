@@ -21,4 +21,8 @@ final class IdempotencyKeyTest extends TestCase {
 	public function test_manual_reprints_are_always_unique(): void {
 		self::assertNotSame( IdempotencyKey::manual(), IdempotencyKey::manual() );
 	}
+
+	public function test_different_orders_with_the_same_transaction_cannot_share_a_job(): void {
+		self::assertNotSame( IdempotencyKey::automatic( 42, 'same-transaction' ), IdempotencyKey::automatic( 43, 'same-transaction' ) );
+	}
 }

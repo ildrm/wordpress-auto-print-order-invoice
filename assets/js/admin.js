@@ -4,7 +4,16 @@
   if (!root || !window.wcipAdmin) return;
   const notice = root.querySelector('.wcip-async-notice');
   const request = async (path, options = {}) => {
-    const response = await fetch(wcipAdmin.restUrl + path, {
+    // WordPress uses ?rest_route= when pretty permalinks are disabled.
+    const endpoint = new URL(wcipAdmin.restUrl);
+    const suffix = new URL(path, endpoint.origin);
+    if (endpoint.searchParams.has('rest_route')) {
+      endpoint.searchParams.set('rest_route', endpoint.searchParams.get('rest_route').replace(/\/$/, '') + suffix.pathname);
+    } else {
+      endpoint.pathname = endpoint.pathname.replace(/\/$/, '') + suffix.pathname;
+    }
+    suffix.searchParams.forEach((value, key) => endpoint.searchParams.set(key, value));
+    const response = await fetch(endpoint.toString(), {
       ...options,
       headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': wcipAdmin.nonce, ...(options.headers || {}) }
     });
@@ -31,15 +40,22 @@
       } else if (button.dataset.wcipAction === 'refresh-printers') {
         const data = await request('/printers?refresh=true');
         const select = root.querySelector('#wcip-printer-select');
+        const selectedId = select.value || wcipAdmin.printerId;
         select.replaceChildren();
         if (!data.printers.length) {
           select.add(new Option(wcipAdmin.strings.noPrinters, ''));
           setNotice(wcipAdmin.strings.noPrinters, 'warning');
         } else {
-          data.printers.forEach((printer) => select.add(new Option(printer.name + (printer.state ? ' · ' + printer.state : ''), printer.id)));
-          select.dispatchEvent(new Event('change'));
+          select.add(new Option(wcipAdmin.strings.selectPrinter, ''));
+          data.printers.forEach((printer) => {
+            const option = new Option(printer.name + (printer.state ? ' · ' + printer.state : ''), printer.id);
+            option.dataset.printerName = printer.name;
+            select.add(option);
+          });
+          if (data.printers.some((printer) => String(printer.id) === selectedId)) select.value = selectedId;
           setNotice(wcipAdmin.strings.printersFound.replace('%d', data.printers.length), 'success');
         }
+        select.dispatchEvent(new Event('change', { bubbles: true }));
       } else if (button.dataset.wcipAction === 'test-print') {
         const printerId = root.querySelector('#wcip-printer-select').value;
         await request('/test-print', { method: 'POST', body: JSON.stringify({ printer_id: printerId }) });
@@ -52,10 +68,12 @@
         const templateId = root.querySelector('#wcip-bulk_template').value;
         const output = root.querySelector('#wcip-bulk-output').value;
         const copies = Number(root.querySelector('#wcip-bulk_copies').value);
+        if (!Number.isInteger(copies) || copies < 1 || copies > 20) throw new Error(wcipAdmin.strings.invalidCopies);
         if (output === 'browser') {
           const url = new URL(button.dataset.previewUrl);
           url.searchParams.set('template', templateId);
           url.searchParams.set('copies', String(copies));
+          url.searchParams.set('print', '1');
           window.open(url.toString(), '_blank', 'noopener');
         } else {
           const data = await request('/print', { method: 'POST', body: JSON.stringify({ order_ids: orderIds, template_id: templateId, provider_id: 'printnode', printer_id: wcipAdmin.printerId, copies }) });
@@ -73,7 +91,8 @@
   root.addEventListener('change', (event) => {
     if (event.target.id === 'wcip-printer-select') {
       const hidden = root.querySelector('#wcip-printer-name');
-      hidden.value = event.target.selectedOptions[0]?.textContent.replace(/ · .+$/, '') || '';
+      const selected = event.target.selectedOptions[0];
+      hidden.value = event.target.value ? (selected?.dataset.printerName || selected?.textContent || '') : '';
     }
     if (event.target.id === 'wcip-auto-enabled') {
       const dependent = root.querySelector('[data-auto-settings]');
@@ -81,5 +100,5 @@
     }
   });
   const auto = root.querySelector('#wcip-auto-enabled');
-  if (auto) auto.dispatchEvent(new Event('change'));
+  if (auto) auto.dispatchEvent(new Event('change', { bubbles: true }));
 })();
