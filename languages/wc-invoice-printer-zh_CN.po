@@ -2,7 +2,7 @@
 # Distributed under GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-07 09:00+0330\n"
 "PO-Revision-Date: 2026-10-07 09:00+0330\n"
@@ -26,483 +26,486 @@ msgid "Secure manual and automatic invoice printing for WooCommerce."
 msgstr "为 WooCommerce 提供安全的手动和自动发票打印。"
 
 #: src/Admin/AdminPage.php:24
-#: src/Admin/AdminPage.php:91
+#: src/Admin/AdminPage.php:92
 msgid "Invoice Printer"
 msgstr "发票打印器"
 
-#: src/Admin/AdminPage.php:41
+#: src/Admin/AdminPage.php:42
+#: src/Admin/PrintConfirmationUi.php:12
 msgid "Working…"
 msgstr "正在处理…"
 
-#: src/Admin/AdminPage.php:42
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/AdminPage.php:43
+#: src/Admin/OrderIntegration.php:87
 #: src/Admin/PreviewController.php:48
 #: src/PrintJob/PrintJobService.php:84
 msgid "Choose between 1 and 20 copies."
 msgstr "请选择 1 到 20 份。"
 
-#: src/Admin/AdminPage.php:43
+#: src/Admin/AdminPage.php:44
 msgid "Something went wrong. Check the details and try again."
 msgstr "发生错误。请检查详情后重试。"
 
-#: src/Admin/AdminPage.php:44
+#: src/Admin/AdminPage.php:45
 msgid "Choose a printer"
 msgstr "选择打印机"
 
-#: src/Admin/AdminPage.php:45
+#: src/Admin/AdminPage.php:46
 msgid "No printers were found. Confirm that the PrintNode client is online."
 msgstr "未找到打印机。请确认 PrintNode 客户端已联网。"
 
-#: src/Admin/AdminPage.php:46
+#: src/Admin/AdminPage.php:47
 msgid "Submitted to PrintNode."
 msgstr "已提交至 PrintNode。"
 
-#: src/Admin/AdminPage.php:47
+#: src/Admin/AdminPage.php:48
 msgid "PrintNode connection verified."
 msgstr "PrintNode 连接已验证。"
 
 #. translators: %d: number of printers returned by PrintNode.
-#: src/Admin/AdminPage.php:49
+#: src/Admin/AdminPage.php:50
 #, php-format
 msgid "%d printer(s) found."
 msgstr "找到的打印机数量：%d"
 
 #. translators: %d: number of invoices added to the print queue.
-#: src/Admin/AdminPage.php:51
+#: src/Admin/AdminPage.php:52
 #, php-format
 msgid "%d invoice(s) queued."
 msgstr "已加入队列的发票数量：%d"
 
-#: src/Admin/AdminPage.php:57
+#: src/Admin/AdminPage.php:58
 msgid "You are not allowed to change these settings."
 msgstr "您无权更改这些设置。"
 
-#: src/Admin/AdminPage.php:60
+#: src/Admin/AdminPage.php:61
 msgid "Invalid settings input."
 msgstr "设置输入无效。"
 
-#: src/Admin/AdminPage.php:63
+#: src/Admin/AdminPage.php:64
 msgid "Invalid settings section."
 msgstr "设置分区无效。"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "General"
 msgstr "常规"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Templates"
 msgstr "模板"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Automatic Printing"
 msgstr "自动打印"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Printers"
 msgstr "打印机"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Print Jobs"
 msgstr "打印任务"
 
-#: src/Admin/AdminPage.php:91
+#: src/Admin/AdminPage.php:92
 msgid "Create consistent invoices and send them to the right printer."
 msgstr "创建格式统一的发票，并发送到正确的打印机。"
 
-#: src/Admin/AdminPage.php:92
+#: src/Admin/AdminPage.php:93
 msgid "Settings saved."
 msgstr "设置已保存。"
 
-#: src/Admin/AdminPage.php:93
+#: src/Admin/AdminPage.php:94
 msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
 msgstr "配置 PrintNode 凭据和打印机之前，自动打印将保持关闭。"
 
-#: src/Admin/AdminPage.php:94
+#: src/Admin/AdminPage.php:95
 msgid "Invoice Printer sections"
 msgstr "发票打印器分区"
 
-#: src/Admin/AdminPage.php:115
+#: src/Admin/AdminPage.php:116
 msgid "Invoice identity"
 msgstr "发票标识信息"
 
-#: src/Admin/AdminPage.php:115
+#: src/Admin/AdminPage.php:116
 msgid "Business details shown to customers on every invoice."
 msgstr "每张发票上向客户显示的企业信息。"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Business name"
 msgstr "企业名称"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Logo URL"
 msgstr "标志 URL"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Phone"
 msgstr "电话"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Email"
 msgstr "电子邮箱"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Business and tax details"
 msgstr "企业和税务信息"
 
-#: src/Admin/AdminPage.php:117
+#: src/Admin/AdminPage.php:118
 msgid "Manual printing defaults"
 msgstr "手动打印默认设置"
 
-#: src/Admin/AdminPage.php:117
+#: src/Admin/AdminPage.php:118
 msgid "Include customer notes on invoices"
 msgstr "在发票中包含客户备注"
 
-#: src/Admin/AdminPage.php:121
+#: src/Admin/AdminPage.php:122
 msgid "Choose an invoice layout"
 msgstr "选择发票版式"
 
-#: src/Admin/AdminPage.php:121
+#: src/Admin/AdminPage.php:122
 msgid "Preview uses realistic sample data and can switch to RTL."
 msgstr "预览使用真实风格的示例数据，并可切换为从右到左显示。"
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "Selected"
 msgstr "已选择"
 
-#: src/Admin/AdminPage.php:122
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:123
+#: src/Admin/OrderIntegration.php:56
 msgid "Preview"
 msgstr "预览"
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "RTL preview"
 msgstr "从右到左预览"
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "Select"
 msgstr "选择"
 
-#: src/Admin/AdminPage.php:123
+#: src/Admin/AdminPage.php:124
 msgid "Save selected template"
 msgstr "保存所选模板"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Automatic printing"
 msgstr "自动打印"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "After verified payment, queue an invoice without delaying checkout."
 msgstr "付款确认后，将发票加入队列，不延迟结账。"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Enabled"
 msgstr "已启用"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:153
 msgid "Provider"
 msgstr "服务提供方"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Connection"
 msgstr "连接"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:140
 msgid "Credential configured"
 msgstr "凭据已配置"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Not configured"
 msgstr "未配置"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:153
 msgid "Printer"
 msgstr "打印机"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "No printer selected"
 msgstr "未选择打印机"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:178
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:179
+#: src/Admin/OrderIntegration.php:56
 msgid "Copies"
 msgstr "份数"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Trigger"
 msgstr "触发事件"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Payment completed"
 msgstr "付款已完成"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Only orders WooCommerce confirms as paid are eligible."
 msgstr "仅限 WooCommerce 确认为已付款的订单。"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "PrintNode connection"
 msgstr "PrintNode 连接"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
 msgstr "发票 PDF 包含客户数据，使用此目标时会发送至 PrintNode。"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Not connected"
 msgstr "未连接"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
 msgstr "通过 WCIP_PRINTNODE_API_KEY 在外部管理，无法在此编辑。"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "The stored key is never displayed or returned to the browser."
 msgstr "已保存的密钥不会显示，也不会返回给浏览器。"
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "Replace API key"
 msgstr "替换 API 密钥"
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "API key"
 msgstr "API 密钥"
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
 msgstr "测试连接前请保存新密钥。留空可保留当前凭据。"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Test connection"
 msgstr "测试连接"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Refresh printers"
 msgstr "刷新打印机"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Default PrintNode printer"
 msgstr "默认 PrintNode 打印机"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Refresh to load printers"
 msgstr "刷新以加载打印机"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Print test page"
 msgstr "打印测试页"
 
-#: src/Admin/AdminPage.php:143
+#: src/Admin/AdminPage.php:144
 msgid "Save printer settings"
 msgstr "保存打印机设置"
 
-#: src/Admin/AdminPage.php:148
+#: src/Admin/AdminPage.php:149
 msgid "You are not allowed to view print jobs."
 msgstr "您无权查看打印任务。"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Print jobs"
 msgstr "打印任务"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
 msgstr "“已提交”表示 PrintNode 已接受 PDF，或浏览器发票已准备好，并不表示已打印到纸张上。"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Status"
 msgstr "状态"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "All"
 msgstr "全部"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Source"
 msgstr "来源"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Automatic"
 msgstr "自动"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Manual"
 msgstr "手动"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Order ID"
 msgstr "订单 ID"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Filter"
 msgstr "筛选"
 
-#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:152
 msgid "No print jobs yet"
 msgstr "暂无打印任务"
 
-#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:152
 msgid "Manual and automatic jobs will appear here with their delivery status."
 msgstr "手动和自动任务及其发送状态将显示在此处。"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Order"
 msgstr "订单"
 
-#: src/Admin/AdminPage.php:152
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:56
 msgid "Template"
 msgstr "模板"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Attempts"
 msgstr "尝试次数"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Updated"
 msgstr "更新时间"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Details"
 msgstr "详情"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
+#: src/PrintJob/PrintConfirmationService.php:35
 msgid "Browser"
 msgstr "浏览器"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "View"
 msgstr "查看"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "External job ID"
 msgstr "外部任务 ID"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Error"
 msgstr "错误"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Cancel queued job"
 msgstr "取消排队任务"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Retry if safe"
 msgstr "安全时重试"
 
-#: src/Admin/AdminPage.php:157
+#: src/Admin/AdminPage.php:158
 #: src/Admin/PreviewController.php:34
 msgid "You are not allowed to print invoices."
 msgstr "您无权打印发票。"
 
-#: src/Admin/AdminPage.php:161
-#: src/Admin/PreviewController.php:57
+#: src/Admin/AdminPage.php:162
+#: src/Admin/PreviewController.php:58
 msgid "Select no more than 50 orders."
 msgstr "最多选择 50 个订单。"
 
-#: src/Admin/AdminPage.php:163
-#: src/Admin/PreviewController.php:59
+#: src/Admin/AdminPage.php:164
+#: src/Admin/PreviewController.php:60
 msgid "Invalid order selection."
 msgstr "订单选择无效。"
 
-#: src/Admin/AdminPage.php:165
+#: src/Admin/AdminPage.php:166
 msgid "No orders selected"
 msgstr "未选择订单"
 
 #. translators: %d: number of selected invoices.
-#: src/Admin/AdminPage.php:168
+#: src/Admin/AdminPage.php:169
 #, php-format
 msgid "Print %d invoice"
 msgid_plural "Print %d invoices"
 msgstr[0] "打印 %d 张发票"
 
-#: src/Admin/AdminPage.php:169
+#: src/Admin/AdminPage.php:170
 msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
 msgstr "浏览器输出会合并为一个文档。PrintNode 会创建独立且受控的后台任务。"
 
-#: src/Admin/AdminPage.php:171
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:172
+#: src/Admin/OrderIntegration.php:56
 msgid "Destination"
 msgstr "目标"
 
-#: src/Admin/AdminPage.php:171
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:172
+#: src/Admin/OrderIntegration.php:56
 msgid "Browser print dialog"
 msgstr "浏览器打印对话框"
 
 #. translators: %s: the selected printer's name.
-#: src/Admin/AdminPage.php:174
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:175
+#: src/Admin/OrderIntegration.php:56
 #, php-format
 msgid "PrintNode: %s"
 msgstr "PrintNode：%s"
 
-#: src/Admin/AdminPage.php:179
+#: src/Admin/AdminPage.php:180
 msgid "Start bulk printing"
 msgstr "开始批量打印"
 
-#: src/Admin/AdminPage.php:202
+#: src/Admin/AdminPage.php:203
 msgid "Invoice template"
 msgstr "发票模板"
 
-#: src/Admin/OrderIntegration.php:23
+#: src/Admin/OrderIntegration.php:24
 msgid "Invoice printing"
 msgstr "发票打印"
 
-#: src/Admin/OrderIntegration.php:31
+#: src/Admin/OrderIntegration.php:55
 msgid "Automatic job:"
 msgstr "自动任务："
 
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:56
 msgid "Reprint invoice"
 msgstr "重新打印发票"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:38
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:62
 msgid "Print invoice"
 msgstr "打印发票"
 
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:56
 msgid "Close print dialog"
 msgstr "关闭打印对话框"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:87
 msgid "Your browser print dialog will open."
 msgstr "即将打开浏览器打印对话框。"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/PreviewController.php:93
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/PreviewController.php:100
+#: src/Admin/PreviewController.php:102
 msgid "Print"
 msgstr "打印"
 
-#: src/Admin/OrderIntegration.php:43
+#: src/Admin/OrderIntegration.php:67
 msgid "Print invoices"
 msgstr "打印发票"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "The invoice will be queued for the configured physical printer."
 msgstr "发票将加入已配置实体打印机的队列。"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Preparing invoice…"
 msgstr "正在准备发票…"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Queuing invoice…"
 msgstr "正在将发票加入队列…"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Invoice queued. Check Print Jobs for delivery status."
 msgstr "发票已加入队列。请在打印任务中查看发送状态。"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Printing failed. Review the message and try again."
 msgstr "打印失败。请查看提示后重试。"
 
@@ -514,20 +517,22 @@ msgstr "预览输入无效。"
 msgid "Invalid invoice template."
 msgstr "发票模板无效。"
 
-#: src/Admin/PreviewController.php:62
-#: src/Rest/RestController.php:112
+#: src/Admin/PreviewController.php:63
+#: src/Rest/RestController.php:114
 msgid "One of the selected orders does not exist or cannot be printed."
 msgstr "某个所选订单不存在或无法打印。"
 
-#: src/Admin/PreviewController.php:83
+#: src/Admin/PreviewController.php:85
 msgid "The invoice could not be prepared. Review Print Jobs before trying again."
 msgstr "无法准备发票。重试之前请检查打印任务。"
 
-#: src/Admin/PreviewController.php:86
+#: src/Admin/PreviewController.php:88
 msgid "No valid invoices were selected."
 msgstr "未选择有效发票。"
 
 #: src/Automation/PrintWorker.php:69
+#: src/PrintJob/PrintConfirmationService.php:33
+#: src/Rest/RestController.php:151
 msgid "The order no longer exists."
 msgstr "订单已不存在。"
 
@@ -569,19 +574,19 @@ msgstr "PDF 支持不可用。请安装 Composer 依赖项。"
 msgid "A secure PDF working directory could not be created."
 msgstr "无法创建安全的 PDF 工作目录。"
 
-#: src/Plugin.php:80
+#: src/Plugin.php:84
 msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
 msgstr "WooCommerce 发票打印器要求安装并启用 WooCommerce。"
 
-#: src/Plugin.php:84
+#: src/Plugin.php:88
 msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
 msgstr "WooCommerce 发票打印器要求 WooCommerce 9.0 或更高版本。"
 
-#: src/Plugin.php:88
+#: src/Plugin.php:92
 msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
 msgstr "WooCommerce 发票打印器需要 Composer 依赖项才能输出 PDF 和 PrintNode 内容。浏览器打印仍可使用。"
 
-#: src/Plugin.php:92
+#: src/Plugin.php:96
 msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
 msgstr "WooCommerce 发票打印器无法准备数据库。打印不可用；请检查数据库权限并重新激活插件。"
 
@@ -645,7 +650,7 @@ msgid "Choose a valid print destination."
 msgstr "请选择有效的打印目标。"
 
 #: src/PrintJob/PrintJobService.php:78
-#: src/Rest/RestController.php:78
+#: src/Rest/RestController.php:80
 msgid "Choose a valid printer."
 msgstr "请选择有效的打印机。"
 
@@ -653,52 +658,54 @@ msgstr "请选择有效的打印机。"
 msgid "Connect PrintNode before printing."
 msgstr "打印之前请连接 PrintNode。"
 
-#: src/Rest/RestController.php:83
+#: src/Rest/RestController.php:85
 msgid "Invoice printer test page"
 msgstr "发票打印器测试页"
 
-#: src/Rest/RestController.php:93
+#: src/Rest/RestController.php:95
 msgid "Select between 1 and 50 orders."
 msgstr "请选择 1 到 50 个订单。"
 
-#: src/Rest/RestController.php:99
+#: src/Rest/RestController.php:101
 msgid "Choose a valid template, printer, destination, and number of copies."
 msgstr "请选择有效的模板、打印机、目标和份数。"
 
-#: src/Rest/RestController.php:102
+#: src/Rest/RestController.php:104
 msgid "Configure the PrintNode credential before printing."
 msgstr "打印之前请配置 PrintNode 凭据。"
 
-#: src/Rest/RestController.php:108
+#: src/Rest/RestController.php:110
 msgid "One of the selected order IDs is invalid."
 msgstr "某个所选订单 ID 无效。"
 
-#: src/Rest/RestController.php:122
+#: src/Rest/RestController.php:124
 msgid "A print job could not be queued. Review Print Jobs before trying again."
 msgstr "某个打印任务无法加入队列。重试之前请检查打印任务。"
 
-#: src/Rest/RestController.php:127
+#: src/Rest/RestController.php:129
 msgid "The print request stopped. Review Print Jobs before trying again."
 msgstr "打印请求已停止。重试之前请检查打印任务。"
 
-#: src/Rest/RestController.php:137
-#: src/Rest/RestController.php:149
+#: src/PrintJob/PrintConfirmationService.php:23
+#: src/Rest/RestController.php:145
+#: src/Rest/RestController.php:170
+#: src/Rest/RestController.php:182
 msgid "Print job not found."
 msgstr "未找到打印任务。"
 
-#: src/Rest/RestController.php:140
+#: src/Rest/RestController.php:173
 msgid "Only queued jobs can be cancelled."
 msgstr "只能取消排队中的任务。"
 
-#: src/Rest/RestController.php:152
+#: src/Rest/RestController.php:185
 msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
 msgstr "此任务不适合安全重试。如有需要，请明确创建新的打印任务。"
 
-#: src/Rest/RestController.php:155
+#: src/Rest/RestController.php:188
 msgid "The print job could not be queued. Review Print Jobs before trying again."
 msgstr "无法将打印任务加入队列。重试之前请检查打印任务。"
 
-#: src/Rest/RestController.php:171
+#: src/Rest/RestController.php:204
 msgid "The print operation failed. Check the configuration and try again."
 msgstr "打印操作失败。请检查配置后重试。"
 
@@ -910,7 +917,7 @@ msgstr "已提交"
 msgid "Failed"
 msgstr "失败"
 
-#: src/Admin/AdminPage.php:38
+#: src/Admin/AdminPage.php:39
 #: src/PrintJob/JobStatus.php:30
 msgid "Unknown"
 msgstr "未知"
@@ -919,56 +926,118 @@ msgstr "未知"
 msgid "Cancelled"
 msgstr "已取消"
 
-#: src/Admin/AdminPage.php:36
+#: src/Admin/AdminPage.php:37
 msgid "Online"
 msgstr "在线"
 
-#: src/Admin/AdminPage.php:37
+#: src/Admin/AdminPage.php:38
 msgid "Offline"
 msgstr "离线"
 
-#: src/Admin/AdminPage.php:127
+#: src/Admin/AdminPage.php:128
 msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
 msgstr "自动打印通过 PrintNode 进行，需要在连接打印机的电脑上运行其客户端。本地浏览器打印需要您确认打印对话框。"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Local printer (no API key)"
 msgstr "本地打印机（无需 API 密钥）"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
 msgstr "通过浏览器使用此电脑上已安装的打印机。无需 PrintNode 账户或 API 密钥。"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Open the test page, click Print, and choose your printer in the browser dialog."
 msgstr "打开测试页，点击打印，然后在浏览器的打印对话框中选择您的打印机。"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Open local test page"
 msgstr "打开本地测试页"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
 msgstr "打印单个订单发票或批量所选订单时，请选择浏览器打印对话框。"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
 msgstr "本地打印机在浏览器的打印对话框中选择，不会出现在下方的 PrintNode 列表中。如果对话框中没有某台打印机，请先在操作系统中安装它。"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "PrintNode (optional automatic printing)"
 msgstr "PrintNode（可选自动打印）"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "PrintNode printers"
 msgstr "PrintNode 打印机"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
 msgstr "此列表仅包含您账户下的 PrintNode 客户端共享的打印机。请在连接打印机的电脑上安装客户端并登录，然后刷新列表。"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:87
 msgid "Choose your local printer in the browser dialog. No API key is required."
 msgstr "在浏览器的打印对话框中选择您的本地打印机。无需 API 密钥。"
+
+#. Author of the plugin
+#: wc-invoice-printer.php
+msgid "Shahin Ilderemi"
+msgstr "Shahin Ilderemi"
+
+#. Author URI of the plugin
+#: wc-invoice-printer.php
+msgid "https://ildrm.com"
+msgstr "https://ildrm.com"
+
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:29
+#: src/Admin/OrderIntegration.php:39
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printed"
+msgstr "已打印"
+
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:39
+msgid "Not printed"
+msgstr "未打印"
+
+#: src/Admin/OrderIntegration.php:39
+msgid "Printed means an operator confirmed the paper output."
+msgstr "已打印表示操作人员已确认纸张输出。"
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
+msgstr "请在检查纸张输出后确认。关闭打印对话框并不代表确认打印。"
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printing confirmed. A private order note has been added."
+msgstr "打印已确认。已为订单添加一条私密备注。"
+
+#: src/Admin/PrintConfirmationUi.php:12
+#: src/Rest/RestController.php:160
+msgid "The print confirmation could not be saved. Review Print Jobs and try again."
+msgstr "无法保存打印确认。请检查打印任务并重试。"
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Confirm printed"
+msgstr "确认已打印"
+
+#: src/PrintJob/PrintConfirmationService.php:29
+#: src/Rest/RestController.php:147
+msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
+msgstr "只能确认已准备或已提交的打印任务。请先检查纸张输出。"
+
+#. translators: 1: print job ID, 2: destination name, 3: number of copies.
+#: src/PrintJob/PrintConfirmationService.php:37
+#, php-format
+msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
+msgstr "发票已打印。任务 #%1$d；目标：%2$s；份数：%3$d。操作人员已确认。"
+
+#: src/Rest/RestController.php:139
+msgid "Select between 1 and 50 print jobs."
+msgstr "请选择 1 至 50 个打印任务。"
+
+#: src/Rest/RestController.php:143
+msgid "Select valid print jobs."
+msgstr "请选择有效的打印任务。"
 

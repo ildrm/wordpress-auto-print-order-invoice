@@ -3,7 +3,7 @@
 namespace WCInvoicePrinter\Infrastructure;
 
 final class Activator {
-	public const DB_VERSION = '1.0.0';
+	public const DB_VERSION = '1.1.2';
 	public const CAPABILITIES_VERSION = '1.0.0';
 
 	public static function activate(): void {
@@ -56,10 +56,14 @@ final class Activator {
 			updated_at datetime NOT NULL,
 			started_at datetime NULL,
 			completed_at datetime NULL,
+			printed_at datetime NULL,
+			printed_by bigint(20) unsigned NULL,
+			printed_note_id bigint(20) unsigned NULL,
 			PRIMARY KEY  (id),
 			UNIQUE KEY idempotency_key (idempotency_key),
 			KEY status_created (status, created_at),
 			KEY order_created (order_id, created_at),
+			KEY order_printed (order_id, printed_at),
 			KEY trigger_created (trigger_type, created_at),
 			KEY action_id (action_id)
 		) {$charset};";

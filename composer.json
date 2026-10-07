@@ -23,7 +23,7 @@
     "i18n:pot": "wp i18n make-pot . languages/wc-invoice-printer.pot --domain=wc-invoice-printer --exclude=vendor,tests,build,languages,scripts --skip-js",
     "i18n:check": "python3 scripts/check-translations.py",
     "i18n:build": "python3 scripts/check-translations.py --compile",
-    "lint:js": ["node --check assets/js/admin.js", "node --check assets/js/order.js"],
+    "lint:js": ["node --check assets/js/admin.js", "node --check assets/js/order.js", "node --check assets/js/confirmation.js"],
     "lint": "find . -path ./vendor -prune -o -path ./build -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l"
   },
   "config": {"allow-plugins": {}, "platform": {"php": "7.4.33"}, "sort-packages": true}

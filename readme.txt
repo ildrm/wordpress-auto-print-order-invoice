@@ -4,7 +4,7 @@ Tags: woocommerce, invoice, print, printnode, pdf
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 
 Secure browser and automatic PrintNode invoice printing for WooCommerce.
@@ -39,6 +39,11 @@ The plugin does not claim jurisdiction-specific fiscal or tax compliance. WooCom
 Deactivation cancels pending plugin actions and preserves settings/history for recovery on reactivation. Uninstall removes plugin role capabilities and preserves data unless the `wcip_delete_data_on_uninstall` option is explicitly enabled by an operator. Print jobs retain operational references and sanitized errors, but no duplicated invoice/customer payload.
 
 == Changelog ==
+
+= 1.1.2 =
+* Printed column on legacy and HPOS order lists, with explicit print confirmation.
+* Confirmation adds one private order note per print job without resaving the order or changing its dates.
+* Browser, individual, bulk, and PrintNode job confirmation with permission and nonce checks.
 
 = 1.1.1 =
 * API-free local-printer setup and test-page access, with optional PrintNode settings.

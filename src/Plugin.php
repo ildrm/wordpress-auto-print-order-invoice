@@ -69,6 +69,10 @@ final class Plugin {
 		add_action( 'admin_post_wcip_save_settings', array( $admin, 'save' ) );
 		add_action( 'admin_post_wcip_preview', array( $preview, 'output' ) );
 		add_action( 'add_meta_boxes', array( $orders, 'add_meta_boxes' ) );
+		add_filter( 'manage_edit-shop_order_columns', array( $orders, 'columns' ) );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $orders, 'columns' ) );
+		add_action( 'manage_shop_order_posts_custom_column', array( $orders, 'render_column' ), 10, 2 );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $orders, 'render_column' ), 10, 2 );
 		add_filter( 'woocommerce_admin_order_actions', array( $orders, 'row_actions' ), 10, 2 );
 		add_filter( 'bulk_actions-edit-shop_order', array( $orders, 'bulk_actions' ) );
 		add_filter( 'bulk_actions-woocommerce_page_wc-orders', array( $orders, 'bulk_actions' ) );

@@ -9,6 +9,7 @@ use WCInvoicePrinter\Printing\PrintProviderRegistry;
 use WCInvoicePrinter\Printing\ProviderException;
 use WCInvoicePrinter\PrintJob\PrintJobRepository;
 use WCInvoicePrinter\PrintJob\PrintJobService;
+use WCInvoicePrinter\PrintJob\PrintConfirmationService;
 use WCInvoicePrinter\Settings\SettingsRepository;
 use WCInvoicePrinter\Template\HtmlRenderer;
 use WCInvoicePrinter\Template\TemplateRegistry;
@@ -49,6 +50,7 @@ final class RestController {
 	}
 
 	public function register(): void {
+		register_rest_route( self::NS, '/printed', array( 'methods' => 'POST', 'callback' => array( $this, 'confirm_printed' ), 'permission_callback' => array( $this, 'can_manage_jobs' ), 'args' => array( 'job_ids' => array( 'type' => 'array', 'required' => true, 'items' => array( 'type' => 'integer', 'minimum' => 1 ), 'minItems' => 1, 'maxItems' => 50 ) ) ) );
 		register_rest_route( self::NS, '/connection/test', array( 'methods' => 'POST', 'callback' => array( $this, 'test_connection' ), 'permission_callback' => array( $this, 'can_manage' ) ) );
 		register_rest_route( self::NS, '/printers', array( 'methods' => 'GET', 'callback' => array( $this, 'printers' ), 'permission_callback' => array( $this, 'can_manage' ), 'args' => array( 'refresh' => array( 'type' => 'boolean', 'default' => false ) ) ) );
 		register_rest_route( self::NS, '/test-print', array( 'methods' => 'POST', 'callback' => array( $this, 'test_print' ), 'permission_callback' => array( $this, 'can_manage' ), 'args' => array( 'printer_id' => array( 'type' => 'string', 'required' => true, 'pattern' => '^[1-9][0-9]*$' ) ) ) );
@@ -128,6 +130,37 @@ final class RestController {
 			}
 		}
 		return new \WP_REST_Response( array( 'queued' => count( $created ), 'job_ids' => $created ), 201 );
+	}
+
+	/** @return \WP_REST_Response|\WP_Error */
+	public function confirm_printed( \WP_REST_Request $request ) {
+		$ids = $request['job_ids'];
+		if ( ! is_array( $ids ) || ! $ids || count( $ids ) > 50 ) {
+			return new \WP_Error( 'wcip_invalid_confirmation', __( 'Select between 1 and 50 print jobs.', 'wc-invoice-printer' ), array( 'status' => 400 ) );
+		}
+		// Validate the whole batch before writing any notes.
+		foreach ( $ids as $id ) {
+			if ( ! is_int( $id ) || $id < 1 ) { return new \WP_Error( 'wcip_invalid_confirmation', __( 'Select valid print jobs.', 'wc-invoice-printer' ), array( 'status' => 400 ) ); }
+			$job = $this->jobs->find( $id );
+			if ( ! $job ) { return new \WP_Error( 'wcip_job_not_found', __( 'Print job not found.', 'wc-invoice-printer' ), array( 'status' => 404 ) ); }
+			if ( empty( $job['printed_at'] ) && ! PrintConfirmationService::eligible( $job ) ) {
+				return new \WP_Error( 'wcip_invalid_confirmation', __( 'Only prepared or submitted print jobs can be confirmed. Check the paper output first.', 'wc-invoice-printer' ), array( 'status' => 409 ) );
+			}
+			$order = wc_get_order( (int) $job['order_id'] );
+			if ( ! $order instanceof \WC_Order || in_array( $order->get_status(), array( 'trash', 'checkout-draft' ), true ) ) {
+				return new \WP_Error( 'wcip_invalid_order', __( 'The order no longer exists.', 'wc-invoice-printer' ), array( 'status' => 404 ) );
+			}
+		}
+		$confirmed = array();
+		$service = new PrintConfirmationService( $this->jobs );
+		foreach ( array_unique( $ids ) as $id ) {
+			try { $service->confirm( $id ); $confirmed[] = $id; }
+			catch ( \Throwable $error ) {
+				$status = in_array( $error->getCode(), array( 404, 409 ), true ) ? $error->getCode() : 500;
+				return new \WP_Error( 'wcip_confirmation_failed', __( 'The print confirmation could not be saved. Review Print Jobs and try again.', 'wc-invoice-printer' ), array( 'status' => $status, 'confirmed_job_ids' => $confirmed ) );
+			}
+		}
+		return new \WP_REST_Response( array( 'printed' => true, 'job_ids' => $confirmed ) );
 	}
 
 	/** @return \WP_REST_Response|\WP_Error */

@@ -15,19 +15,20 @@ $settings = get_option( 'wcip_settings', array() );
 $cookies = $_COOKIE;
 $previous_user = get_current_user_id();
 $order = null;
+$other_orders = array();
 $sessions = WP_Session_Tokens::get_instance( 1 );
 $expiration = time() + 600;
 $token = $sessions->create( $expiration );
 $logged_in = wp_generate_auth_cookie( 1, $expiration, 'logged_in', $token );
 $auth = wp_generate_auth_cookie( 1, $expiration, is_ssl() ? 'secure_auth' : 'auth', $token );
-$request = static function ( string $url ) use ( $logged_in, $auth ): array {
-	$response = wp_remote_get( $url, array(
+$request = static function ( string $url, array $options = array() ) use ( $logged_in, $auth ): array {
+	$response = wp_remote_request( $url, array_merge( array(
 		'timeout' => 30, 'redirection' => 0,
 		'cookies' => array(
 			new WP_HTTP_Cookie( array( 'name' => LOGGED_IN_COOKIE, 'value' => $logged_in ) ),
 			new WP_HTTP_Cookie( array( 'name' => is_ssl() ? SECURE_AUTH_COOKIE : AUTH_COOKIE, 'value' => $auth ) ),
 		),
-	) );
+	), $options ) );
 	if ( is_wp_error( $response ) ) { throw new RuntimeException( $response->get_error_message() ); }
 	return array( wp_remote_retrieve_response_code( $response ), wp_remote_retrieve_body( $response ), wp_remote_retrieve_header( $response, 'location' ) );
 };
@@ -66,22 +67,91 @@ try {
 	list( $status ) = $request( add_query_arg( '_wpnonce', 'invalid', $sample_url ) );
 	if ( 403 !== $status ) { throw new RuntimeException( 'The local test route accepted an invalid nonce.' ); }
 	$order = wc_create_order();
-	$order->set_status( 'pending' );
+	$order->set_status( 'on-hold' );
+	$order->set_date_created( '2024-01-02 10:00:00' );
+	$order->set_date_modified( '2024-01-02 11:00:00' );
 	$order->save();
+	foreach ( array( '01', '03' ) as $day ) {
+		$other = wc_create_order();
+		$other_orders[] = $other;
+		$other->set_status( 'on-hold' );
+		$other->set_date_created( '2024-01-' . $day . ' 10:00:00' );
+		$other->set_date_modified( '2024-01-' . $day . ' 11:00:00' );
+		$other->save();
+	}
+	$ids = array_merge( array( $order->get_id() ), array_map( static fn( WC_Order $o ): int => $o->get_id(), $other_orders ) );
+	$dates = static function () use ( $wpdb, $ids ): array {
+		// Read persisted timestamps directly so an object cache cannot hide a change.
+		$hpos = \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
+		$result = array();
+		foreach ( $ids as $id ) {
+			$sql = $hpos ? "SELECT date_created_gmt AS created, date_updated_gmt AS modified FROM {$wpdb->prefix}wc_orders WHERE id = %d" : "SELECT post_date_gmt AS created, post_modified_gmt AS modified FROM {$wpdb->posts} WHERE ID = %d";
+			$result[ $id ] = $wpdb->get_row( $wpdb->prepare( $sql, $id ), ARRAY_A );
+		}
+		return $result;
+	};
+	$list_order = static function () use ( $ids ): array {
+		$result = array();
+		foreach ( array( 'date', 'modified' ) as $by ) {
+			$result[ $by ] = wc_get_orders( array( 'include' => $ids, 'limit' => -1, 'orderby' => $by, 'order' => 'DESC', 'return' => 'ids' ) );
+		}
+		return $result;
+	};
+	$dates_before = $dates();
+	$sort_before = $list_order();
 	$url = wp_nonce_url( add_query_arg( array(
 		'action' => 'wcip_preview', 'order_ids' => $order->get_id(), 'template' => 'classic', 'copies' => '2', 'print' => '1',
 	), admin_url( 'admin-post.php' ) ), 'wcip_preview_invoices' );
 	list( $status, $invoice ) = $request( html_entity_decode( $url, ENT_QUOTES, 'UTF-8' ) );
 	$job = ( new \WCInvoicePrinter\PrintJob\PrintJobRepository() )->latest_for_order( $order->get_id(), 'manual' );
 	if ( 200 !== $status || 2 !== substr_count( $invoice, '<section class="wcip-document">' ) || false === strpos( $invoice, 'window.print();' ) || ! $job || 'browser' !== $job['provider_id'] || 'submitted' !== $job['status'] || 2 !== (int) $job['copies'] || ! empty( $job['action_id'] ) ) {
-		throw new RuntimeException( 'Local order printing failed without an API key.' );
+		throw new RuntimeException( 'Local order printing failed without an API key. HTTP: ' . $status . '; job: ' . wp_json_encode( $job ) . '; body: ' . substr( wp_strip_all_tags( $invoice ), -300 ) );
 	}
-	WP_CLI::success( 'Local settings, protected thermal sample, no sample jobs, nonce rejection and two-copy browser order printing pass without an API key; no physical output.' );
+	if ( ! empty( $job['printed_at'] ) || false === strpos( $invoice, 'data-wcip-confirm' ) || $dates_before !== $dates() || $sort_before !== $list_order() ) {
+		throw new RuntimeException( 'Preparing an invoice must preserve order dates/list order and leave printing unconfirmed.' );
+	}
+	$column = \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ? 'manage_woocommerce_page_wc-orders' : 'manage_shop_order_posts';
+	$filter = 'manage_shop_order_posts' === $column ? 'manage_edit-shop_order_columns' : $column . '_columns';
+	if ( ! isset( apply_filters( $filter, array() )['wcip_printed'] ) ) { throw new RuntimeException( 'The Orders list has no Printed column.' ); }
+	ob_start();
+	do_action( $column . '_custom_column', 'wcip_printed', 'manage_shop_order_posts' === $column ? $order->get_id() : $order );
+	$label = ob_get_clean();
+	if ( false === strpos( $label, '>Not printed<' ) ) { throw new RuntimeException( 'An unconfirmed invoice was labelled printed.' ); }
+	$endpoint = rest_url( 'wc-invoice-printer/v1/printed' );
+	$options = array( 'method' => 'POST', 'headers' => array( 'Content-Type' => 'application/json' ), 'body' => wp_json_encode( array( 'job_ids' => array( (int) $job['id'] ) ) ) );
+	list( $status ) = $request( $endpoint, $options );
+	if ( 401 !== $status ) { throw new RuntimeException( 'Confirmation accepted cookie authentication without a REST nonce.' ); }
+	$options['headers']['X-WP-Nonce'] = 'invalid';
+	list( $status ) = $request( $endpoint, $options );
+	if ( 403 !== $status ) { throw new RuntimeException( 'Confirmation accepted an invalid REST nonce.' ); }
+	$options['headers']['X-WP-Nonce'] = wp_create_nonce( 'wp_rest' );
+	$note_count = static function () use ( $wpdb, $order ): int {
+		// CLI's in-memory comment-query cache cannot observe another HTTP process.
+		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_post_ID = %d AND comment_type = %s", $order->get_id(), 'order_note' ) );
+	};
+	$notes_before = $note_count();
+	for ( $attempt = 0; $attempt < 2; ++$attempt ) {
+		list( $status, $body ) = $request( $endpoint, $options );
+		if ( 200 !== $status || true !== ( json_decode( $body, true )['printed'] ?? false ) ) { throw new RuntimeException( 'Authenticated print confirmation failed: ' . $body ); }
+	}
+	$confirmed = ( new \WCInvoicePrinter\PrintJob\PrintJobRepository() )->find( (int) $job['id'] );
+	$note = wc_get_order_note( (int) $confirmed['printed_note_id'] );
+	if ( ! $note || $note->customer_note || false === strpos( $note->content, 'Invoice printed.' ) || $notes_before + 1 !== $note_count() ) {
+		throw new RuntimeException( 'Confirmation must add exactly one private order note, including after a repeated request.' );
+	}
+	ob_start();
+	do_action( $column . '_custom_column', 'wcip_printed', 'manage_shop_order_posts' === $column ? $order->get_id() : $order );
+	$label = ob_get_clean();
+	if ( false === strpos( $label, '>Printed<' ) || $dates_before !== $dates() || $sort_before !== $list_order() ) {
+		throw new RuntimeException( 'Confirmation must show Printed without changing persisted order dates or either list sort.' );
+	}
+	WP_CLI::success( 'API-free printing, nonce enforcement, Printed order column, one private note after repeated confirmation, unchanged creation/modification dates and order-list sorting pass; storage=' . ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ? 'HPOS' : 'legacy' ) . '; no physical output.' );
 } finally {
 	if ( $order instanceof WC_Order ) {
 		$wpdb->delete( $wpdb->prefix . 'wc_invoice_print_jobs', array( 'order_id' => $order->get_id() ), array( '%d' ) );
 		$order->delete( true );
 	}
+	foreach ( $other_orders as $other ) { $other->delete( true ); }
 	update_option( 'wcip_settings', $settings );
 	$sessions->destroy( $token );
 	$_COOKIE = $cookies;

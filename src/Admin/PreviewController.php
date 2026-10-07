@@ -53,6 +53,7 @@ final class PreviewController {
 		}
 		$documents = array();
 		$orders    = array();
+		$prepared_jobs = array();
 		if ( ! $sample ) {
 			if ( count( $ids ) > 50 ) { wp_die( esc_html__( 'Select no more than 50 orders.', 'wc-invoice-printer' ), '', array( 'response' => 400 ) ); }
 			foreach ( $ids as $id ) {
@@ -77,6 +78,7 @@ final class PreviewController {
 					if ( ! $this->jobs->browser_ready( (int) $job['id'] ) ) {
 						throw new \RuntimeException( 'The browser job could not be recorded as prepared.' );
 					}
+					$prepared_jobs[] = (int) $job['id'];
 				}
 			}
 		} catch ( \Throwable $error ) {
@@ -90,7 +92,21 @@ final class PreviewController {
 		preg_match_all( '/<style[^>]*>(.*?)<\/style>/si', $documents[0], $style_matches );
 		$styles = implode( "\n", $style_matches[1] ?? array() );
 		$body   = array_map( static function ( string $document ): string { preg_match( '/<body[^>]*>(.*?)<\/body>/si', $document, $match ); return $match[1] ?? ''; }, $documents );
-		echo '<!doctype html><html lang="' . esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ) . '" dir="' . ( $rtl || is_rtl() ? 'rtl' : 'ltr' ) . '"><head><meta charset="utf-8"><style>' . $styles . '.wcip-toolbar{position:sticky;top:0;z-index:5;padding:10px;background:#fff;border-bottom:1px solid #ccc;text-align:center}.wcip-document{page-break-after:always}.wcip-document:last-child{page-break-after:auto}@media print{.wcip-toolbar{display:none}}</style></head><body><div class="wcip-toolbar"><button onclick="window.print()">' . esc_html__( 'Print', 'wc-invoice-printer' ) . '</button></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS originates from bundled, validated templates.
+		echo '<!doctype html><html lang="' . esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ) . '" dir="' . ( $rtl || is_rtl() ? 'rtl' : 'ltr' ) . '"><head><meta charset="utf-8"><style>' . $styles . '.wcip-toolbar{position:sticky;top:0;z-index:5;padding:10px;background:#fff;border-bottom:1px solid #ccc;text-align:center}.wcip-document{page-break-after:always}.wcip-document:last-child{page-break-after:auto}@media print{.wcip-toolbar{display:none}}</style></head><body>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS originates from bundled, validated templates.
+		// Printing a real preview prepares a tracked job only when Print is clicked.
+		echo '<div class="wcip-toolbar">';
+		if ( $preview && ! $sample ) {
+			$url = wp_nonce_url( add_query_arg( array( 'action' => 'wcip_preview', 'order_ids' => implode( ',', array_map( static function ( \WC_Order $order ): int { return $order->get_id(); }, $orders ) ), 'template' => $template_id, 'copies' => 1, 'rtl' => $rtl ? 1 : 0, 'print' => 1 ), admin_url( 'admin-post.php' ) ), 'wcip_preview_invoices' );
+			echo '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Print', 'wc-invoice-printer' ) . '</a>';
+		} else {
+			echo '<button onclick="window.print()">' . esc_html__( 'Print', 'wc-invoice-printer' ) . '</button>';
+		}
+		if ( $prepared_jobs && current_user_can( 'wcip_view_print_jobs' ) ) {
+			// A separate, explicit action: afterprint also fires when printing is cancelled.
+			PrintConfirmationUi::render( $prepared_jobs );
+			echo '<script src="' . esc_url( WCIP_URL . 'assets/js/confirmation.js?ver=' . WCIP_VERSION ) . '" defer></script>';
+		}
+		echo '</div>';
 		foreach ( $body as $document ) { echo '<section class="wcip-document">' . $document . '</section>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered template escapes normalized data.
 		if ( $auto_print ) { echo '<script>window.addEventListener("load",function(){window.print();});</script>'; }
 		echo '</body></html>';

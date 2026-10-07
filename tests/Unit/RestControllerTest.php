@@ -127,6 +127,42 @@ final class RestControllerTest extends TestCase {
 		self::assertFalse( $this->controller->can_manage() );
 	}
 
+	public function test_print_confirmation_requires_print_and_history_capabilities(): void {
+		$this->controller->register();
+		$route = $GLOBALS['wcip_test_routes']['wc-invoice-printer/v1/printed'];
+		$GLOBALS['wcip_test_capabilities']['wcip_view_print_jobs'] = true;
+		self::assertFalse( call_user_func( $route['permission_callback'] ) );
+		$GLOBALS['wcip_test_capabilities'] = array( 'wcip_print_invoices' => true );
+		self::assertFalse( call_user_func( $route['permission_callback'] ) );
+		$GLOBALS['wcip_test_capabilities']['wcip_view_print_jobs'] = true;
+		self::assertTrue( call_user_func( $route['permission_callback'] ) );
+	}
+
+	public function test_invalid_confirmation_batch_does_not_confirm_the_valid_first_job(): void {
+		$jobs = new PrintJobRepository();
+		$job = $jobs->create( array( 'order_id' => 1, 'trigger_type' => 'manual', 'idempotency_key' => wp_generate_uuid4(), 'template_id' => 'classic', 'provider_id' => 'browser', 'printer_id' => '', 'copies' => 1 ) );
+		$jobs->browser_ready( (int) $job['id'] );
+		$request = new \WP_REST_Request( 'POST' );
+		$request['job_ids'] = array( (int) $job['id'], 999 );
+		$response = $this->controller->confirm_printed( $request );
+		self::assertInstanceOf( \WP_Error::class, $response );
+		self::assertSame( 404, $response->get_error_data()['status'] );
+		self::assertNull( $jobs->find( (int) $job['id'] )['printed_at'] );
+	}
+
+	/** @dataProvider invalid_confirmation_batches */
+	public function test_invalid_confirmation_input_is_rejected( $ids ): void {
+		$request = new \WP_REST_Request( 'POST' );
+		$request['job_ids'] = $ids;
+		$response = $this->controller->confirm_printed( $request );
+		self::assertInstanceOf( \WP_Error::class, $response );
+		self::assertSame( 400, $response->get_error_data()['status'] );
+	}
+
+	public static function invalid_confirmation_batches(): array {
+		return array( array( array() ), array( array( 0 ) ), array( array( '1' ) ), array( array( true ) ), array( range( 1, 51 ) ), array( '1' ) );
+	}
+
 	public function test_retry_missing_job_returns_not_found(): void {
 		$request = new \WP_REST_Request( 'POST' );
 		$request['id'] = 999;

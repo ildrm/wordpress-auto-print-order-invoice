@@ -75,7 +75,7 @@ foreach ( $locales as $locale => $label ) {
 				throw new RuntimeException( 'Admin screen not translated: ' . $locale . '/' . $section );
 			}
 			if ( 'jobs' === $section ) {
-				foreach ( array( 'Classic', 'Automatic', 'Queued' ) as $message ) {
+				foreach ( array( 'Classic', 'Automatic', 'Queued', 'Printed', 'Not printed' ) as $message ) {
 					if ( false === strpos( $screen, esc_html__( $message, 'wc-invoice-printer' ) ) ) {
 						throw new RuntimeException( 'Job label not translated: ' . $locale . '/' . $message );
 					}

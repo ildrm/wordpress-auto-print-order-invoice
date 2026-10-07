@@ -116,7 +116,7 @@ PHP;
 		$result = $this->run_case( 'success' );
 		self::assertTrue( $result['ready'] );
 		self::assertTrue( $result['exists'] );
-		self::assertSame( '1.0.0', $result['options']['wcip_db_version'] );
+		self::assertSame( '1.1.2', $result['options']['wcip_db_version'] );
 		self::assertSame( '1.0.0', $result['options']['wcip_capabilities_version'] );
 	}
 

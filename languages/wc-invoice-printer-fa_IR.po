@@ -2,7 +2,7 @@
 # Distributed under GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-07 09:00+0330\n"
 "PO-Revision-Date: 2026-10-07 09:00+0330\n"
@@ -26,484 +26,487 @@ msgid "Secure manual and automatic invoice printing for WooCommerce."
 msgstr "چاپ دستی و خودکار امن فاکتور برای ووکامرس."
 
 #: src/Admin/AdminPage.php:24
-#: src/Admin/AdminPage.php:91
+#: src/Admin/AdminPage.php:92
 msgid "Invoice Printer"
 msgstr "چاپگر فاکتور"
 
-#: src/Admin/AdminPage.php:41
+#: src/Admin/AdminPage.php:42
+#: src/Admin/PrintConfirmationUi.php:12
 msgid "Working…"
 msgstr "در حال انجام…"
 
-#: src/Admin/AdminPage.php:42
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/AdminPage.php:43
+#: src/Admin/OrderIntegration.php:87
 #: src/Admin/PreviewController.php:48
 #: src/PrintJob/PrintJobService.php:84
 msgid "Choose between 1 and 20 copies."
 msgstr "تعداد نسخه‌ها را بین ۱ تا ۲۰ انتخاب کنید."
 
-#: src/Admin/AdminPage.php:43
+#: src/Admin/AdminPage.php:44
 msgid "Something went wrong. Check the details and try again."
 msgstr "خطایی رخ داد. جزئیات را بررسی کنید و دوباره تلاش کنید."
 
-#: src/Admin/AdminPage.php:44
+#: src/Admin/AdminPage.php:45
 msgid "Choose a printer"
 msgstr "یک چاپگر انتخاب کنید"
 
-#: src/Admin/AdminPage.php:45
+#: src/Admin/AdminPage.php:46
 msgid "No printers were found. Confirm that the PrintNode client is online."
 msgstr "چاپگری پیدا نشد. مطمئن شوید برنامه PrintNode آنلاین است."
 
-#: src/Admin/AdminPage.php:46
+#: src/Admin/AdminPage.php:47
 msgid "Submitted to PrintNode."
 msgstr "به PrintNode ارسال شد."
 
-#: src/Admin/AdminPage.php:47
+#: src/Admin/AdminPage.php:48
 msgid "PrintNode connection verified."
 msgstr "اتصال به PrintNode تأیید شد."
 
 #. translators: %d: number of printers returned by PrintNode.
-#: src/Admin/AdminPage.php:49
+#: src/Admin/AdminPage.php:50
 #, php-format
 msgid "%d printer(s) found."
 msgstr "تعداد چاپگرهای پیدا شده: %d"
 
 #. translators: %d: number of invoices added to the print queue.
-#: src/Admin/AdminPage.php:51
+#: src/Admin/AdminPage.php:52
 #, php-format
 msgid "%d invoice(s) queued."
 msgstr "تعداد فاکتورهای اضافه‌شده به صف: %d"
 
-#: src/Admin/AdminPage.php:57
+#: src/Admin/AdminPage.php:58
 msgid "You are not allowed to change these settings."
 msgstr "اجازه تغییر این تنظیمات را ندارید."
 
-#: src/Admin/AdminPage.php:60
+#: src/Admin/AdminPage.php:61
 msgid "Invalid settings input."
 msgstr "ورودی تنظیمات نامعتبر است."
 
-#: src/Admin/AdminPage.php:63
+#: src/Admin/AdminPage.php:64
 msgid "Invalid settings section."
 msgstr "بخش تنظیمات نامعتبر است."
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "General"
 msgstr "عمومی"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Templates"
 msgstr "قالب‌ها"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Automatic Printing"
 msgstr "چاپ خودکار"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Printers"
 msgstr "چاپگرها"
 
-#: src/Admin/AdminPage.php:88
+#: src/Admin/AdminPage.php:89
 msgid "Print Jobs"
 msgstr "کارهای چاپ"
 
-#: src/Admin/AdminPage.php:91
+#: src/Admin/AdminPage.php:92
 msgid "Create consistent invoices and send them to the right printer."
 msgstr "فاکتورهای یکسان بسازید و آن‌ها را به چاپگر مناسب بفرستید."
 
-#: src/Admin/AdminPage.php:92
+#: src/Admin/AdminPage.php:93
 msgid "Settings saved."
 msgstr "تنظیمات ذخیره شد."
 
-#: src/Admin/AdminPage.php:93
+#: src/Admin/AdminPage.php:94
 msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
 msgstr "تا زمانی که اطلاعات اتصال به PrintNode و یک چاپگر تنظیم نشوند، چاپ خودکار غیرفعال می‌ماند."
 
-#: src/Admin/AdminPage.php:94
+#: src/Admin/AdminPage.php:95
 msgid "Invoice Printer sections"
 msgstr "بخش‌های چاپگر فاکتور"
 
-#: src/Admin/AdminPage.php:115
+#: src/Admin/AdminPage.php:116
 msgid "Invoice identity"
 msgstr "مشخصات فاکتور"
 
-#: src/Admin/AdminPage.php:115
+#: src/Admin/AdminPage.php:116
 msgid "Business details shown to customers on every invoice."
 msgstr "اطلاعات کسب‌وکار که در هر فاکتور به مشتری نمایش داده می‌شود."
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Business name"
 msgstr "نام کسب‌وکار"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Logo URL"
 msgstr "نشانی لوگو"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Phone"
 msgstr "تلفن"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Email"
 msgstr "ایمیل"
 
-#: src/Admin/AdminPage.php:116
+#: src/Admin/AdminPage.php:117
 msgid "Business and tax details"
 msgstr "اطلاعات کسب‌وکار و مالیاتی"
 
-#: src/Admin/AdminPage.php:117
+#: src/Admin/AdminPage.php:118
 msgid "Manual printing defaults"
 msgstr "پیش‌فرض‌های چاپ دستی"
 
-#: src/Admin/AdminPage.php:117
+#: src/Admin/AdminPage.php:118
 msgid "Include customer notes on invoices"
 msgstr "نمایش یادداشت مشتری در فاکتورها"
 
-#: src/Admin/AdminPage.php:121
+#: src/Admin/AdminPage.php:122
 msgid "Choose an invoice layout"
 msgstr "یک چیدمان فاکتور انتخاب کنید"
 
-#: src/Admin/AdminPage.php:121
+#: src/Admin/AdminPage.php:122
 msgid "Preview uses realistic sample data and can switch to RTL."
 msgstr "پیش‌نمایش از داده‌های نمونه واقعی استفاده می‌کند و امکان نمایش راست‌به‌چپ دارد."
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "Selected"
 msgstr "انتخاب‌شده"
 
-#: src/Admin/AdminPage.php:122
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:123
+#: src/Admin/OrderIntegration.php:56
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "RTL preview"
 msgstr "پیش‌نمایش راست‌به‌چپ"
 
-#: src/Admin/AdminPage.php:122
+#: src/Admin/AdminPage.php:123
 msgid "Select"
 msgstr "انتخاب"
 
-#: src/Admin/AdminPage.php:123
+#: src/Admin/AdminPage.php:124
 msgid "Save selected template"
 msgstr "ذخیره قالب انتخاب‌شده"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Automatic printing"
 msgstr "چاپ خودکار"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "After verified payment, queue an invoice without delaying checkout."
 msgstr "پس از تأیید پرداخت، فاکتور را بدون تأخیر در تسویه‌حساب به صف اضافه کنید."
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Enabled"
 msgstr "فعال"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:153
 msgid "Provider"
 msgstr "ارائه‌دهنده"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Connection"
 msgstr "اتصال"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:140
 msgid "Credential configured"
 msgstr "اطلاعات اتصال تنظیم شده است"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Not configured"
 msgstr "تنظیم نشده"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:153
 msgid "Printer"
 msgstr "چاپگر"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "No printer selected"
 msgstr "چاپگری انتخاب نشده"
 
-#: src/Admin/AdminPage.php:128
-#: src/Admin/AdminPage.php:178
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:129
+#: src/Admin/AdminPage.php:179
+#: src/Admin/OrderIntegration.php:56
 msgid "Copies"
 msgstr "تعداد نسخه‌ها"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Trigger"
 msgstr "رویداد آغازگر"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Payment completed"
 msgstr "پرداخت تکمیل شد"
 
-#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:129
 msgid "Only orders WooCommerce confirms as paid are eligible."
 msgstr "فقط سفارش‌هایی واجد شرایط هستند که ووکامرس پرداخت آن‌ها را تأیید کرده باشد."
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "PrintNode connection"
 msgstr "اتصال به PrintNode"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
 msgstr "فایل‌های PDF فاکتور شامل اطلاعات مشتری هستند و با انتخاب این مقصد به PrintNode ارسال می‌شوند."
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
 msgstr "با ثابت WCIP_PRINTNODE_API_KEY به‌صورت خارجی مدیریت می‌شود؛ امکان ویرایش در اینجا وجود ندارد."
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "The stored key is never displayed or returned to the browser."
 msgstr "کلید ذخیره‌شده هرگز نمایش داده نمی‌شود یا به مرورگر بازگردانده نمی‌شود."
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "Replace API key"
 msgstr "جایگزینی کلید API"
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "API key"
 msgstr "کلید API"
 
-#: src/Admin/AdminPage.php:140
+#: src/Admin/AdminPage.php:141
 msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
 msgstr "پیش از آزمایش اتصال، کلید جدید را ذخیره کنید. برای حفظ اطلاعات اتصال فعلی، این فیلد را خالی بگذارید."
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Test connection"
 msgstr "آزمایش اتصال"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Refresh printers"
 msgstr "تازه‌سازی چاپگرها"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Default PrintNode printer"
 msgstr "چاپگر پیش‌فرض PrintNode"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Refresh to load printers"
 msgstr "برای دریافت چاپگرها تازه‌سازی کنید"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "Print test page"
 msgstr "چاپ صفحه آزمایشی"
 
-#: src/Admin/AdminPage.php:143
+#: src/Admin/AdminPage.php:144
 msgid "Save printer settings"
 msgstr "ذخیره تنظیمات چاپگر"
 
-#: src/Admin/AdminPage.php:148
+#: src/Admin/AdminPage.php:149
 msgid "You are not allowed to view print jobs."
 msgstr "اجازه مشاهده کارهای چاپ را ندارید."
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Print jobs"
 msgstr "کارهای چاپ"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
 msgstr "ارسال‌شده یعنی PrintNode فایل PDF را پذیرفته یا فاکتور مرورگر آماده شده است. این وضعیت چاپ روی کاغذ را تأیید نمی‌کند."
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Status"
 msgstr "وضعیت"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "All"
 msgstr "همه"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Source"
 msgstr "منبع"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Automatic"
 msgstr "خودکار"
 
-#: src/Admin/AdminPage.php:150
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:153
 msgid "Manual"
 msgstr "دستی"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Order ID"
 msgstr "شناسه سفارش"
 
-#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:151
 msgid "Filter"
 msgstr "فیلتر"
 
-#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:152
 msgid "No print jobs yet"
 msgstr "هنوز کاری برای چاپ وجود ندارد"
 
-#: src/Admin/AdminPage.php:151
+#: src/Admin/AdminPage.php:152
 msgid "Manual and automatic jobs will appear here with their delivery status."
 msgstr "کارهای چاپ دستی و خودکار به همراه وضعیت ارسال آن‌ها در اینجا نمایش داده می‌شوند."
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Order"
 msgstr "سفارش"
 
-#: src/Admin/AdminPage.php:152
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:56
 msgid "Template"
 msgstr "قالب"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Attempts"
 msgstr "تعداد تلاش‌ها"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Updated"
 msgstr "آخرین تغییر"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Details"
 msgstr "جزئیات"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
+#: src/PrintJob/PrintConfirmationService.php:35
 msgid "Browser"
 msgstr "مرورگر"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "View"
 msgstr "مشاهده"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "External job ID"
 msgstr "شناسه خارجی کار چاپ"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Error"
 msgstr "خطا"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Cancel queued job"
 msgstr "لغو کار در صف"
 
-#: src/Admin/AdminPage.php:152
+#: src/Admin/AdminPage.php:153
 msgid "Retry if safe"
 msgstr "تلاش مجدد در صورت ایمن بودن"
 
-#: src/Admin/AdminPage.php:157
+#: src/Admin/AdminPage.php:158
 #: src/Admin/PreviewController.php:34
 msgid "You are not allowed to print invoices."
 msgstr "اجازه چاپ فاکتورها را ندارید."
 
-#: src/Admin/AdminPage.php:161
-#: src/Admin/PreviewController.php:57
+#: src/Admin/AdminPage.php:162
+#: src/Admin/PreviewController.php:58
 msgid "Select no more than 50 orders."
 msgstr "حداکثر ۵۰ سفارش انتخاب کنید."
 
-#: src/Admin/AdminPage.php:163
-#: src/Admin/PreviewController.php:59
+#: src/Admin/AdminPage.php:164
+#: src/Admin/PreviewController.php:60
 msgid "Invalid order selection."
 msgstr "انتخاب سفارش نامعتبر است."
 
-#: src/Admin/AdminPage.php:165
+#: src/Admin/AdminPage.php:166
 msgid "No orders selected"
 msgstr "سفارشی انتخاب نشده"
 
 #. translators: %d: number of selected invoices.
-#: src/Admin/AdminPage.php:168
+#: src/Admin/AdminPage.php:169
 #, php-format
 msgid "Print %d invoice"
 msgid_plural "Print %d invoices"
 msgstr[0] "چاپ %d فاکتور"
 msgstr[1] "چاپ %d فاکتور"
 
-#: src/Admin/AdminPage.php:169
+#: src/Admin/AdminPage.php:170
 msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
 msgstr "خروجی مرورگر در یک سند ترکیب می‌شود. PrintNode برای هر سفارش یک کار پس‌زمینه مجزا ایجاد می‌کند."
 
-#: src/Admin/AdminPage.php:171
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:172
+#: src/Admin/OrderIntegration.php:56
 msgid "Destination"
 msgstr "مقصد"
 
-#: src/Admin/AdminPage.php:171
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:172
+#: src/Admin/OrderIntegration.php:56
 msgid "Browser print dialog"
 msgstr "پنجره چاپ مرورگر"
 
 #. translators: %s: the selected printer's name.
-#: src/Admin/AdminPage.php:174
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/AdminPage.php:175
+#: src/Admin/OrderIntegration.php:56
 #, php-format
 msgid "PrintNode: %s"
 msgstr "PrintNode: %s"
 
-#: src/Admin/AdminPage.php:179
+#: src/Admin/AdminPage.php:180
 msgid "Start bulk printing"
 msgstr "شروع چاپ گروهی"
 
-#: src/Admin/AdminPage.php:202
+#: src/Admin/AdminPage.php:203
 msgid "Invoice template"
 msgstr "قالب فاکتور"
 
-#: src/Admin/OrderIntegration.php:23
+#: src/Admin/OrderIntegration.php:24
 msgid "Invoice printing"
 msgstr "چاپ فاکتور"
 
-#: src/Admin/OrderIntegration.php:31
+#: src/Admin/OrderIntegration.php:55
 msgid "Automatic job:"
 msgstr "کار چاپ خودکار:"
 
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:56
 msgid "Reprint invoice"
 msgstr "چاپ مجدد فاکتور"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:38
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:62
 msgid "Print invoice"
 msgstr "چاپ فاکتور"
 
-#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:56
 msgid "Close print dialog"
 msgstr "بستن پنجره چاپ"
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:87
 msgid "Your browser print dialog will open."
 msgstr "پنجره چاپ مرورگر شما باز می‌شود."
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/PreviewController.php:93
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/PreviewController.php:100
+#: src/Admin/PreviewController.php:102
 msgid "Print"
 msgstr "چاپ"
 
-#: src/Admin/OrderIntegration.php:43
+#: src/Admin/OrderIntegration.php:67
 msgid "Print invoices"
 msgstr "چاپ فاکتورها"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "The invoice will be queued for the configured physical printer."
 msgstr "فاکتور برای چاپگر فیزیکی تنظیم‌شده به صف اضافه می‌شود."
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Preparing invoice…"
 msgstr "در حال آماده‌سازی فاکتور…"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Queuing invoice…"
 msgstr "در حال افزودن فاکتور به صف…"
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Invoice queued. Check Print Jobs for delivery status."
 msgstr "فاکتور به صف اضافه شد. وضعیت ارسال را در کارهای چاپ بررسی کنید."
 
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:87
 msgid "Printing failed. Review the message and try again."
 msgstr "چاپ ناموفق بود. پیام را بررسی کنید و دوباره تلاش کنید."
 
@@ -515,20 +518,22 @@ msgstr "ورودی پیش‌نمایش نامعتبر است."
 msgid "Invalid invoice template."
 msgstr "قالب فاکتور نامعتبر است."
 
-#: src/Admin/PreviewController.php:62
-#: src/Rest/RestController.php:112
+#: src/Admin/PreviewController.php:63
+#: src/Rest/RestController.php:114
 msgid "One of the selected orders does not exist or cannot be printed."
 msgstr "یکی از سفارش‌های انتخاب‌شده وجود ندارد یا قابل چاپ نیست."
 
-#: src/Admin/PreviewController.php:83
+#: src/Admin/PreviewController.php:85
 msgid "The invoice could not be prepared. Review Print Jobs before trying again."
 msgstr "فاکتور آماده نشد. پیش از تلاش مجدد، کارهای چاپ را بررسی کنید."
 
-#: src/Admin/PreviewController.php:86
+#: src/Admin/PreviewController.php:88
 msgid "No valid invoices were selected."
 msgstr "هیچ فاکتور معتبری انتخاب نشده است."
 
 #: src/Automation/PrintWorker.php:69
+#: src/PrintJob/PrintConfirmationService.php:33
+#: src/Rest/RestController.php:151
 msgid "The order no longer exists."
 msgstr "سفارش دیگر وجود ندارد."
 
@@ -570,19 +575,19 @@ msgstr "پشتیبانی PDF در دسترس نیست. وابستگی‌های C
 msgid "A secure PDF working directory could not be created."
 msgstr "پوشه کاری امن برای PDF ایجاد نشد."
 
-#: src/Plugin.php:80
+#: src/Plugin.php:84
 msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
 msgstr "چاپگر فاکتور ووکامرس به نصب و فعال‌بودن ووکامرس نیاز دارد."
 
-#: src/Plugin.php:84
+#: src/Plugin.php:88
 msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
 msgstr "چاپگر فاکتور ووکامرس به ووکامرس نسخه ۹٫۰ یا جدیدتر نیاز دارد."
 
-#: src/Plugin.php:88
+#: src/Plugin.php:92
 msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
 msgstr "چاپگر فاکتور ووکامرس برای خروجی PDF و PrintNode به وابستگی‌های Composer نیاز دارد. چاپ مرورگر همچنان در دسترس است."
 
-#: src/Plugin.php:92
+#: src/Plugin.php:96
 msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
 msgstr "چاپگر فاکتور ووکامرس نتوانست پایگاه داده خود را آماده کند. چاپ در دسترس نیست؛ مجوزهای پایگاه داده را بررسی کنید و افزونه را دوباره فعال کنید."
 
@@ -646,7 +651,7 @@ msgid "Choose a valid print destination."
 msgstr "یک مقصد چاپ معتبر انتخاب کنید."
 
 #: src/PrintJob/PrintJobService.php:78
-#: src/Rest/RestController.php:78
+#: src/Rest/RestController.php:80
 msgid "Choose a valid printer."
 msgstr "یک چاپگر معتبر انتخاب کنید."
 
@@ -654,52 +659,54 @@ msgstr "یک چاپگر معتبر انتخاب کنید."
 msgid "Connect PrintNode before printing."
 msgstr "پیش از چاپ، PrintNode را متصل کنید."
 
-#: src/Rest/RestController.php:83
+#: src/Rest/RestController.php:85
 msgid "Invoice printer test page"
 msgstr "صفحه آزمایشی چاپگر فاکتور"
 
-#: src/Rest/RestController.php:93
+#: src/Rest/RestController.php:95
 msgid "Select between 1 and 50 orders."
 msgstr "بین ۱ تا ۵۰ سفارش انتخاب کنید."
 
-#: src/Rest/RestController.php:99
+#: src/Rest/RestController.php:101
 msgid "Choose a valid template, printer, destination, and number of copies."
 msgstr "قالب، چاپگر، مقصد و تعداد نسخه‌های معتبر انتخاب کنید."
 
-#: src/Rest/RestController.php:102
+#: src/Rest/RestController.php:104
 msgid "Configure the PrintNode credential before printing."
 msgstr "پیش از چاپ، اطلاعات اتصال به PrintNode را تنظیم کنید."
 
-#: src/Rest/RestController.php:108
+#: src/Rest/RestController.php:110
 msgid "One of the selected order IDs is invalid."
 msgstr "شناسه یکی از سفارش‌های انتخاب‌شده نامعتبر است."
 
-#: src/Rest/RestController.php:122
+#: src/Rest/RestController.php:124
 msgid "A print job could not be queued. Review Print Jobs before trying again."
 msgstr "یک کار چاپ به صف اضافه نشد. پیش از تلاش مجدد، کارهای چاپ را بررسی کنید."
 
-#: src/Rest/RestController.php:127
+#: src/Rest/RestController.php:129
 msgid "The print request stopped. Review Print Jobs before trying again."
 msgstr "درخواست چاپ متوقف شد. پیش از تلاش مجدد، کارهای چاپ را بررسی کنید."
 
-#: src/Rest/RestController.php:137
-#: src/Rest/RestController.php:149
+#: src/PrintJob/PrintConfirmationService.php:23
+#: src/Rest/RestController.php:145
+#: src/Rest/RestController.php:170
+#: src/Rest/RestController.php:182
 msgid "Print job not found."
 msgstr "کار چاپ پیدا نشد."
 
-#: src/Rest/RestController.php:140
+#: src/Rest/RestController.php:173
 msgid "Only queued jobs can be cancelled."
 msgstr "فقط کارهای در صف را می‌توان لغو کرد."
 
-#: src/Rest/RestController.php:152
+#: src/Rest/RestController.php:185
 msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
 msgstr "تلاش مجدد برای این کار ایمن نیست. در صورت نیاز، آگاهانه یک چاپ جدید ایجاد کنید."
 
-#: src/Rest/RestController.php:155
+#: src/Rest/RestController.php:188
 msgid "The print job could not be queued. Review Print Jobs before trying again."
 msgstr "کار چاپ به صف اضافه نشد. پیش از تلاش مجدد، کارهای چاپ را بررسی کنید."
 
-#: src/Rest/RestController.php:171
+#: src/Rest/RestController.php:204
 msgid "The print operation failed. Check the configuration and try again."
 msgstr "عملیات چاپ ناموفق بود. تنظیمات را بررسی کنید و دوباره تلاش کنید."
 
@@ -911,7 +918,7 @@ msgstr "ارسال‌شده"
 msgid "Failed"
 msgstr "ناموفق"
 
-#: src/Admin/AdminPage.php:38
+#: src/Admin/AdminPage.php:39
 #: src/PrintJob/JobStatus.php:30
 msgid "Unknown"
 msgstr "نامشخص"
@@ -920,56 +927,118 @@ msgstr "نامشخص"
 msgid "Cancelled"
 msgstr "لغوشده"
 
-#: src/Admin/AdminPage.php:36
+#: src/Admin/AdminPage.php:37
 msgid "Online"
 msgstr "آنلاین"
 
-#: src/Admin/AdminPage.php:37
+#: src/Admin/AdminPage.php:38
 msgid "Offline"
 msgstr "آفلاین"
 
-#: src/Admin/AdminPage.php:127
+#: src/Admin/AdminPage.php:128
 msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
 msgstr "چاپ خودکار از طریق PrintNode انجام می‌شود و به برنامهٔ آن روی رایانهٔ متصل به چاپگر نیاز دارد. برای چاپ محلی با مرورگر باید پنجرهٔ چاپ را تأیید کنید."
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Local printer (no API key)"
 msgstr "چاپگر محلی (بدون کلید API)"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
 msgstr "از طریق مرورگر از چاپگری استفاده کنید که روی این رایانه نصب شده است. به حساب PrintNode یا کلید API نیازی نیست."
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Open the test page, click Print, and choose your printer in the browser dialog."
 msgstr "صفحهٔ آزمایشی را باز کنید، روی چاپ کلیک کنید و چاپگر خود را در پنجرهٔ چاپ مرورگر انتخاب کنید."
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Open local test page"
 msgstr "باز کردن صفحهٔ آزمایشی محلی"
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
 msgstr "برای سفارش‌ها، هنگام چاپ یک فاکتور یا مجموعه‌ای از سفارش‌ها، گزینهٔ پنجرهٔ چاپ مرورگر را انتخاب کنید."
 
-#: src/Admin/AdminPage.php:137
+#: src/Admin/AdminPage.php:138
 msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
 msgstr "چاپگرهای محلی در پنجرهٔ چاپ مرورگر انتخاب می‌شوند و در فهرست PrintNode زیر نمایش داده نمی‌شوند. اگر چاپگری در پنجرهٔ چاپ نیست، ابتدا آن را در سیستم‌عامل خود نصب کنید."
 
-#: src/Admin/AdminPage.php:139
+#: src/Admin/AdminPage.php:140
 msgid "PrintNode (optional automatic printing)"
 msgstr "PrintNode (چاپ خودکار اختیاری)"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "PrintNode printers"
 msgstr "چاپگرهای PrintNode"
 
-#: src/Admin/AdminPage.php:142
+#: src/Admin/AdminPage.php:143
 msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
 msgstr "این فهرست فقط شامل چاپگرهایی است که برنامهٔ PrintNode در حساب شما به اشتراک گذاشته است. این برنامه را روی رایانهٔ متصل به چاپگر نصب کنید، وارد حساب خود شوید و سپس فهرست را تازه‌سازی کنید."
 
-#: src/Admin/OrderIntegration.php:32
-#: src/Admin/OrderIntegration.php:62
+#: src/Admin/OrderIntegration.php:56
+#: src/Admin/OrderIntegration.php:87
 msgid "Choose your local printer in the browser dialog. No API key is required."
 msgstr "چاپگر محلی خود را در پنجرهٔ چاپ مرورگر انتخاب کنید. به کلید API نیازی نیست."
+
+#. Author of the plugin
+#: wc-invoice-printer.php
+msgid "Shahin Ilderemi"
+msgstr "Shahin Ilderemi"
+
+#. Author URI of the plugin
+#: wc-invoice-printer.php
+msgid "https://ildrm.com"
+msgstr "https://ildrm.com"
+
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:29
+#: src/Admin/OrderIntegration.php:39
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printed"
+msgstr "چاپ شده"
+
+#: src/Admin/AdminPage.php:153
+#: src/Admin/OrderIntegration.php:39
+msgid "Not printed"
+msgstr "چاپ نشده"
+
+#: src/Admin/OrderIntegration.php:39
+msgid "Printed means an operator confirmed the paper output."
+msgstr "چاپ شده یعنی کاربر خروجی کاغذی را تأیید کرده است."
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
+msgstr "فقط پس از بررسی خروجی کاغذی تأیید کنید. بستن پنجرهٔ چاپ به معنی تأیید چاپ نیست."
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printing confirmed. A private order note has been added."
+msgstr "چاپ تأیید شد. یک یادداشت خصوصی به سفارش اضافه شد."
+
+#: src/Admin/PrintConfirmationUi.php:12
+#: src/Rest/RestController.php:160
+msgid "The print confirmation could not be saved. Review Print Jobs and try again."
+msgstr "تأیید چاپ ذخیره نشد. کارهای چاپ را بررسی کنید و دوباره تلاش کنید."
+
+#: src/Admin/PrintConfirmationUi.php:12
+msgid "Confirm printed"
+msgstr "تأیید چاپ"
+
+#: src/PrintJob/PrintConfirmationService.php:29
+#: src/Rest/RestController.php:147
+msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
+msgstr "فقط کارهای چاپ آماده‌شده یا ارسال‌شده قابل تأیید هستند. ابتدا خروجی کاغذی را بررسی کنید."
+
+#. translators: 1: print job ID, 2: destination name, 3: number of copies.
+#: src/PrintJob/PrintConfirmationService.php:37
+#, php-format
+msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
+msgstr "فاکتور چاپ شد. کار چاپ شمارهٔ %1$d؛ مقصد: %2$s؛ تعداد نسخه: %3$d. کاربر چاپ را تأیید کرده است."
+
+#: src/Rest/RestController.php:139
+msgid "Select between 1 and 50 print jobs."
+msgstr "بین ۱ تا ۵۰ کار چاپ انتخاب کنید."
+
+#: src/Rest/RestController.php:143
+msgid "Select valid print jobs."
+msgstr "کارهای چاپ معتبر را انتخاب کنید."
 

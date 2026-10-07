@@ -92,11 +92,20 @@ class WC_Order {
 	public function get_payment_method_title(): string { return 'Card'; }
 	public function get_shipping_method(): string { return ''; }
 	public function get_customer_note(): string { return ''; }
+	public function add_order_note( string $note, $customer = false, bool $by_user = false ): int {
+		if ( $GLOBALS['wcip_note_failure'] ?? false ) { return 0; }
+		$id = count( $GLOBALS['wcip_test_notes'] ?? array() ) + 1;
+		$GLOBALS['wcip_test_notes'][ $id ] = array( 'order_id' => $this->id, 'note' => $note, 'customer' => $customer, 'by_user' => $by_user );
+		return $id;
+	}
 }
 
 class WC_Order_Item_Product {}
 
 function wc_get_order( $id ) { return $GLOBALS['wcip_test_orders'][ (int) $id ] ?? false; }
+function get_current_user_id(): int { return $GLOBALS['wcip_test_user_id'] ?? 42; }
+function wp_delete_comment( int $id, bool $force = false ): bool { unset( $GLOBALS['wcip_test_notes'][ $id ] ); return true; }
+function clean_comment_cache( int $id ): void {}
 function wc_get_is_paid_statuses(): array { return array( 'processing', 'completed' ); }
 function current_user_can( string $capability ): bool { return (bool) ( $GLOBALS['wcip_test_capabilities'][ $capability ] ?? false ); }
 function update_option( string $name, $value, $autoload = null ): bool { $GLOBALS['wcip_test_options'][ $name ] = $value; return true; }

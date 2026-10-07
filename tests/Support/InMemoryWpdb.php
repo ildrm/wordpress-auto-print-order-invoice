@@ -10,6 +10,7 @@ final class InMemoryWpdb {
 	public array $updates = array();
 	public bool $fail_insert = false;
 	public bool $fail_update = false;
+	private ?array $transaction_rows = null;
 	public $before_insert = null;
 	public $before_update = null;
 	private int $total = 0;
@@ -25,7 +26,7 @@ final class InMemoryWpdb {
 			if ( $row['idempotency_key'] === $data['idempotency_key'] ) { return false; }
 		}
 		$id = $this->rows ? max( array_keys( $this->rows ) ) + 1 : 1;
-		$this->rows[ $id ] = array_merge( array( 'id' => $id, 'attempt_count' => 0, 'action_id' => null, 'external_job_id' => null, 'error_code' => null, 'error_message' => null, 'started_at' => null, 'completed_at' => null ), $data );
+		$this->rows[ $id ] = array_merge( array( 'id' => $id, 'attempt_count' => 0, 'action_id' => null, 'external_job_id' => null, 'error_code' => null, 'error_message' => null, 'started_at' => null, 'completed_at' => null, 'printed_at' => null, 'printed_by' => null, 'printed_note_id' => null ), $data );
 		return 1;
 	}
 
@@ -72,6 +73,9 @@ final class InMemoryWpdb {
 
 	public function query( string $sql ): int {
 		$this->queries[] = $sql;
+		if ( 'START TRANSACTION' === $sql ) { $this->transaction_rows = $this->rows; return 0; }
+		if ( 'ROLLBACK' === $sql ) { $this->rows = $this->transaction_rows ?? $this->rows; $this->transaction_rows = null; return 0; }
+		if ( 'COMMIT' === $sql ) { $this->transaction_rows = null; return 0; }
 		preg_match( '/ SET (.*?) WHERE (.*)$/', $sql, $parts );
 		if ( ! $parts ) { throw new \LogicException( 'Unsupported SQL: ' . $sql ); }
 		$count = 0;
@@ -88,6 +92,7 @@ final class InMemoryWpdb {
 	}
 
 	private function matches( array $row, string $sql ): bool {
+		if ( false !== strpos( $sql, 'printed_at IS NOT NULL' ) && empty( $row['printed_at'] ) ) { return false; }
 		$where = false !== strpos( $sql, ' WHERE ' ) ? substr( $sql, strpos( $sql, ' WHERE ' ) + 7 ) : $sql;
 		preg_match_all( "/\\b(id|order_id|action_id|status|trigger_type|provider_id|idempotency_key) = ('(?:[^'\\\\]|\\\\.)*'|[0-9]+)/", $where, $conditions, PREG_SET_ORDER );
 		foreach ( $conditions as $condition ) {

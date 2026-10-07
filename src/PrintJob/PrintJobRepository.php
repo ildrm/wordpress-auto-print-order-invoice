@@ -65,6 +65,31 @@ final class PrintJobRepository {
 		return is_array( $row ) ? $row : null;
 	}
 
+	/** Must be called inside the confirmation transaction. */
+	public function lock_for_confirmation( int $id ): ?array {
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE id = %d FOR UPDATE", $id ), ARRAY_A );
+		if ( ! empty( $wpdb->last_error ) ) { throw new \RuntimeException( 'The print job could not be locked.' ); }
+		return is_array( $row ) ? $row : null;
+	}
+
+	public function record_confirmation( int $id, int $note_id, int $user_id ): bool {
+		global $wpdb;
+		// Print tracking lives in this table. Never save the order or alter its dates.
+		return 1 === $wpdb->update( $this->table,
+			array( 'printed_at' => current_time( 'mysql', true ), 'printed_by' => $user_id, 'printed_note_id' => $note_id ),
+			array( 'id' => $id, 'printed_at' => null ), array( '%s', '%d', '%d' ), array( '%d', '%s' )
+		);
+	}
+
+	public function latest_confirmed_for_order( int $order_id ): ?array {
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND printed_at IS NOT NULL ORDER BY printed_at DESC, id DESC LIMIT 1", $order_id ), ARRAY_A );
+		return is_array( $row ) ? $row : null;
+	}
+
 	public function claim( int $id ): bool {
 		global $wpdb;
 		$now = current_time( 'mysql', true );
