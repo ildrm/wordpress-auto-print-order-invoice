@@ -1,3 +1,17 @@
-/.phpunit.cache/
+# Installed dependencies.
 /vendor/
-/build/package/
+/node_modules/
+
+# Generated packages and test output.
+/build/
+/.phpunit.cache/
+/.phpunit.result.cache
+/coverage/
+
+# Python tooling caches.
+__pycache__/
+*.py[cod]
+
+# Local operating-system files.
+.DS_Store
+Thumbs.db
