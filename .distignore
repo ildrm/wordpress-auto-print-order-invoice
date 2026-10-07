@@ -2,8 +2,10 @@
 /.github
 /.phpunit.cache
 /tests
+/scripts
 /phpunit.xml.dist
 /composer.json
 /composer.lock
 /docs
 /node_modules
+/build

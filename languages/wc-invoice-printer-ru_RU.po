@@ -1,0 +1,976 @@
+# Copyright (C) 2026 WooCommerce Invoice Printer contributors
+# Distributed under GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-07 09:00+0330\n"
+"PO-Revision-Date: 2026-10-07 09:00+0330\n"
+"Last-Translator: WooCommerce Invoice Printer contributors\n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Domain: wc-invoice-printer\n"
+
+#. Plugin Name of the plugin
+#: wc-invoice-printer.php
+msgid "WooCommerce Invoice Printer"
+msgstr "Печать счетов WooCommerce"
+
+#. Description of the plugin
+#: wc-invoice-printer.php
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "Безопасная ручная и автоматическая печать счетов WooCommerce."
+
+#: src/Admin/AdminPage.php:24
+#: src/Admin/AdminPage.php:91
+msgid "Invoice Printer"
+msgstr "Печать счетов"
+
+#: src/Admin/AdminPage.php:41
+msgid "Working…"
+msgstr "Обработка…"
+
+#: src/Admin/AdminPage.php:42
+#: src/Admin/OrderIntegration.php:62
+#: src/Admin/PreviewController.php:48
+#: src/PrintJob/PrintJobService.php:84
+msgid "Choose between 1 and 20 copies."
+msgstr "Выберите от 1 до 20 копий."
+
+#: src/Admin/AdminPage.php:43
+msgid "Something went wrong. Check the details and try again."
+msgstr "Произошла ошибка. Проверьте подробности и повторите попытку."
+
+#: src/Admin/AdminPage.php:44
+msgid "Choose a printer"
+msgstr "Выберите принтер"
+
+#: src/Admin/AdminPage.php:45
+msgid "No printers were found. Confirm that the PrintNode client is online."
+msgstr "Принтеры не найдены. Убедитесь, что клиент PrintNode подключён к сети."
+
+#: src/Admin/AdminPage.php:46
+msgid "Submitted to PrintNode."
+msgstr "Отправлено в PrintNode."
+
+#: src/Admin/AdminPage.php:47
+msgid "PrintNode connection verified."
+msgstr "Подключение к PrintNode проверено."
+
+#. translators: %d: number of printers returned by PrintNode.
+#: src/Admin/AdminPage.php:49
+#, php-format
+msgid "%d printer(s) found."
+msgstr "Количество найденных принтеров: %d"
+
+#. translators: %d: number of invoices added to the print queue.
+#: src/Admin/AdminPage.php:51
+#, php-format
+msgid "%d invoice(s) queued."
+msgstr "Количество счетов в очереди: %d"
+
+#: src/Admin/AdminPage.php:57
+msgid "You are not allowed to change these settings."
+msgstr "У вас нет прав на изменение этих настроек."
+
+#: src/Admin/AdminPage.php:60
+msgid "Invalid settings input."
+msgstr "Некорректные данные настроек."
+
+#: src/Admin/AdminPage.php:63
+msgid "Invalid settings section."
+msgstr "Некорректный раздел настроек."
+
+#: src/Admin/AdminPage.php:88
+msgid "General"
+msgstr "Общие"
+
+#: src/Admin/AdminPage.php:88
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: src/Admin/AdminPage.php:88
+msgid "Automatic Printing"
+msgstr "Автоматическая печать"
+
+#: src/Admin/AdminPage.php:88
+msgid "Printers"
+msgstr "Принтеры"
+
+#: src/Admin/AdminPage.php:88
+msgid "Print Jobs"
+msgstr "Задания печати"
+
+#: src/Admin/AdminPage.php:91
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "Создавайте единообразные счета и отправляйте их на нужный принтер."
+
+#: src/Admin/AdminPage.php:92
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+#: src/Admin/AdminPage.php:93
+msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
+msgstr "Автоматическая печать остаётся отключённой, пока не настроены учётные данные PrintNode и принтер."
+
+#: src/Admin/AdminPage.php:94
+msgid "Invoice Printer sections"
+msgstr "Разделы печати счетов"
+
+#: src/Admin/AdminPage.php:115
+msgid "Invoice identity"
+msgstr "Реквизиты счёта"
+
+#: src/Admin/AdminPage.php:115
+msgid "Business details shown to customers on every invoice."
+msgstr "Сведения о компании, которые показываются клиентам на каждом счёте."
+
+#: src/Admin/AdminPage.php:116
+msgid "Business name"
+msgstr "Название компании"
+
+#: src/Admin/AdminPage.php:116
+msgid "Logo URL"
+msgstr "URL логотипа"
+
+#: src/Admin/AdminPage.php:116
+msgid "Phone"
+msgstr "Телефон"
+
+#: src/Admin/AdminPage.php:116
+msgid "Email"
+msgstr "Электронная почта"
+
+#: src/Admin/AdminPage.php:116
+msgid "Business and tax details"
+msgstr "Сведения о компании и налогах"
+
+#: src/Admin/AdminPage.php:117
+msgid "Manual printing defaults"
+msgstr "Настройки ручной печати по умолчанию"
+
+#: src/Admin/AdminPage.php:117
+msgid "Include customer notes on invoices"
+msgstr "Включать примечания клиента в счета"
+
+#: src/Admin/AdminPage.php:121
+msgid "Choose an invoice layout"
+msgstr "Выберите макет счёта"
+
+#: src/Admin/AdminPage.php:121
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "Предпросмотр использует реалистичные примеры и поддерживает направление справа налево."
+
+#: src/Admin/AdminPage.php:122
+msgid "Selected"
+msgstr "Выбран"
+
+#: src/Admin/AdminPage.php:122
+#: src/Admin/OrderIntegration.php:32
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: src/Admin/AdminPage.php:122
+msgid "RTL preview"
+msgstr "Предпросмотр справа налево"
+
+#: src/Admin/AdminPage.php:122
+msgid "Select"
+msgstr "Выбрать"
+
+#: src/Admin/AdminPage.php:123
+msgid "Save selected template"
+msgstr "Сохранить выбранный шаблон"
+
+#: src/Admin/AdminPage.php:128
+msgid "Automatic printing"
+msgstr "Автоматическая печать"
+
+#: src/Admin/AdminPage.php:128
+msgid "After verified payment, queue an invoice without delaying checkout."
+msgstr "После подтверждения оплаты добавьте счёт в очередь, не задерживая оформление заказа."
+
+#: src/Admin/AdminPage.php:128
+msgid "Enabled"
+msgstr "Включено"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Provider"
+msgstr "Провайдер"
+
+#: src/Admin/AdminPage.php:128
+msgid "Connection"
+msgstr "Подключение"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:139
+msgid "Credential configured"
+msgstr "Учётные данные настроены"
+
+#: src/Admin/AdminPage.php:128
+msgid "Not configured"
+msgstr "Не настроено"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Printer"
+msgstr "Принтер"
+
+#: src/Admin/AdminPage.php:128
+msgid "No printer selected"
+msgstr "Принтер не выбран"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:178
+#: src/Admin/OrderIntegration.php:32
+msgid "Copies"
+msgstr "Копии"
+
+#: src/Admin/AdminPage.php:128
+msgid "Trigger"
+msgstr "Событие запуска"
+
+#: src/Admin/AdminPage.php:128
+msgid "Payment completed"
+msgstr "Оплата завершена"
+
+#: src/Admin/AdminPage.php:128
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "Подходят только заказы, оплату которых подтвердил WooCommerce."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode connection"
+msgstr "Подключение к PrintNode"
+
+#: src/Admin/AdminPage.php:139
+msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
+msgstr "PDF счетов содержат данные клиентов и отправляются в PrintNode при выборе этого назначения."
+
+#: src/Admin/AdminPage.php:139
+msgid "Not connected"
+msgstr "Нет подключения"
+
+#: src/Admin/AdminPage.php:139
+msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
+msgstr "Управляется извне через WCIP_PRINTNODE_API_KEY; здесь изменить нельзя."
+
+#: src/Admin/AdminPage.php:139
+msgid "The stored key is never displayed or returned to the browser."
+msgstr "Сохранённый ключ никогда не показывается и не передаётся браузеру."
+
+#: src/Admin/AdminPage.php:140
+msgid "Replace API key"
+msgstr "Заменить ключ API"
+
+#: src/Admin/AdminPage.php:140
+msgid "API key"
+msgstr "Ключ API"
+
+#: src/Admin/AdminPage.php:140
+msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
+msgstr "Сохраните новый ключ перед проверкой подключения. Оставьте поле пустым, чтобы сохранить текущие учётные данные."
+
+#: src/Admin/AdminPage.php:142
+msgid "Test connection"
+msgstr "Проверить подключение"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh printers"
+msgstr "Обновить принтеры"
+
+#: src/Admin/AdminPage.php:142
+msgid "Default PrintNode printer"
+msgstr "Принтер PrintNode по умолчанию"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh to load printers"
+msgstr "Обновите список для загрузки принтеров"
+
+#: src/Admin/AdminPage.php:142
+msgid "Print test page"
+msgstr "Напечатать тестовую страницу"
+
+#: src/Admin/AdminPage.php:143
+msgid "Save printer settings"
+msgstr "Сохранить настройки принтера"
+
+#: src/Admin/AdminPage.php:148
+msgid "You are not allowed to view print jobs."
+msgstr "У вас нет прав на просмотр заданий печати."
+
+#: src/Admin/AdminPage.php:150
+msgid "Print jobs"
+msgstr "Задания печати"
+
+#: src/Admin/AdminPage.php:150
+msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
+msgstr "«Отправлено» означает, что PrintNode принял PDF или счёт для браузера подготовлен. Это не подтверждает печать на бумаге."
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Status"
+msgstr "Статус"
+
+#: src/Admin/AdminPage.php:150
+msgid "All"
+msgstr "Все"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Source"
+msgstr "Источник"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Automatic"
+msgstr "Автоматически"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Manual"
+msgstr "Вручную"
+
+#: src/Admin/AdminPage.php:150
+msgid "Order ID"
+msgstr "ID заказа"
+
+#: src/Admin/AdminPage.php:150
+msgid "Filter"
+msgstr "Фильтровать"
+
+#: src/Admin/AdminPage.php:151
+msgid "No print jobs yet"
+msgstr "Заданий печати пока нет"
+
+#: src/Admin/AdminPage.php:151
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "Здесь появятся ручные и автоматические задания со статусом отправки."
+
+#: src/Admin/AdminPage.php:152
+msgid "Order"
+msgstr "Заказ"
+
+#: src/Admin/AdminPage.php:152
+#: src/Admin/OrderIntegration.php:32
+msgid "Template"
+msgstr "Шаблон"
+
+#: src/Admin/AdminPage.php:152
+msgid "Attempts"
+msgstr "Попытки"
+
+#: src/Admin/AdminPage.php:152
+msgid "Updated"
+msgstr "Обновлено"
+
+#: src/Admin/AdminPage.php:152
+msgid "Details"
+msgstr "Подробности"
+
+#: src/Admin/AdminPage.php:152
+msgid "Browser"
+msgstr "Браузер"
+
+#: src/Admin/AdminPage.php:152
+msgid "View"
+msgstr "Просмотр"
+
+#: src/Admin/AdminPage.php:152
+msgid "External job ID"
+msgstr "Внешний ID задания"
+
+#: src/Admin/AdminPage.php:152
+msgid "Error"
+msgstr "Ошибка"
+
+#: src/Admin/AdminPage.php:152
+msgid "Cancel queued job"
+msgstr "Отменить задание в очереди"
+
+#: src/Admin/AdminPage.php:152
+msgid "Retry if safe"
+msgstr "Повторить, если это безопасно"
+
+#: src/Admin/AdminPage.php:157
+#: src/Admin/PreviewController.php:34
+msgid "You are not allowed to print invoices."
+msgstr "У вас нет прав на печать счетов."
+
+#: src/Admin/AdminPage.php:161
+#: src/Admin/PreviewController.php:57
+msgid "Select no more than 50 orders."
+msgstr "Выберите не более 50 заказов."
+
+#: src/Admin/AdminPage.php:163
+#: src/Admin/PreviewController.php:59
+msgid "Invalid order selection."
+msgstr "Некорректный выбор заказов."
+
+#: src/Admin/AdminPage.php:165
+msgid "No orders selected"
+msgstr "Заказы не выбраны"
+
+#. translators: %d: number of selected invoices.
+#: src/Admin/AdminPage.php:168
+#, php-format
+msgid "Print %d invoice"
+msgid_plural "Print %d invoices"
+msgstr[0] "Напечатать %d счёт"
+msgstr[1] "Напечатать %d счёта"
+msgstr[2] "Напечатать %d счетов"
+
+#: src/Admin/AdminPage.php:169
+msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
+msgstr "Вывод браузера объединяется в один документ. PrintNode создаёт отдельные контролируемые фоновые задания."
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Destination"
+msgstr "Назначение"
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Browser print dialog"
+msgstr "Диалог печати браузера"
+
+#. translators: %s: the selected printer's name.
+#: src/Admin/AdminPage.php:174
+#: src/Admin/OrderIntegration.php:32
+#, php-format
+msgid "PrintNode: %s"
+msgstr "PrintNode: %s"
+
+#: src/Admin/AdminPage.php:179
+msgid "Start bulk printing"
+msgstr "Начать пакетную печать"
+
+#: src/Admin/AdminPage.php:202
+msgid "Invoice template"
+msgstr "Шаблон счёта"
+
+#: src/Admin/OrderIntegration.php:23
+msgid "Invoice printing"
+msgstr "Печать счетов"
+
+#: src/Admin/OrderIntegration.php:31
+msgid "Automatic job:"
+msgstr "Автоматическое задание:"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Reprint invoice"
+msgstr "Напечатать счёт повторно"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:38
+msgid "Print invoice"
+msgstr "Напечатать счёт"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Close print dialog"
+msgstr "Закрыть диалог печати"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Your browser print dialog will open."
+msgstr "Откроется диалог печати вашего браузера."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/PreviewController.php:93
+msgid "Print"
+msgstr "Печать"
+
+#: src/Admin/OrderIntegration.php:43
+msgid "Print invoices"
+msgstr "Напечатать счета"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "Счёт будет добавлен в очередь настроенного физического принтера."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Preparing invoice…"
+msgstr "Подготовка счёта…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Queuing invoice…"
+msgstr "Добавление счёта в очередь…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "Счёт добавлен в очередь. Проверьте статус отправки в разделе заданий печати."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Printing failed. Review the message and try again."
+msgstr "Печать не удалась. Прочитайте сообщение и повторите попытку."
+
+#: src/Admin/PreviewController.php:38
+msgid "Invalid preview input."
+msgstr "Некорректные данные предпросмотра."
+
+#: src/Admin/PreviewController.php:52
+msgid "Invalid invoice template."
+msgstr "Некорректный шаблон счёта."
+
+#: src/Admin/PreviewController.php:62
+#: src/Rest/RestController.php:112
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "Один из выбранных заказов не существует или не может быть напечатан."
+
+#: src/Admin/PreviewController.php:83
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "Не удалось подготовить счёт. Проверьте задания печати перед повторной попыткой."
+
+#: src/Admin/PreviewController.php:86
+msgid "No valid invoices were selected."
+msgstr "Не выбрано ни одного подходящего счёта."
+
+#: src/Automation/PrintWorker.php:69
+msgid "The order no longer exists."
+msgstr "Заказ больше не существует."
+
+#: src/Automation/PrintWorker.php:72
+#: src/Automation/PrintWorker.php:85
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "Заказ больше не считается оплаченным, поэтому автоматическая печать остановлена."
+
+#: src/Automation/PrintWorker.php:92
+msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
+msgstr "Провайдер принял задание печати, но результат не удалось сохранить. Проверьте PrintNode перед повторной печатью."
+
+#: src/Automation/PrintWorker.php:120
+#: src/Automation/Scheduler.php:80
+msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
+msgstr "Обработчик остановился до записи результата. Проверьте PrintNode перед повторной печатью."
+
+#: src/Automation/Scheduler.php:24
+msgid "The background queue is unavailable."
+msgstr "Фоновая очередь недоступна."
+
+#: src/Automation/Scheduler.php:58
+msgid "The print job could not be queued."
+msgstr "Не удалось добавить задание печати в очередь."
+
+#: src/Infrastructure/Activator.php:11
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "Не удалось установить базу данных печати счетов. Проверьте права доступа к базе данных и повторите активацию."
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Business registration and tax details"
+msgstr "Регистрационные и налоговые сведения компании"
+
+#: src/Pdf/MpdfRenderer.php:10
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "Поддержка PDF недоступна. Установите зависимости Composer."
+
+#: src/Pdf/MpdfRenderer.php:16
+msgid "A secure PDF working directory could not be created."
+msgstr "Не удалось создать защищённый рабочий каталог PDF."
+
+#: src/Plugin.php:80
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "Для печати счетов WooCommerce требуется установленный и активный WooCommerce."
+
+#: src/Plugin.php:84
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "Для печати счетов WooCommerce требуется WooCommerce 9.0 или новее."
+
+#: src/Plugin.php:88
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
+msgstr "Для вывода PDF и PrintNode нужны зависимости Composer. Печать через браузер остаётся доступной."
+
+#: src/Plugin.php:92
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "Не удалось подготовить базу данных печати счетов WooCommerce. Печать недоступна; проверьте права доступа к базе данных и активируйте плагин заново."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:30
+msgid "PrintNode account"
+msgstr "Учётная запись PrintNode"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:37
+#: src/Printing/PrintNode/PrintNodeProvider.php:108
+msgid "PrintNode is not connected."
+msgstr "PrintNode не подключён."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:69
+msgid "Unnamed printer"
+msgstr "Принтер без названия"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:85
+msgid "The selected printer is invalid."
+msgstr "Выбранный принтер некорректен."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:123
+msgid "The print request could not be encoded."
+msgstr "Не удалось закодировать запрос печати."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:128
+msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
+msgstr "Запрос PrintNode мог быть прерван. Проверьте задание перед повторной печатью."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:138
+msgid "PrintNode rejected the API key."
+msgstr "PrintNode отклонил ключ API."
+
+#. translators: %d: HTTP response status code.
+#: src/Printing/PrintNode/PrintNodeProvider.php:141
+#, php-format
+msgid "PrintNode rejected the request (HTTP %d)."
+msgstr "PrintNode отклонил запрос (HTTP %d)."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:144
+msgid "PrintNode may have accepted the print request. Check the job before reprinting."
+msgstr "PrintNode мог принять запрос печати. Проверьте задание перед повторной печатью."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:167
+msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
+msgstr "PrintNode вернул нечитаемый ответ задания. Проверьте задание перед повторной печатью."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:168
+msgid "PrintNode returned an unreadable response."
+msgstr "PrintNode вернул нечитаемый ответ."
+
+#: src/PrintJob/PrintJobRepository.php:37
+msgid "The print job could not be saved."
+msgstr "Не удалось сохранить задание печати."
+
+#: src/PrintJob/PrintJobService.php:72
+msgid "Choose a valid invoice template."
+msgstr "Выберите корректный шаблон счёта."
+
+#: src/PrintJob/PrintJobService.php:75
+msgid "Choose a valid print destination."
+msgstr "Выберите корректное назначение печати."
+
+#: src/PrintJob/PrintJobService.php:78
+#: src/Rest/RestController.php:78
+msgid "Choose a valid printer."
+msgstr "Выберите корректный принтер."
+
+#: src/PrintJob/PrintJobService.php:81
+msgid "Connect PrintNode before printing."
+msgstr "Подключите PrintNode перед печатью."
+
+#: src/Rest/RestController.php:83
+msgid "Invoice printer test page"
+msgstr "Тестовая страница печати счетов"
+
+#: src/Rest/RestController.php:93
+msgid "Select between 1 and 50 orders."
+msgstr "Выберите от 1 до 50 заказов."
+
+#: src/Rest/RestController.php:99
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "Выберите корректные шаблон, принтер, назначение и число копий."
+
+#: src/Rest/RestController.php:102
+msgid "Configure the PrintNode credential before printing."
+msgstr "Настройте учётные данные PrintNode перед печатью."
+
+#: src/Rest/RestController.php:108
+msgid "One of the selected order IDs is invalid."
+msgstr "Один из выбранных ID заказов некорректен."
+
+#: src/Rest/RestController.php:122
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "Не удалось добавить одно задание печати в очередь. Проверьте задания печати перед повторной попыткой."
+
+#: src/Rest/RestController.php:127
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "Запрос печати остановлен. Проверьте задания печати перед повторной попыткой."
+
+#: src/Rest/RestController.php:137
+#: src/Rest/RestController.php:149
+msgid "Print job not found."
+msgstr "Задание печати не найдено."
+
+#: src/Rest/RestController.php:140
+msgid "Only queued jobs can be cancelled."
+msgstr "Можно отменять только задания в очереди."
+
+#: src/Rest/RestController.php:152
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "Безопасная повторная попытка для этого задания невозможна. При необходимости осознанно создайте новое задание печати."
+
+#: src/Rest/RestController.php:155
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "Не удалось добавить задание печати в очередь. Проверьте задания печати перед повторной попыткой."
+
+#: src/Rest/RestController.php:171
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "Операция печати не удалась. Проверьте настройки и повторите попытку."
+
+#: src/Template/TemplateRegistry.php:10
+msgid "Classic"
+msgstr "Классический"
+
+#: src/Template/TemplateRegistry.php:10
+msgid "A polished full invoice for office printers."
+msgstr "Полный аккуратно оформленный счёт для офисных принтеров."
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Compact"
+msgstr "Компактный"
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Dense and readable for high-volume operations."
+msgstr "Плотный и читаемый макет для больших объёмов."
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Thermal 80 mm"
+msgstr "Термопечать 80 мм"
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Purpose-built for narrow receipt printers."
+msgstr "Разработан для узких чековых принтеров."
+
+#: templates/classic/invoice.php:37
+#: templates/thermal/invoice.php:30
+msgid "INVOICE"
+msgstr "Счёт"
+
+#: templates/classic/invoice.php:42
+msgid "Bill to"
+msgstr "Получатель счёта"
+
+#: templates/classic/invoice.php:47
+msgid "Payment & shipping"
+msgstr "Оплата и доставка"
+
+#: templates/classic/invoice.php:53
+msgid "Item"
+msgstr "Товар"
+
+#: templates/classic/invoice.php:54
+#: templates/compact/invoice.php:47
+msgid "SKU"
+msgstr "Артикул"
+
+#: templates/classic/invoice.php:55
+#: templates/compact/invoice.php:48
+msgid "Qty"
+msgstr "Кол-во"
+
+#: templates/classic/invoice.php:56
+msgid "Unit"
+msgstr "Цена за единицу"
+
+#: templates/classic/invoice.php:57
+msgid "Discount"
+msgstr "Скидка"
+
+#: templates/classic/invoice.php:58
+msgid "Tax"
+msgstr "Налог"
+
+#: templates/classic/invoice.php:59
+#: templates/compact/invoice.php:50
+msgid "Total"
+msgstr "Итого"
+
+#: templates/classic/invoice.php:71
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "Цены за единицу и скидки указаны без налога; суммы строк включают налог."
+
+#: templates/classic/invoice.php:75
+msgid "Customer note"
+msgstr "Примечание клиента"
+
+#: templates/compact/invoice.php:33
+msgid "Invoice"
+msgstr "Счёт"
+
+#: templates/compact/invoice.php:37
+msgid "Customer"
+msgstr "Клиент"
+
+#: templates/compact/invoice.php:40
+msgid "Payment / delivery"
+msgstr "Оплата / доставка"
+
+#: templates/compact/invoice.php:46
+msgid "Description"
+msgstr "Описание"
+
+#: templates/compact/invoice.php:49
+msgid "Price"
+msgstr "Цена"
+
+#: templates/compact/invoice.php:60
+#: templates/thermal/invoice.php:45
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "Цены за единицу указаны без налога; суммы строк включают скидки и налог."
+
+#: templates/compact/invoice.php:62
+msgid "Note"
+msgstr "Примечание"
+
+#: templates/thermal/invoice.php:32
+msgid "Date"
+msgstr "Дата"
+
+#: templates/thermal/invoice.php:50
+msgid "Note:"
+msgstr "Примечание:"
+
+#: templates/thermal/invoice.php:51
+msgid "Thank you for your order."
+msgstr "Спасибо за ваш заказ."
+
+#. translators: %s: WooCommerce order number.
+#: src/Automation/PrintWorker.php:90
+#, php-format
+msgid "Invoice %s"
+msgstr "Счёт %s"
+
+#: src/Invoice/InvoiceFactory.php:80
+msgid "September 15, 2026"
+msgstr "15 сентября 2026 г."
+
+#: src/Invoice/InvoiceFactory.php:80
+#: src/PrintJob/JobStatus.php:27
+msgid "Processing"
+msgstr "Обработка"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Northstar Supply Co."
+msgstr "Компания «Северная звезда»"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "24 Market Street, Portland, OR"
+msgstr "Маркет-стрит, 24, Портленд, Орегон"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Alex Morgan"
+msgstr "Алекс Морган"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Morgan Studio"
+msgstr "Студия Морган"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "Эвергрин-террас, 840, Сиэтл, Вашингтон"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "Профессиональный блокнот для планирования с намеренно длинным названием товара"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Color: Midnight / Size: Large"
+msgstr "Цвет: Тёмно-синий / Размер: Большой"
+
+#: src/Invoice/InvoiceFactory.php:85
+msgid "Fine gel pen set"
+msgstr "Набор тонких гелевых ручек"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Subtotal:"
+msgstr "Подытог:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Discount:"
+msgstr "Скидка:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Shipping:"
+msgstr "Доставка:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Tax:"
+msgstr "Налог:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Total:"
+msgstr "Итого:"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Credit card"
+msgstr "Кредитная карта"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Ground shipping"
+msgstr "Наземная доставка"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Please leave the parcel at reception."
+msgstr "Пожалуйста, оставьте посылку на стойке приёма."
+
+#: src/PrintJob/JobStatus.php:26
+msgid "Queued"
+msgstr "В очереди"
+
+#: src/PrintJob/JobStatus.php:28
+msgid "Submitted"
+msgstr "Отправлено"
+
+#: src/PrintJob/JobStatus.php:29
+msgid "Failed"
+msgstr "Ошибка"
+
+#: src/Admin/AdminPage.php:38
+#: src/PrintJob/JobStatus.php:30
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: src/PrintJob/JobStatus.php:31
+msgid "Cancelled"
+msgstr "Отменено"
+
+#: src/Admin/AdminPage.php:36
+msgid "Online"
+msgstr "В сети"
+
+#: src/Admin/AdminPage.php:37
+msgid "Offline"
+msgstr "Не в сети"
+
+#: src/Admin/AdminPage.php:127
+msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
+msgstr "Автоматическая печать работает через PrintNode и требует его клиента на компьютере, к которому подключён принтер. При локальной печати через браузер нужно подтвердить диалог печати."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printer (no API key)"
+msgstr "Локальный принтер (без ключа API)"
+
+#: src/Admin/AdminPage.php:137
+msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
+msgstr "Используйте установленный на этом компьютере принтер через браузер. Учётная запись PrintNode и ключ API не требуются."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "Откройте тестовую страницу, нажмите «Печать» и выберите принтер в диалоге печати браузера."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open local test page"
+msgstr "Открыть локальную тестовую страницу"
+
+#: src/Admin/AdminPage.php:137
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "Для заказов выберите диалог печати браузера при печати одного счёта или нескольких выбранных заказов."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
+msgstr "Локальные принтеры выбираются в диалоге печати браузера и не отображаются в списке PrintNode ниже. Если принтер отсутствует в диалоге, сначала установите его в операционной системе."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode (optional automatic printing)"
+msgstr "PrintNode (необязательная автоматическая печать)"
+
+#: src/Admin/AdminPage.php:142
+msgid "PrintNode printers"
+msgstr "Принтеры PrintNode"
+
+#: src/Admin/AdminPage.php:142
+msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
+msgstr "Этот список содержит только принтеры, предоставленные клиентом PrintNode в вашей учётной записи. Установите клиент на компьютер, к которому подключён принтер, войдите в учётную запись и обновите список."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "Выберите локальный принтер в диалоге печати браузера. Ключ API не требуется."
+

@@ -77,15 +77,15 @@ final class InvoiceFactory {
 
 	public function sample( bool $rtl = false ): InvoiceData {
 		return new InvoiceData(
-			array( 'id' => 1042, 'number' => '1042', 'date' => 'September 15, 2026', 'paid_date' => 'September 15, 2026', 'currency' => 'USD', 'status' => 'Processing' ),
-			array( 'name' => $rtl ? 'فروشگاه نمونه' : 'Northstar Supply Co.', 'details' => __( 'Business registration and tax details', 'wc-invoice-printer' ), 'phone' => '+1 555 0142', 'email' => 'billing@example.com', 'logo_data_uri' => '', 'address' => $rtl ? 'تهران، خیابان ولیعصر، پلاک ۲۴' : '24 Market Street, Portland, OR' ),
-			array( 'name' => $rtl ? 'آرمان رضایی' : 'Alex Morgan', 'company' => $rtl ? 'شرکت راهکار نو' : 'Morgan Studio', 'billing_address' => $rtl ? 'تهران، بلوار کشاورز، واحد ۱۲' : '840 Evergreen Terrace, Seattle, WA', 'shipping_address' => '', 'phone' => '+1 555 0199', 'email' => 'alex@example.com' ),
+			array( 'id' => 1042, 'number' => '1042', 'date' => __( 'September 15, 2026', 'wc-invoice-printer' ), 'paid_date' => __( 'September 15, 2026', 'wc-invoice-printer' ), 'currency' => 'USD', 'status' => __( 'Processing', 'wc-invoice-printer' ) ),
+			array( 'name' => __( 'Northstar Supply Co.', 'wc-invoice-printer' ), 'details' => __( 'Business registration and tax details', 'wc-invoice-printer' ), 'phone' => '+1 555 0142', 'email' => 'billing@example.com', 'logo_data_uri' => '', 'address' => __( '24 Market Street, Portland, OR', 'wc-invoice-printer' ) ),
+			array( 'name' => __( 'Alex Morgan', 'wc-invoice-printer' ), 'company' => __( 'Morgan Studio', 'wc-invoice-printer' ), 'billing_address' => __( '840 Evergreen Terrace, Seattle, WA', 'wc-invoice-printer' ), 'shipping_address' => '', 'phone' => '+1 555 0199', 'email' => 'alex@example.com' ),
 			array(
-				array( 'name' => $rtl ? 'دفتر برنامه‌ریزی حرفه‌ای با نام محصول بسیار طولانی' : 'Professional planning notebook with an intentionally long product name', 'variation' => 'Color: Midnight / Size: Large', 'sku' => 'PLAN-XL-01', 'quantity' => 2, 'unit_price' => '$42.00', 'subtotal' => '$84.00', 'discount' => '$8.40', 'tax' => '$6.05', 'total' => '$81.65' ),
-				array( 'name' => $rtl ? 'خودکار ژله‌ای' : 'Fine gel pen set', 'variation' => '', 'sku' => 'PEN-06', 'quantity' => 1, 'unit_price' => '$18.00', 'subtotal' => '$18.00', 'discount' => '$0.00', 'tax' => '$1.44', 'total' => '$19.44' ),
+				array( 'name' => __( 'Professional planning notebook with an intentionally long product name', 'wc-invoice-printer' ), 'variation' => __( 'Color: Midnight / Size: Large', 'wc-invoice-printer' ), 'sku' => 'PLAN-XL-01', 'quantity' => 2, 'unit_price' => '$42.00', 'subtotal' => '$84.00', 'discount' => '$8.40', 'tax' => '$6.05', 'total' => '$81.65' ),
+				array( 'name' => __( 'Fine gel pen set', 'wc-invoice-printer' ), 'variation' => '', 'sku' => 'PEN-06', 'quantity' => 1, 'unit_price' => '$18.00', 'subtotal' => '$18.00', 'discount' => '$0.00', 'tax' => '$1.44', 'total' => '$19.44' ),
 			),
-			array( array( 'label' => 'Subtotal:', 'value' => '$102.00' ), array( 'label' => 'Discount:', 'value' => '−$8.40' ), array( 'label' => 'Shipping:', 'value' => '$7.00' ), array( 'label' => 'Tax:', 'value' => '$7.49' ), array( 'label' => 'Total:', 'value' => '<strong>$108.09</strong>' ) ),
-			array( 'payment_method' => 'Credit card', 'shipping_method' => 'Ground shipping', 'note' => $rtl ? 'لطفاً بسته را به نگهبانی تحویل دهید.' : 'Please leave the parcel at reception.' ),
+			array( array( 'label' => __( 'Subtotal:', 'wc-invoice-printer' ), 'value' => '$102.00' ), array( 'label' => __( 'Discount:', 'wc-invoice-printer' ), 'value' => '−$8.40' ), array( 'label' => __( 'Shipping:', 'wc-invoice-printer' ), 'value' => '$7.00' ), array( 'label' => __( 'Tax:', 'wc-invoice-printer' ), 'value' => '$7.49' ), array( 'label' => __( 'Total:', 'wc-invoice-printer' ), 'value' => '<strong>$108.09</strong>' ) ),
+			array( 'payment_method' => __( 'Credit card', 'wc-invoice-printer' ), 'shipping_method' => __( 'Ground shipping', 'wc-invoice-printer' ), 'note' => __( 'Please leave the parcel at reception.', 'wc-invoice-printer' ) ),
 			$rtl
 		);
 	}

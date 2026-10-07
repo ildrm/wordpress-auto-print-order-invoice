@@ -136,7 +136,10 @@ final class PrintNodeProvider implements PrintProviderInterface {
 			$retryable = ! $ambiguous && ( 429 === $status || $status >= 500 );
 			$message   = 401 === $status
 				? __( 'PrintNode rejected the API key.', 'wc-invoice-printer' )
-				: sprintf( __( 'PrintNode rejected the request (HTTP %d).', 'wc-invoice-printer' ), $status );
+				: sprintf(
+					// translators: %d: HTTP response status code.
+					__( 'PrintNode rejected the request (HTTP %d).', 'wc-invoice-printer' ), $status
+				);
 			if ( $ambiguous ) {
 				$message = __( 'PrintNode may have accepted the print request. Check the job before reprinting.', 'wc-invoice-printer' );
 			}

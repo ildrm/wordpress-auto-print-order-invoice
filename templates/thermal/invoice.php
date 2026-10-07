@@ -1,11 +1,11 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 <!doctype html>
-<html lang="<?php echo esc_attr( get_locale() ); ?>" dir="<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?>">
+<html lang="<?php echo esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ); ?>" dir="<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?>">
 <head><meta charset="utf-8"><style>
 @page { margin:4mm }
 body { width:72mm; margin:0; color:#000; font:9px/1.35 DejaVu Sans,sans-serif; direction:<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?> }
 .center { text-align:center }
-.brand { font-size:15px; font-weight:bold }
+.brand { font-size:15px; font-weight:bold; line-height:1.5 }
 .logo { max-width:42mm; max-height:18mm }
 .rule { border:0; border-top:1px dashed #000; margin:7px 0 }
 .pair { width:100%; border-collapse:collapse; table-layout:fixed }

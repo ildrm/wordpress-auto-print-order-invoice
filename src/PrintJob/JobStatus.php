@@ -20,4 +20,16 @@ final class JobStatus {
 	public static function is_terminal( string $status ): bool {
 		return in_array( $status, array( self::SUBMITTED, self::FAILED, self::UNKNOWN, self::CANCELLED ), true );
 	}
+
+	public static function label( string $status ): string {
+		switch ( $status ) {
+			case self::QUEUED: return __( 'Queued', 'wc-invoice-printer' );
+			case self::PROCESSING: return __( 'Processing', 'wc-invoice-printer' );
+			case self::SUBMITTED: return __( 'Submitted', 'wc-invoice-printer' );
+			case self::FAILED: return __( 'Failed', 'wc-invoice-printer' );
+			case self::UNKNOWN: return __( 'Unknown', 'wc-invoice-printer' );
+			case self::CANCELLED: return __( 'Cancelled', 'wc-invoice-printer' );
+			default: return $status;
+		}
+	}
 }

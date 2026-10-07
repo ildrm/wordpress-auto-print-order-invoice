@@ -35,3 +35,16 @@ jobs:
       - run: node --test tests/js/*.test.js
       - run: node --check assets/js/admin.js
       - run: node --check assets/js/order.js
+  translations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2, wp-cli
+      - run: sudo apt-get update && sudo apt-get install -y gettext
+      - run: composer i18n:check
+      - run: wp i18n make-pot . /tmp/wcip-source.pot --domain=wc-invoice-printer --exclude=vendor,tests,build,languages,scripts --skip-js
+      - run: python3 scripts/check-translations.py --pot /tmp/wcip-source.pot

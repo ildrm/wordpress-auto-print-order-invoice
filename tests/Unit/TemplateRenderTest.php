@@ -9,14 +9,20 @@ use WCInvoicePrinter\Settings\SettingsRepository;
 use WCInvoicePrinter\Template\HtmlRenderer;
 use WCInvoicePrinter\Template\TemplateRegistry;
 use WCInvoicePrinter\Template\TemplateDefinition;
+use WCInvoicePrinter\Tests\Support\TranslationCatalog;
 
 final class TemplateRenderTest extends TestCase {
 	protected function setUp(): void { $GLOBALS['wcip_test_filters'] = array(); }
-	protected function tearDown(): void { $GLOBALS['wcip_test_filters'] = array(); }
+	protected function tearDown(): void {
+		$GLOBALS['wcip_test_filters'] = array();
+		unset( $GLOBALS['wcip_test_translations'], $GLOBALS['wcip_test_locale'] );
+	}
 	/**
 	 * @dataProvider templates
 	 */
 	public function test_template_renders_complete_rtl_invoice( string $template_id ): void {
+		$GLOBALS['wcip_test_translations'] = TranslationCatalog::load( 'fa_IR' );
+		$GLOBALS['wcip_test_locale'] = 'fa_IR';
 		$renderer = new HtmlRenderer( new TemplateRegistry() );
 		$invoice  = ( new InvoiceFactory( new SettingsRepository() ) )->sample( true );
 		$html     = $renderer->render( $invoice, $template_id );

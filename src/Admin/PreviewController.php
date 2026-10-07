@@ -65,7 +65,7 @@ final class PreviewController {
 			}
 		}
 		try {
-			if ( $sample ) { $documents[] = $this->html->render( $this->invoices->sample( $rtl ), $template_id ); }
+			if ( $sample ) { $documents[] = $this->html->render( $this->invoices->sample( $rtl || is_rtl() ), $template_id ); }
 			foreach ( $orders as $order ) {
 				$document = $this->html->render( $this->invoices->from_order( $order )->with_rtl( $rtl || is_rtl() ), $template_id );
 				for ( $copy = 0; $copy < $copies; $copy++ ) { $documents[] = $document; }
@@ -90,7 +90,7 @@ final class PreviewController {
 		preg_match_all( '/<style[^>]*>(.*?)<\/style>/si', $documents[0], $style_matches );
 		$styles = implode( "\n", $style_matches[1] ?? array() );
 		$body   = array_map( static function ( string $document ): string { preg_match( '/<body[^>]*>(.*?)<\/body>/si', $document, $match ); return $match[1] ?? ''; }, $documents );
-		echo '<!doctype html><html dir="' . ( $rtl || is_rtl() ? 'rtl' : 'ltr' ) . '"><head><meta charset="utf-8"><style>' . $styles . '.wcip-toolbar{position:sticky;top:0;z-index:5;padding:10px;background:#fff;border-bottom:1px solid #ccc;text-align:center}.wcip-document{page-break-after:always}.wcip-document:last-child{page-break-after:auto}@media print{.wcip-toolbar{display:none}}</style></head><body><div class="wcip-toolbar"><button onclick="window.print()">' . esc_html__( 'Print', 'wc-invoice-printer' ) . '</button></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS originates from bundled, validated templates.
+		echo '<!doctype html><html lang="' . esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ) . '" dir="' . ( $rtl || is_rtl() ? 'rtl' : 'ltr' ) . '"><head><meta charset="utf-8"><style>' . $styles . '.wcip-toolbar{position:sticky;top:0;z-index:5;padding:10px;background:#fff;border-bottom:1px solid #ccc;text-align:center}.wcip-document{page-break-after:always}.wcip-document:last-child{page-break-after:auto}@media print{.wcip-toolbar{display:none}}</style></head><body><div class="wcip-toolbar"><button onclick="window.print()">' . esc_html__( 'Print', 'wc-invoice-printer' ) . '</button></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS originates from bundled, validated templates.
 		foreach ( $body as $document ) { echo '<section class="wcip-document">' . $document . '</section>'; } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Rendered template escapes normalized data.
 		if ( $auto_print ) { echo '<script>window.addEventListener("load",function(){window.print();});</script>'; }
 		echo '</body></html>';

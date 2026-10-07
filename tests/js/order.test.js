@@ -47,6 +47,7 @@ test('PrintNode submission reports queued instead of provider acceptance', async
   const env = environment({ output: 'printnode' });
   const button = await env.click('submit');
   const body = JSON.parse(env.requests[0].options.body);
+  assert.equal(new URL(env.requests[0].url).searchParams.get('_locale'), 'user');
   assert.deepEqual(body, { order_ids: [42], template_id: 'thermal', provider_id: 'printnode', printer_id: '123', copies: 2 });
   assert.equal(env.status.textContent, 'Invoice queued');
   assert.equal(button.disabled, false);

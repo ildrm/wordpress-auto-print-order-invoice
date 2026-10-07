@@ -5,12 +5,32 @@ namespace WCInvoicePrinter\Tests\Unit;
 use WCInvoicePrinter\Tests\Support\JobTestCase;
 
 final class SchedulerTest extends JobTestCase {
-	public function test_initial_action_is_unique(): void {
+	public function test_initial_action_does_not_use_group_wide_uniqueness(): void {
 		$job = $this->job();
 		self::assertSame( 101, $this->scheduler->enqueue( $job['id'] ) );
-		self::assertTrue( $GLOBALS['wcip_scheduled_action']['unique'] );
+		self::assertFalse( $GLOBALS['wcip_scheduled_action']['unique'] );
 		self::assertSame( array( 'job_id' => $job['id'] ), $GLOBALS['wcip_scheduled_action']['args'] );
 		self::assertSame( 101, $this->jobs->find( $job['id'] )['action_id'] );
+	}
+
+	public function test_different_jobs_can_queue_in_stores_that_deduplicate_by_hook_and_group(): void {
+		$actions = array();
+		$GLOBALS['wcip_async_action_callback'] = static function ( string $hook, array $args, string $group, bool $unique ) use ( &$actions ): int {
+			// WooCommerce 9.0's DB store ignores args when unique is requested.
+			if ( $unique && $actions ) { return 0; }
+			$actions[] = compact( 'hook', 'args', 'group' );
+			return 100 + count( $actions );
+		};
+		try {
+			$first = $this->job();
+			$second = $this->job( array( 'order_id' => 43 ) );
+			self::assertSame( 101, $this->scheduler->enqueue( $first['id'] ) );
+			self::assertSame( 102, $this->scheduler->enqueue( $second['id'] ) );
+			self::assertSame( 'queued', $this->jobs->find( $first['id'] )['status'] );
+			self::assertSame( 'queued', $this->jobs->find( $second['id'] )['status'] );
+		} finally {
+			unset( $GLOBALS['wcip_async_action_callback'] );
+		}
 	}
 
 	public function test_delayed_retry_is_not_blocked_by_current_running_action(): void {

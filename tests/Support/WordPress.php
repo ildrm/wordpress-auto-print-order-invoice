@@ -103,8 +103,8 @@ function update_option( string $name, $value, $autoload = null ): bool { $GLOBAL
 function delete_option( string $name ): bool { unset( $GLOBALS['wcip_test_options'][ $name ] ); return true; }
 function delete_transient( string $name ): bool { unset( $GLOBALS['wcip_test_transients'][ $name ] ); return true; }
 function register_rest_route( string $namespace, string $route, array $args ): void { $GLOBALS['wcip_test_routes'][ $namespace . $route ] = $args; }
-function esc_html__( string $value, string $domain = '' ): string { return esc_html( $value ); }
-function esc_attr__( string $value, string $domain = '' ): string { return esc_attr( $value ); }
+function esc_html__( string $value, string $domain = '' ): string { return esc_html( __( $value, $domain ) ); }
+function esc_attr__( string $value, string $domain = '' ): string { return esc_attr( __( $value, $domain ) ); }
 function wp_unslash( $value ) { return is_array( $value ) ? array_map( 'wp_unslash', $value ) : ( is_string( $value ) ? stripslashes( $value ) : $value ); }
 function sanitize_email( $value ): string { return filter_var( (string) $value, FILTER_SANITIZE_EMAIL ); }
 function sanitize_textarea_field( $value ): string { return trim( strip_tags( (string) $value ) ); }

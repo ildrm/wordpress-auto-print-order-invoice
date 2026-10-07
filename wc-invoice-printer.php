@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Invoice Printer
  * Description: Secure manual and automatic invoice printing for WooCommerce.
- * Version: 1.0.0
+ * Version: 1.1.1
  * Requires at least: 6.6
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WCIP_VERSION', '1.0.0' );
+define( 'WCIP_VERSION', '1.1.1' );
 define( 'WCIP_FILE', __FILE__ );
 define( 'WCIP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WCIP_URL', plugin_dir_url( __FILE__ ) );
@@ -46,6 +46,7 @@ add_action( 'before_woocommerce_init', static function (): void {
 	}
 } );
 
-add_action( 'plugins_loaded', static function (): void {
+// Load translations at init, before Action Scheduler initializes at priority 1.
+add_action( 'init', static function (): void {
 	WCInvoicePrinter\Plugin::boot();
-}, 20 );
+}, 0 );

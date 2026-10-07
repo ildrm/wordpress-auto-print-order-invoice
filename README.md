@@ -2,7 +2,7 @@
 
 Print WooCommerce invoices manually or send them to a physical printer through PrintNode after WooCommerce confirms payment. Automatic printing runs in the background so checkout does not wait for PDF generation or delivery. It is **disabled by default**.
 
-Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal templates, RTL and Persian/Arabic PDF text, business identity and optional customer notes, individual/bulk printing, and persistent job history with duplicate prevention and conservative retries.
+Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal templates, translations for 13 languages, RTL and multilingual PDF text, business identity and optional customer notes, individual/bulk printing, and persistent job history with duplicate prevention and conservative retries.
 
 ## Contents
 
@@ -12,6 +12,7 @@ Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal te
 - [Payment triggers](#payment-triggers)
 - [Manual printing](#manual-printing)
 - [Invoices and templates](#invoices-and-templates)
+- [Languages](#languages)
 - [Jobs, retries, and recovery](#jobs-retries-and-recovery)
 - [Permissions and privacy](#permissions-and-privacy)
 - [Storage and lifecycle](#storage-and-lifecycle)
@@ -31,8 +32,9 @@ Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal te
 | PHP | 7.4+ |
 | PDF output | Packaged Composer dependencies (mPDF), including its `mbstring`/`gd` extension requirements |
 | Queue | WooCommerce's initialized Action Scheduler and a working WP-Cron/loopback or server-managed runner |
-| Physical printing | PrintNode account/API key and an online PrintNode client on a computer connected to the printer |
-| Network | Outbound HTTPS to `https://api.printnode.com`; logo loading also needs access to the logo host |
+| Local printing | Printer installed in the operating system on the computer running your browser; no API key |
+| Unattended printing | PrintNode account/API key and an online PrintNode client on a computer connected to the printer |
+| Network | PrintNode output needs outbound HTTPS to `https://api.printnode.com`; logo loading needs access to the logo host |
 | Filesystem | Writable PHP temporary directory for private PDF working files |
 
 Browser printing remains available without mPDF; PrintNode output/test pages need it. The WordPress server and printer computer may be on different networks. Composer itself is only needed to prepare dependencies, not on a correctly packaged production installation.
@@ -41,7 +43,7 @@ Production and development dependencies support PHP 7.4. Composer resolves again
 
 ## Installation
 
-For a release archive, verify it includes `wc-invoice-printer.php`, `src/`, `templates/`, `assets/`, and `vendor/autoload.php`. Upload it through **Plugins → Add New Plugin → Upload Plugin**, or extract its folder into `wp-content/plugins/`. Activate WooCommerce, activate this plugin, and open **WooCommerce → Invoice Printer**.
+For a release archive, verify it includes `wc-invoice-printer.php`, `src/`, `templates/`, `assets/`, `languages/`, and `vendor/autoload.php`. Upload it through **Plugins → Add New Plugin → Upload Plugin**, or extract its folder into `wp-content/plugins/`. Activate WooCommerce, activate this plugin, and open **WooCommerce → Invoice Printer**.
 
 For a source checkout, install production dependencies before uploading:
 
@@ -56,6 +58,12 @@ Copy the whole folder, including `vendor/`, to `wp-content/plugins/wc-invoice-pr
 
 1. In **General**, set business name, contact information, logo URL, business/tax details, and whether customer notes should appear. The store address comes from WooCommerce store settings.
 2. In **Templates**, choose the manual default and inspect normal/RTL sample previews.
+For a locally connected USB or network printer, open **Printers → Local printer (no API key) → Open local test page**. Click **Print** on that page and select the printer in your browser's dialog. For real orders, use **Print invoice → Browser print dialog**, or the same destination in bulk printing. Local printing is available immediately; no credential or printer settings need to be saved.
+
+The PrintNode list only contains devices shared by a client signed in to that PrintNode account. A web page cannot enumerate your operating system's printers or save a local device selection; printer choice belongs to the browser/operating system. If a local printer is missing from the print dialog, install its driver and verify that your operating system can print to it. Refreshing the PrintNode list does not discover directly connected local printers.
+
+For unattended printing after payment, expand **PrintNode (optional automatic printing)** and continue:
+
 3. Install/sign in to the PrintNode client on the printer computer. First verify that the operating system can print to the device.
 4. In **Printers**, enter and **save** the API key before testing; alternatively configure the server constant below.
 5. **Test connection**, **Refresh printers**, select the intended printer, and save printer settings.
@@ -120,9 +128,19 @@ Invoices use the WooCommerce order number as their reference. Data includes date
 
 Item unit price/subtotal exclude tax and precede discounts. Discount equals stored subtotal minus discounted total; payable line total includes stored line tax after discount. WooCommerce order totals retain shipping, fees, discounts, and tax. Classic exposes detailed amounts; smaller layouts show a subset.
 
-RTL follows the WordPress locale, with an explicit RTL sample option. mPDF uses DejaVu Sans for Latin/Persian/Arabic. Large receipts can span pages; browser receipt paper size depends on the selected printer/driver. Test long names, addresses, and notes on the physical device.
+RTL follows the WordPress locale, with an explicit RTL sample option. mPDF selects bundled fonts for the invoice language. Large receipts can span pages; browser receipt paper size depends on the selected printer/driver. Test long names, addresses, and notes on the physical device.
 
 Logo URLs use WordPress's safe HTTP API. PNG/JPEG/GIF/WebP data is validated and embedded, with limits of 2 MiB and 5,000 pixels per dimension. Successful logos are cached for one day; inaccessible or invalid images are omitted.
+
+## Languages
+
+Bundled translations cover English, Persian, Turkish, Arabic, French, German, Russian, Spanish, Portuguese (Portugal and Brazil), Armenian, Hindi, Simplified Chinese, and Japanese. Admin screens, print dialogs, messages, invoice labels, and sample previews use the selected WordPress language.
+
+Choose **Settings → General → Site Language** for the store and background invoices. Administrators can choose a different **Users → Profile → Language** for their admin screens and browser previews. Background PrintNode jobs use the site's language when the worker runs. Persian and Arabic automatically use RTL layout, including ordinary sample previews.
+
+PDF output selects bundled fonts for Arabic/Persian, Armenian, Cyrillic, Hindi, Chinese, and Japanese; retain mPDF's font files in the release. WooCommerce supplies real order totals, currency/date formatting, payment/shipping names, and order status translations. Business details, product names, customer details, and notes keep the text saved in the store.
+
+See [language locales, translation maintenance, and verification](docs/languages.md).
 
 ## Jobs, retries, and recovery
 
@@ -254,7 +272,7 @@ The readable PHP file receives `$invoice` (`InvoiceData`) and `$template` (`Temp
 
 `InvoiceData` exposes read-only `order`, `store`, `customer`, `items`, `totals`, `fulfillment` arrays and an `rtl` boolean. PHP 7.4-compatible private fields and magic accessors preserve property reads and prevent replacement/unsetting. Array reads return values, so modify a copy and return a new instance to change fields. `TemplateDefinition` and `SubmissionResult` use the same approach. Match bundled escaping of plain text and restricted currency HTML.
 
-`JobStatus` uses string constants on every PHP version: pass `JobStatus::FAILED` directly rather than reading an enum's `->value`. `JobStatus::cases()` returns the status strings, and `JobStatus::is_terminal( $status )` identifies terminal states. Stored database values and failure-hook arguments remain the same strings.
+`JobStatus` uses string constants on every PHP version: pass `JobStatus::FAILED` directly rather than reading an enum's `->value`. `JobStatus::cases()` returns the status strings, `JobStatus::is_terminal( $status )` identifies terminal states, and `JobStatus::label( $status )` returns translated display labels. Stored database values and failure-hook arguments remain the same strings.
 
 Providers receive PDF bytes, printer ID, copies, and title, and return `SubmissionResult`. Use `ProviderException` to distinguish definitive rejection from ambiguous submission; never mark possibly accepted delivery retryable. Additional registered providers are available internally; the built-in configuration/public manual route remains PrintNode-specific.
 
@@ -266,9 +284,10 @@ composer test
 composer test:js
 composer lint
 composer lint:js
+composer i18n:check
 ```
 
-Unit tests use controlled WordPress/WooCommerce/HTTP/database doubles for settings, permissions, requests, queue failures, idempotency, and state transitions. PDF tests generate real mPDF output, including RTL text. Tests do not contact PrintNode or physically print. Doubles do not establish MySQL behavior or browser/gateway compatibility.
+Unit tests use controlled WordPress/WooCommerce/HTTP/database doubles for settings, permissions, requests, queue failures, idempotency, and state transitions. PDF tests generate all three layouts in every bundled locale, including RTL text and the required Hindi/CJK fonts. Translation checks require Python 3.8+ and GNU gettext; extraction additionally uses WP-CLI. Tests do not contact PrintNode or physically print. Doubles do not establish MySQL behavior or browser/gateway compatibility.
 
 PHPUnit 9.6 and its configuration/annotations run on PHP 7.4 and PHP 8. The [PHP compatibility workflow](.github/workflows/php-compatibility.yml) installs the committed lock file and runs platform checks, PHP lint, and the full suite on PHP 7.4 and 8.0–8.5. Compatibility review details are in [docs/php-compatibility.md](docs/php-compatibility.md).
 
@@ -282,6 +301,14 @@ WCIP_RUN_INTEGRATION_TESTS=1 wp --path=/path/to/disposable-wordpress eval-file \
 ```
 
 It creates test orders/products, mocks outbound HTTP, restores settings, and removes its test data. Test with both legacy storage and HPOS; physical delivery requires a deliberate staging test with a real printer.
+
+The [local-printing HTTP test](tests/Integration/local-printing.php) additionally checks the actual authenticated settings and preview routes without an API key. It verifies the selected thermal sample, no sample job creation, nonce rejection, and two-copy browser output/history. Run it on a disposable site whose admin URL is reachable from its own PHP process:
+
+```sh
+WCIP_RUN_INTEGRATION_TESTS=1 wp eval-file /path/to/plugin/tests/Integration/local-printing.php
+```
+
+The HTTP test fetches documents without executing browser scripts, so it does not print paper. It restores settings and deletes its order, job, and login-session fixtures.
 
 | Directory/file | Responsibility |
 | --- | --- |
@@ -303,6 +330,8 @@ Prepare a clean staging copy, install dependencies with `--no-dev --prefer-dist 
 
 The checked-in `build/wc-invoice-printer-1.0.0.zip` is a historical artifact, **not regenerated by source changes/tests**. Build a fresh archive before distributing reviewed changes, then verify its installation/activation and a test print.
 
+`build/wc-invoice-printer-1.1.1.zip` packages the PHP 7.4-compatible source, all language catalogs, local-printer settings, and production PDF dependencies. The previous 1.1.0 archive predates the local-printer settings update. The version increase also refreshes WordPress's cached admin assets.
+
 ## Troubleshooting
 
 | Symptom | Check/action |
@@ -314,7 +343,9 @@ The checked-in `build/wc-invoice-printer-1.0.0.zip` is a historical artifact, **
 | Database setup notice | Check database CREATE/ALTER permissions and storage; fix the cause and reactivate. Other WooCommerce operations can continue while printing is unavailable. |
 | Generation failure | Composer dependencies/extensions, memory/temp permissions, template/filter code; correct then reprint |
 | HTTP 401 | Replace/test credential and check whether the server constant overrides it |
-| No printers | Correct account, online client, refresh discovery |
+| Local printer missing from plugin list | Use Browser print dialog; the plugin list is for PrintNode devices only |
+| Local printer missing from browser dialog | Install the printer/driver in the operating system and verify printing from another application |
+| No PrintNode printers | Correct account, install/sign in to the client on the printer computer, refresh discovery |
 | Missing printer after refresh/key change | Explicitly select/save a printer from the intended account; refresh does not silently choose another |
 | HTTP 429 | Wait for bounded retries; inspect service/account limits if exhausted |
 | Unknown job | Inspect PrintNode/physical output first; a new manual print may duplicate accepted work |

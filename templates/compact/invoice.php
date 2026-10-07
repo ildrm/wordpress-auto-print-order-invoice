@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 <!doctype html>
-<html lang="<?php echo esc_attr( get_locale() ); ?>" dir="<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?>">
+<html lang="<?php echo esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ); ?>" dir="<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?>">
 <head><meta charset="utf-8"><style>
 @page { margin:8mm }
 body { margin:0; color:#202124; font:10px/1.35 DejaVu Sans,sans-serif; direction:<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?> }

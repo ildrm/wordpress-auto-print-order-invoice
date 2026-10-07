@@ -87,6 +87,13 @@ try {
 	$check( $price_text( wc_price( 20, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['discount'] ), 'Stored line discount must be reflected on invoice.' );
 	$check( $price_text( wc_price( 88, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['total'] ), 'Discounted line total must include stored tax.' );
 	$check( false === strpos( $invoice->items[0]['variation'], 'DO_NOT_SHOW' ), 'Private item metadata must not appear.' );
+	$parallel_one = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$parallel_two = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$check( 'queued' === $parallel_one['status'] && 'queued' === $parallel_two['status'] && (int) $parallel_one['action_id'] > 0 && (int) $parallel_two['action_id'] > 0 && $parallel_one['action_id'] !== $parallel_two['action_id'], 'Independent jobs must queue while another invoice is pending.' );
+	foreach ( array( $parallel_one, $parallel_two ) as $parallel_job ) {
+		$repository->cancel( (int) $parallel_job['id'] );
+		as_unschedule_all_actions( \WCInvoicePrinter\Automation\Scheduler::HOOK, array( 'job_id' => (int) $parallel_job['id'] ), \WCInvoicePrinter\Automation\Scheduler::GROUP );
+	}
 	foreach ( array( 'classic', 'compact', 'thermal' ) as $template_id ) {
 		$bytes = $pdf->render( $html->render( $invoice->with_rtl( true ), $template_id ), $templates->get( $template_id ) );
 		$check( 0 === strpos( $bytes, '%PDF-' ), 'Every bundled template must render a real RTL PDF.' );

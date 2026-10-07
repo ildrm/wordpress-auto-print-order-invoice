@@ -24,9 +24,8 @@ final class MpdfRenderer implements PdfRendererInterface {
 					'orientation'      => strtoupper( substr( $template->orientation, 0, 1 ) ),
 					'tempDir'          => $temp_dir,
 					'autoScriptToLang' => true,
-					// DejaVu Sans covers Latin, Persian, and Arabic; pinning it keeps the
-					// distributable deterministic and avoids mPDF selecting optional fonts.
-					'autoLangToFont'   => false,
+					// mPDF ships FreeSerif (Indic) and Sun-ExtA (CJK) alongside DejaVu.
+					'autoLangToFont'   => true,
 					'default_font'     => 'dejavusans',
 					'margin_left'      => '80mm' === $template->paper_size ? 4 : 10,
 					'margin_right'     => '80mm' === $template->paper_size ? 4 : 10,

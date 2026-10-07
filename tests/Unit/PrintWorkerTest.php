@@ -13,6 +13,7 @@ use WCInvoicePrinter\Printing\SubmissionResult;
 use WCInvoicePrinter\Template\HtmlRenderer;
 use WCInvoicePrinter\Template\TemplateDefinition;
 use WCInvoicePrinter\Tests\Support\JobTestCase;
+use WCInvoicePrinter\Tests\Support\TranslationCatalog;
 
 final class PrintWorkerTest extends JobTestCase {
 	private object $provider;
@@ -38,7 +39,9 @@ final class PrintWorkerTest extends JobTestCase {
 		};
 		$this->pdf = new class() implements PdfRendererInterface {
 			public ?\Throwable $exception = null;
+			public string $html = '';
 			public function render( string $html, TemplateDefinition $template ): string {
+				$this->html = $html;
 				if ( $this->exception ) { throw $this->exception; }
 				return '%PDF-test';
 			}
@@ -46,6 +49,24 @@ final class PrintWorkerTest extends JobTestCase {
 		$providers = new PrintProviderRegistry();
 		$providers->register( $this->provider );
 		$this->worker = new PrintWorker( $this->jobs, new InvoiceFactory( $this->settings ), new HtmlRenderer( $this->templates ), $this->pdf, $this->templates, $providers, new RetryPolicy(), $this->scheduler );
+	}
+
+	protected function tearDown(): void {
+		parent::tearDown();
+		unset( $GLOBALS['wcip_test_locale'], $GLOBALS['wcip_test_user_locale'], $GLOBALS['wcip_test_translations'], $GLOBALS['wcip_test_locale_stack'] );
+	}
+
+	public function test_queued_invoice_uses_store_language_and_restores_operator_language(): void {
+		$GLOBALS['wcip_test_options']['WPLANG'] = 'ja';
+		$GLOBALS['wcip_test_user_locale'] = 'fa_IR';
+		$GLOBALS['wcip_test_translations'] = TranslationCatalog::load( 'fa_IR' );
+		$job = $this->job();
+		$this->worker->process( $job['id'] );
+		self::assertStringContainsString( 'lang="ja" dir="ltr"', $this->pdf->html );
+		self::assertStringContainsString( '請求書', $this->pdf->html );
+		self::assertSame( '請求書 42', $this->provider->submissions[0]['title'] );
+		self::assertSame( 'fa_IR', determine_locale() );
+		self::assertSame( 'فاکتور', __( 'Invoice', 'wc-invoice-printer' ) );
 	}
 
 	public function test_successful_submission_is_persisted_and_duplicate_execution_cannot_print_again(): void {
@@ -145,6 +166,8 @@ final class PrintWorkerTest extends JobTestCase {
 	}
 
 	public function test_exception_in_post_submission_observer_preserves_the_successful_job(): void {
+		$GLOBALS['wcip_test_options']['WPLANG'] = 'ja';
+		$GLOBALS['wcip_test_user_locale'] = 'fa_IR';
 		$GLOBALS['wcip_test_hooks']['wcip_after_print_submission'][] = static function (): void { throw new \RuntimeException( 'Observer failed' ); };
 		$job = $this->job();
 		try {
@@ -156,6 +179,7 @@ final class PrintWorkerTest extends JobTestCase {
 		self::assertSame( 'submitted', $this->jobs->find( $job['id'] )['status'] );
 		self::assertCount( 1, $this->provider->submissions );
 		self::assertFalse( $this->jobs->retry_failed( $job['id'] ) );
+		self::assertSame( 'fa_IR', determine_locale(), 'Restore the operator locale even when an observer throws.' );
 	}
 
 	public function test_interrupted_action_marks_only_an_unfinished_processing_job_unknown(): void {

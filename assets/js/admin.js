@@ -13,6 +13,7 @@
       endpoint.pathname = endpoint.pathname.replace(/\/$/, '') + suffix.pathname;
     }
     suffix.searchParams.forEach((value, key) => endpoint.searchParams.set(key, value));
+    endpoint.searchParams.set('_locale', 'user');
     const response = await fetch(endpoint.toString(), {
       ...options,
       headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': wcipAdmin.nonce, ...(options.headers || {}) }
@@ -48,7 +49,9 @@
         } else {
           select.add(new Option(wcipAdmin.strings.selectPrinter, ''));
           data.printers.forEach((printer) => {
-            const option = new Option(printer.name + (printer.state ? ' · ' + printer.state : ''), printer.id);
+            const state = Object.prototype.hasOwnProperty.call(wcipAdmin.printerStates || {}, printer.state)
+              ? wcipAdmin.printerStates[printer.state] : printer.state;
+            const option = new Option(printer.name + (state ? ' · ' + state : ''), printer.id);
             option.dataset.printerName = printer.name;
             select.add(option);
           });
@@ -58,6 +61,7 @@
         select.dispatchEvent(new Event('change', { bubbles: true }));
       } else if (button.dataset.wcipAction === 'test-print') {
         const printerId = root.querySelector('#wcip-printer-select').value;
+        if (!printerId) throw new Error(wcipAdmin.strings.selectPrinter);
         await request('/test-print', { method: 'POST', body: JSON.stringify({ printer_id: printerId }) });
         setNotice(wcipAdmin.strings.submitted, 'success');
       } else if (button.dataset.wcipJob) {

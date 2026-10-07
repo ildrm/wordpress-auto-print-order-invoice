@@ -13,6 +13,7 @@ use WCInvoicePrinter\Template\HtmlRenderer;
 use WCInvoicePrinter\Template\TemplateDefinition;
 use WCInvoicePrinter\Template\TemplateRegistry;
 use WCInvoicePrinter\Tests\Support\InMemoryWpdb;
+use WCInvoicePrinter\Tests\Support\TranslationCatalog;
 
 final class PreviewControllerTest extends TestCase {
 	private InMemoryWpdb $database;
@@ -24,10 +25,12 @@ final class PreviewControllerTest extends TestCase {
 		$this->database = new InMemoryWpdb();
 		$GLOBALS['wpdb'] = $this->database;
 		$GLOBALS['wcip_test_options'] = array();
+		$GLOBALS['wcip_test_filters'] = array();
 		$GLOBALS['wcip_test_orders'] = array( 1 => new \WC_Order( 1 ) );
 		$GLOBALS['wcip_test_capabilities'] = array( 'wcip_print_invoices' => true );
 		$GLOBALS['wcip_test_nonce_valid'] = true;
 		unset( $GLOBALS['wcip_nocache_called'], $GLOBALS['wcip_nocache_exception'] );
+		unset( $GLOBALS['wcip_test_locale'], $GLOBALS['wcip_test_translations'] );
 		$_GET = array( 'order_ids' => '1', 'template' => 'classic' );
 		$settings = new SettingsRepository();
 		$this->templates = new TemplateRegistry();
@@ -39,6 +42,8 @@ final class PreviewControllerTest extends TestCase {
 		$_GET = array();
 		$GLOBALS['wcip_test_nonce_valid'] = true;
 		unset( $GLOBALS['wcip_nocache_called'], $GLOBALS['wcip_nocache_exception'] );
+		unset( $GLOBALS['wcip_test_locale'], $GLOBALS['wcip_test_translations'] );
+		$GLOBALS['wcip_test_filters'] = array();
 		if ( $this->temporary_template ) { unlink( $this->temporary_template ); }
 	}
 
@@ -122,6 +127,27 @@ final class PreviewControllerTest extends TestCase {
 		$_GET = array( 'sample' => '1', 'template' => 'thermal' );
 		$this->prepare_to_http_boundary();
 		self::assertSame( array(), $this->database->rows );
+	}
+
+	/** @dataProvider rtl_locales */
+	public function test_normal_sample_preview_follows_the_current_rtl_language( string $locale ): void {
+		$GLOBALS['wcip_test_locale'] = $locale;
+		$GLOBALS['wcip_test_translations'] = TranslationCatalog::load( $locale );
+		$_GET = array( 'sample' => '1', 'template' => 'classic' );
+		$rendered = '';
+		$GLOBALS['wcip_test_filters']['wcip_rendered_invoice_html'][] = static function ( string $html ) use ( &$rendered ): string {
+			$rendered = $html;
+			return $html;
+		};
+		$this->prepare_to_http_boundary();
+		self::assertStringContainsString( 'dir="rtl"', $rendered );
+		self::assertStringContainsString( 'direction:rtl', $rendered );
+		self::assertStringContainsString( __( 'INVOICE', 'wc-invoice-printer' ), $rendered );
+		self::assertSame( array(), $this->database->rows );
+	}
+
+	public static function rtl_locales(): array {
+		return array( array( 'fa_IR' ), array( 'ar' ) );
 	}
 
 	public function test_browser_print_records_prepared_job_with_correct_copies(): void {

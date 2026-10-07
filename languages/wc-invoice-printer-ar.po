@@ -1,0 +1,979 @@
+# Copyright (C) 2026 WooCommerce Invoice Printer contributors
+# Distributed under GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-07 09:00+0330\n"
+"PO-Revision-Date: 2026-10-07 09:00+0330\n"
+"Last-Translator: WooCommerce Invoice Printer contributors\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Domain: wc-invoice-printer\n"
+
+#. Plugin Name of the plugin
+#: wc-invoice-printer.php
+msgid "WooCommerce Invoice Printer"
+msgstr "طابعة فواتير WooCommerce"
+
+#. Description of the plugin
+#: wc-invoice-printer.php
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "طباعة يدوية وتلقائية آمنة للفواتير في WooCommerce."
+
+#: src/Admin/AdminPage.php:24
+#: src/Admin/AdminPage.php:91
+msgid "Invoice Printer"
+msgstr "طابعة الفواتير"
+
+#: src/Admin/AdminPage.php:41
+msgid "Working…"
+msgstr "جارٍ التنفيذ…"
+
+#: src/Admin/AdminPage.php:42
+#: src/Admin/OrderIntegration.php:62
+#: src/Admin/PreviewController.php:48
+#: src/PrintJob/PrintJobService.php:84
+msgid "Choose between 1 and 20 copies."
+msgstr "اختر عدد نسخ بين 1 و20."
+
+#: src/Admin/AdminPage.php:43
+msgid "Something went wrong. Check the details and try again."
+msgstr "حدث خطأ. تحقق من التفاصيل وحاول مجددًا."
+
+#: src/Admin/AdminPage.php:44
+msgid "Choose a printer"
+msgstr "اختر طابعة"
+
+#: src/Admin/AdminPage.php:45
+msgid "No printers were found. Confirm that the PrintNode client is online."
+msgstr "لم يتم العثور على طابعات. تأكد من أن عميل PrintNode متصل بالإنترنت."
+
+#: src/Admin/AdminPage.php:46
+msgid "Submitted to PrintNode."
+msgstr "تم الإرسال إلى PrintNode."
+
+#: src/Admin/AdminPage.php:47
+msgid "PrintNode connection verified."
+msgstr "تم التحقق من اتصال PrintNode."
+
+#. translators: %d: number of printers returned by PrintNode.
+#: src/Admin/AdminPage.php:49
+#, php-format
+msgid "%d printer(s) found."
+msgstr "عدد الطابعات التي تم العثور عليها: %d"
+
+#. translators: %d: number of invoices added to the print queue.
+#: src/Admin/AdminPage.php:51
+#, php-format
+msgid "%d invoice(s) queued."
+msgstr "عدد الفواتير المضافة إلى قائمة الانتظار: %d"
+
+#: src/Admin/AdminPage.php:57
+msgid "You are not allowed to change these settings."
+msgstr "ليس لديك إذن لتغيير هذه الإعدادات."
+
+#: src/Admin/AdminPage.php:60
+msgid "Invalid settings input."
+msgstr "إدخال إعدادات غير صالح."
+
+#: src/Admin/AdminPage.php:63
+msgid "Invalid settings section."
+msgstr "قسم إعدادات غير صالح."
+
+#: src/Admin/AdminPage.php:88
+msgid "General"
+msgstr "عام"
+
+#: src/Admin/AdminPage.php:88
+msgid "Templates"
+msgstr "القوالب"
+
+#: src/Admin/AdminPage.php:88
+msgid "Automatic Printing"
+msgstr "الطباعة التلقائية"
+
+#: src/Admin/AdminPage.php:88
+msgid "Printers"
+msgstr "الطابعات"
+
+#: src/Admin/AdminPage.php:88
+msgid "Print Jobs"
+msgstr "مهام الطباعة"
+
+#: src/Admin/AdminPage.php:91
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "أنشئ فواتير متناسقة وأرسلها إلى الطابعة المناسبة."
+
+#: src/Admin/AdminPage.php:92
+msgid "Settings saved."
+msgstr "تم حفظ الإعدادات."
+
+#: src/Admin/AdminPage.php:93
+msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
+msgstr "تبقى الطباعة التلقائية معطلة حتى يتم إعداد بيانات اتصال PrintNode وطابعة."
+
+#: src/Admin/AdminPage.php:94
+msgid "Invoice Printer sections"
+msgstr "أقسام طابعة الفواتير"
+
+#: src/Admin/AdminPage.php:115
+msgid "Invoice identity"
+msgstr "بيانات الفاتورة"
+
+#: src/Admin/AdminPage.php:115
+msgid "Business details shown to customers on every invoice."
+msgstr "بيانات النشاط التجاري المعروضة للعملاء في كل فاتورة."
+
+#: src/Admin/AdminPage.php:116
+msgid "Business name"
+msgstr "اسم النشاط التجاري"
+
+#: src/Admin/AdminPage.php:116
+msgid "Logo URL"
+msgstr "رابط الشعار"
+
+#: src/Admin/AdminPage.php:116
+msgid "Phone"
+msgstr "الهاتف"
+
+#: src/Admin/AdminPage.php:116
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: src/Admin/AdminPage.php:116
+msgid "Business and tax details"
+msgstr "بيانات النشاط التجاري والضرائب"
+
+#: src/Admin/AdminPage.php:117
+msgid "Manual printing defaults"
+msgstr "الإعدادات الافتراضية للطباعة اليدوية"
+
+#: src/Admin/AdminPage.php:117
+msgid "Include customer notes on invoices"
+msgstr "تضمين ملاحظات العميل في الفواتير"
+
+#: src/Admin/AdminPage.php:121
+msgid "Choose an invoice layout"
+msgstr "اختر تصميمًا للفاتورة"
+
+#: src/Admin/AdminPage.php:121
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "تستخدم المعاينة بيانات نموذجية واقعية وتتيح العرض من اليمين إلى اليسار."
+
+#: src/Admin/AdminPage.php:122
+msgid "Selected"
+msgstr "محدد"
+
+#: src/Admin/AdminPage.php:122
+#: src/Admin/OrderIntegration.php:32
+msgid "Preview"
+msgstr "معاينة"
+
+#: src/Admin/AdminPage.php:122
+msgid "RTL preview"
+msgstr "معاينة من اليمين إلى اليسار"
+
+#: src/Admin/AdminPage.php:122
+msgid "Select"
+msgstr "تحديد"
+
+#: src/Admin/AdminPage.php:123
+msgid "Save selected template"
+msgstr "حفظ القالب المحدد"
+
+#: src/Admin/AdminPage.php:128
+msgid "Automatic printing"
+msgstr "الطباعة التلقائية"
+
+#: src/Admin/AdminPage.php:128
+msgid "After verified payment, queue an invoice without delaying checkout."
+msgstr "بعد تأكيد الدفع، أضف الفاتورة إلى قائمة الانتظار دون تأخير إتمام الشراء."
+
+#: src/Admin/AdminPage.php:128
+msgid "Enabled"
+msgstr "مفعّل"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Provider"
+msgstr "مزود الخدمة"
+
+#: src/Admin/AdminPage.php:128
+msgid "Connection"
+msgstr "الاتصال"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:139
+msgid "Credential configured"
+msgstr "تم إعداد بيانات الاتصال"
+
+#: src/Admin/AdminPage.php:128
+msgid "Not configured"
+msgstr "غير معدّ"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Printer"
+msgstr "الطابعة"
+
+#: src/Admin/AdminPage.php:128
+msgid "No printer selected"
+msgstr "لم يتم تحديد طابعة"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:178
+#: src/Admin/OrderIntegration.php:32
+msgid "Copies"
+msgstr "عدد النسخ"
+
+#: src/Admin/AdminPage.php:128
+msgid "Trigger"
+msgstr "الحدث المحفّز"
+
+#: src/Admin/AdminPage.php:128
+msgid "Payment completed"
+msgstr "اكتمل الدفع"
+
+#: src/Admin/AdminPage.php:128
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "تقتصر الأهلية على الطلبات التي يؤكد WooCommerce أنها مدفوعة."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode connection"
+msgstr "اتصال PrintNode"
+
+#: src/Admin/AdminPage.php:139
+msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
+msgstr "تحتوي ملفات PDF للفواتير على بيانات العملاء وتُرسل إلى PrintNode عند استخدام هذه الوجهة."
+
+#: src/Admin/AdminPage.php:139
+msgid "Not connected"
+msgstr "غير متصل"
+
+#: src/Admin/AdminPage.php:139
+msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
+msgstr "تتم إدارته خارجيًا باستخدام WCIP_PRINTNODE_API_KEY؛ لا يمكن تعديله هنا."
+
+#: src/Admin/AdminPage.php:139
+msgid "The stored key is never displayed or returned to the browser."
+msgstr "لا يتم عرض المفتاح المحفوظ أو إرساله إلى المتصفح مطلقًا."
+
+#: src/Admin/AdminPage.php:140
+msgid "Replace API key"
+msgstr "استبدال مفتاح API"
+
+#: src/Admin/AdminPage.php:140
+msgid "API key"
+msgstr "مفتاح API"
+
+#: src/Admin/AdminPage.php:140
+msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
+msgstr "احفظ المفتاح الجديد قبل اختبار الاتصال. اترك الحقل فارغًا للاحتفاظ ببيانات الاتصال الحالية."
+
+#: src/Admin/AdminPage.php:142
+msgid "Test connection"
+msgstr "اختبار الاتصال"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh printers"
+msgstr "تحديث الطابعات"
+
+#: src/Admin/AdminPage.php:142
+msgid "Default PrintNode printer"
+msgstr "طابعة PrintNode الافتراضية"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh to load printers"
+msgstr "حدّث القائمة لتحميل الطابعات"
+
+#: src/Admin/AdminPage.php:142
+msgid "Print test page"
+msgstr "طباعة صفحة اختبار"
+
+#: src/Admin/AdminPage.php:143
+msgid "Save printer settings"
+msgstr "حفظ إعدادات الطابعة"
+
+#: src/Admin/AdminPage.php:148
+msgid "You are not allowed to view print jobs."
+msgstr "ليس لديك إذن لعرض مهام الطباعة."
+
+#: src/Admin/AdminPage.php:150
+msgid "Print jobs"
+msgstr "مهام الطباعة"
+
+#: src/Admin/AdminPage.php:150
+msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
+msgstr "تعني حالة «تم الإرسال» أن PrintNode قبل ملف PDF أو أن فاتورة المتصفح أصبحت جاهزة. لا تؤكد هذه الحالة الطباعة على الورق."
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Status"
+msgstr "الحالة"
+
+#: src/Admin/AdminPage.php:150
+msgid "All"
+msgstr "الكل"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Source"
+msgstr "المصدر"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Automatic"
+msgstr "تلقائي"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Manual"
+msgstr "يدوي"
+
+#: src/Admin/AdminPage.php:150
+msgid "Order ID"
+msgstr "معرّف الطلب"
+
+#: src/Admin/AdminPage.php:150
+msgid "Filter"
+msgstr "تصفية"
+
+#: src/Admin/AdminPage.php:151
+msgid "No print jobs yet"
+msgstr "لا توجد مهام طباعة بعد"
+
+#: src/Admin/AdminPage.php:151
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "ستظهر المهام اليدوية والتلقائية هنا مع حالة إرسالها."
+
+#: src/Admin/AdminPage.php:152
+msgid "Order"
+msgstr "الطلب"
+
+#: src/Admin/AdminPage.php:152
+#: src/Admin/OrderIntegration.php:32
+msgid "Template"
+msgstr "القالب"
+
+#: src/Admin/AdminPage.php:152
+msgid "Attempts"
+msgstr "المحاولات"
+
+#: src/Admin/AdminPage.php:152
+msgid "Updated"
+msgstr "آخر تحديث"
+
+#: src/Admin/AdminPage.php:152
+msgid "Details"
+msgstr "التفاصيل"
+
+#: src/Admin/AdminPage.php:152
+msgid "Browser"
+msgstr "المتصفح"
+
+#: src/Admin/AdminPage.php:152
+msgid "View"
+msgstr "عرض"
+
+#: src/Admin/AdminPage.php:152
+msgid "External job ID"
+msgstr "معرّف المهمة الخارجي"
+
+#: src/Admin/AdminPage.php:152
+msgid "Error"
+msgstr "الخطأ"
+
+#: src/Admin/AdminPage.php:152
+msgid "Cancel queued job"
+msgstr "إلغاء المهمة المنتظرة"
+
+#: src/Admin/AdminPage.php:152
+msgid "Retry if safe"
+msgstr "إعادة المحاولة إذا كانت آمنة"
+
+#: src/Admin/AdminPage.php:157
+#: src/Admin/PreviewController.php:34
+msgid "You are not allowed to print invoices."
+msgstr "ليس لديك إذن لطباعة الفواتير."
+
+#: src/Admin/AdminPage.php:161
+#: src/Admin/PreviewController.php:57
+msgid "Select no more than 50 orders."
+msgstr "اختر 50 طلبًا كحد أقصى."
+
+#: src/Admin/AdminPage.php:163
+#: src/Admin/PreviewController.php:59
+msgid "Invalid order selection."
+msgstr "اختيار طلبات غير صالح."
+
+#: src/Admin/AdminPage.php:165
+msgid "No orders selected"
+msgstr "لم يتم تحديد طلبات"
+
+#. translators: %d: number of selected invoices.
+#: src/Admin/AdminPage.php:168
+#, php-format
+msgid "Print %d invoice"
+msgid_plural "Print %d invoices"
+msgstr[0] "طباعة الفواتير (%d)"
+msgstr[1] "طباعة فاتورة واحدة (%d)"
+msgstr[2] "طباعة فاتورتين (%d)"
+msgstr[3] "طباعة %d فواتير"
+msgstr[4] "طباعة %d فاتورة"
+msgstr[5] "طباعة الفواتير (%d)"
+
+#: src/Admin/AdminPage.php:169
+msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
+msgstr "تُدمج مخرجات المتصفح في مستند واحد. ينشئ PrintNode مهام خلفية منفصلة ومضبوطة."
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Destination"
+msgstr "الوجهة"
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Browser print dialog"
+msgstr "نافذة الطباعة في المتصفح"
+
+#. translators: %s: the selected printer's name.
+#: src/Admin/AdminPage.php:174
+#: src/Admin/OrderIntegration.php:32
+#, php-format
+msgid "PrintNode: %s"
+msgstr "PrintNode: %s"
+
+#: src/Admin/AdminPage.php:179
+msgid "Start bulk printing"
+msgstr "بدء الطباعة الجماعية"
+
+#: src/Admin/AdminPage.php:202
+msgid "Invoice template"
+msgstr "قالب الفاتورة"
+
+#: src/Admin/OrderIntegration.php:23
+msgid "Invoice printing"
+msgstr "طباعة الفواتير"
+
+#: src/Admin/OrderIntegration.php:31
+msgid "Automatic job:"
+msgstr "المهمة التلقائية:"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Reprint invoice"
+msgstr "إعادة طباعة الفاتورة"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:38
+msgid "Print invoice"
+msgstr "طباعة الفاتورة"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Close print dialog"
+msgstr "إغلاق نافذة الطباعة"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Your browser print dialog will open."
+msgstr "ستفتح نافذة الطباعة في متصفحك."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/PreviewController.php:93
+msgid "Print"
+msgstr "طباعة"
+
+#: src/Admin/OrderIntegration.php:43
+msgid "Print invoices"
+msgstr "طباعة الفواتير"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "ستُضاف الفاتورة إلى قائمة انتظار الطابعة الفعلية المُعدّة."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Preparing invoice…"
+msgstr "جارٍ إعداد الفاتورة…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Queuing invoice…"
+msgstr "جارٍ إضافة الفاتورة إلى قائمة الانتظار…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "أُضيفت الفاتورة إلى قائمة الانتظار. راجع مهام الطباعة للتحقق من حالة الإرسال."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Printing failed. Review the message and try again."
+msgstr "فشلت الطباعة. راجع الرسالة وحاول مجددًا."
+
+#: src/Admin/PreviewController.php:38
+msgid "Invalid preview input."
+msgstr "إدخال معاينة غير صالح."
+
+#: src/Admin/PreviewController.php:52
+msgid "Invalid invoice template."
+msgstr "قالب فاتورة غير صالح."
+
+#: src/Admin/PreviewController.php:62
+#: src/Rest/RestController.php:112
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "أحد الطلبات المحددة غير موجود أو لا يمكن طباعته."
+
+#: src/Admin/PreviewController.php:83
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "تعذر إعداد الفاتورة. راجع مهام الطباعة قبل المحاولة مجددًا."
+
+#: src/Admin/PreviewController.php:86
+msgid "No valid invoices were selected."
+msgstr "لم يتم تحديد فواتير صالحة."
+
+#: src/Automation/PrintWorker.php:69
+msgid "The order no longer exists."
+msgstr "لم يعد الطلب موجودًا."
+
+#: src/Automation/PrintWorker.php:72
+#: src/Automation/PrintWorker.php:85
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "لم يعد الطلب مدفوعًا، لذا توقفت الطباعة التلقائية."
+
+#: src/Automation/PrintWorker.php:92
+msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
+msgstr "قبل مزود الخدمة مهمة الطباعة، لكن تعذر حفظ نتيجتها. تحقق من PrintNode قبل إعادة الطباعة."
+
+#: src/Automation/PrintWorker.php:120
+#: src/Automation/Scheduler.php:80
+msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
+msgstr "توقف المعالج قبل تسجيل النتيجة. تحقق من PrintNode قبل إعادة الطباعة."
+
+#: src/Automation/Scheduler.php:24
+msgid "The background queue is unavailable."
+msgstr "قائمة الانتظار الخلفية غير متاحة."
+
+#: src/Automation/Scheduler.php:58
+msgid "The print job could not be queued."
+msgstr "تعذرت إضافة مهمة الطباعة إلى قائمة الانتظار."
+
+#: src/Infrastructure/Activator.php:11
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "تعذر تثبيت قاعدة بيانات طابعة الفواتير. تحقق من أذونات قاعدة البيانات وحاول تفعيل الإضافة مجددًا."
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Business registration and tax details"
+msgstr "بيانات تسجيل النشاط التجاري والضرائب"
+
+#: src/Pdf/MpdfRenderer.php:10
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "دعم PDF غير متاح. ثبّت تبعيات Composer."
+
+#: src/Pdf/MpdfRenderer.php:16
+msgid "A secure PDF working directory could not be created."
+msgstr "تعذر إنشاء مجلد عمل آمن لملفات PDF."
+
+#: src/Plugin.php:80
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "تتطلب طابعة فواتير WooCommerce تثبيت WooCommerce وتفعيله."
+
+#: src/Plugin.php:84
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "تتطلب طابعة فواتير WooCommerce الإصدار 9.0 أو أحدث من WooCommerce."
+
+#: src/Plugin.php:88
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
+msgstr "تحتاج طابعة فواتير WooCommerce إلى تبعيات Composer لإخراج PDF وPrintNode. تبقى الطباعة عبر المتصفح متاحة."
+
+#: src/Plugin.php:92
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "تعذر على طابعة فواتير WooCommerce إعداد قاعدة بياناتها. الطباعة غير متاحة؛ تحقق من أذونات قاعدة البيانات وأعد تفعيل الإضافة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:30
+msgid "PrintNode account"
+msgstr "حساب PrintNode"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:37
+#: src/Printing/PrintNode/PrintNodeProvider.php:108
+msgid "PrintNode is not connected."
+msgstr "PrintNode غير متصل."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:69
+msgid "Unnamed printer"
+msgstr "طابعة بلا اسم"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:85
+msgid "The selected printer is invalid."
+msgstr "الطابعة المحددة غير صالحة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:123
+msgid "The print request could not be encoded."
+msgstr "تعذر ترميز طلب الطباعة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:128
+msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
+msgstr "ربما انقطع طلب PrintNode. تحقق من المهمة قبل إعادة الطباعة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:138
+msgid "PrintNode rejected the API key."
+msgstr "رفض PrintNode مفتاح API."
+
+#. translators: %d: HTTP response status code.
+#: src/Printing/PrintNode/PrintNodeProvider.php:141
+#, php-format
+msgid "PrintNode rejected the request (HTTP %d)."
+msgstr "رفض PrintNode الطلب (HTTP %d)."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:144
+msgid "PrintNode may have accepted the print request. Check the job before reprinting."
+msgstr "ربما قبل PrintNode طلب الطباعة. تحقق من المهمة قبل إعادة الطباعة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:167
+msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
+msgstr "أعاد PrintNode استجابة غير مقروءة للمهمة. تحقق من المهمة قبل إعادة الطباعة."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:168
+msgid "PrintNode returned an unreadable response."
+msgstr "أعاد PrintNode استجابة غير مقروءة."
+
+#: src/PrintJob/PrintJobRepository.php:37
+msgid "The print job could not be saved."
+msgstr "تعذر حفظ مهمة الطباعة."
+
+#: src/PrintJob/PrintJobService.php:72
+msgid "Choose a valid invoice template."
+msgstr "اختر قالب فاتورة صالحًا."
+
+#: src/PrintJob/PrintJobService.php:75
+msgid "Choose a valid print destination."
+msgstr "اختر وجهة طباعة صالحة."
+
+#: src/PrintJob/PrintJobService.php:78
+#: src/Rest/RestController.php:78
+msgid "Choose a valid printer."
+msgstr "اختر طابعة صالحة."
+
+#: src/PrintJob/PrintJobService.php:81
+msgid "Connect PrintNode before printing."
+msgstr "اربط PrintNode قبل الطباعة."
+
+#: src/Rest/RestController.php:83
+msgid "Invoice printer test page"
+msgstr "صفحة اختبار طابعة الفواتير"
+
+#: src/Rest/RestController.php:93
+msgid "Select between 1 and 50 orders."
+msgstr "اختر بين 1 و50 طلبًا."
+
+#: src/Rest/RestController.php:99
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "اختر قالبًا وطابعة ووجهة وعدد نسخ صالحًا."
+
+#: src/Rest/RestController.php:102
+msgid "Configure the PrintNode credential before printing."
+msgstr "أعدّ بيانات اتصال PrintNode قبل الطباعة."
+
+#: src/Rest/RestController.php:108
+msgid "One of the selected order IDs is invalid."
+msgstr "أحد معرّفات الطلبات المحددة غير صالح."
+
+#: src/Rest/RestController.php:122
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "تعذرت إضافة إحدى مهام الطباعة إلى قائمة الانتظار. راجع مهام الطباعة قبل المحاولة مجددًا."
+
+#: src/Rest/RestController.php:127
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "توقف طلب الطباعة. راجع مهام الطباعة قبل المحاولة مجددًا."
+
+#: src/Rest/RestController.php:137
+#: src/Rest/RestController.php:149
+msgid "Print job not found."
+msgstr "لم يتم العثور على مهمة الطباعة."
+
+#: src/Rest/RestController.php:140
+msgid "Only queued jobs can be cancelled."
+msgstr "يمكن إلغاء المهام الموجودة في قائمة الانتظار فقط."
+
+#: src/Rest/RestController.php:152
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "هذه المهمة غير مؤهلة لإعادة محاولة آمنة. أنشئ طلب طباعة جديدًا عن قصد إذا لزم الأمر."
+
+#: src/Rest/RestController.php:155
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "تعذرت إضافة مهمة الطباعة إلى قائمة الانتظار. راجع مهام الطباعة قبل المحاولة مجددًا."
+
+#: src/Rest/RestController.php:171
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "فشلت عملية الطباعة. تحقق من الإعدادات وحاول مجددًا."
+
+#: src/Template/TemplateRegistry.php:10
+msgid "Classic"
+msgstr "كلاسيكي"
+
+#: src/Template/TemplateRegistry.php:10
+msgid "A polished full invoice for office printers."
+msgstr "فاتورة كاملة وأنيقة للطابعات المكتبية."
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Compact"
+msgstr "مضغوط"
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Dense and readable for high-volume operations."
+msgstr "تصميم مكثف وواضح للعمليات الكبيرة."
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Thermal 80 mm"
+msgstr "حراري 80 مم"
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Purpose-built for narrow receipt printers."
+msgstr "مصمم خصيصًا لطابعات الإيصالات الضيقة."
+
+#: templates/classic/invoice.php:37
+#: templates/thermal/invoice.php:30
+msgid "INVOICE"
+msgstr "فاتورة"
+
+#: templates/classic/invoice.php:42
+msgid "Bill to"
+msgstr "الفاتورة إلى"
+
+#: templates/classic/invoice.php:47
+msgid "Payment & shipping"
+msgstr "الدفع والشحن"
+
+#: templates/classic/invoice.php:53
+msgid "Item"
+msgstr "الصنف"
+
+#: templates/classic/invoice.php:54
+#: templates/compact/invoice.php:47
+msgid "SKU"
+msgstr "رمز المخزون"
+
+#: templates/classic/invoice.php:55
+#: templates/compact/invoice.php:48
+msgid "Qty"
+msgstr "الكمية"
+
+#: templates/classic/invoice.php:56
+msgid "Unit"
+msgstr "سعر الوحدة"
+
+#: templates/classic/invoice.php:57
+msgid "Discount"
+msgstr "الخصم"
+
+#: templates/classic/invoice.php:58
+msgid "Tax"
+msgstr "الضريبة"
+
+#: templates/classic/invoice.php:59
+#: templates/compact/invoice.php:50
+msgid "Total"
+msgstr "الإجمالي"
+
+#: templates/classic/invoice.php:71
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "أسعار الوحدات والخصومات لا تشمل الضريبة؛ إجماليات البنود تشمل الضريبة."
+
+#: templates/classic/invoice.php:75
+msgid "Customer note"
+msgstr "ملاحظة العميل"
+
+#: templates/compact/invoice.php:33
+msgid "Invoice"
+msgstr "فاتورة"
+
+#: templates/compact/invoice.php:37
+msgid "Customer"
+msgstr "العميل"
+
+#: templates/compact/invoice.php:40
+msgid "Payment / delivery"
+msgstr "الدفع / التسليم"
+
+#: templates/compact/invoice.php:46
+msgid "Description"
+msgstr "الوصف"
+
+#: templates/compact/invoice.php:49
+msgid "Price"
+msgstr "السعر"
+
+#: templates/compact/invoice.php:60
+#: templates/thermal/invoice.php:45
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "أسعار الوحدات لا تشمل الضريبة؛ إجماليات البنود تشمل الخصومات والضريبة."
+
+#: templates/compact/invoice.php:62
+msgid "Note"
+msgstr "ملاحظة"
+
+#: templates/thermal/invoice.php:32
+msgid "Date"
+msgstr "التاريخ"
+
+#: templates/thermal/invoice.php:50
+msgid "Note:"
+msgstr "ملاحظة:"
+
+#: templates/thermal/invoice.php:51
+msgid "Thank you for your order."
+msgstr "شكرًا لطلبك."
+
+#. translators: %s: WooCommerce order number.
+#: src/Automation/PrintWorker.php:90
+#, php-format
+msgid "Invoice %s"
+msgstr "فاتورة %s"
+
+#: src/Invoice/InvoiceFactory.php:80
+msgid "September 15, 2026"
+msgstr "15 سبتمبر 2026"
+
+#: src/Invoice/InvoiceFactory.php:80
+#: src/PrintJob/JobStatus.php:27
+msgid "Processing"
+msgstr "قيد المعالجة"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Northstar Supply Co."
+msgstr "شركة نجم الشمال للتوريد"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "24 Market Street, Portland, OR"
+msgstr "24 شارع ماركت، بورتلاند، أوريغون"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Alex Morgan"
+msgstr "أليكس مورغان"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Morgan Studio"
+msgstr "استوديو مورغان"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "840 شارع إيفرغرين، سياتل، واشنطن"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "دفتر تخطيط احترافي باسم منتج طويل للغاية"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Color: Midnight / Size: Large"
+msgstr "اللون: أزرق داكن / المقاس: كبير"
+
+#: src/Invoice/InvoiceFactory.php:85
+msgid "Fine gel pen set"
+msgstr "مجموعة أقلام حبر هلامي رفيعة"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Subtotal:"
+msgstr "المجموع الفرعي:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Discount:"
+msgstr "الخصم:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Shipping:"
+msgstr "الشحن:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Tax:"
+msgstr "الضريبة:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Total:"
+msgstr "الإجمالي:"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Credit card"
+msgstr "بطاقة ائتمان"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Ground shipping"
+msgstr "شحن بري"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Please leave the parcel at reception."
+msgstr "يرجى ترك الطرد لدى الاستقبال."
+
+#: src/PrintJob/JobStatus.php:26
+msgid "Queued"
+msgstr "في قائمة الانتظار"
+
+#: src/PrintJob/JobStatus.php:28
+msgid "Submitted"
+msgstr "تم الإرسال"
+
+#: src/PrintJob/JobStatus.php:29
+msgid "Failed"
+msgstr "فشل"
+
+#: src/Admin/AdminPage.php:38
+#: src/PrintJob/JobStatus.php:30
+msgid "Unknown"
+msgstr "غير معروف"
+
+#: src/PrintJob/JobStatus.php:31
+msgid "Cancelled"
+msgstr "ملغى"
+
+#: src/Admin/AdminPage.php:36
+msgid "Online"
+msgstr "متصل"
+
+#: src/Admin/AdminPage.php:37
+msgid "Offline"
+msgstr "غير متصل"
+
+#: src/Admin/AdminPage.php:127
+msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
+msgstr "تعمل الطباعة التلقائية عبر PrintNode وتتطلب برنامجه على الحاسوب المتصل بالطابعة. تتطلب الطباعة المحلية عبر المتصفح تأكيد مربع حوار الطباعة."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printer (no API key)"
+msgstr "طابعة محلية (دون مفتاح API)"
+
+#: src/Admin/AdminPage.php:137
+msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
+msgstr "استخدم طابعة مثبتة على هذا الحاسوب عبر متصفحك. لا تحتاج إلى حساب PrintNode أو مفتاح API."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "افتح صفحة الاختبار، وانقر على طباعة، ثم اختر طابعتك في مربع حوار الطباعة في المتصفح."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open local test page"
+msgstr "فتح صفحة اختبار محلية"
+
+#: src/Admin/AdminPage.php:137
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "للطلبات، اختر مربع حوار الطباعة في المتصفح عند طباعة فاتورة واحدة أو مجموعة من الطلبات."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
+msgstr "تُختار الطابعات المحلية في مربع حوار الطباعة في المتصفح ولا تظهر في قائمة PrintNode أدناه. إذا لم تظهر طابعة في مربع الحوار، فثبّتها أولًا في نظام التشغيل."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode (optional automatic printing)"
+msgstr "PrintNode (طباعة تلقائية اختيارية)"
+
+#: src/Admin/AdminPage.php:142
+msgid "PrintNode printers"
+msgstr "طابعات PrintNode"
+
+#: src/Admin/AdminPage.php:142
+msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
+msgstr "تحتوي هذه القائمة فقط على الطابعات التي يشاركها برنامج PrintNode في حسابك. ثبّت البرنامج وسجّل الدخول إليه على الحاسوب المتصل بالطابعة، ثم حدّث القائمة."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "اختر طابعتك المحلية في مربع حوار الطباعة في المتصفح. لا يلزم مفتاح API."
+

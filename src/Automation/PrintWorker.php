@@ -2,6 +2,7 @@
 
 namespace WCInvoicePrinter\Automation;
 
+use WCInvoicePrinter\I18n\Locale;
 use WCInvoicePrinter\Invoice\InvoiceFactory;
 use WCInvoicePrinter\Pdf\PdfRendererInterface;
 use WCInvoicePrinter\Printing\PrintProviderRegistry;
@@ -43,6 +44,17 @@ final class PrintWorker {
 	}
 
 	public function process( int $job_id ): void {
+		// Async admin requests can inherit an operator's profile language.
+		// Queued invoices consistently use the store language in every runner.
+		$switched = switch_to_locale( Locale::site_locale() );
+		try {
+			$this->process_job( $job_id );
+		} finally {
+			if ( $switched ) { restore_previous_locale(); }
+		}
+	}
+
+	private function process_job( int $job_id ): void {
 		if ( ! $this->jobs->claim( $job_id ) ) {
 			return;
 		}
@@ -74,7 +86,8 @@ final class PrintWorker {
 				}
 			}
 			$submission_started = true;
-			$result = $provider->submit( $pdf, $job['printer_id'], (int) $job['copies'], sprintf( 'Invoice %s', $order->get_order_number() ) );
+			/* translators: %s: WooCommerce order number. */
+			$result = $provider->submit( $pdf, $job['printer_id'], (int) $job['copies'], sprintf( __( 'Invoice %s', 'wc-invoice-printer' ), $order->get_order_number() ) );
 			if ( ! $this->jobs->submitted( $job_id, $result->external_job_id ) ) {
 				throw new \RuntimeException( __( 'The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting.', 'wc-invoice-printer' ) );
 			}

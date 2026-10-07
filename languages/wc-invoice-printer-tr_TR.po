@@ -1,0 +1,975 @@
+# Copyright (C) 2026 WooCommerce Invoice Printer contributors
+# Distributed under GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-07 09:00+0330\n"
+"PO-Revision-Date: 2026-10-07 09:00+0330\n"
+"Last-Translator: WooCommerce Invoice Printer contributors\n"
+"Language-Team: Turkish\n"
+"Language: tr_TR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: wc-invoice-printer\n"
+
+#. Plugin Name of the plugin
+#: wc-invoice-printer.php
+msgid "WooCommerce Invoice Printer"
+msgstr "WooCommerce Fatura Yazıcısı"
+
+#. Description of the plugin
+#: wc-invoice-printer.php
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "WooCommerce için güvenli manuel ve otomatik fatura yazdırma."
+
+#: src/Admin/AdminPage.php:24
+#: src/Admin/AdminPage.php:91
+msgid "Invoice Printer"
+msgstr "Fatura Yazıcısı"
+
+#: src/Admin/AdminPage.php:41
+msgid "Working…"
+msgstr "İşleniyor…"
+
+#: src/Admin/AdminPage.php:42
+#: src/Admin/OrderIntegration.php:62
+#: src/Admin/PreviewController.php:48
+#: src/PrintJob/PrintJobService.php:84
+msgid "Choose between 1 and 20 copies."
+msgstr "1 ile 20 arasında kopya seçin."
+
+#: src/Admin/AdminPage.php:43
+msgid "Something went wrong. Check the details and try again."
+msgstr "Bir sorun oluştu. Ayrıntıları kontrol edip yeniden deneyin."
+
+#: src/Admin/AdminPage.php:44
+msgid "Choose a printer"
+msgstr "Bir yazıcı seçin"
+
+#: src/Admin/AdminPage.php:45
+msgid "No printers were found. Confirm that the PrintNode client is online."
+msgstr "Yazıcı bulunamadı. PrintNode istemcisinin çevrimiçi olduğunu doğrulayın."
+
+#: src/Admin/AdminPage.php:46
+msgid "Submitted to PrintNode."
+msgstr "PrintNode'a gönderildi."
+
+#: src/Admin/AdminPage.php:47
+msgid "PrintNode connection verified."
+msgstr "PrintNode bağlantısı doğrulandı."
+
+#. translators: %d: number of printers returned by PrintNode.
+#: src/Admin/AdminPage.php:49
+#, php-format
+msgid "%d printer(s) found."
+msgstr "Bulunan yazıcı sayısı: %d"
+
+#. translators: %d: number of invoices added to the print queue.
+#: src/Admin/AdminPage.php:51
+#, php-format
+msgid "%d invoice(s) queued."
+msgstr "Kuyruğa alınan fatura sayısı: %d"
+
+#: src/Admin/AdminPage.php:57
+msgid "You are not allowed to change these settings."
+msgstr "Bu ayarları değiştirme yetkiniz yok."
+
+#: src/Admin/AdminPage.php:60
+msgid "Invalid settings input."
+msgstr "Geçersiz ayar girdisi."
+
+#: src/Admin/AdminPage.php:63
+msgid "Invalid settings section."
+msgstr "Geçersiz ayar bölümü."
+
+#: src/Admin/AdminPage.php:88
+msgid "General"
+msgstr "Genel"
+
+#: src/Admin/AdminPage.php:88
+msgid "Templates"
+msgstr "Şablonlar"
+
+#: src/Admin/AdminPage.php:88
+msgid "Automatic Printing"
+msgstr "Otomatik Yazdırma"
+
+#: src/Admin/AdminPage.php:88
+msgid "Printers"
+msgstr "Yazıcılar"
+
+#: src/Admin/AdminPage.php:88
+msgid "Print Jobs"
+msgstr "Yazdırma İşleri"
+
+#: src/Admin/AdminPage.php:91
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "Tutarlı faturalar oluşturun ve doğru yazıcıya gönderin."
+
+#: src/Admin/AdminPage.php:92
+msgid "Settings saved."
+msgstr "Ayarlar kaydedildi."
+
+#: src/Admin/AdminPage.php:93
+msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
+msgstr "PrintNode kimlik bilgisi ve yazıcı yapılandırılana kadar otomatik yazdırma devre dışı kalır."
+
+#: src/Admin/AdminPage.php:94
+msgid "Invoice Printer sections"
+msgstr "Fatura Yazıcısı bölümleri"
+
+#: src/Admin/AdminPage.php:115
+msgid "Invoice identity"
+msgstr "Fatura bilgileri"
+
+#: src/Admin/AdminPage.php:115
+msgid "Business details shown to customers on every invoice."
+msgstr "Her faturada müşterilere gösterilen işletme bilgileri."
+
+#: src/Admin/AdminPage.php:116
+msgid "Business name"
+msgstr "İşletme adı"
+
+#: src/Admin/AdminPage.php:116
+msgid "Logo URL"
+msgstr "Logo URL'si"
+
+#: src/Admin/AdminPage.php:116
+msgid "Phone"
+msgstr "Telefon"
+
+#: src/Admin/AdminPage.php:116
+msgid "Email"
+msgstr "E-posta"
+
+#: src/Admin/AdminPage.php:116
+msgid "Business and tax details"
+msgstr "İşletme ve vergi bilgileri"
+
+#: src/Admin/AdminPage.php:117
+msgid "Manual printing defaults"
+msgstr "Manuel yazdırma varsayılanları"
+
+#: src/Admin/AdminPage.php:117
+msgid "Include customer notes on invoices"
+msgstr "Faturalara müşteri notlarını ekle"
+
+#: src/Admin/AdminPage.php:121
+msgid "Choose an invoice layout"
+msgstr "Bir fatura düzeni seçin"
+
+#: src/Admin/AdminPage.php:121
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "Önizleme gerçekçi örnek veriler kullanır ve sağdan sola görünüme geçebilir."
+
+#: src/Admin/AdminPage.php:122
+msgid "Selected"
+msgstr "Seçildi"
+
+#: src/Admin/AdminPage.php:122
+#: src/Admin/OrderIntegration.php:32
+msgid "Preview"
+msgstr "Önizleme"
+
+#: src/Admin/AdminPage.php:122
+msgid "RTL preview"
+msgstr "Sağdan sola önizleme"
+
+#: src/Admin/AdminPage.php:122
+msgid "Select"
+msgstr "Seç"
+
+#: src/Admin/AdminPage.php:123
+msgid "Save selected template"
+msgstr "Seçilen şablonu kaydet"
+
+#: src/Admin/AdminPage.php:128
+msgid "Automatic printing"
+msgstr "Otomatik Yazdırma"
+
+#: src/Admin/AdminPage.php:128
+msgid "After verified payment, queue an invoice without delaying checkout."
+msgstr "Ödeme doğrulandıktan sonra ödeme işlemini geciktirmeden faturayı kuyruğa alın."
+
+#: src/Admin/AdminPage.php:128
+msgid "Enabled"
+msgstr "Etkin"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Provider"
+msgstr "Sağlayıcı"
+
+#: src/Admin/AdminPage.php:128
+msgid "Connection"
+msgstr "Bağlantı"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:139
+msgid "Credential configured"
+msgstr "Kimlik bilgisi yapılandırıldı"
+
+#: src/Admin/AdminPage.php:128
+msgid "Not configured"
+msgstr "Yapılandırılmadı"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Printer"
+msgstr "Yazıcı"
+
+#: src/Admin/AdminPage.php:128
+msgid "No printer selected"
+msgstr "Yazıcı seçilmedi"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:178
+#: src/Admin/OrderIntegration.php:32
+msgid "Copies"
+msgstr "Kopya sayısı"
+
+#: src/Admin/AdminPage.php:128
+msgid "Trigger"
+msgstr "Tetikleyici"
+
+#: src/Admin/AdminPage.php:128
+msgid "Payment completed"
+msgstr "Ödeme tamamlandı"
+
+#: src/Admin/AdminPage.php:128
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "Yalnızca WooCommerce tarafından ödendiği doğrulanan siparişler uygundur."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode connection"
+msgstr "PrintNode bağlantısı"
+
+#: src/Admin/AdminPage.php:139
+msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
+msgstr "Fatura PDF'leri müşteri verileri içerir ve bu hedef kullanıldığında PrintNode'a gönderilir."
+
+#: src/Admin/AdminPage.php:139
+msgid "Not connected"
+msgstr "Bağlı değil"
+
+#: src/Admin/AdminPage.php:139
+msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
+msgstr "WCIP_PRINTNODE_API_KEY ile harici olarak yönetilir; burada düzenlenemez."
+
+#: src/Admin/AdminPage.php:139
+msgid "The stored key is never displayed or returned to the browser."
+msgstr "Kaydedilen anahtar hiçbir zaman gösterilmez veya tarayıcıya gönderilmez."
+
+#: src/Admin/AdminPage.php:140
+msgid "Replace API key"
+msgstr "API anahtarını değiştir"
+
+#: src/Admin/AdminPage.php:140
+msgid "API key"
+msgstr "API anahtarı"
+
+#: src/Admin/AdminPage.php:140
+msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
+msgstr "Bağlantıyı test etmeden önce yeni anahtarı kaydedin. Mevcut kimlik bilgisini korumak için alanı boş bırakın."
+
+#: src/Admin/AdminPage.php:142
+msgid "Test connection"
+msgstr "Bağlantıyı test et"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh printers"
+msgstr "Yazıcıları yenile"
+
+#: src/Admin/AdminPage.php:142
+msgid "Default PrintNode printer"
+msgstr "Varsayılan PrintNode yazıcısı"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh to load printers"
+msgstr "Yazıcıları yüklemek için yenileyin"
+
+#: src/Admin/AdminPage.php:142
+msgid "Print test page"
+msgstr "Test sayfası yazdır"
+
+#: src/Admin/AdminPage.php:143
+msgid "Save printer settings"
+msgstr "Yazıcı ayarlarını kaydet"
+
+#: src/Admin/AdminPage.php:148
+msgid "You are not allowed to view print jobs."
+msgstr "Yazdırma işlerini görüntüleme yetkiniz yok."
+
+#: src/Admin/AdminPage.php:150
+msgid "Print jobs"
+msgstr "Yazdırma İşleri"
+
+#: src/Admin/AdminPage.php:150
+msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
+msgstr "Gönderildi durumu, PrintNode'un PDF'yi kabul ettiğini veya tarayıcı faturasının hazırlandığını belirtir. Kağıda yazdırıldığını doğrulamaz."
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Status"
+msgstr "Durum"
+
+#: src/Admin/AdminPage.php:150
+msgid "All"
+msgstr "Tümü"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Source"
+msgstr "Kaynak"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Manual"
+msgstr "Manuel"
+
+#: src/Admin/AdminPage.php:150
+msgid "Order ID"
+msgstr "Sipariş kimliği"
+
+#: src/Admin/AdminPage.php:150
+msgid "Filter"
+msgstr "Filtrele"
+
+#: src/Admin/AdminPage.php:151
+msgid "No print jobs yet"
+msgstr "Henüz yazdırma işi yok"
+
+#: src/Admin/AdminPage.php:151
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "Manuel ve otomatik işler teslim durumlarıyla birlikte burada görünür."
+
+#: src/Admin/AdminPage.php:152
+msgid "Order"
+msgstr "Sipariş"
+
+#: src/Admin/AdminPage.php:152
+#: src/Admin/OrderIntegration.php:32
+msgid "Template"
+msgstr "Şablon"
+
+#: src/Admin/AdminPage.php:152
+msgid "Attempts"
+msgstr "Denemeler"
+
+#: src/Admin/AdminPage.php:152
+msgid "Updated"
+msgstr "Güncellendi"
+
+#: src/Admin/AdminPage.php:152
+msgid "Details"
+msgstr "Ayrıntılar"
+
+#: src/Admin/AdminPage.php:152
+msgid "Browser"
+msgstr "Tarayıcı"
+
+#: src/Admin/AdminPage.php:152
+msgid "View"
+msgstr "Görüntüle"
+
+#: src/Admin/AdminPage.php:152
+msgid "External job ID"
+msgstr "Harici iş kimliği"
+
+#: src/Admin/AdminPage.php:152
+msgid "Error"
+msgstr "Hata"
+
+#: src/Admin/AdminPage.php:152
+msgid "Cancel queued job"
+msgstr "Kuyruktaki işi iptal et"
+
+#: src/Admin/AdminPage.php:152
+msgid "Retry if safe"
+msgstr "Güvenliyse yeniden dene"
+
+#: src/Admin/AdminPage.php:157
+#: src/Admin/PreviewController.php:34
+msgid "You are not allowed to print invoices."
+msgstr "Faturaları yazdırma yetkiniz yok."
+
+#: src/Admin/AdminPage.php:161
+#: src/Admin/PreviewController.php:57
+msgid "Select no more than 50 orders."
+msgstr "En fazla 50 sipariş seçin."
+
+#: src/Admin/AdminPage.php:163
+#: src/Admin/PreviewController.php:59
+msgid "Invalid order selection."
+msgstr "Geçersiz sipariş seçimi."
+
+#: src/Admin/AdminPage.php:165
+msgid "No orders selected"
+msgstr "Sipariş seçilmedi"
+
+#. translators: %d: number of selected invoices.
+#: src/Admin/AdminPage.php:168
+#, php-format
+msgid "Print %d invoice"
+msgid_plural "Print %d invoices"
+msgstr[0] "%d fatura yazdır"
+msgstr[1] "%d fatura yazdır"
+
+#: src/Admin/AdminPage.php:169
+msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
+msgstr "Tarayıcı çıktısı tek belgede birleştirilir. PrintNode kontrollü, ayrı arka plan işleri oluşturur."
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Destination"
+msgstr "Hedef"
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Browser print dialog"
+msgstr "Tarayıcı yazdırma penceresi"
+
+#. translators: %s: the selected printer's name.
+#: src/Admin/AdminPage.php:174
+#: src/Admin/OrderIntegration.php:32
+#, php-format
+msgid "PrintNode: %s"
+msgstr "PrintNode: %s"
+
+#: src/Admin/AdminPage.php:179
+msgid "Start bulk printing"
+msgstr "Toplu yazdırmayı başlat"
+
+#: src/Admin/AdminPage.php:202
+msgid "Invoice template"
+msgstr "Fatura şablonu"
+
+#: src/Admin/OrderIntegration.php:23
+msgid "Invoice printing"
+msgstr "Fatura yazdırma"
+
+#: src/Admin/OrderIntegration.php:31
+msgid "Automatic job:"
+msgstr "Otomatik iş:"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Reprint invoice"
+msgstr "Faturayı yeniden yazdır"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:38
+msgid "Print invoice"
+msgstr "Fatura yazdır"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Close print dialog"
+msgstr "Yazdırma penceresini kapat"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Your browser print dialog will open."
+msgstr "Tarayıcınızın yazdırma penceresi açılacak."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/PreviewController.php:93
+msgid "Print"
+msgstr "Yazdır"
+
+#: src/Admin/OrderIntegration.php:43
+msgid "Print invoices"
+msgstr "Faturaları yazdır"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "Fatura, yapılandırılan fiziksel yazıcı için kuyruğa alınacak."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Preparing invoice…"
+msgstr "Fatura hazırlanıyor…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Queuing invoice…"
+msgstr "Fatura kuyruğa alınıyor…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "Fatura kuyruğa alındı. Teslim durumunu Yazdırma İşleri bölümünden kontrol edin."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Printing failed. Review the message and try again."
+msgstr "Yazdırma başarısız oldu. Mesajı inceleyip yeniden deneyin."
+
+#: src/Admin/PreviewController.php:38
+msgid "Invalid preview input."
+msgstr "Geçersiz önizleme girdisi."
+
+#: src/Admin/PreviewController.php:52
+msgid "Invalid invoice template."
+msgstr "Geçersiz fatura şablonu."
+
+#: src/Admin/PreviewController.php:62
+#: src/Rest/RestController.php:112
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "Seçilen siparişlerden biri mevcut değil veya yazdırılamıyor."
+
+#: src/Admin/PreviewController.php:83
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "Fatura hazırlanamadı. Yeniden denemeden önce Yazdırma İşleri bölümünü inceleyin."
+
+#: src/Admin/PreviewController.php:86
+msgid "No valid invoices were selected."
+msgstr "Geçerli fatura seçilmedi."
+
+#: src/Automation/PrintWorker.php:69
+msgid "The order no longer exists."
+msgstr "Sipariş artık mevcut değil."
+
+#: src/Automation/PrintWorker.php:72
+#: src/Automation/PrintWorker.php:85
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "Sipariş artık ödenmiş durumda değil; otomatik yazdırma durduruldu."
+
+#: src/Automation/PrintWorker.php:92
+msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
+msgstr "Sağlayıcı yazdırma işini kabul etti ancak sonucu kaydedilemedi. Yeniden yazdırmadan önce PrintNode'u kontrol edin."
+
+#: src/Automation/PrintWorker.php:120
+#: src/Automation/Scheduler.php:80
+msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
+msgstr "İşleyici sonucu kaydetmeden durdu. Yeniden yazdırmadan önce PrintNode'u kontrol edin."
+
+#: src/Automation/Scheduler.php:24
+msgid "The background queue is unavailable."
+msgstr "Arka plan kuyruğu kullanılamıyor."
+
+#: src/Automation/Scheduler.php:58
+msgid "The print job could not be queued."
+msgstr "Yazdırma işi kuyruğa alınamadı."
+
+#: src/Infrastructure/Activator.php:11
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "Fatura yazıcısı veritabanı kurulamadı. Veritabanı izinlerini kontrol edip yeniden etkinleştirin."
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Business registration and tax details"
+msgstr "İşletme sicil ve vergi bilgileri"
+
+#: src/Pdf/MpdfRenderer.php:10
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "PDF desteği kullanılamıyor. Composer bağımlılıklarını yükleyin."
+
+#: src/Pdf/MpdfRenderer.php:16
+msgid "A secure PDF working directory could not be created."
+msgstr "Güvenli bir PDF çalışma dizini oluşturulamadı."
+
+#: src/Plugin.php:80
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "WooCommerce Fatura Yazıcısı, WooCommerce'in yüklü ve etkin olmasını gerektirir."
+
+#: src/Plugin.php:84
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "WooCommerce Fatura Yazıcısı, WooCommerce 9.0 veya üzerini gerektirir."
+
+#: src/Plugin.php:88
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
+msgstr "WooCommerce Fatura Yazıcısı, PDF ve PrintNode çıktısı için Composer bağımlılıklarına ihtiyaç duyar. Tarayıcıdan yazdırma kullanılabilir."
+
+#: src/Plugin.php:92
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "WooCommerce Fatura Yazıcısı veritabanını hazırlayamadı. Yazdırma kullanılamıyor; veritabanı izinlerini kontrol edip eklentiyi yeniden etkinleştirin."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:30
+msgid "PrintNode account"
+msgstr "PrintNode hesabı"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:37
+#: src/Printing/PrintNode/PrintNodeProvider.php:108
+msgid "PrintNode is not connected."
+msgstr "PrintNode bağlı değil."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:69
+msgid "Unnamed printer"
+msgstr "Adsız yazıcı"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:85
+msgid "The selected printer is invalid."
+msgstr "Seçilen yazıcı geçersiz."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:123
+msgid "The print request could not be encoded."
+msgstr "Yazdırma isteği kodlanamadı."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:128
+msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
+msgstr "PrintNode isteği kesintiye uğramış olabilir. Yeniden yazdırmadan önce işi kontrol edin."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:138
+msgid "PrintNode rejected the API key."
+msgstr "PrintNode API anahtarını reddetti."
+
+#. translators: %d: HTTP response status code.
+#: src/Printing/PrintNode/PrintNodeProvider.php:141
+#, php-format
+msgid "PrintNode rejected the request (HTTP %d)."
+msgstr "PrintNode isteği reddetti (HTTP %d)."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:144
+msgid "PrintNode may have accepted the print request. Check the job before reprinting."
+msgstr "PrintNode yazdırma isteğini kabul etmiş olabilir. Yeniden yazdırmadan önce işi kontrol edin."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:167
+msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
+msgstr "PrintNode okunamayan bir iş yanıtı döndürdü. Yeniden yazdırmadan önce işi kontrol edin."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:168
+msgid "PrintNode returned an unreadable response."
+msgstr "PrintNode okunamayan bir yanıt döndürdü."
+
+#: src/PrintJob/PrintJobRepository.php:37
+msgid "The print job could not be saved."
+msgstr "Yazdırma işi kaydedilemedi."
+
+#: src/PrintJob/PrintJobService.php:72
+msgid "Choose a valid invoice template."
+msgstr "Geçerli bir fatura şablonu seçin."
+
+#: src/PrintJob/PrintJobService.php:75
+msgid "Choose a valid print destination."
+msgstr "Geçerli bir yazdırma hedefi seçin."
+
+#: src/PrintJob/PrintJobService.php:78
+#: src/Rest/RestController.php:78
+msgid "Choose a valid printer."
+msgstr "Geçerli bir yazıcı seçin."
+
+#: src/PrintJob/PrintJobService.php:81
+msgid "Connect PrintNode before printing."
+msgstr "Yazdırmadan önce PrintNode'u bağlayın."
+
+#: src/Rest/RestController.php:83
+msgid "Invoice printer test page"
+msgstr "Fatura yazıcısı test sayfası"
+
+#: src/Rest/RestController.php:93
+msgid "Select between 1 and 50 orders."
+msgstr "1 ile 50 arasında sipariş seçin."
+
+#: src/Rest/RestController.php:99
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "Geçerli şablon, yazıcı, hedef ve kopya sayısı seçin."
+
+#: src/Rest/RestController.php:102
+msgid "Configure the PrintNode credential before printing."
+msgstr "Yazdırmadan önce PrintNode kimlik bilgisini yapılandırın."
+
+#: src/Rest/RestController.php:108
+msgid "One of the selected order IDs is invalid."
+msgstr "Seçilen sipariş kimliklerinden biri geçersiz."
+
+#: src/Rest/RestController.php:122
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "Bir yazdırma işi kuyruğa alınamadı. Yeniden denemeden önce Yazdırma İşleri bölümünü inceleyin."
+
+#: src/Rest/RestController.php:127
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "Yazdırma isteği durdu. Yeniden denemeden önce Yazdırma İşleri bölümünü inceleyin."
+
+#: src/Rest/RestController.php:137
+#: src/Rest/RestController.php:149
+msgid "Print job not found."
+msgstr "Yazdırma işi bulunamadı."
+
+#: src/Rest/RestController.php:140
+msgid "Only queued jobs can be cancelled."
+msgstr "Yalnızca kuyruktaki işler iptal edilebilir."
+
+#: src/Rest/RestController.php:152
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "Bu iş güvenli bir yeniden deneme için uygun değil. Gerekirse bilinçli olarak yeni bir yazdırma işlemi oluşturun."
+
+#: src/Rest/RestController.php:155
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "Yazdırma işi kuyruğa alınamadı. Yeniden denemeden önce Yazdırma İşleri bölümünü inceleyin."
+
+#: src/Rest/RestController.php:171
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "Yazdırma işlemi başarısız oldu. Yapılandırmayı kontrol edip yeniden deneyin."
+
+#: src/Template/TemplateRegistry.php:10
+msgid "Classic"
+msgstr "Klasik"
+
+#: src/Template/TemplateRegistry.php:10
+msgid "A polished full invoice for office printers."
+msgstr "Ofis yazıcıları için şık ve eksiksiz fatura."
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Compact"
+msgstr "Kompakt"
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Dense and readable for high-volume operations."
+msgstr "Yoğun işlemler için sık ve okunaklı düzen."
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Thermal 80 mm"
+msgstr "80 mm Termal"
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Purpose-built for narrow receipt printers."
+msgstr "Dar fiş yazıcıları için özel tasarım."
+
+#: templates/classic/invoice.php:37
+#: templates/thermal/invoice.php:30
+msgid "INVOICE"
+msgstr "Fatura"
+
+#: templates/classic/invoice.php:42
+msgid "Bill to"
+msgstr "Fatura alıcısı"
+
+#: templates/classic/invoice.php:47
+msgid "Payment & shipping"
+msgstr "Ödeme ve kargo"
+
+#: templates/classic/invoice.php:53
+msgid "Item"
+msgstr "Ürün"
+
+#: templates/classic/invoice.php:54
+#: templates/compact/invoice.php:47
+msgid "SKU"
+msgstr "Stok kodu"
+
+#: templates/classic/invoice.php:55
+#: templates/compact/invoice.php:48
+msgid "Qty"
+msgstr "Adet"
+
+#: templates/classic/invoice.php:56
+msgid "Unit"
+msgstr "Birim"
+
+#: templates/classic/invoice.php:57
+msgid "Discount"
+msgstr "İndirim"
+
+#: templates/classic/invoice.php:58
+msgid "Tax"
+msgstr "Vergi"
+
+#: templates/classic/invoice.php:59
+#: templates/compact/invoice.php:50
+msgid "Total"
+msgstr "Toplam"
+
+#: templates/classic/invoice.php:71
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "Birim fiyatlar ve indirimler vergi hariçtir; satır toplamları vergi dahildir."
+
+#: templates/classic/invoice.php:75
+msgid "Customer note"
+msgstr "Müşteri notu"
+
+#: templates/compact/invoice.php:33
+msgid "Invoice"
+msgstr "Fatura"
+
+#: templates/compact/invoice.php:37
+msgid "Customer"
+msgstr "Müşteri"
+
+#: templates/compact/invoice.php:40
+msgid "Payment / delivery"
+msgstr "Ödeme / teslimat"
+
+#: templates/compact/invoice.php:46
+msgid "Description"
+msgstr "Açıklama"
+
+#: templates/compact/invoice.php:49
+msgid "Price"
+msgstr "Fiyat"
+
+#: templates/compact/invoice.php:60
+#: templates/thermal/invoice.php:45
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "Birim fiyatlar vergi hariçtir; satır toplamları indirim ve vergi dahildir."
+
+#: templates/compact/invoice.php:62
+msgid "Note"
+msgstr "Not"
+
+#: templates/thermal/invoice.php:32
+msgid "Date"
+msgstr "Tarih"
+
+#: templates/thermal/invoice.php:50
+msgid "Note:"
+msgstr "Not:"
+
+#: templates/thermal/invoice.php:51
+msgid "Thank you for your order."
+msgstr "Siparişiniz için teşekkür ederiz."
+
+#. translators: %s: WooCommerce order number.
+#: src/Automation/PrintWorker.php:90
+#, php-format
+msgid "Invoice %s"
+msgstr "Fatura %s"
+
+#: src/Invoice/InvoiceFactory.php:80
+msgid "September 15, 2026"
+msgstr "15 Eylül 2026"
+
+#: src/Invoice/InvoiceFactory.php:80
+#: src/PrintJob/JobStatus.php:27
+msgid "Processing"
+msgstr "İşleniyor"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Northstar Supply Co."
+msgstr "Kuzey Yıldızı Tedarik"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "24 Market Street, Portland, OR"
+msgstr "24 Market Caddesi, Portland, OR"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Alex Morgan"
+msgstr "Alex Morgan"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Morgan Studio"
+msgstr "Morgan Stüdyo"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "840 Evergreen Caddesi, Seattle, WA"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "Özellikle uzun ürün adına sahip profesyonel planlama defteri"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Color: Midnight / Size: Large"
+msgstr "Renk: Gece mavisi / Beden: Büyük"
+
+#: src/Invoice/InvoiceFactory.php:85
+msgid "Fine gel pen set"
+msgstr "İnce jel kalem seti"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Subtotal:"
+msgstr "Ara toplam:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Discount:"
+msgstr "İndirim:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Shipping:"
+msgstr "Kargo:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Tax:"
+msgstr "Vergi:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Total:"
+msgstr "Toplam:"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Credit card"
+msgstr "Kredi kartı"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Ground shipping"
+msgstr "Kara yolu kargosu"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Please leave the parcel at reception."
+msgstr "Lütfen paketi resepsiyona bırakın."
+
+#: src/PrintJob/JobStatus.php:26
+msgid "Queued"
+msgstr "Kuyrukta"
+
+#: src/PrintJob/JobStatus.php:28
+msgid "Submitted"
+msgstr "Gönderildi"
+
+#: src/PrintJob/JobStatus.php:29
+msgid "Failed"
+msgstr "Başarısız"
+
+#: src/Admin/AdminPage.php:38
+#: src/PrintJob/JobStatus.php:30
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: src/PrintJob/JobStatus.php:31
+msgid "Cancelled"
+msgstr "İptal edildi"
+
+#: src/Admin/AdminPage.php:36
+msgid "Online"
+msgstr "Çevrimiçi"
+
+#: src/Admin/AdminPage.php:37
+msgid "Offline"
+msgstr "Çevrimdışı"
+
+#: src/Admin/AdminPage.php:127
+msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
+msgstr "Otomatik yazdırma PrintNode üzerinden çalışır ve yazıcının bağlı olduğu bilgisayarda PrintNode istemcisi gerektirir. Yerel tarayıcı yazdırmasında yazdırma iletişim kutusunu onaylamanız gerekir."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printer (no API key)"
+msgstr "Yerel yazıcı (API anahtarı gerekmez)"
+
+#: src/Admin/AdminPage.php:137
+msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
+msgstr "Bu bilgisayarda kurulu bir yazıcıyı tarayıcınız üzerinden kullanın. PrintNode hesabı veya API anahtarı gerekmez."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "Test sayfasını açın, Yazdır'a tıklayın ve tarayıcının yazdırma iletişim kutusunda yazıcınızı seçin."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open local test page"
+msgstr "Yerel test sayfasını aç"
+
+#: src/Admin/AdminPage.php:137
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "Siparişlerde tek bir fatura veya toplu seçim yazdırırken Tarayıcı yazdırma iletişim kutusu seçeneğini seçin."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
+msgstr "Yerel yazıcılar tarayıcının yazdırma iletişim kutusunda seçilir ve aşağıdaki PrintNode listesinde görünmez. Yazıcınız iletişim kutusunda yoksa önce işletim sisteminize kurun."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode (optional automatic printing)"
+msgstr "PrintNode (isteğe bağlı otomatik yazdırma)"
+
+#: src/Admin/AdminPage.php:142
+msgid "PrintNode printers"
+msgstr "PrintNode yazıcıları"
+
+#: src/Admin/AdminPage.php:142
+msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
+msgstr "Bu liste yalnızca hesabınızdaki PrintNode istemcisinin paylaştığı yazıcıları içerir. İstemciyi yazıcının bağlı olduğu bilgisayara kurun, hesabınıza giriş yapın ve listeyi yenileyin."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "Yerel yazıcınızı tarayıcının yazdırma iletişim kutusunda seçin. API anahtarı gerekmez."
+

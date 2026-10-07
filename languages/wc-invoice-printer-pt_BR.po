@@ -1,0 +1,975 @@
+# Copyright (C) 2026 WooCommerce Invoice Printer contributors
+# Distributed under GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Invoice Printer 1.1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-07 09:00+0330\n"
+"PO-Revision-Date: 2026-10-07 09:00+0330\n"
+"Last-Translator: WooCommerce Invoice Printer contributors\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: wc-invoice-printer\n"
+
+#. Plugin Name of the plugin
+#: wc-invoice-printer.php
+msgid "WooCommerce Invoice Printer"
+msgstr "Impressora de faturas WooCommerce"
+
+#. Description of the plugin
+#: wc-invoice-printer.php
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "Impressão manual e automática segura de faturas para WooCommerce."
+
+#: src/Admin/AdminPage.php:24
+#: src/Admin/AdminPage.php:91
+msgid "Invoice Printer"
+msgstr "Impressora de faturas"
+
+#: src/Admin/AdminPage.php:41
+msgid "Working…"
+msgstr "A processar…"
+
+#: src/Admin/AdminPage.php:42
+#: src/Admin/OrderIntegration.php:62
+#: src/Admin/PreviewController.php:48
+#: src/PrintJob/PrintJobService.php:84
+msgid "Choose between 1 and 20 copies."
+msgstr "Escolha entre 1 e 20 cópias."
+
+#: src/Admin/AdminPage.php:43
+msgid "Something went wrong. Check the details and try again."
+msgstr "Ocorreu um erro. Verifique os detalhes e tente novamente."
+
+#: src/Admin/AdminPage.php:44
+msgid "Choose a printer"
+msgstr "Escolha uma impressora"
+
+#: src/Admin/AdminPage.php:45
+msgid "No printers were found. Confirm that the PrintNode client is online."
+msgstr "Não foram encontradas impressoras. Confirme que o cliente PrintNode está online."
+
+#: src/Admin/AdminPage.php:46
+msgid "Submitted to PrintNode."
+msgstr "Enviado para o PrintNode."
+
+#: src/Admin/AdminPage.php:47
+msgid "PrintNode connection verified."
+msgstr "Ligação ao PrintNode verificada."
+
+#. translators: %d: number of printers returned by PrintNode.
+#: src/Admin/AdminPage.php:49
+#, php-format
+msgid "%d printer(s) found."
+msgstr "Número de impressoras encontradas: %d"
+
+#. translators: %d: number of invoices added to the print queue.
+#: src/Admin/AdminPage.php:51
+#, php-format
+msgid "%d invoice(s) queued."
+msgstr "Número de faturas em fila: %d"
+
+#: src/Admin/AdminPage.php:57
+msgid "You are not allowed to change these settings."
+msgstr "Não tem permissão para alterar estas configurações."
+
+#: src/Admin/AdminPage.php:60
+msgid "Invalid settings input."
+msgstr "Dados de configurações inválidos."
+
+#: src/Admin/AdminPage.php:63
+msgid "Invalid settings section."
+msgstr "Secção de configurações inválida."
+
+#: src/Admin/AdminPage.php:88
+msgid "General"
+msgstr "Geral"
+
+#: src/Admin/AdminPage.php:88
+msgid "Templates"
+msgstr "Modelos"
+
+#: src/Admin/AdminPage.php:88
+msgid "Automatic Printing"
+msgstr "Impressão automática"
+
+#: src/Admin/AdminPage.php:88
+msgid "Printers"
+msgstr "Impressoras"
+
+#: src/Admin/AdminPage.php:88
+msgid "Print Jobs"
+msgstr "Tarefas de impressão"
+
+#: src/Admin/AdminPage.php:91
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "Crie faturas uniformes e envie-as para a impressora certa."
+
+#: src/Admin/AdminPage.php:92
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+#: src/Admin/AdminPage.php:93
+msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
+msgstr "A impressão automática permanece desativada até configurar a credencial do PrintNode e uma impressora."
+
+#: src/Admin/AdminPage.php:94
+msgid "Invoice Printer sections"
+msgstr "Secções da impressora de faturas"
+
+#: src/Admin/AdminPage.php:115
+msgid "Invoice identity"
+msgstr "Identificação da fatura"
+
+#: src/Admin/AdminPage.php:115
+msgid "Business details shown to customers on every invoice."
+msgstr "Dados da empresa apresentados aos clientes em cada fatura."
+
+#: src/Admin/AdminPage.php:116
+msgid "Business name"
+msgstr "Nome da empresa"
+
+#: src/Admin/AdminPage.php:116
+msgid "Logo URL"
+msgstr "URL do logótipo"
+
+#: src/Admin/AdminPage.php:116
+msgid "Phone"
+msgstr "Telefone"
+
+#: src/Admin/AdminPage.php:116
+msgid "Email"
+msgstr "Email"
+
+#: src/Admin/AdminPage.php:116
+msgid "Business and tax details"
+msgstr "Dados empresariais e fiscais"
+
+#: src/Admin/AdminPage.php:117
+msgid "Manual printing defaults"
+msgstr "Configurações padrão da impressão manual"
+
+#: src/Admin/AdminPage.php:117
+msgid "Include customer notes on invoices"
+msgstr "Incluir notas do cliente nas faturas"
+
+#: src/Admin/AdminPage.php:121
+msgid "Choose an invoice layout"
+msgstr "Escolha um formato de fatura"
+
+#: src/Admin/AdminPage.php:121
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "A pré-visualização utiliza dados realistas e permite mudar para a apresentação da direita para a esquerda."
+
+#: src/Admin/AdminPage.php:122
+msgid "Selected"
+msgstr "Selecionado"
+
+#: src/Admin/AdminPage.php:122
+#: src/Admin/OrderIntegration.php:32
+msgid "Preview"
+msgstr "Pré-visualização"
+
+#: src/Admin/AdminPage.php:122
+msgid "RTL preview"
+msgstr "Pré-visualização da direita para a esquerda"
+
+#: src/Admin/AdminPage.php:122
+msgid "Select"
+msgstr "Selecionar"
+
+#: src/Admin/AdminPage.php:123
+msgid "Save selected template"
+msgstr "Salvar o modelo selecionado"
+
+#: src/Admin/AdminPage.php:128
+msgid "Automatic printing"
+msgstr "Impressão automática"
+
+#: src/Admin/AdminPage.php:128
+msgid "After verified payment, queue an invoice without delaying checkout."
+msgstr "Após a confirmação do pagamento, coloque a fatura em fila sem atrasar a finalização da compra."
+
+#: src/Admin/AdminPage.php:128
+msgid "Enabled"
+msgstr "Ativada"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Provider"
+msgstr "Fornecedor"
+
+#: src/Admin/AdminPage.php:128
+msgid "Connection"
+msgstr "Ligação"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:139
+msgid "Credential configured"
+msgstr "Credencial configurada"
+
+#: src/Admin/AdminPage.php:128
+msgid "Not configured"
+msgstr "Não configurado"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:152
+msgid "Printer"
+msgstr "Impressora"
+
+#: src/Admin/AdminPage.php:128
+msgid "No printer selected"
+msgstr "Nenhuma impressora selecionada"
+
+#: src/Admin/AdminPage.php:128
+#: src/Admin/AdminPage.php:178
+#: src/Admin/OrderIntegration.php:32
+msgid "Copies"
+msgstr "Cópias"
+
+#: src/Admin/AdminPage.php:128
+msgid "Trigger"
+msgstr "Evento desencadeador"
+
+#: src/Admin/AdminPage.php:128
+msgid "Payment completed"
+msgstr "Pagamento concluído"
+
+#: src/Admin/AdminPage.php:128
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "Apenas são elegíveis as pedidos que o WooCommerce confirma como pagas."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode connection"
+msgstr "Ligação ao PrintNode"
+
+#: src/Admin/AdminPage.php:139
+msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
+msgstr "Os PDF das faturas contêm dados dos clientes e são enviados para o PrintNode quando este destino é usado."
+
+#: src/Admin/AdminPage.php:139
+msgid "Not connected"
+msgstr "Não ligado"
+
+#: src/Admin/AdminPage.php:139
+msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
+msgstr "Gerido externamente através de WCIP_PRINTNODE_API_KEY; não pode ser editado aqui."
+
+#: src/Admin/AdminPage.php:139
+msgid "The stored key is never displayed or returned to the browser."
+msgstr "A chave salva nunca é apresentada nem devolvida ao navegador."
+
+#: src/Admin/AdminPage.php:140
+msgid "Replace API key"
+msgstr "Substituir chave API"
+
+#: src/Admin/AdminPage.php:140
+msgid "API key"
+msgstr "Chave API"
+
+#: src/Admin/AdminPage.php:140
+msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
+msgstr "Salve uma nova chave antes de testar a ligação. Deixe o campo vazio para manter a credencial atual."
+
+#: src/Admin/AdminPage.php:142
+msgid "Test connection"
+msgstr "Testar ligação"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh printers"
+msgstr "Atualizar impressoras"
+
+#: src/Admin/AdminPage.php:142
+msgid "Default PrintNode printer"
+msgstr "Impressora PrintNode predefinida"
+
+#: src/Admin/AdminPage.php:142
+msgid "Refresh to load printers"
+msgstr "Atualize para carregar as impressoras"
+
+#: src/Admin/AdminPage.php:142
+msgid "Print test page"
+msgstr "Imprimir página de teste"
+
+#: src/Admin/AdminPage.php:143
+msgid "Save printer settings"
+msgstr "Salvar configurações da impressora"
+
+#: src/Admin/AdminPage.php:148
+msgid "You are not allowed to view print jobs."
+msgstr "Não tem permissão para consultar as tarefas de impressão."
+
+#: src/Admin/AdminPage.php:150
+msgid "Print jobs"
+msgstr "Tarefas de impressão"
+
+#: src/Admin/AdminPage.php:150
+msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
+msgstr "«Enviado» significa que o PrintNode aceitou o PDF ou que a fatura do navegador foi preparada. Não confirma a impressão em papel."
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Status"
+msgstr "Estado"
+
+#: src/Admin/AdminPage.php:150
+msgid "All"
+msgstr "Todos"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Source"
+msgstr "Origem"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Automatic"
+msgstr "Automático"
+
+#: src/Admin/AdminPage.php:150
+#: src/Admin/AdminPage.php:152
+msgid "Manual"
+msgstr "Manual"
+
+#: src/Admin/AdminPage.php:150
+msgid "Order ID"
+msgstr "ID da pedido"
+
+#: src/Admin/AdminPage.php:150
+msgid "Filter"
+msgstr "Filtrar"
+
+#: src/Admin/AdminPage.php:151
+msgid "No print jobs yet"
+msgstr "Ainda não existem tarefas de impressão"
+
+#: src/Admin/AdminPage.php:151
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "As tarefas manuais e automáticas aparecerão aqui com o seu estado de envio."
+
+#: src/Admin/AdminPage.php:152
+msgid "Order"
+msgstr "Pedido"
+
+#: src/Admin/AdminPage.php:152
+#: src/Admin/OrderIntegration.php:32
+msgid "Template"
+msgstr "Modelo"
+
+#: src/Admin/AdminPage.php:152
+msgid "Attempts"
+msgstr "Tentativas"
+
+#: src/Admin/AdminPage.php:152
+msgid "Updated"
+msgstr "Atualizado"
+
+#: src/Admin/AdminPage.php:152
+msgid "Details"
+msgstr "Detalhes"
+
+#: src/Admin/AdminPage.php:152
+msgid "Browser"
+msgstr "Navegador"
+
+#: src/Admin/AdminPage.php:152
+msgid "View"
+msgstr "Ver"
+
+#: src/Admin/AdminPage.php:152
+msgid "External job ID"
+msgstr "ID externo da tarefa"
+
+#: src/Admin/AdminPage.php:152
+msgid "Error"
+msgstr "Erro"
+
+#: src/Admin/AdminPage.php:152
+msgid "Cancel queued job"
+msgstr "Cancelar tarefa em fila"
+
+#: src/Admin/AdminPage.php:152
+msgid "Retry if safe"
+msgstr "Tentar novamente se for seguro"
+
+#: src/Admin/AdminPage.php:157
+#: src/Admin/PreviewController.php:34
+msgid "You are not allowed to print invoices."
+msgstr "Não tem permissão para imprimir faturas."
+
+#: src/Admin/AdminPage.php:161
+#: src/Admin/PreviewController.php:57
+msgid "Select no more than 50 orders."
+msgstr "Selecione no máximo 50 pedidos."
+
+#: src/Admin/AdminPage.php:163
+#: src/Admin/PreviewController.php:59
+msgid "Invalid order selection."
+msgstr "Seleção de pedidos inválida."
+
+#: src/Admin/AdminPage.php:165
+msgid "No orders selected"
+msgstr "Nenhuma pedido selecionada"
+
+#. translators: %d: number of selected invoices.
+#: src/Admin/AdminPage.php:168
+#, php-format
+msgid "Print %d invoice"
+msgid_plural "Print %d invoices"
+msgstr[0] "Imprimir %d fatura"
+msgstr[1] "Imprimir %d faturas"
+
+#: src/Admin/AdminPage.php:169
+msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
+msgstr "A saída do navegador é combinada num único documento. O PrintNode cria tarefas individuais e controladas em segundo plano."
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Destination"
+msgstr "Destino"
+
+#: src/Admin/AdminPage.php:171
+#: src/Admin/OrderIntegration.php:32
+msgid "Browser print dialog"
+msgstr "Janela de impressão do navegador"
+
+#. translators: %s: the selected printer's name.
+#: src/Admin/AdminPage.php:174
+#: src/Admin/OrderIntegration.php:32
+#, php-format
+msgid "PrintNode: %s"
+msgstr "PrintNode: %s"
+
+#: src/Admin/AdminPage.php:179
+msgid "Start bulk printing"
+msgstr "Iniciar impressão em lote"
+
+#: src/Admin/AdminPage.php:202
+msgid "Invoice template"
+msgstr "Modelo de fatura"
+
+#: src/Admin/OrderIntegration.php:23
+msgid "Invoice printing"
+msgstr "Impressão de faturas"
+
+#: src/Admin/OrderIntegration.php:31
+msgid "Automatic job:"
+msgstr "Tarefa automática:"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Reprint invoice"
+msgstr "Voltar a imprimir a fatura"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:38
+msgid "Print invoice"
+msgstr "Imprimir fatura"
+
+#: src/Admin/OrderIntegration.php:32
+msgid "Close print dialog"
+msgstr "Fechar janela de impressão"
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Your browser print dialog will open."
+msgstr "A janela de impressão do navegador será aberta."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/PreviewController.php:93
+msgid "Print"
+msgstr "Imprimir"
+
+#: src/Admin/OrderIntegration.php:43
+msgid "Print invoices"
+msgstr "Imprimir faturas"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "A fatura será colocada em fila para a impressora física configurada."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Preparing invoice…"
+msgstr "A preparar fatura…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Queuing invoice…"
+msgstr "A colocar a fatura em fila…"
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "Fatura em fila. Consulte as tarefas de impressão para verificar o estado de envio."
+
+#: src/Admin/OrderIntegration.php:62
+msgid "Printing failed. Review the message and try again."
+msgstr "A impressão falhou. Reveja a mensagem e tente novamente."
+
+#: src/Admin/PreviewController.php:38
+msgid "Invalid preview input."
+msgstr "Dados de pré-visualização inválidos."
+
+#: src/Admin/PreviewController.php:52
+msgid "Invalid invoice template."
+msgstr "Modelo de fatura inválido."
+
+#: src/Admin/PreviewController.php:62
+#: src/Rest/RestController.php:112
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "Uma das pedidos selecionadas não existe ou não pode ser impressa."
+
+#: src/Admin/PreviewController.php:83
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "Não foi possível preparar a fatura. Consulte as tarefas de impressão antes de tentar novamente."
+
+#: src/Admin/PreviewController.php:86
+msgid "No valid invoices were selected."
+msgstr "Não foram selecionadas faturas válidas."
+
+#: src/Automation/PrintWorker.php:69
+msgid "The order no longer exists."
+msgstr "A pedido já não existe."
+
+#: src/Automation/PrintWorker.php:72
+#: src/Automation/PrintWorker.php:85
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "A pedido já não consta como paga, pelo que a impressão automática foi interrompida."
+
+#: src/Automation/PrintWorker.php:92
+msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
+msgstr "O fornecedor aceitou a tarefa de impressão, mas não foi possível guardar o resultado. Verifique o PrintNode antes de voltar a imprimir."
+
+#: src/Automation/PrintWorker.php:120
+#: src/Automation/Scheduler.php:80
+msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
+msgstr "O processamento parou antes de registar o resultado. Verifique o PrintNode antes de voltar a imprimir."
+
+#: src/Automation/Scheduler.php:24
+msgid "The background queue is unavailable."
+msgstr "A fila em segundo plano está indisponível."
+
+#: src/Automation/Scheduler.php:58
+msgid "The print job could not be queued."
+msgstr "Não foi possível colocar a tarefa de impressão em fila."
+
+#: src/Infrastructure/Activator.php:11
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "Não foi possível instalar a base de dados da impressora de faturas. Verifique as permissões da base de dados e tente ativar novamente."
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Business registration and tax details"
+msgstr "Dados de registo da empresa e informações fiscais"
+
+#: src/Pdf/MpdfRenderer.php:10
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "O suporte PDF está indisponível. Instale as dependências do Composer."
+
+#: src/Pdf/MpdfRenderer.php:16
+msgid "A secure PDF working directory could not be created."
+msgstr "Não foi possível criar um diretório de trabalho seguro para PDF."
+
+#: src/Plugin.php:80
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "A impressora de faturas WooCommerce requer que o WooCommerce esteja instalado e ativo."
+
+#: src/Plugin.php:84
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "A impressora de faturas WooCommerce requer o WooCommerce 9.0 ou superior."
+
+#: src/Plugin.php:88
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
+msgstr "A impressora de faturas WooCommerce necessita das dependências do Composer para as saídas PDF e PrintNode. A impressão pelo navegador continua disponível."
+
+#: src/Plugin.php:92
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "A impressora de faturas WooCommerce não conseguiu preparar a base de dados. A impressão está indisponível; verifique as permissões da base de dados e reative o plugin."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:30
+msgid "PrintNode account"
+msgstr "Conta PrintNode"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:37
+#: src/Printing/PrintNode/PrintNodeProvider.php:108
+msgid "PrintNode is not connected."
+msgstr "O PrintNode não está ligado."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:69
+msgid "Unnamed printer"
+msgstr "Impressora sem nome"
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:85
+msgid "The selected printer is invalid."
+msgstr "A impressora selecionada é inválida."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:123
+msgid "The print request could not be encoded."
+msgstr "Não foi possível codificar o pedido de impressão."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:128
+msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
+msgstr "O pedido ao PrintNode pode ter sido interrompido. Verifique a tarefa antes de voltar a imprimir."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:138
+msgid "PrintNode rejected the API key."
+msgstr "O PrintNode rejeitou a chave API."
+
+#. translators: %d: HTTP response status code.
+#: src/Printing/PrintNode/PrintNodeProvider.php:141
+#, php-format
+msgid "PrintNode rejected the request (HTTP %d)."
+msgstr "O PrintNode rejeitou o pedido (HTTP %d)."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:144
+msgid "PrintNode may have accepted the print request. Check the job before reprinting."
+msgstr "O PrintNode pode ter aceite o pedido de impressão. Verifique a tarefa antes de voltar a imprimir."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:167
+msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
+msgstr "O PrintNode devolveu uma resposta de tarefa ilegível. Verifique a tarefa antes de voltar a imprimir."
+
+#: src/Printing/PrintNode/PrintNodeProvider.php:168
+msgid "PrintNode returned an unreadable response."
+msgstr "O PrintNode devolveu uma resposta ilegível."
+
+#: src/PrintJob/PrintJobRepository.php:37
+msgid "The print job could not be saved."
+msgstr "Não foi possível guardar a tarefa de impressão."
+
+#: src/PrintJob/PrintJobService.php:72
+msgid "Choose a valid invoice template."
+msgstr "Escolha um modelo de fatura válido."
+
+#: src/PrintJob/PrintJobService.php:75
+msgid "Choose a valid print destination."
+msgstr "Escolha um destino de impressão válido."
+
+#: src/PrintJob/PrintJobService.php:78
+#: src/Rest/RestController.php:78
+msgid "Choose a valid printer."
+msgstr "Escolha uma impressora válida."
+
+#: src/PrintJob/PrintJobService.php:81
+msgid "Connect PrintNode before printing."
+msgstr "Ligue o PrintNode antes de imprimir."
+
+#: src/Rest/RestController.php:83
+msgid "Invoice printer test page"
+msgstr "Página de teste da impressora de faturas"
+
+#: src/Rest/RestController.php:93
+msgid "Select between 1 and 50 orders."
+msgstr "Selecione entre 1 e 50 pedidos."
+
+#: src/Rest/RestController.php:99
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "Escolha um modelo, uma impressora, um destino e um número de cópias válidos."
+
+#: src/Rest/RestController.php:102
+msgid "Configure the PrintNode credential before printing."
+msgstr "Configure a credencial do PrintNode antes de imprimir."
+
+#: src/Rest/RestController.php:108
+msgid "One of the selected order IDs is invalid."
+msgstr "Um dos ID das pedidos selecionadas é inválido."
+
+#: src/Rest/RestController.php:122
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "Não foi possível colocar uma tarefa de impressão em fila. Consulte as tarefas de impressão antes de tentar novamente."
+
+#: src/Rest/RestController.php:127
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "O pedido de impressão parou. Consulte as tarefas de impressão antes de tentar novamente."
+
+#: src/Rest/RestController.php:137
+#: src/Rest/RestController.php:149
+msgid "Print job not found."
+msgstr "Tarefa de impressão não encontrada."
+
+#: src/Rest/RestController.php:140
+msgid "Only queued jobs can be cancelled."
+msgstr "Só podem ser canceladas tarefas em fila."
+
+#: src/Rest/RestController.php:152
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "Esta tarefa não permite uma repetição segura. Se necessário, crie deliberadamente uma nova impressão."
+
+#: src/Rest/RestController.php:155
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "Não foi possível colocar a tarefa de impressão em fila. Consulte as tarefas de impressão antes de tentar novamente."
+
+#: src/Rest/RestController.php:171
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "A operação de impressão falhou. Verifique a configuração e tente novamente."
+
+#: src/Template/TemplateRegistry.php:10
+msgid "Classic"
+msgstr "Clássico"
+
+#: src/Template/TemplateRegistry.php:10
+msgid "A polished full invoice for office printers."
+msgstr "Uma fatura completa e cuidada para impressoras de escritório."
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Compact"
+msgstr "Compacto"
+
+#: src/Template/TemplateRegistry.php:11
+msgid "Dense and readable for high-volume operations."
+msgstr "Formato denso e legível para grandes volumes."
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Thermal 80 mm"
+msgstr "Térmico 80 mm"
+
+#: src/Template/TemplateRegistry.php:12
+msgid "Purpose-built for narrow receipt printers."
+msgstr "Concebido para impressoras de recibos estreitos."
+
+#: templates/classic/invoice.php:37
+#: templates/thermal/invoice.php:30
+msgid "INVOICE"
+msgstr "Fatura"
+
+#: templates/classic/invoice.php:42
+msgid "Bill to"
+msgstr "Faturar a"
+
+#: templates/classic/invoice.php:47
+msgid "Payment & shipping"
+msgstr "Pagamento e envio"
+
+#: templates/classic/invoice.php:53
+msgid "Item"
+msgstr "Artigo"
+
+#: templates/classic/invoice.php:54
+#: templates/compact/invoice.php:47
+msgid "SKU"
+msgstr "Referência"
+
+#: templates/classic/invoice.php:55
+#: templates/compact/invoice.php:48
+msgid "Qty"
+msgstr "Qtd."
+
+#: templates/classic/invoice.php:56
+msgid "Unit"
+msgstr "Unidade"
+
+#: templates/classic/invoice.php:57
+msgid "Discount"
+msgstr "Desconto"
+
+#: templates/classic/invoice.php:58
+msgid "Tax"
+msgstr "Imposto"
+
+#: templates/classic/invoice.php:59
+#: templates/compact/invoice.php:50
+msgid "Total"
+msgstr "Total"
+
+#: templates/classic/invoice.php:71
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "Os preços unitários e descontos não incluem impostos; os totais das linhas incluem impostos."
+
+#: templates/classic/invoice.php:75
+msgid "Customer note"
+msgstr "Nota do cliente"
+
+#: templates/compact/invoice.php:33
+msgid "Invoice"
+msgstr "Fatura"
+
+#: templates/compact/invoice.php:37
+msgid "Customer"
+msgstr "Cliente"
+
+#: templates/compact/invoice.php:40
+msgid "Payment / delivery"
+msgstr "Pagamento / entrega"
+
+#: templates/compact/invoice.php:46
+msgid "Description"
+msgstr "Descrição"
+
+#: templates/compact/invoice.php:49
+msgid "Price"
+msgstr "Preço"
+
+#: templates/compact/invoice.php:60
+#: templates/thermal/invoice.php:45
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "Os preços unitários não incluem impostos; os totais das linhas incluem descontos e impostos."
+
+#: templates/compact/invoice.php:62
+msgid "Note"
+msgstr "Nota"
+
+#: templates/thermal/invoice.php:32
+msgid "Date"
+msgstr "Data"
+
+#: templates/thermal/invoice.php:50
+msgid "Note:"
+msgstr "Nota:"
+
+#: templates/thermal/invoice.php:51
+msgid "Thank you for your order."
+msgstr "Obrigado pela sua pedido."
+
+#. translators: %s: WooCommerce order number.
+#: src/Automation/PrintWorker.php:90
+#, php-format
+msgid "Invoice %s"
+msgstr "Fatura %s"
+
+#: src/Invoice/InvoiceFactory.php:80
+msgid "September 15, 2026"
+msgstr "15 de setembro de 2026"
+
+#: src/Invoice/InvoiceFactory.php:80
+#: src/PrintJob/JobStatus.php:27
+msgid "Processing"
+msgstr "Em processamento"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "Northstar Supply Co."
+msgstr "Fornecimentos Estrela do Norte"
+
+#: src/Invoice/InvoiceFactory.php:81
+msgid "24 Market Street, Portland, OR"
+msgstr "Rua Market, 24, Portland, Oregon"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Alex Morgan"
+msgstr "Alex Morgan"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "Morgan Studio"
+msgstr "Estúdio Morgan"
+
+#: src/Invoice/InvoiceFactory.php:82
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "Rua Evergreen, 840, Seattle, Washington"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "Caderno de planejamento profissional com um nome de produto intencionalmente longo"
+
+#: src/Invoice/InvoiceFactory.php:84
+msgid "Color: Midnight / Size: Large"
+msgstr "Cor: Azul meia-noite / Tamanho: Grande"
+
+#: src/Invoice/InvoiceFactory.php:85
+msgid "Fine gel pen set"
+msgstr "Conjunto de canetas de gel finas"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Subtotal:"
+msgstr "Subtotal:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Discount:"
+msgstr "Desconto:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Shipping:"
+msgstr "Envio:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Tax:"
+msgstr "Imposto:"
+
+#: src/Invoice/InvoiceFactory.php:87
+msgid "Total:"
+msgstr "Total:"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Credit card"
+msgstr "Cartão de crédito"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Ground shipping"
+msgstr "Envio terrestre"
+
+#: src/Invoice/InvoiceFactory.php:88
+msgid "Please leave the parcel at reception."
+msgstr "Deixe o pacote na recepção, por favor."
+
+#: src/PrintJob/JobStatus.php:26
+msgid "Queued"
+msgstr "Em fila"
+
+#: src/PrintJob/JobStatus.php:28
+msgid "Submitted"
+msgstr "Enviado"
+
+#: src/PrintJob/JobStatus.php:29
+msgid "Failed"
+msgstr "Falhou"
+
+#: src/Admin/AdminPage.php:38
+#: src/PrintJob/JobStatus.php:30
+msgid "Unknown"
+msgstr "Desconhecido"
+
+#: src/PrintJob/JobStatus.php:31
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#: src/Admin/AdminPage.php:36
+msgid "Online"
+msgstr "Online"
+
+#: src/Admin/AdminPage.php:37
+msgid "Offline"
+msgstr "Offline"
+
+#: src/Admin/AdminPage.php:127
+msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
+msgstr "A impressão automática funciona através do PrintNode e requer o seu cliente no computador ligado à impressora. A impressão local pelo navegador requer a confirmação da janela de impressão."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printer (no API key)"
+msgstr "Impressora local (sem chave API)"
+
+#: src/Admin/AdminPage.php:137
+msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
+msgstr "Utilize uma impressora instalada neste computador através do navegador. Não é necessária uma conta PrintNode nem uma chave API."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "Abra a página de teste, clique em Imprimir e escolha a sua impressora na janela de impressão do navegador."
+
+#: src/Admin/AdminPage.php:137
+msgid "Open local test page"
+msgstr "Abrir página de teste local"
+
+#: src/Admin/AdminPage.php:137
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "Para as pedidos, escolha a janela de impressão do navegador ao imprimir uma fatura ou uma seleção em lote."
+
+#: src/Admin/AdminPage.php:137
+msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
+msgstr "As impressoras locais são selecionadas na janela de impressão do navegador e não aparecem na lista PrintNode abaixo. Se uma impressora não aparecer na janela, instale-a primeiro no sistema operativo."
+
+#: src/Admin/AdminPage.php:139
+msgid "PrintNode (optional automatic printing)"
+msgstr "PrintNode (impressão automática opcional)"
+
+#: src/Admin/AdminPage.php:142
+msgid "PrintNode printers"
+msgstr "Impressoras PrintNode"
+
+#: src/Admin/AdminPage.php:142
+msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
+msgstr "Esta lista contém apenas impressoras partilhadas pelo cliente PrintNode da sua conta. Instale o cliente e inicie sessão no computador ligado à impressora e atualize a lista."
+
+#: src/Admin/OrderIntegration.php:32
+#: src/Admin/OrderIntegration.php:62
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "Escolha a sua impressora local na janela de impressão do navegador. Não é necessária uma chave API."
+

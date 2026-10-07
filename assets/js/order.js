@@ -36,7 +36,9 @@
     submit.setAttribute('aria-busy', 'true');
     status.textContent = config.sending;
     try {
-      const response = await fetch(config.rest, {
+      const endpoint = new URL(config.rest);
+      endpoint.searchParams.set('_locale', 'user');
+      const response = await fetch(endpoint.toString(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': config.nonce },
         body: JSON.stringify({ order_ids: [Number(dialog.dataset.orderId)], template_id: template, provider_id: 'printnode', printer_id: config.printer, copies })

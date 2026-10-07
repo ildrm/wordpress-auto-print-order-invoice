@@ -34,13 +34,16 @@ final class Scheduler {
 					// unique=true also matches the currently running action, which
 					// would prevent a delayed retry from being scheduled inside it.
 					? as_schedule_single_action( time() + $delay, self::HOOK, $args, self::GROUP, false )
-					: as_enqueue_async_action( self::HOOK, $args, self::GROUP, true );
+					// Some Action Scheduler stores deduplicate only by hook/group,
+					// ignoring job_id. Reuse pending actions above; the job's atomic
+					// claim prevents concurrent actions from submitting twice.
+					: as_enqueue_async_action( self::HOOK, $args, self::GROUP, false );
 			}
 			if ( ! $action_id ) {
 				$action_id = $this->pending_action( $args );
 				if ( ! $action_id && 0 === $delay && function_exists( 'as_has_scheduled_action' ) && as_has_scheduled_action( self::HOOK, $args, self::GROUP ) ) {
-					// A running action can reject a unique enqueue after this caller
-					// read the queued row. Its worker may be arranging a safe retry.
+					// A queue filter can decline enqueueing while an action is
+					// running. Its worker may be arranging a safe retry.
 					// Leave that state alone; recovery repairs any later orphan.
 					return (int) ( $this->jobs->find( $job_id )['action_id'] ?? 0 );
 				}
