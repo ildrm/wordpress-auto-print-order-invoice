@@ -1,5 +1,5 @@
 === WooCommerce Invoice Printer ===
-Contributors: wc-invoice-printer
+Contributors: ildrm
 Tags: woocommerce, invoice, print, printnode, pdf
 Requires at least: 6.6
 Tested up to: 6.8
