@@ -9,7 +9,25 @@ use WCInvoicePrinter\Template\HtmlRenderer;
 use WCInvoicePrinter\Template\TemplateRegistry;
 
 final class PreviewController {
-	public function __construct( private readonly InvoiceFactory $invoices, private readonly HtmlRenderer $html, private readonly TemplateRegistry $templates, private readonly PrintJobService $job_service, private readonly PrintJobRepository $jobs ) {}
+	private InvoiceFactory $invoices;
+	private HtmlRenderer $html;
+	private TemplateRegistry $templates;
+	private PrintJobService $job_service;
+	private PrintJobRepository $jobs;
+
+	public function __construct(
+		InvoiceFactory $invoices,
+		HtmlRenderer $html,
+		TemplateRegistry $templates,
+		PrintJobService $job_service,
+		PrintJobRepository $jobs
+	) {
+		$this->invoices = $invoices;
+		$this->html = $html;
+		$this->templates = $templates;
+		$this->job_service = $job_service;
+		$this->jobs = $jobs;
+	}
 
 	public function output(): void {
 		if ( ! current_user_can( 'wcip_print_invoices' ) ) {

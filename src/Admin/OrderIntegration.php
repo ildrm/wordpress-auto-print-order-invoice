@@ -7,7 +7,15 @@ use WCInvoicePrinter\Settings\SettingsRepository;
 use WCInvoicePrinter\Template\TemplateRegistry;
 
 final class OrderIntegration {
-	public function __construct( private readonly SettingsRepository $settings, private readonly TemplateRegistry $templates, private readonly PrintJobRepository $jobs ) {}
+	private SettingsRepository $settings;
+	private TemplateRegistry $templates;
+	private PrintJobRepository $jobs;
+
+	public function __construct( SettingsRepository $settings, TemplateRegistry $templates, PrintJobRepository $jobs ) {
+		$this->settings = $settings;
+		$this->templates = $templates;
+		$this->jobs = $jobs;
+	}
 
 	public function add_meta_boxes(): void {
 		foreach ( array( 'shop_order', 'woocommerce_page_wc-orders' ) as $screen ) {
@@ -15,7 +23,7 @@ final class OrderIntegration {
 		}
 	}
 
-	public function render_meta_box( mixed $object ): void {
+	public function render_meta_box( $object ): void {
 		$order = $object instanceof \WC_Order ? $object : ( $object instanceof \WP_Post ? wc_get_order( $object->ID ) : null );
 		if ( ! $order instanceof \WC_Order || ! current_user_can( 'wcip_print_invoices' ) ) { return; }
 		$latest = $this->jobs->latest_for_order( $order->get_id(), 'automatic' );

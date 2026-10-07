@@ -45,3 +45,5 @@ Review date: October 6, 2026. Scope: the complete shipped PHP, invoice templates
 No live PrintNode account/client or physical printer was exercised. There is no claim of complete gateway/browser/printer/version-matrix or multisite coverage. A payment state can still change after the last check and before remote acceptance; network/process uncertainty prevents an end-to-end exactly-once guarantee. Jobs render current order/settings rather than immutable invoice snapshots. The README documents these operational boundaries.
 
 The checked-in historical ZIP was not regenerated. These changes are in source; prepare and verify a fresh archive before release.
+
+The subsequent [PHP compatibility review](php-compatibility.md), dated October 7, 2026, records the PHP 7.4 changes, dependency resolution, and verification on PHP 7.4 and PHP 8.0–8.5.

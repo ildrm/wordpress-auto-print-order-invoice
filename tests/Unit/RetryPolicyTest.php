@@ -2,13 +2,14 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use WCInvoicePrinter\Printing\ProviderException;
 use WCInvoicePrinter\Printing\RetryPolicy;
 
 final class RetryPolicyTest extends TestCase {
-	#[DataProvider( 'retry_cases' )]
+	/**
+	 * @dataProvider retry_cases
+	 */
 	public function test_retry_decision( bool $retryable, bool $ambiguous, int $attempt, bool $expected ): void {
 		$exception = new ProviderException( 'safe message', 'test', $retryable, $ambiguous );
 		self::assertSame( $expected, ( new RetryPolicy() )->should_retry( $exception, $attempt ) );

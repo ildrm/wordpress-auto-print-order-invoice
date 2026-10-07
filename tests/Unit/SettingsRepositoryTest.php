@@ -2,9 +2,6 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\PreserveGlobalState;
-use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 use WCInvoicePrinter\Settings\SettingsRepository;
 
@@ -25,8 +22,10 @@ final class SettingsRepositoryTest extends TestCase {
 		self::assertArrayNotHasKey( 'unknown', $settings->all() );
 	}
 
-	#[DataProvider( 'invalid_printer_ids' )]
-	public function test_invalid_printer_ids_are_not_rewritten_to_another_printer( mixed $value ): void {
+	/**
+	 * @dataProvider invalid_printer_ids
+	 */
+	public function test_invalid_printer_ids_are_not_rewritten_to_another_printer( $value ): void {
 		$settings = new SettingsRepository();
 		$settings->update( array( 'printnode_printer_id' => $value ) );
 		self::assertSame( '', $settings->get( 'printnode_printer_id' ) );
@@ -53,8 +52,10 @@ final class SettingsRepositoryTest extends TestCase {
 		self::assertSame( array( 'unrelated' => 'cached' ), $GLOBALS['wcip_test_transients'] );
 	}
 
-	#[RunInSeparateProcess]
-	#[PreserveGlobalState( false )]
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
 	public function test_external_key_has_precedence_and_cannot_be_replaced(): void {
 		define( 'WCIP_PRINTNODE_API_KEY', ' external ' );
 		$GLOBALS['wcip_test_options']['wcip_settings'] = array( 'printnode_api_key' => 'stored' );
@@ -66,8 +67,10 @@ final class SettingsRepositoryTest extends TestCase {
 		self::assertSame( 'Updated', $settings->get( 'business_name' ) );
 	}
 
-	#[RunInSeparateProcess]
-	#[PreserveGlobalState( false )]
+	/**
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
 	public function test_empty_external_constant_does_not_hide_stored_key(): void {
 		define( 'WCIP_PRINTNODE_API_KEY', ' ' );
 		$settings = new SettingsRepository();

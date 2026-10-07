@@ -2,7 +2,6 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use WCInvoicePrinter\Invoice\InvoiceData;
 use WCInvoicePrinter\Invoice\InvoiceFactory;
@@ -14,7 +13,9 @@ use WCInvoicePrinter\Template\TemplateDefinition;
 final class TemplateRenderTest extends TestCase {
 	protected function setUp(): void { $GLOBALS['wcip_test_filters'] = array(); }
 	protected function tearDown(): void { $GLOBALS['wcip_test_filters'] = array(); }
-	#[DataProvider( 'templates' )]
+	/**
+	 * @dataProvider templates
+	 */
 	public function test_template_renders_complete_rtl_invoice( string $template_id ): void {
 		$renderer = new HtmlRenderer( new TemplateRegistry() );
 		$invoice  = ( new InvoiceFactory( new SettingsRepository() ) )->sample( true );

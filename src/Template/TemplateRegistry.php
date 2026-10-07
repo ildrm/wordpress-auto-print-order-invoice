@@ -43,7 +43,7 @@ final class TemplateRegistry {
 		try {
 			$this->get( $id );
 			return true;
-		} catch ( \InvalidArgumentException ) {
+		} catch ( \InvalidArgumentException $error ) {
 			return false;
 		}
 	}

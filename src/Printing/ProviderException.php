@@ -3,12 +3,14 @@
 namespace WCInvoicePrinter\Printing;
 
 final class ProviderException extends \RuntimeException {
-	public function __construct(
-		string $message,
-		private readonly string $error_code,
-		private readonly bool $retryable,
-		private readonly bool $ambiguous
-	) {
+	private string $error_code;
+	private bool $retryable;
+	private bool $ambiguous;
+
+	public function __construct( string $message, string $error_code, bool $retryable, bool $ambiguous ) {
+		$this->error_code = $error_code;
+		$this->retryable = $retryable;
+		$this->ambiguous = $ambiguous;
 		parent::__construct( $message );
 	}
 

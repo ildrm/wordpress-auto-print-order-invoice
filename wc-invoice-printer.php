@@ -4,7 +4,7 @@
  * Description: Secure manual and automatic invoice printing for WooCommerce.
  * Version: 1.0.0
  * Requires at least: 6.6
- * Requires PHP: 8.1
+ * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  * WC requires at least: 9.0
  * WC tested up to: 10.7

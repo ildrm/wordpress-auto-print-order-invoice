@@ -2,7 +2,6 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use WCInvoicePrinter\Admin\PreviewController;
 use WCInvoicePrinter\Automation\Scheduler;
@@ -64,8 +63,10 @@ final class PreviewControllerTest extends TestCase {
 		$this->assert_failure( 0, 'Invalid nonce' );
 	}
 
-	#[DataProvider( 'invalid_selections' )]
-	public function test_invalid_selection_does_not_create_browser_jobs( mixed $selection, int $status ): void {
+	/**
+	 * @dataProvider invalid_selections
+	 */
+	public function test_invalid_selection_does_not_create_browser_jobs( $selection, int $status ): void {
 		$_GET['order_ids'] = $selection;
 		$this->assert_failure( $status, is_array( $selection ) ? 'Invalid preview input' : ( 400 === $status ? 'Invalid order selection' : 'selected orders' ) );
 	}

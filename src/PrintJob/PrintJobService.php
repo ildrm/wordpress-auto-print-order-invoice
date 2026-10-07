@@ -7,12 +7,22 @@ use WCInvoicePrinter\Settings\SettingsRepository;
 use WCInvoicePrinter\Template\TemplateRegistry;
 
 final class PrintJobService {
+	private PrintJobRepository $jobs;
+	private Scheduler $scheduler;
+	private SettingsRepository $settings;
+	private TemplateRegistry $templates;
+
 	public function __construct(
-		private readonly PrintJobRepository $jobs,
-		private readonly Scheduler $scheduler,
-		private readonly SettingsRepository $settings,
-		private readonly TemplateRegistry $templates
-	) {}
+		PrintJobRepository $jobs,
+		Scheduler $scheduler,
+		SettingsRepository $settings,
+		TemplateRegistry $templates
+	) {
+		$this->jobs = $jobs;
+		$this->scheduler = $scheduler;
+		$this->settings = $settings;
+		$this->templates = $templates;
+	}
 
 	public function create_automatic( \WC_Order $order ): ?array {
 		if ( ! $this->settings->get( 'automatic_enabled' ) || ! $order->is_paid() ) {
@@ -34,7 +44,7 @@ final class PrintJobService {
 		if ( $existing ) {
 			// A crash between persisting the job and scheduling its action can leave
 			// a queued row behind. Repeated payment callbacks may repair that gap.
-			if ( JobStatus::QUEUED->value === $existing['status'] && empty( $existing['action_id'] ) ) {
+			if ( JobStatus::QUEUED === $existing['status'] && empty( $existing['action_id'] ) ) {
 				$this->scheduler->enqueue( (int) $existing['id'] );
 				return $this->jobs->find( (int) $existing['id'] );
 			}
@@ -51,7 +61,7 @@ final class PrintJobService {
 				'copies'          => (int) $this->settings->get( 'automatic_copies', 1 ),
 			)
 		);
-		if ( JobStatus::QUEUED->value === $job['status'] && empty( $job['action_id'] ) ) {
+		if ( JobStatus::QUEUED === $job['status'] && empty( $job['action_id'] ) ) {
 			$this->scheduler->enqueue( (int) $job['id'] );
 		}
 		return $this->jobs->find( (int) $job['id'] );

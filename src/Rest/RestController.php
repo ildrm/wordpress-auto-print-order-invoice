@@ -16,17 +16,37 @@ use WCInvoicePrinter\Template\TemplateRegistry;
 final class RestController {
 	private const NS = 'wc-invoice-printer/v1';
 
+	private SettingsRepository $settings;
+	private PrintProviderRegistry $providers;
+	private PrintJobService $job_service;
+	private PrintJobRepository $jobs;
+	private Scheduler $scheduler;
+	private InvoiceFactory $invoices;
+	private HtmlRenderer $html;
+	private PdfRendererInterface $pdf;
+	private TemplateRegistry $templates;
+
 	public function __construct(
-		private readonly SettingsRepository $settings,
-		private readonly PrintProviderRegistry $providers,
-		private readonly PrintJobService $job_service,
-		private readonly PrintJobRepository $jobs,
-		private readonly Scheduler $scheduler,
-		private readonly InvoiceFactory $invoices,
-		private readonly HtmlRenderer $html,
-		private readonly PdfRendererInterface $pdf,
-		private readonly TemplateRegistry $templates
-	) {}
+		SettingsRepository $settings,
+		PrintProviderRegistry $providers,
+		PrintJobService $job_service,
+		PrintJobRepository $jobs,
+		Scheduler $scheduler,
+		InvoiceFactory $invoices,
+		HtmlRenderer $html,
+		PdfRendererInterface $pdf,
+		TemplateRegistry $templates
+	) {
+		$this->settings = $settings;
+		$this->providers = $providers;
+		$this->job_service = $job_service;
+		$this->jobs = $jobs;
+		$this->scheduler = $scheduler;
+		$this->invoices = $invoices;
+		$this->html = $html;
+		$this->pdf = $pdf;
+		$this->templates = $templates;
+	}
 
 	public function register(): void {
 		register_rest_route( self::NS, '/connection/test', array( 'methods' => 'POST', 'callback' => array( $this, 'test_connection' ), 'permission_callback' => array( $this, 'can_manage' ) ) );
@@ -42,15 +62,18 @@ final class RestController {
 	public function can_view_jobs(): bool { return current_user_can( 'wcip_view_print_jobs' ); }
 	public function can_manage_jobs(): bool { return $this->can_view_jobs() && $this->can_print(); }
 
-	public function test_connection(): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function test_connection() {
 		return $this->provider_call( fn() => $this->providers->get( 'printnode' )->test_connection() );
 	}
 
-	public function printers( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function printers( \WP_REST_Request $request ) {
 		return $this->provider_call( fn() => array( 'printers' => $this->providers->get( 'printnode' )->printers( (bool) $request['refresh'] ) ) );
 	}
 
-	public function test_print( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function test_print( \WP_REST_Request $request ) {
 		if ( ! is_string( $request['printer_id'] ) || ! preg_match( '/^[1-9][0-9]*$/D', $request['printer_id'] ) ) {
 			return new \WP_Error( 'wcip_invalid_print_request', __( 'Choose a valid printer.', 'wc-invoice-printer' ), array( 'status' => 400 ) );
 		}
@@ -64,7 +87,8 @@ final class RestController {
 		}
 	}
 
-	public function manual_print( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function manual_print( \WP_REST_Request $request ) {
 		if ( ! is_array( $request['order_ids'] ) || ! $request['order_ids'] || count( $request['order_ids'] ) > 50 ) {
 			return new \WP_Error( 'wcip_invalid_print_request', __( 'Select between 1 and 50 orders.', 'wc-invoice-printer' ), array( 'status' => 400 ) );
 		}
@@ -106,7 +130,8 @@ final class RestController {
 		return new \WP_REST_Response( array( 'queued' => count( $created ), 'job_ids' => $created ), 201 );
 	}
 
-	public function cancel_job( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function cancel_job( \WP_REST_Request $request ) {
 		$job = $this->jobs->find( (int) $request['id'] );
 		if ( ! $job ) {
 			return new \WP_Error( 'wcip_job_not_found', __( 'Print job not found.', 'wc-invoice-printer' ), array( 'status' => 404 ) );
@@ -117,7 +142,8 @@ final class RestController {
 		return new \WP_REST_Response( array( 'cancelled' => true ) );
 	}
 
-	public function retry_job( \WP_REST_Request $request ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	public function retry_job( \WP_REST_Request $request ) {
 		$id = (int) $request['id'];
 		if ( ! $this->jobs->find( $id ) ) {
 			return new \WP_Error( 'wcip_job_not_found', __( 'Print job not found.', 'wc-invoice-printer' ), array( 'status' => 404 ) );
@@ -131,7 +157,8 @@ final class RestController {
 		return new \WP_REST_Response( array( 'queued' => true ) );
 	}
 
-	private function provider_call( callable $callable ): \WP_REST_Response|\WP_Error {
+	/** @return \WP_REST_Response|\WP_Error */
+	private function provider_call( callable $callable ) {
 		try {
 			return new \WP_REST_Response( $callable() );
 		} catch ( \Throwable $error ) {

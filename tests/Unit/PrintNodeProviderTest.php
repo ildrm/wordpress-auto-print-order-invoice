@@ -3,7 +3,6 @@
 namespace WCInvoicePrinter\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 use WCInvoicePrinter\Printing\PrintNode\PrintNodeProvider;
 use WCInvoicePrinter\Printing\ProviderException;
 use WCInvoicePrinter\Settings\SettingsRepository;
@@ -56,7 +55,9 @@ final class PrintNodeProviderTest extends TestCase {
 		self::assertArrayNotHasKey( 'wcip_last_http', $GLOBALS );
 	}
 
-	#[DataProvider( 'malformed_jobs' )]
+	/**
+	 * @dataProvider malformed_jobs
+	 */
 	public function test_malformed_success_never_implies_a_safe_reprint( string $body ): void {
 		$GLOBALS['wcip_http_response'] = array( 'response' => array( 'code' => 201 ), 'body' => $body );
 		$error = $this->failure( fn() => $this->provider->submit( 'pdf', '34', 1, 'Invoice' ) );
@@ -69,7 +70,9 @@ final class PrintNodeProviderTest extends TestCase {
 		return array_map( static fn( $value ) => array( $value ), array( 'true', 'false', 'null', '0', '-1', '623.0', '"0"', '" 623"', '"+623"', '"0623"', '"92233720368547758080"', '[]', '{}', '"secret raw body"', '<html>upstream error</html>', '' ) );
 	}
 
-	#[DataProvider( 'submission_errors' )]
+	/**
+	 * @dataProvider submission_errors
+	 */
 	public function test_submission_http_error_classification( int $status, bool $ambiguous, bool $retryable ): void {
 		$GLOBALS['wcip_http_response'] = array( 'response' => array( 'code' => $status ), 'body' => '{"message":"server-secret"}' );
 		$error = $this->failure( fn() => $this->provider->submit( 'pdf', '34', 1, 'Invoice' ) );
@@ -94,7 +97,9 @@ final class PrintNodeProviderTest extends TestCase {
 		self::assertSame( array( 'connected' => true, 'account' => 'Alex' ), $this->provider->test_connection() );
 	}
 
-	#[DataProvider( 'malformed_accounts' )]
+	/**
+	 * @dataProvider malformed_accounts
+	 */
 	public function test_invalid_account_never_reports_connected( string $body ): void {
 		$GLOBALS['wcip_http_response'] = array( 'response' => array( 'code' => 200 ), 'body' => $body );
 		$error = $this->failure( fn() => $this->provider->test_connection() );
@@ -128,7 +133,7 @@ final class PrintNodeProviderTest extends TestCase {
 		$requests = array();
 		$GLOBALS['wcip_http_callback'] = static function ( string $url ) use ( &$requests ): array {
 			$requests[] = $url;
-			$ids = str_contains( $url, 'after=100' ) ? array( 101 ) : range( 1, 100 );
+			$ids = false !== strpos( $url, 'after=100' ) ? array( 101 ) : range( 1, 100 );
 			return array( 'response' => array( 'code' => 200 ), 'body' => json_encode( array_map( static fn( $id ) => array( 'id' => $id, 'name' => 'Printer ' . $id ), $ids ) ) );
 		};
 		self::assertCount( 101, $this->provider->printers() );
@@ -140,7 +145,17 @@ final class PrintNodeProviderTest extends TestCase {
 		self::assertCount( 4, $requests );
 	}
 
-	#[DataProvider( 'malformed_printers' )]
+	public function test_empty_printer_list_is_valid_and_cached(): void {
+		$GLOBALS['wcip_http_response'] = array( 'response' => array( 'code' => 200 ), 'body' => '[]' );
+		self::assertSame( array(), $this->provider->printers() );
+		self::assertCount( 1, $GLOBALS['wcip_test_transients'] );
+		$GLOBALS['wcip_http_response'] = new \WP_Error( 'timeout', 'Cache should avoid this request' );
+		self::assertSame( array(), $this->provider->printers() );
+	}
+
+	/**
+	 * @dataProvider malformed_printers
+	 */
 	public function test_malformed_printer_data_is_not_cached( string $body ): void {
 		$GLOBALS['wcip_http_response'] = array( 'response' => array( 'code' => 200 ), 'body' => $body );
 		$error = $this->failure( fn() => $this->provider->printers() );

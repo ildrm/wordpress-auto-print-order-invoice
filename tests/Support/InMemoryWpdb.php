@@ -10,11 +10,11 @@ final class InMemoryWpdb {
 	public array $updates = array();
 	public bool $fail_insert = false;
 	public bool $fail_update = false;
-	public mixed $before_insert = null;
-	public mixed $before_update = null;
+	public $before_insert = null;
+	public $before_update = null;
 	private int $total = 0;
 
-	public function insert( string $table, array $data, array $formats = array() ): int|false {
+	public function insert( string $table, array $data, array $formats = array() ) {
 		if ( is_callable( $this->before_insert ) ) {
 			$callback = $this->before_insert;
 			$this->before_insert = null;
@@ -29,7 +29,7 @@ final class InMemoryWpdb {
 		return 1;
 	}
 
-	public function update( string $table, array $data, array $where, array $formats = array(), array $where_formats = array() ): int|false {
+	public function update( string $table, array $data, array $where, array $formats = array(), array $where_formats = array() ) {
 		$this->updates[] = compact( 'table', 'data', 'where' );
 		if ( is_callable( $this->before_update ) ) {
 			$callback = $this->before_update;
@@ -48,7 +48,7 @@ final class InMemoryWpdb {
 		return $count;
 	}
 
-	public function prepare( string $sql, mixed ...$values ): string {
+	public function prepare( string $sql, ...$values ): string {
 		if ( isset( $values[0] ) && is_array( $values[0] ) ) { $values = $values[0]; }
 		$index = 0;
 		return preg_replace_callback( '/%[ds]/', static function ( array $match ) use ( &$index, $values ): string {
@@ -57,13 +57,13 @@ final class InMemoryWpdb {
 		}, $sql );
 	}
 
-	public function get_row( string $sql, mixed $format = null ): ?array { return $this->get_results( $sql, $format )[0] ?? null; }
+	public function get_row( string $sql, $format = null ): ?array { return $this->get_results( $sql, $format )[0] ?? null; }
 
-	public function get_results( string $sql, mixed $format = null ): array {
+	public function get_results( string $sql, $format = null ): array {
 		$this->queries[] = $sql;
 		$rows = array_values( array_filter( $this->rows, fn( $row ) => $this->matches( $row, $sql ) ) );
 		$this->total = count( $rows );
-		usort( $rows, static fn( $a, $b ) => str_contains( $sql, 'id ASC' ) ? $a['id'] <=> $b['id'] : $b['id'] <=> $a['id'] );
+		usort( $rows, static fn( $a, $b ) => false !== strpos( $sql, 'id ASC' ) ? $a['id'] <=> $b['id'] : $b['id'] <=> $a['id'] );
 		preg_match( '/LIMIT (\d+)(?: OFFSET (\d+))?/', $sql, $limit );
 		return $limit ? array_slice( $rows, (int) ( $limit[2] ?? 0 ), (int) $limit[1] ) : $rows;
 	}
@@ -81,14 +81,14 @@ final class InMemoryWpdb {
 			foreach ( $assignments as $assignment ) {
 				$row[ $assignment[1] ] = 'NULL' === $assignment[2] ? null : ( is_numeric( $assignment[2] ) ? (int) $assignment[2] : stripslashes( trim( $assignment[2], "'" ) ) );
 			}
-			if ( str_contains( $parts[1], 'attempt_count = attempt_count + 1' ) ) { ++$row['attempt_count']; }
+			if ( false !== strpos( $parts[1], 'attempt_count = attempt_count + 1' ) ) { ++$row['attempt_count']; }
 			++$count;
 		}
 		return $count;
 	}
 
 	private function matches( array $row, string $sql ): bool {
-		$where = str_contains( $sql, ' WHERE ' ) ? substr( $sql, strpos( $sql, ' WHERE ' ) + 7 ) : $sql;
+		$where = false !== strpos( $sql, ' WHERE ' ) ? substr( $sql, strpos( $sql, ' WHERE ' ) + 7 ) : $sql;
 		preg_match_all( "/\\b(id|order_id|action_id|status|trigger_type|provider_id|idempotency_key) = ('(?:[^'\\\\]|\\\\.)*'|[0-9]+)/", $where, $conditions, PREG_SET_ORDER );
 		foreach ( $conditions as $condition ) {
 			if ( (string) ( $row[ $condition[1] ] ?? '' ) !== stripslashes( trim( $condition[2], "'" ) ) ) { return false; }

@@ -2,7 +2,6 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use WCInvoicePrinter\Automation\Scheduler;
 use WCInvoicePrinter\Invoice\InvoiceFactory;
@@ -56,7 +55,9 @@ final class RestControllerTest extends TestCase {
 		self::assertArrayNotHasKey( 'wcip_scheduled_action', $GLOBALS );
 	}
 
-	#[DataProvider( 'invalid_print_requests' )]
+	/**
+	 * @dataProvider invalid_print_requests
+	 */
 	public function test_invalid_print_request_has_no_side_effects( array $changes ): void {
 		$response = $this->controller->manual_print( $this->request( $changes ) );
 		self::assertInstanceOf( \WP_Error::class, $response );

@@ -10,7 +10,11 @@ use WCInvoicePrinter\Settings\SettingsRepository;
 final class PrintNodeProvider implements PrintProviderInterface {
 	private const BASE_URL = 'https://api.printnode.com';
 
-	public function __construct( private readonly SettingsRepository $settings ) {}
+	private SettingsRepository $settings;
+
+	public function __construct( SettingsRepository $settings ) {
+		$this->settings = $settings;
+	}
 
 	public function id(): string {
 		return 'printnode';
@@ -47,7 +51,7 @@ final class PrintNodeProvider implements PrintProviderInterface {
 		for ( $page = 0; $page < 100; ++$page ) {
 			$path = '/printers?limit=100&dir=asc' . ( $after ? '&after=' . $after : '' );
 			$data = $this->request( 'GET', $path );
-			if ( ! is_array( $data ) || ! array_is_list( $data ) ) {
+			if ( ! is_array( $data ) || ( array() !== $data && array_keys( $data ) !== range( 0, count( $data ) - 1 ) ) ) {
 				throw $this->malformed_response();
 			}
 			foreach ( $data as $printer ) {
@@ -96,7 +100,8 @@ final class PrintNodeProvider implements PrintProviderInterface {
 		return new SubmissionResult( $job_id );
 	}
 
-	private function request( string $method, string $path, ?array $payload = null ): mixed {
+	/** @return mixed */
+	private function request( string $method, string $path, ?array $payload = null ) {
 		$is_submission = 'POST' === $method;
 		$api_key = $this->settings->api_key();
 		if ( '' === $api_key ) {
@@ -139,13 +144,14 @@ final class PrintNodeProvider implements PrintProviderInterface {
 		}
 		$decoded = json_decode( $body, true );
 		$first_character = substr( ltrim( $body ), 0, 1 );
-		if ( JSON_ERROR_NONE !== json_last_error() || ( str_starts_with( $path, '/printers' ) && '[' !== $first_character ) || ( '/whoami' === $path && '{' !== $first_character ) ) {
+		if ( JSON_ERROR_NONE !== json_last_error() || ( 0 === strpos( $path, '/printers' ) && '[' !== $first_character ) || ( '/whoami' === $path && '{' !== $first_character ) ) {
 			throw $this->malformed_response( $is_submission );
 		}
 		return $decoded;
 	}
 
-	private function positive_id( mixed $value ): string {
+	/** @param mixed $value */
+	private function positive_id( $value ): string {
 		if ( ( ! is_int( $value ) && ! is_string( $value ) ) || ! preg_match( '/^[1-9][0-9]*$/', (string) $value ) ) {
 			return '';
 		}

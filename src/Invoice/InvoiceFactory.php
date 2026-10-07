@@ -5,7 +5,11 @@ namespace WCInvoicePrinter\Invoice;
 use WCInvoicePrinter\Settings\SettingsRepository;
 
 final class InvoiceFactory {
-	public function __construct( private readonly SettingsRepository $settings ) {}
+	private SettingsRepository $settings;
+
+	public function __construct( SettingsRepository $settings ) {
+		$this->settings = $settings;
+	}
 
 	public function from_order( \WC_Order $order ): InvoiceData {
 		$items = array();
@@ -86,7 +90,8 @@ final class InvoiceFactory {
 		);
 	}
 
-	private function price( float|string $amount, \WC_Order $order ): string {
+	/** @param float|string $amount */
+	private function price( $amount, \WC_Order $order ): string {
 		return wp_kses( wc_price( $amount, array( 'currency' => $order->get_currency() ) ), $this->price_tags() );
 	}
 

@@ -5,7 +5,11 @@ namespace WCInvoicePrinter\Template;
 use WCInvoicePrinter\Invoice\InvoiceData;
 
 final class HtmlRenderer {
-	public function __construct( private readonly TemplateRegistry $templates ) {}
+	private TemplateRegistry $templates;
+
+	public function __construct( TemplateRegistry $templates ) {
+		$this->templates = $templates;
+	}
 
 	public function render( InvoiceData $invoice, string $template_id ): string {
 		$template = $this->templates->get( $template_id );

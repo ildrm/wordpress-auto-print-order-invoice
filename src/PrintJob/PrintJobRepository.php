@@ -24,7 +24,7 @@ final class PrintJobRepository {
 				'provider_id'     => sanitize_key( $data['provider_id'] ),
 				'printer_id'      => sanitize_text_field( $data['printer_id'] ),
 				'copies'          => max( 1, min( 20, absint( $data['copies'] ) ) ),
-				'status'          => JobStatus::QUEUED->value,
+				'status'          => JobStatus::QUEUED,
 				'created_at'      => $now,
 				'updated_at'      => $now,
 			),
@@ -69,18 +69,18 @@ final class PrintJobRepository {
 		global $wpdb;
 		$now = current_time( 'mysql', true );
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, attempt_count = attempt_count + 1, started_at = %s, updated_at = %s WHERE id = %d AND status = %s", JobStatus::PROCESSING->value, $now, $now, $id, JobStatus::QUEUED->value ) );
+		$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, attempt_count = attempt_count + 1, started_at = %s, updated_at = %s WHERE id = %d AND status = %s", JobStatus::PROCESSING, $now, $now, $id, JobStatus::QUEUED ) );
 		return 1 === $updated;
 	}
 
 	public function set_action_id( int $id, int $action_id ): void {
 		global $wpdb;
 		$data = array( 'action_id' => $action_id, 'updated_at' => current_time( 'mysql', true ) );
-		$updated = $wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => JobStatus::QUEUED->value ), array( '%d', '%s' ), array( '%d', '%s' ) );
+		$updated = $wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => JobStatus::QUEUED ), array( '%d', '%s' ), array( '%d', '%s' ) );
 		if ( 0 === $updated ) {
 			// A fast runner can claim the new action before its ID is persisted.
 			// Preserve an already-recorded action ID belonging to another attempt.
-			$wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => JobStatus::PROCESSING->value, 'action_id' => null ), array( '%d', '%s' ), array( '%d', '%s', '%d' ) );
+			$wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => JobStatus::PROCESSING, 'action_id' => null ), array( '%d', '%s' ), array( '%d', '%s', '%d' ) );
 		}
 	}
 
@@ -92,7 +92,7 @@ final class PrintJobRepository {
 		return $this->set_status( $id, JobStatus::SUBMITTED, JobStatus::QUEUED, array( 'external_job_id' => null, 'completed_at' => current_time( 'mysql', true ), 'error_code' => null, 'error_message' => null ) );
 	}
 
-	public function fail( int $id, JobStatus $status, string $code, string $message, JobStatus $expected = JobStatus::PROCESSING ): bool {
+	public function fail( int $id, string $status, string $code, string $message, string $expected = JobStatus::PROCESSING ): bool {
 		if ( ! in_array( $status, array( JobStatus::FAILED, JobStatus::UNKNOWN ), true ) ) {
 			throw new \InvalidArgumentException( 'Invalid failure status.' );
 		}
@@ -106,7 +106,7 @@ final class PrintJobRepository {
 	public function cancel( int $id ): bool {
 		global $wpdb;
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		return 1 === $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, updated_at = %s, completed_at = %s WHERE id = %d AND status = %s", JobStatus::CANCELLED->value, current_time( 'mysql', true ), current_time( 'mysql', true ), $id, JobStatus::QUEUED->value ) );
+		return 1 === $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, updated_at = %s, completed_at = %s WHERE id = %d AND status = %s", JobStatus::CANCELLED, current_time( 'mysql', true ), current_time( 'mysql', true ), $id, JobStatus::QUEUED ) );
 	}
 
 	public function retry_failed( int $id ): bool {
@@ -114,7 +114,7 @@ final class PrintJobRepository {
 		// Queue failures happened before submission; HTTP 429 definitively rejects
 		// the request. An HTTP 5xx response can follow acceptance, so it is unsafe.
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, action_id = NULL, completed_at = NULL, updated_at = %s WHERE id = %d AND status = %s AND attempt_count < %d AND error_code IN (%s, %s, %s)", JobStatus::QUEUED->value, current_time( 'mysql', true ), $id, JobStatus::FAILED->value, \WCInvoicePrinter\Printing\RetryPolicy::MAX_ATTEMPTS, 'http_429', 'scheduler_unavailable', 'schedule_failed' ) );
+		$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, action_id = NULL, completed_at = NULL, updated_at = %s WHERE id = %d AND status = %s AND attempt_count < %d AND error_code IN (%s, %s, %s)", JobStatus::QUEUED, current_time( 'mysql', true ), $id, JobStatus::FAILED, \WCInvoicePrinter\Printing\RetryPolicy::MAX_ATTEMPTS, 'http_429', 'scheduler_unavailable', 'schedule_failed' ) );
 		return 1 === $updated;
 	}
 
@@ -122,7 +122,7 @@ final class PrintJobRepository {
 		global $wpdb;
 		// Browser jobs have no background action and must not be sent to a provider.
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE status IN (%s, %s) AND provider_id = %s AND id > %d ORDER BY id ASC LIMIT %d", JobStatus::QUEUED->value, JobStatus::PROCESSING->value, 'printnode', $after_id, max( 1, min( 100, $limit ) ) ), ARRAY_A );
+		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE status IN (%s, %s) AND provider_id = %s AND id > %d ORDER BY id ASC LIMIT %d", JobStatus::QUEUED, JobStatus::PROCESSING, 'printnode', $after_id, max( 1, min( 100, $limit ) ) ), ARRAY_A );
 		return is_array( $rows ) ? $rows : array();
 	}
 
@@ -139,7 +139,7 @@ final class PrintJobRepository {
 		$per_page = max( 1, min( 100, $per_page ) );
 		$where  = array( '1=1' );
 		$values = array();
-		if ( ! empty( $filters['status'] ) && in_array( $filters['status'], array_column( JobStatus::cases(), 'value' ), true ) ) {
+		if ( ! empty( $filters['status'] ) && in_array( $filters['status'], JobStatus::cases(), true ) ) {
 			$where[]  = 'status = %s';
 			$values[] = $filters['status'];
 		}
@@ -161,10 +161,13 @@ final class PrintJobRepository {
 		return array( 'items' => is_array( $rows ) ? $rows : array(), 'total' => $total );
 	}
 
-	private function set_status( int $id, JobStatus $status, JobStatus $expected, array $extra = array() ): bool {
+	private function set_status( int $id, string $status, string $expected, array $extra = array() ): bool {
+		if ( ! in_array( $status, JobStatus::cases(), true ) || ! in_array( $expected, JobStatus::cases(), true ) ) {
+			throw new \InvalidArgumentException( 'Invalid print job status.' );
+		}
 		global $wpdb;
-		$data = array_merge( array( 'status' => $status->value, 'updated_at' => current_time( 'mysql', true ) ), $extra );
-		return 1 === $wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => $expected->value ) );
+		$data = array_merge( array( 'status' => $status, 'updated_at' => current_time( 'mysql', true ) ), $extra );
+		return 1 === $wpdb->update( $this->table, $data, array( 'id' => $id, 'status' => $expected ) );
 	}
 
 	private function sanitize_error( string $message ): string {

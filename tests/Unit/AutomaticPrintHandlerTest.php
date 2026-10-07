@@ -48,7 +48,7 @@ final class AutomaticPrintHandlerTest extends JobTestCase {
 	}
 
 	public function test_throwing_fallback_filter_cannot_break_order_status_updates(): void {
-		$GLOBALS['wcip_test_filters']['wcip_enable_paid_status_fallback'][] = static function (): never { throw new \RuntimeException( 'Eligibility extension failed' ); };
+		$GLOBALS['wcip_test_filters']['wcip_enable_paid_status_fallback'][] = static function () { throw new \RuntimeException( 'Eligibility extension failed' ); };
 		( new AutomaticPrintHandler( $this->service ) )->paid_status_fallback( 42, 'pending', 'processing', new \WC_Order( 42 ) );
 		self::assertCount( 0, $this->db->rows );
 		self::assertSame( 'wcip_automatic_print_error', $GLOBALS['wcip_test_actions'][0][0] );

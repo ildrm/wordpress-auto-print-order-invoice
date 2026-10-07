@@ -25,11 +25,11 @@ $check           = static function ( bool $condition, string $message ) use ( &$
 	++$assertions;
 	if ( ! $condition ) { throw new RuntimeException( $message ); }
 };
-$http_mock = static function ( mixed $preempt, array $args, string $url ) use ( &$submissions, &$http_status ): mixed {
+$http_mock = static function ( $preempt, array $args, string $url ) use ( &$submissions, &$http_status ) {
 	if ( 'https://api.printnode.com/printjobs' === $url ) {
 		++$submissions;
 		$payload = json_decode( $args['body'], true );
-		if ( ! str_starts_with( base64_decode( $payload['content'], true ) ?: '', '%PDF-' ) ) {
+		if ( 0 !== strpos( base64_decode( $payload['content'], true ) ?: '', '%PDF-' ) ) {
 			throw new RuntimeException( 'The provider did not receive a real PDF.' );
 		}
 		return array( 'headers' => array(), 'response' => array( 'code' => $http_status, 'message' => 'Mocked' ), 'body' => 201 === $http_status ? '9001' : '{}' );
@@ -86,10 +86,10 @@ try {
 	$price_text = static fn( string $value ): string => html_entity_decode( wp_strip_all_tags( $value ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	$check( $price_text( wc_price( 20, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['discount'] ), 'Stored line discount must be reflected on invoice.' );
 	$check( $price_text( wc_price( 88, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['total'] ), 'Discounted line total must include stored tax.' );
-	$check( ! str_contains( $invoice->items[0]['variation'], 'DO_NOT_SHOW' ), 'Private item metadata must not appear.' );
+	$check( false === strpos( $invoice->items[0]['variation'], 'DO_NOT_SHOW' ), 'Private item metadata must not appear.' );
 	foreach ( array( 'classic', 'compact', 'thermal' ) as $template_id ) {
 		$bytes = $pdf->render( $html->render( $invoice->with_rtl( true ), $template_id ), $templates->get( $template_id ) );
-		$check( str_starts_with( $bytes, '%PDF-' ), 'Every bundled template must render a real RTL PDF.' );
+		$check( 0 === strpos( $bytes, '%PDF-' ), 'Every bundled template must render a real RTL PDF.' );
 	}
 	ActionScheduler::runner()->process_action( (int) $job['action_id'], 'WCIP integration' );
 	$check( 'submitted' === $repository->find( (int) $job['id'] )['status'], 'Worker should persist submitted status.' );

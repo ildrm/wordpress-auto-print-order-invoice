@@ -5,7 +5,11 @@ namespace WCInvoicePrinter\Automation;
 use WCInvoicePrinter\PrintJob\PrintJobService;
 
 final class AutomaticPrintHandler {
-	public function __construct( private readonly PrintJobService $jobs ) {}
+	private PrintJobService $jobs;
+
+	public function __construct( PrintJobService $jobs ) {
+		$this->jobs = $jobs;
+	}
 
 	public function payment_complete( int $order_id ): void {
 		try {

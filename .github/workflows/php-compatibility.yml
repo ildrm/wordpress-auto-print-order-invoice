@@ -1,0 +1,37 @@
+name: PHP compatibility
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: gd, mbstring, dom, xml, xmlwriter
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - run: composer install --prefer-dist --no-interaction --no-progress
+      - run: composer check-platform-reqs
+      - run: composer lint
+      - run: composer test
+  javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/js/*.test.js
+      - run: node --check assets/js/admin.js
+      - run: node --check assets/js/order.js

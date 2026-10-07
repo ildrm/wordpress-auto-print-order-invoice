@@ -3,7 +3,7 @@ Contributors: wc-invoice-printer
 Tags: woocommerce, invoice, print, printnode, pdf
 Requires at least: 6.6
 Tested up to: 6.8
-Requires PHP: 8.1
+Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 
@@ -37,3 +37,4 @@ Deactivation cancels pending plugin actions and preserves settings/history for r
 
 = 1.0.0 =
 * Initial release with HPOS-compatible invoice data, three templates, browser printing, PrintNode automation, and print-job history.
+* PHP 7.4+ compatible source, production dependencies, and development test suite.

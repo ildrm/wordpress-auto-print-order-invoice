@@ -3,7 +3,6 @@
 namespace WCInvoicePrinter\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
 use WCInvoicePrinter\Invoice\InvoiceFactory;
 use WCInvoicePrinter\Invoice\InvoiceData;
 use WCInvoicePrinter\Pdf\MpdfRenderer;
@@ -25,7 +24,9 @@ final class MpdfRendererTest extends TestCase {
 		self::assertGreaterThan( 1000, strlen( $pdf ) );
 	}
 
-	#[DataProvider( 'built_in_templates' )]
+	/**
+	 * @dataProvider built_in_templates
+	 */
 	public function test_real_template_pdf_uses_its_advertised_paper_size( string $id, bool $rtl ): void {
 		$templates = new TemplateRegistry();
 		$invoice = ( new InvoiceFactory( new SettingsRepository() ) )->sample( $rtl );
@@ -73,7 +74,7 @@ final class MpdfRendererTest extends TestCase {
 			try {
 				( new MpdfRenderer() )->render( '<p>Private invoice</p>', $template );
 				self::fail( 'Expected PDF generation failure.' );
-			} catch ( \Mpdf\MpdfException ) {
+			} catch ( \Mpdf\MpdfException $error ) {
 				self::assertSame( array( '.', '..' ), scandir( $directory ) );
 			}
 		} finally { rmdir( $directory ); }

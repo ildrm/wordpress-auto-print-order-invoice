@@ -25,7 +25,11 @@ final class SettingsRepository {
 		return array_merge( $defaults, $this->sanitize( is_array( $value ) ? $value : array() ) );
 	}
 
-	public function get( string $key, mixed $default = null ): mixed {
+	/**
+	 * @param mixed $default
+	 * @return mixed
+	 */
+	public function get( string $key, $default = null ) {
 		$settings = $this->all();
 		return $settings[ $key ] ?? $default;
 	}

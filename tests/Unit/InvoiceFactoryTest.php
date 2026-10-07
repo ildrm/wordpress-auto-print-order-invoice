@@ -94,7 +94,7 @@ final class InvoiceOrderFixture extends \WC_Order {
 	public array $items = array();
 	public array $subtotal_options = array();
 	public function get_items(): array { return $this->items; }
-	public function get_item_subtotal( mixed $item, bool $inc_tax = false, bool $round = true ): float {
+	public function get_item_subtotal( $item, bool $inc_tax = false, bool $round = true ): float {
 		$this->subtotal_options = array( $inc_tax, $round );
 		return ( (float) $item->get_subtotal() + ( $inc_tax ? 10 : 0 ) ) / $item->get_quantity();
 	}
@@ -117,6 +117,6 @@ final class InvoiceItemFixture extends \WC_Order_Item_Product {
 			(object) array( 'key' => 'color', 'display_key' => 'Color', 'display_value' => '<p>Blue &amp; green</p>' ),
 			(object) array( 'key' => '_private_token', 'display_key' => '_private_token', 'display_value' => 'internal-secret' ),
 		);
-		return array_filter( $metadata, static fn( $meta ) => '' === $hideprefix || ! str_starts_with( $meta->key, $hideprefix ) );
+		return array_filter( $metadata, static fn( $meta ) => '' === $hideprefix || 0 !== strpos( $meta->key, $hideprefix ) );
 	}
 }

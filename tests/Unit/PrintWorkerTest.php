@@ -25,7 +25,7 @@ final class PrintWorkerTest extends JobTestCase {
 		$this->provider = new class() implements PrintProviderInterface {
 			public array $submissions = array();
 			public ?\Throwable $exception = null;
-			public mixed $callback = null;
+			public $callback = null;
 			public function id(): string { return 'printnode'; }
 			public function test_connection(): array { return array(); }
 			public function printers( bool $force_refresh = false ): array { return array(); }

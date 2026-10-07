@@ -4,6 +4,8 @@
 
 WooCommerce orders are read only through public CRUD objects. `InvoiceFactory` normalizes an order into immutable `InvoiceData`; registered templates consume only that model; `HtmlRenderer` creates markup; `MpdfRenderer` creates private temporary PDF bytes; a `PrintProviderInterface` implementation dispatches them. Print providers never receive an order object.
 
+The minimum PHP version is 7.4. Service dependencies use explicit typed properties and constructor assignments. Value objects expose private fields through read-only accessors; job statuses are string constants with the same database values on PHP 7.4 and PHP 8. Composer's platform target keeps the complete dependency lock installable on PHP 7.4.33.
+
 `PrintJobRepository` owns the operational custom table. `PrintJobService` creates manual or automatic jobs, and `PrintWorker` performs state transitions and dispatch. Admin and REST controllers depend on those services and contain no provider-specific logic.
 
 ## Print-job persistence

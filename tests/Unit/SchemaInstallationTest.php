@@ -2,7 +2,6 @@
 
 namespace WCInvoicePrinter\Tests\Unit;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /** Exercise the real Activator with a controllable dbDelta/WordPress boundary. */
@@ -28,10 +27,10 @@ define( 'ABSPATH', $argv[1] . '/' );
 require $argv[2];
 $scenario = $argv[3];
 $options = array();
-function get_option( string $key, mixed $default = false ): mixed { global $options; return $options[$key] ?? $default; }
-function update_option( string $key, mixed $value, mixed $autoload = null ): bool { global $options; $options[$key] = $value; return true; }
+function get_option( string $key, $default = false ) { global $options; return $options[$key] ?? $default; }
+function update_option( string $key, $value, $autoload = null ): bool { global $options; $options[$key] = $value; return true; }
 function esc_html__( string $message, string $domain ): string { return $message; }
-function wp_die( string $message, string $title, array $args ): never { throw new RuntimeException( $message, $args['response'] ); }
+function wp_die( string $message, string $title, array $args ) { throw new RuntimeException( $message, $args['response'] ); }
 class TestRole {
     public array $caps = array();
     public int $writes = 0;
@@ -39,7 +38,7 @@ class TestRole {
     public function add_cap( string $cap ): void { $this->caps[$cap] = true; ++$this->writes; }
 }
 $roles = array( 'administrator' => new TestRole(), 'shop_manager' => new TestRole() );
-function get_role( string $name ): mixed { global $roles; return $roles[$name] ?? null; }
+function get_role( string $name ) { global $roles; return $roles[$name] ?? null; }
 class TestDatabase {
     public string $prefix = 'wp_';
     public string $last_error = '';
@@ -90,7 +89,9 @@ PHP;
 		return json_decode( $output, true, 512, JSON_THROW_ON_ERROR );
 	}
 
-	#[DataProvider( 'failed_schema_cases' )]
+	/**
+	 * @dataProvider failed_schema_cases
+	 */
 	public function test_failed_schema_installation_does_not_mark_version_current( string $scenario ): void {
 		$result = $this->run_case( $scenario );
 		self::assertFalse( $result['ready'] );

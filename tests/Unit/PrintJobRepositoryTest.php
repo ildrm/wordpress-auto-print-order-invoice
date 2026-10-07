@@ -6,6 +6,18 @@ use WCInvoicePrinter\PrintJob\JobStatus;
 use WCInvoicePrinter\Tests\Support\JobTestCase;
 
 final class PrintJobRepositoryTest extends JobTestCase {
+	public function test_invalid_failure_status_is_rejected(): void {
+		$job = $this->job();
+		$this->expectException( \InvalidArgumentException::class );
+		$this->jobs->fail( $job['id'], JobStatus::SUBMITTED, 'error', 'Invalid transition' );
+	}
+
+	public function test_invalid_expected_status_is_rejected(): void {
+		$job = $this->job();
+		$this->expectException( \InvalidArgumentException::class );
+		$this->jobs->fail( $job['id'], JobStatus::FAILED, 'error', 'Invalid transition', 'bogus' );
+	}
+
 	public function test_insert_failure_is_explicit(): void {
 		$this->db->fail_insert = true;
 		$this->expectException( \RuntimeException::class );

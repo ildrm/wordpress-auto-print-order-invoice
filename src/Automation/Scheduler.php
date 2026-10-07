@@ -9,11 +9,15 @@ final class Scheduler {
 	public const HOOK  = 'wcip_process_print_job';
 	public const GROUP = 'wc-invoice-printer';
 
-	public function __construct( private readonly PrintJobRepository $jobs ) {}
+	private PrintJobRepository $jobs;
+
+	public function __construct( PrintJobRepository $jobs ) {
+		$this->jobs = $jobs;
+	}
 
 	public function enqueue( int $job_id, int $delay = 0 ): int {
 		$job = $this->jobs->find( $job_id );
-		if ( ! $job || JobStatus::QUEUED->value !== $job['status'] ) {
+		if ( ! $job || JobStatus::QUEUED !== $job['status'] ) {
 			return 0;
 		}
 		if ( ! $this->available() || ( $delay > 0 && ! function_exists( 'as_schedule_single_action' ) ) ) {
@@ -65,13 +69,13 @@ final class Scheduler {
 			foreach ( $jobs as $job ) {
 				$cursor = (int) $job['id'];
 				$args   = array( 'job_id' => $cursor );
-				if ( JobStatus::PROCESSING->value === $job['status'] ) {
+				if ( JobStatus::PROCESSING === $job['status'] ) {
 					$started = strtotime( (string) $job['started_at'] . ' UTC' );
 					if ( false === $started || $started > time() - 10 * MINUTE_IN_SECONDS ) {
 						continue;
 					}
 					if ( ! as_has_scheduled_action( self::HOOK, $args, self::GROUP ) && $this->jobs->fail( $cursor, JobStatus::UNKNOWN, 'worker_interrupted', __( 'The worker stopped before recording a result. Check PrintNode before reprinting.', 'wc-invoice-printer' ) ) ) {
-						do_action( 'wcip_print_failure', $cursor, 'worker_interrupted', JobStatus::UNKNOWN->value );
+						do_action( 'wcip_print_failure', $cursor, 'worker_interrupted', JobStatus::UNKNOWN );
 					}
 					continue;
 				}

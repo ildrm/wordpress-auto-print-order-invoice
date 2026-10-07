@@ -28,7 +28,7 @@ Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal te
 | --- | --- |
 | WordPress | 6.6+ |
 | WooCommerce | 9.0+, installed and active |
-| PHP | 8.1+ for production |
+| PHP | 7.4+ |
 | PDF output | Packaged Composer dependencies (mPDF), including its `mbstring`/`gd` extension requirements |
 | Queue | WooCommerce's initialized Action Scheduler and a working WP-Cron/loopback or server-managed runner |
 | Physical printing | PrintNode account/API key and an online PrintNode client on a computer connected to the printer |
@@ -37,7 +37,7 @@ Features include HPOS and legacy order storage, Classic/Compact/80 mm Thermal te
 
 Browser printing remains available without mPDF; PrintNode output/test pages need it. The WordPress server and printer computer may be on different networks. Composer itself is only needed to prepare dependencies, not on a correctly packaged production installation.
 
-The production PHP minimum differs from development tooling: the locked PHPUnit 11 dependencies require PHP 8.3+. Use that or newer to install the exact development lock file.
+Production and development dependencies support PHP 7.4. Composer resolves against PHP 7.4.33 through `config.platform.php`, so preparing a package on PHP 8 does not select dependencies that require PHP 8. Keep this platform setting when updating the lock file, and run `composer check-platform-reqs --no-dev` on the deployment runtime to verify its actual PHP/extensions.
 
 ## Installation
 
@@ -252,7 +252,9 @@ add_filter( 'wcip_invoice_templates', static function ( array $templates ): arra
 
 The readable PHP file receives `$invoice` (`InvoiceData`) and `$template` (`TemplateDefinition`). Follow a bundled template's complete HTML/body/style structure. IDs use lowercase letters, digits, `_`, and `-`; orientation is `portrait`/`landscape`. Templates execute PHP and must come from trusted code.
 
-`InvoiceData` has readonly `order`, `store`, `customer`, `items`, `totals`, `fulfillment` arrays and an `rtl` boolean. Return a new instance to change fields. Match bundled escaping of plain text and restricted currency HTML.
+`InvoiceData` exposes read-only `order`, `store`, `customer`, `items`, `totals`, `fulfillment` arrays and an `rtl` boolean. PHP 7.4-compatible private fields and magic accessors preserve property reads and prevent replacement/unsetting. Array reads return values, so modify a copy and return a new instance to change fields. `TemplateDefinition` and `SubmissionResult` use the same approach. Match bundled escaping of plain text and restricted currency HTML.
+
+`JobStatus` uses string constants on every PHP version: pass `JobStatus::FAILED` directly rather than reading an enum's `->value`. `JobStatus::cases()` returns the status strings, and `JobStatus::is_terminal( $status )` identifies terminal states. Stored database values and failure-hook arguments remain the same strings.
 
 Providers receive PDF bytes, printer ID, copies, and title, and return `SubmissionResult`. Use `ProviderException` to distinguish definitive rejection from ambiguous submission; never mark possibly accepted delivery retryable. Additional registered providers are available internally; the built-in configuration/public manual route remains PrintNode-specific.
 
@@ -267,6 +269,8 @@ composer lint:js
 ```
 
 Unit tests use controlled WordPress/WooCommerce/HTTP/database doubles for settings, permissions, requests, queue failures, idempotency, and state transitions. PDF tests generate real mPDF output, including RTL text. Tests do not contact PrintNode or physically print. Doubles do not establish MySQL behavior or browser/gateway compatibility.
+
+PHPUnit 9.6 and its configuration/annotations run on PHP 7.4 and PHP 8. The [PHP compatibility workflow](.github/workflows/php-compatibility.yml) installs the committed lock file and runs platform checks, PHP lint, and the full suite on PHP 7.4 and 8.0–8.5. Compatibility review details are in [docs/php-compatibility.md](docs/php-compatibility.md).
 
 JavaScript tests use Node's built-in test runner (Node 18+); no npm dependencies are needed. `composer test:all` runs both PHP and JavaScript suites.
 

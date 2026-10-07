@@ -56,7 +56,11 @@ final class PrintProviderRegistryTest extends TestCase {
 
 	private function provider( string $id ): PrintProviderInterface {
 		return new class( $id ) implements PrintProviderInterface {
-			public function __construct( private string $provider_id ) {}
+			private string $provider_id;
+
+			public function __construct( string $provider_id ) {
+				$this->provider_id = $provider_id;
+			}
 			public function id(): string { return $this->provider_id; }
 			public function test_connection(): array { return array(); }
 			public function printers( bool $force_refresh = false ): array { return array(); }

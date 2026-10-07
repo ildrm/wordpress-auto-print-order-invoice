@@ -15,25 +15,25 @@ $GLOBALS['wcip_http_response']  = array( 'response' => array( 'code' => 200 ), '
 
 if ( ! function_exists( '__' ) ) { function __( string $text ): string { return $text; } }
 if ( ! function_exists( 'get_bloginfo' ) ) { function get_bloginfo( string $show = '' ): string { return 'Test Store'; } }
-if ( ! function_exists( 'apply_filters' ) ) { function apply_filters( string $hook, mixed $value, mixed ...$args ): mixed { foreach ( $GLOBALS['wcip_test_filters'][ $hook ] ?? array() as $filter ) { $value = $filter( $value, ...$args ); } return $value; } }
-if ( ! function_exists( 'do_action' ) ) { function do_action( string $hook, mixed ...$args ): void { $GLOBALS['wcip_test_actions'][] = array( $hook, $args ); foreach ( $GLOBALS['wcip_test_hooks'][ $hook ] ?? array() as $callback ) { $callback( ...$args ); } } }
+if ( ! function_exists( 'apply_filters' ) ) { function apply_filters( string $hook, $value, ...$args ) { foreach ( $GLOBALS['wcip_test_filters'][ $hook ] ?? array() as $filter ) { $value = $filter( $value, ...$args ); } return $value; } }
+if ( ! function_exists( 'do_action' ) ) { function do_action( string $hook, ...$args ): void { $GLOBALS['wcip_test_actions'][] = array( $hook, $args ); foreach ( $GLOBALS['wcip_test_hooks'][ $hook ] ?? array() as $callback ) { $callback( ...$args ); } } }
 if ( ! function_exists( 'get_locale' ) ) { function get_locale(): string { return 'en_US'; } }
 if ( ! function_exists( 'is_rtl' ) ) { function is_rtl(): bool { return false; } }
-if ( ! function_exists( 'esc_html' ) ) { function esc_html( mixed $value ): string { return htmlspecialchars( (string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8' ); } }
-if ( ! function_exists( 'esc_attr' ) ) { function esc_attr( mixed $value ): string { return htmlspecialchars( (string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8' ); } }
+if ( ! function_exists( 'esc_html' ) ) { function esc_html( $value ): string { return htmlspecialchars( (string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8' ); } }
+if ( ! function_exists( 'esc_attr' ) ) { function esc_attr( $value ): string { return htmlspecialchars( (string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8' ); } }
 if ( ! function_exists( 'esc_html_e' ) ) { function esc_html_e( string $value ): void { echo esc_html( $value ); } }
 if ( ! function_exists( 'wp_kses_post' ) ) { function wp_kses_post( string $value ): string { return strip_tags( $value, '<strong><span><small><bdi><del><ins>' ); } }
-if ( ! function_exists( 'get_option' ) ) { function get_option( string $key, mixed $default = false ): mixed { return $GLOBALS['wcip_test_options'][ $key ] ?? $default; } }
+if ( ! function_exists( 'get_option' ) ) { function get_option( string $key, $default = false ) { return $GLOBALS['wcip_test_options'][ $key ] ?? $default; } }
 if ( ! function_exists( 'wp_parse_args' ) ) { function wp_parse_args( array $args, array $defaults ): array { return array_merge( $defaults, $args ); } }
 if ( ! function_exists( 'wp_generate_uuid4' ) ) { function wp_generate_uuid4(): string { return sprintf( '%08x-%04x-4%03x-8%03x-%012x', random_int( 0, 0xffffffff ), random_int( 0, 0xffff ), random_int( 0, 0xfff ), random_int( 0, 0xfff ), random_int( 0, 0xffffffffffff ) ); } }
-if ( ! function_exists( 'sanitize_text_field' ) ) { function sanitize_text_field( mixed $value ): string { return trim( strip_tags( (string) $value ) ); } }
+if ( ! function_exists( 'sanitize_text_field' ) ) { function sanitize_text_field( $value ): string { return trim( strip_tags( (string) $value ) ); } }
 if ( ! function_exists( 'sanitize_key' ) ) { function sanitize_key( string $value ): string { return preg_replace( '/[^a-z0-9_\-]/', '', strtolower( $value ) ); } }
-if ( ! function_exists( 'absint' ) ) { function absint( mixed $value ): int { return abs( (int) $value ); } }
-if ( ! function_exists( 'get_transient' ) ) { function get_transient( string $key ): mixed { return $GLOBALS['wcip_test_transients'][ $key ] ?? false; } }
-if ( ! function_exists( 'set_transient' ) ) { function set_transient( string $key, mixed $value ): bool { $GLOBALS['wcip_test_transients'][ $key ] = $value; return true; } }
-if ( ! function_exists( 'wp_json_encode' ) ) { function wp_json_encode( mixed $value, int $flags = 0, int $depth = 512 ): string|false { return json_encode( $value, $flags, $depth ); } }
-if ( ! function_exists( 'wp_safe_remote_request' ) ) { function wp_safe_remote_request( string $url, array $args ): mixed { $GLOBALS['wcip_last_http'] = array( $url, $args ); if ( isset( $GLOBALS['wcip_http_callback'] ) ) { return ( $GLOBALS['wcip_http_callback'] )( $url, $args ); } return $GLOBALS['wcip_http_response']; } }
-if ( ! function_exists( 'is_wp_error' ) ) { function is_wp_error( mixed $value ): bool { return $value instanceof WP_Error; } }
+if ( ! function_exists( 'absint' ) ) { function absint( $value ): int { return abs( (int) $value ); } }
+if ( ! function_exists( 'get_transient' ) ) { function get_transient( string $key ) { return $GLOBALS['wcip_test_transients'][ $key ] ?? false; } }
+if ( ! function_exists( 'set_transient' ) ) { function set_transient( string $key, $value ): bool { $GLOBALS['wcip_test_transients'][ $key ] = $value; return true; } }
+if ( ! function_exists( 'wp_json_encode' ) ) { function wp_json_encode( $value, int $flags = 0, int $depth = 512 ) { return json_encode( $value, $flags, $depth ); } }
+if ( ! function_exists( 'wp_safe_remote_request' ) ) { function wp_safe_remote_request( string $url, array $args ) { $GLOBALS['wcip_last_http'] = array( $url, $args ); if ( isset( $GLOBALS['wcip_http_callback'] ) ) { return ( $GLOBALS['wcip_http_callback'] )( $url, $args ); } return $GLOBALS['wcip_http_response']; } }
+if ( ! function_exists( 'is_wp_error' ) ) { function is_wp_error( $value ): bool { return $value instanceof WP_Error; } }
 if ( ! function_exists( 'wp_remote_retrieve_response_code' ) ) { function wp_remote_retrieve_response_code( array $response ): int { return (int) ( $response['response']['code'] ?? 0 ); } }
 if ( ! function_exists( 'wp_remote_retrieve_body' ) ) { function wp_remote_retrieve_body( array $response ): string { return (string) ( $response['body'] ?? '' ); } }
 if ( ! function_exists( 'get_temp_dir' ) ) { function get_temp_dir(): string { return $GLOBALS['wcip_temp_dir'] ?? sys_get_temp_dir() . '/'; } }
