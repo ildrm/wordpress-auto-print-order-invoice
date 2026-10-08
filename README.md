@@ -331,6 +331,8 @@ The HTTP test fetches documents without executing browser scripts, so it does no
 
 See [architecture](docs/architecture.md), [UI specification](docs/ui-spec.md), and [WordPress plugin readme](readme.txt).
 
+Localized DOCX development and template-customization guides and a companion-plugin example are in [system-development](system-development/README.md).
+
 [Review findings and verification](docs/review.md) records the corrected issues, regression coverage, tested environment, and practical limits.
 
 ## Packaging

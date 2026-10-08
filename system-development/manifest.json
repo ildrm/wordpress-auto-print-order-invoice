@@ -1,0 +1,107 @@
+{
+  "plugin_version": "1.1.2",
+  "reviewed_base_commit": "5f26fa77a9f1fea9acb520a2b5e7ddd5063376a5",
+  "review_date": "2026-10-08",
+  "edition_count": 14,
+  "rendered_page_count": 117,
+  "documents": [
+    {
+      "locale": "ar",
+      "direction": "RTL",
+      "file": "guides/development-guide-ar.docx",
+      "rendered_pages": 8,
+      "sha256": "a2e28138b6ca39960b8c5ae45d1dfa0bcb4ecf356e7ed6d491c14ed878a595cc"
+    },
+    {
+      "locale": "de_DE",
+      "direction": "LTR",
+      "file": "guides/development-guide-de_DE.docx",
+      "rendered_pages": 8,
+      "sha256": "c3e6312f4ccb5573b02c607cab5926c5153d7ca809c2baa4a21fc2dfb0c74286"
+    },
+    {
+      "locale": "en_US",
+      "direction": "LTR",
+      "file": "guides/development-guide-en_US.docx",
+      "rendered_pages": 9,
+      "sha256": "780f0aa0b4fc57d3b372234e571b6b4679abc6765d4669b7c2686786ec3fde9a"
+    },
+    {
+      "locale": "es_ES",
+      "direction": "LTR",
+      "file": "guides/development-guide-es_ES.docx",
+      "rendered_pages": 8,
+      "sha256": "2aa883d3e89b2abc321bb3d430b8ea874f4df1021879fb4c1c1d411bd9619a19"
+    },
+    {
+      "locale": "fa_IR",
+      "direction": "RTL",
+      "file": "guides/development-guide-fa_IR.docx",
+      "rendered_pages": 8,
+      "sha256": "2999af154c3752c05dbd5b6dab464bfd824f58e232a44000c178e68bcd0cec03"
+    },
+    {
+      "locale": "fr_FR",
+      "direction": "LTR",
+      "file": "guides/development-guide-fr_FR.docx",
+      "rendered_pages": 8,
+      "sha256": "0acaa4c2ddaefdc5658a1d4cfe6493443c0366214800e3a31c79b2afd37f99ff"
+    },
+    {
+      "locale": "hi_IN",
+      "direction": "LTR",
+      "file": "guides/development-guide-hi_IN.docx",
+      "rendered_pages": 8,
+      "sha256": "d38dc851abfce13afdeabe1930b193587d9911d29b3cf6b5d105be62b218900c"
+    },
+    {
+      "locale": "hy",
+      "direction": "LTR",
+      "file": "guides/development-guide-hy.docx",
+      "rendered_pages": 9,
+      "sha256": "1f3f08459a8418a2372e094f51dada32694be6c78a776b488b0e064f4a0030ba"
+    },
+    {
+      "locale": "ja",
+      "direction": "LTR",
+      "file": "guides/development-guide-ja.docx",
+      "rendered_pages": 10,
+      "sha256": "65a574e4451f20318ae632f66c49902647920c026587684a4123356405378beb"
+    },
+    {
+      "locale": "pt_BR",
+      "direction": "LTR",
+      "file": "guides/development-guide-pt_BR.docx",
+      "rendered_pages": 8,
+      "sha256": "258d5894ed4ab6025dc53abbac37e490b30d9ee740255347f4ca2610ab519a68"
+    },
+    {
+      "locale": "pt_PT",
+      "direction": "LTR",
+      "file": "guides/development-guide-pt_PT.docx",
+      "rendered_pages": 8,
+      "sha256": "d2f9803998d38304544bccf38920e6f17ab3a0f3292e7553faa18ce7f88c4433"
+    },
+    {
+      "locale": "ru_RU",
+      "direction": "LTR",
+      "file": "guides/development-guide-ru_RU.docx",
+      "rendered_pages": 8,
+      "sha256": "9103d78bacd9916e5fb29f662e2c1208c280e58ed9b69f3413b9223b8a662085"
+    },
+    {
+      "locale": "tr_TR",
+      "direction": "LTR",
+      "file": "guides/development-guide-tr_TR.docx",
+      "rendered_pages": 8,
+      "sha256": "942b689d3ab49f25498859823250a4e52a51774c3926ef47927b09fa27bb321d"
+    },
+    {
+      "locale": "zh_CN",
+      "direction": "LTR",
+      "file": "guides/development-guide-zh_CN.docx",
+      "rendered_pages": 9,
+      "sha256": "ceee4dbfba44445b21a775096ed0882f4a081a0bac760c51c19ff334c9b582ba"
+    }
+  ]
+}

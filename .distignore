@@ -7,5 +7,6 @@
 /composer.json
 /composer.lock
 /docs
+/system-development
 /node_modules
 /build
