@@ -26,7 +26,7 @@ final class InMemoryWpdb {
 			if ( $row['idempotency_key'] === $data['idempotency_key'] ) { return false; }
 		}
 		$id = $this->rows ? max( array_keys( $this->rows ) ) + 1 : 1;
-		$this->rows[ $id ] = array_merge( array( 'id' => $id, 'attempt_count' => 0, 'action_id' => null, 'external_job_id' => null, 'error_code' => null, 'error_message' => null, 'started_at' => null, 'completed_at' => null, 'printed_at' => null, 'printed_by' => null, 'printed_note_id' => null ), $data );
+		$this->rows[ $id ] = array_merge( array( 'id' => $id, 'attempt_count' => 0, 'action_id' => null, 'external_job_id' => null, 'error_code' => null, 'error_message' => null, 'started_at' => null, 'completed_at' => null, 'printed_at' => null, 'printed_by' => null, 'printed_note_id' => null, 'agent_token' => null, 'agent_user' => null, 'agent_phase' => null, 'agent_claimed_at' => null ), $data );
 		return 1;
 	}
 
@@ -94,7 +94,7 @@ final class InMemoryWpdb {
 	private function matches( array $row, string $sql ): bool {
 		if ( false !== strpos( $sql, 'printed_at IS NOT NULL' ) && empty( $row['printed_at'] ) ) { return false; }
 		$where = false !== strpos( $sql, ' WHERE ' ) ? substr( $sql, strpos( $sql, ' WHERE ' ) + 7 ) : $sql;
-		preg_match_all( "/\\b(id|order_id|action_id|status|trigger_type|provider_id|idempotency_key) = ('(?:[^'\\\\]|\\\\.)*'|[0-9]+)/", $where, $conditions, PREG_SET_ORDER );
+		preg_match_all( "/\\b(id|order_id|action_id|status|trigger_type|document_type|provider_id|printer_id|idempotency_key|agent_token|agent_user|agent_phase) = ('(?:[^'\\\\]|\\\\.)*'|[0-9]+)/", $where, $conditions, PREG_SET_ORDER );
 		foreach ( $conditions as $condition ) {
 			if ( (string) ( $row[ $condition[1] ] ?? '' ) !== stripslashes( trim( $condition[2], "'" ) ) ) { return false; }
 		}

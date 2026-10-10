@@ -20,6 +20,7 @@ final class Scheduler {
 		if ( ! $job || JobStatus::QUEUED !== $job['status'] ) {
 			return 0;
 		}
+		if ( 'agent' === $job['provider_id'] ) { return 0; }
 		if ( ! $this->available() || ( $delay > 0 && ! function_exists( 'as_schedule_single_action' ) ) ) {
 			$this->jobs->fail( $job_id, JobStatus::FAILED, 'scheduler_unavailable', __( 'The background queue is unavailable.', 'wc-invoice-printer' ), JobStatus::QUEUED );
 			return 0;
@@ -77,7 +78,7 @@ final class Scheduler {
 					if ( false === $started || $started > time() - 10 * MINUTE_IN_SECONDS ) {
 						continue;
 					}
-					if ( ! as_has_scheduled_action( self::HOOK, $args, self::GROUP ) && $this->jobs->fail( $cursor, JobStatus::UNKNOWN, 'worker_interrupted', __( 'The worker stopped before recording a result. Check PrintNode before reprinting.', 'wc-invoice-printer' ) ) ) {
+					if ( ! as_has_scheduled_action( self::HOOK, $args, self::GROUP ) && $this->jobs->fail( $cursor, JobStatus::UNKNOWN, 'worker_interrupted', __( 'The worker stopped before recording a result. Check CUPS before reprinting.', 'wc-invoice-printer' ) ) ) {
 						do_action( 'wcip_print_failure', $cursor, 'worker_interrupted', JobStatus::UNKNOWN );
 					}
 					continue;

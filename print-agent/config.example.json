@@ -1,0 +1,11 @@
+{
+  "api_url": "https://shop.example.org/wp-json/wc-invoice-printer/v1",
+  "username": "shop-print-agent",
+  "password_env": "WCIP_AGENT_PASSWORD",
+  "route": "Office",
+  "backend": "sumatra",
+  "executable": "C:/Tools/SumatraPDF/SumatraPDF.exe",
+  "printer": "Office Printer",
+  "journal": "agent-journal.sqlite3",
+  "poll_seconds": 10
+}

@@ -18,7 +18,7 @@ The plugin uses WordPress's `wc-invoice-printer` text domain. Each locale ships 
 | Chinese (Simplified) — 简体中文 | `zh_CN` | LTR |
 | Japanese — 日本語 | `ja` | LTR |
 
-Choose the site's language in **Settings → General → Site Language**. Install its WordPress language pack if necessary so WordPress/WooCommerce can translate their own interfaces and supply the correct text direction. An administrator's **Users → Profile → Language** controls their admin screens, browser invoice previews, and authenticated plugin REST requests. Browser requests include WordPress's `_locale=user` parameter. Background PrintNode jobs use the site's language when the worker runs, including manually queued jobs.
+Choose the site's language in **Settings → General → Site Language**. Install its WordPress language pack if necessary so WordPress/WooCommerce can translate their own interfaces and supply the correct text direction. An administrator's **Users → Profile → Language** controls their admin screens, browser invoice previews, and authenticated plugin REST requests. Browser requests include WordPress's `_locale=user` parameter. Background CUPS and agent jobs use the site's language when the worker runs, including manually queued jobs.
 
 An RTL preview button changes direction without changing the selected language. Ordinary Persian and Arabic previews automatically use RTL. Invoices emit HTML language tags such as `fa-IR` or `zh-CN` and inherit WooCommerce's localized order status, totals, currency, and date formatting. Stored product/customer/business text and existing job error messages retain their original wording. Translation catalogs translate labels and sample data; they do not translate a store's content automatically.
 
@@ -48,7 +48,7 @@ The catalog checker rejects missing or fuzzy translations, mismatched source mes
 
 ## Verification
 
-Rendering tests cover all 14 locale catalogs and all three invoice layouts. Hindi and Chinese/Japanese PDF tests assert that the required fonts are embedded. Regression tests cover automatic RTL sample previews, translated printer states without changing device identity, REST requests retaining the user's language, and workers restoring the operator locale after printing or an observer exception.
+Rendering tests cover all 14 locale catalogs and the original three invoice layouts across 14 locales and all seven registered formats. Hindi and Chinese/Japanese PDF tests assert that the required fonts are embedded. Regression tests cover automatic RTL sample previews, translated printer states without changing device identity, REST requests retaining the user's language, and workers restoring the operator locale after printing or an observer exception.
 
 On an isolated disposable WordPress/WooCommerce site, install the core language packs and run the real WordPress catalog/admin/PDF test:
 
@@ -60,3 +60,7 @@ WCIP_RUN_INTEGRATION_TESTS=1 wp eval-file /path/to/plugin/tests/Integration/loca
 This test switches between every locale, checks catalog lookup and RTL direction, renders 42 HTML/PDF invoices and 70 admin screens, exercises plural lookups, and verifies the worker's store-language selection and operator-language restoration. It mocks delivery/email and removes its temporary order/job fixtures. WordPress 6.9.4 with WooCommerce 9.0.2 and PHP 8.4 passed these checks; the printing smoke test also passed with HPOS and legacy storage. PDF images were inspected for Hindi shaping, Persian RTL, and Japanese thermal layout. These checks validate completeness and rendering; translation wording has not had a native-speaker editorial review.
 
 The final printing checks also exposed a queue issue in older Action Scheduler stores: their unique-action check uses the hook/group and ignores the job ID. Async actions now use the plugin's per-job pending-action lookup and atomic worker claim, allowing independent invoices to queue while preventing duplicate accepted submissions. Regression coverage includes multiple pending jobs in the real Action Scheduler store.
+
+The 1.4.0 operations, CUPS and agent strings are included in the source POT and every locale catalog. New translations are development translations pending native editorial review. DOCX guides preserve RTL paragraph/run language and mirrored tables for Persian/Arabic and LTR code for every edition. See [the verification record](../system-development/VERIFICATION.md).
+
+Printing uses the outbound local agent (Windows SumatraPDF or Linux/macOS CUPS lp), optional direct HTTPS CUPS, or the manual browser dialog. All locale editions cover cross-platform pairing, startup, recovery, CUPS migration and extensions using open-source tools. See [the printing guide](open-source-printing.md).

@@ -6,6 +6,7 @@ use WCInvoicePrinter\Template\TemplateDefinition;
 
 final class MpdfRenderer implements PdfRendererInterface {
 	public function render( string $html, TemplateDefinition $template ): string {
+		if ( strlen( $html ) > 4 * MB_IN_BYTES ) { throw new \RuntimeException( __( 'The document exceeds the safe rendering limit.', 'wc-invoice-printer' ) ); }
 		if ( ! class_exists( \Mpdf\Mpdf::class ) ) {
 			throw new \RuntimeException( __( 'PDF support is unavailable. Install the Composer dependencies.', 'wc-invoice-printer' ) );
 		}
@@ -16,7 +17,8 @@ final class MpdfRenderer implements PdfRendererInterface {
 			throw new \RuntimeException( __( 'A secure PDF working directory could not be created.', 'wc-invoice-printer' ) );
 		}
 		try {
-			$format = '80mm' === $template->paper_size ? array( 80, $this->thermal_height( $html ) ) : $template->paper_size;
+			$thermal = in_array( $template->paper_size, array( '80mm', '58mm' ), true );
+			$format = $thermal ? array( '58mm' === $template->paper_size ? 58 : 80, 297 ) : $template->paper_size;
 			$mpdf   = new \Mpdf\Mpdf(
 				array(
 					'mode'             => 'utf-8',
@@ -27,14 +29,16 @@ final class MpdfRenderer implements PdfRendererInterface {
 					// mPDF ships FreeSerif (Indic) and Sun-ExtA (CJK) alongside DejaVu.
 					'autoLangToFont'   => true,
 					'default_font'     => 'dejavusans',
-					'margin_left'      => '80mm' === $template->paper_size ? 4 : 10,
-					'margin_right'     => '80mm' === $template->paper_size ? 4 : 10,
-					'margin_top'       => '80mm' === $template->paper_size ? 4 : 10,
-					'margin_bottom'    => '80mm' === $template->paper_size ? 4 : 10,
+					'margin_left'      => $thermal ? 4 : 10,
+					'margin_right'     => $thermal ? 4 : 10,
+					'margin_top'       => $thermal ? 4 : 10,
+					'margin_bottom'    => $thermal ? 4 : 10,
 				)
 			);
 			$mpdf->WriteHTML( $html );
-			return $mpdf->Output( '', \Mpdf\Output\Destination::STRING_RETURN );
+			$pdf = $mpdf->Output( '', \Mpdf\Output\Destination::STRING_RETURN );
+			if ( strlen( $pdf ) > 20 * MB_IN_BYTES ) { throw new \RuntimeException( __( 'The document exceeds the safe rendering limit.', 'wc-invoice-printer' ) ); }
+			return $pdf;
 		} finally {
 			$this->remove_temp_directory( $temp_dir );
 		}
@@ -58,9 +62,4 @@ final class MpdfRenderer implements PdfRendererInterface {
 		@rmdir( $directory ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged -- Best-effort cleanup.
 	}
 
-	private function thermal_height( string $html ): int {
-		$item_count = max( 1, substr_count( $html, 'class="item"' ) );
-		// Base header, addresses, totals and footer plus room for each receipt item.
-		return max( 175, min( 1000, 155 + ( 22 * $item_count ) ) );
-	}
 }

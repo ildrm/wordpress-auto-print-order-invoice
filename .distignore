@@ -8,5 +8,11 @@
 /composer.lock
 /docs
 /system-development
+/REMEDIATION_TRACEABILITY.md
 /node_modules
 /build
+/print-agent/test_agent.py
+/print-agent/__pycache__
+/print-agent/config.json
+/print-agent/*.sqlite3*
+/print-agent/*.lock

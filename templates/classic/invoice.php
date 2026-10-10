@@ -1,4 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
+<?php $compact_paper = 'A5' === $template->paper_size; ?>
 <!doctype html>
 <html lang="<?php echo esc_attr( \WCInvoicePrinter\I18n\Locale::language_tag() ); ?>" dir="<?php echo $invoice->rtl ? 'rtl' : 'ltr'; ?>">
 <head><meta charset="utf-8"><style>
@@ -49,19 +50,26 @@ td { border-bottom:1px solid #dcdcde; padding:10px 6px; vertical-align:top }
 <?php echo esc_html( $invoice->fulfillment['shipping_method'] ); ?>
 <?php if ( $invoice->customer['shipping_address'] ) : ?><br><?php echo nl2br( esc_html( $invoice->customer['shipping_address'] ) ); ?><?php endif; ?>
 </td></tr></table>
+<?php include WCIP_PATH . 'templates/shared/details.php'; ?>
 <table><thead><tr>
+<?php if ( ! $compact_paper ) : ?>
 <th><?php esc_html_e( 'Item', 'wc-invoice-printer' ); ?></th>
 <th><?php esc_html_e( 'SKU', 'wc-invoice-printer' ); ?></th>
+<?php endif; ?>
 <th class="num"><?php esc_html_e( 'Qty', 'wc-invoice-printer' ); ?></th>
 <th class="num"><?php esc_html_e( 'Unit', 'wc-invoice-printer' ); ?></th>
 <th class="num"><?php esc_html_e( 'Discount', 'wc-invoice-printer' ); ?></th>
 <th class="num"><?php esc_html_e( 'Tax', 'wc-invoice-printer' ); ?></th>
 <th class="num"><?php esc_html_e( 'Total', 'wc-invoice-printer' ); ?></th>
 </tr></thead><tbody>
-<?php foreach ( $invoice->items as $item ) : ?><tr>
+<?php foreach ( $invoice->items as $item ) : ?>
+<?php if ( $compact_paper ) : ?><tr><td colspan="5"><div class="item-name"><?php echo esc_html( $item['name'] ); ?></div><div class="item-meta"><?php echo esc_html( $item['variation'] ); ?> <bdi dir="ltr"><?php echo esc_html( $item['sku'] ); ?></bdi></div></td></tr><?php endif; ?>
+<tr>
+<?php if ( ! $compact_paper ) : ?>
 <td><div class="item-name"><?php echo esc_html( $item['name'] ); ?></div><div class="item-meta"><?php echo esc_html( $item['variation'] ); ?></div></td>
-<td><?php echo esc_html( $item['sku'] ); ?></td>
-<td class="num"><?php echo esc_html( (string) $item['quantity'] ); ?></td>
+<td><bdi dir="ltr"><?php echo esc_html( $item['sku'] ); ?></bdi></td>
+<?php endif; ?>
+<td class="num"><bdi dir="ltr"><?php echo esc_html( (string) $item['quantity'] ); ?></bdi></td>
 <td class="num"><?php echo wp_kses_post( $item['unit_price'] ); ?></td>
 <td class="num"><?php echo wp_kses_post( $item['discount'] ); ?></td>
 <td class="num"><?php echo wp_kses_post( $item['tax'] ); ?></td>
@@ -74,4 +82,5 @@ td { border-bottom:1px solid #dcdcde; padding:10px 6px; vertical-align:top }
 </table>
 <?php if ( $invoice->fulfillment['note'] ) : ?><div class="notes"><strong><?php esc_html_e( 'Customer note', 'wc-invoice-printer' ); ?></strong><br><?php echo nl2br( esc_html( $invoice->fulfillment['note'] ) ); ?></div><?php endif; ?>
 <div class="footer"><bdi dir="ltr"><?php echo esc_html( $invoice->store['phone'] ); ?> · <?php echo esc_html( $invoice->store['email'] ); ?></bdi></div>
+<?php include WCIP_PATH . 'templates/shared/code.php'; ?>
 </body></html>

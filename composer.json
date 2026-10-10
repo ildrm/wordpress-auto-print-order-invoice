@@ -5,26 +5,45 @@
   "license": "GPL-2.0-or-later",
   "require": {
     "php": ">=7.4",
-    "mpdf/mpdf": "^8.2"
+    "mpdf/mpdf": "^8.2",
+    "mpdf/qrcode": "^1.2"
   },
   "require-dev": {
     "phpunit/phpunit": "^9.6"
   },
   "autoload": {
-    "psr-4": {"WCInvoicePrinter\\": "src/"}
+    "psr-4": {
+      "WCInvoicePrinter\\": "src/"
+    }
   },
   "autoload-dev": {
-    "psr-4": {"WCInvoicePrinter\\Tests\\": "tests/"}
+    "psr-4": {
+      "WCInvoicePrinter\\Tests\\": "tests/"
+    }
   },
   "scripts": {
     "test": "phpunit",
     "test:js": "node --test tests/js/*.test.js",
-    "test:all": ["@test", "@test:js"],
-    "i18n:pot": "wp i18n make-pot . languages/wc-invoice-printer.pot --domain=wc-invoice-printer --exclude=vendor,tests,build,languages,scripts --skip-js",
+    "test:all": [
+      "@test",
+      "@test:js"
+    ],
+    "i18n:pot": "wp i18n make-pot . languages/wc-invoice-printer.pot --domain=wc-invoice-printer --exclude=vendor,tests,build,languages,scripts,system-development --skip-js",
     "i18n:check": "python3 scripts/check-translations.py",
     "i18n:build": "python3 scripts/check-translations.py --compile",
-    "lint:js": ["node --check assets/js/admin.js", "node --check assets/js/order.js", "node --check assets/js/confirmation.js"],
+    "lint:js": [
+      "node --check assets/js/admin.js",
+      "node --check assets/js/order.js",
+      "node --check assets/js/confirmation.js",
+      "node --check assets/js/operations.js"
+    ],
     "lint": "find . -path ./vendor -prune -o -path ./build -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l"
   },
-  "config": {"allow-plugins": {}, "platform": {"php": "7.4.33"}, "sort-packages": true}
+  "config": {
+    "allow-plugins": {},
+    "platform": {
+      "php": "7.4.33"
+    },
+    "sort-packages": true
+  }
 }

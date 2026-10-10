@@ -1,1044 +1,1008 @@
-# Copyright (C) 2026 WooCommerce Invoice Printer contributors
-# Distributed under GPL-2.0-or-later.
 msgid ""
-msgstr ""
-"Project-Id-Version: WooCommerce Invoice Printer 1.1.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 09:00+0330\n"
-"PO-Revision-Date: 2026-10-07 09:00+0330\n"
-"Last-Translator: WooCommerce Invoice Printer contributors\n"
-"Language-Team: Armenian\n"
-"Language: hy\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Domain: wc-invoice-printer\n"
+msgstr "Project-Id-Version: WooCommerce Invoice Printer 1.4.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-10 12:00+0330\nPO-Revision-Date: 2026-10-10 12:00+0330\nLast-Translator: WooCommerce Invoice Printer contributors\nLanguage-Team: Armenian\nLanguage: hy\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Domain: wc-invoice-printer\n"
 
-#. Plugin Name of the plugin
-#: wc-invoice-printer.php
-msgid "WooCommerce Invoice Printer"
-msgstr "WooCommerce հաշիվների տպիչ"
-
-#. Description of the plugin
-#: wc-invoice-printer.php
-msgid "Secure manual and automatic invoice printing for WooCommerce."
-msgstr "WooCommerce հաշիվների անվտանգ ձեռքով և ավտոմատ տպում։"
-
-#: src/Admin/AdminPage.php:24
-#: src/Admin/AdminPage.php:92
-msgid "Invoice Printer"
-msgstr "Հաշիվների տպիչ"
-
-#: src/Admin/AdminPage.php:42
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Working…"
-msgstr "Մշակվում է…"
-
-#: src/Admin/AdminPage.php:43
-#: src/Admin/OrderIntegration.php:87
-#: src/Admin/PreviewController.php:48
-#: src/PrintJob/PrintJobService.php:84
-msgid "Choose between 1 and 20 copies."
-msgstr "Ընտրեք 1-ից 20 օրինակ։"
-
-#: src/Admin/AdminPage.php:44
-msgid "Something went wrong. Check the details and try again."
-msgstr "Սխալ է տեղի ունեցել։ Ստուգեք մանրամասները և կրկին փորձեք։"
-
-#: src/Admin/AdminPage.php:45
-msgid "Choose a printer"
-msgstr "Ընտրեք տպիչ"
-
-#: src/Admin/AdminPage.php:46
-msgid "No printers were found. Confirm that the PrintNode client is online."
-msgstr "Տպիչներ չեն գտնվել։ Համոզվեք, որ PrintNode հաճախորդը առցանց է։"
-
-#: src/Admin/AdminPage.php:47
-msgid "Submitted to PrintNode."
-msgstr "Ուղարկվել է PrintNode։"
-
-#: src/Admin/AdminPage.php:48
-msgid "PrintNode connection verified."
-msgstr "PrintNode կապը ստուգված է։"
-
-#. translators: %d: number of printers returned by PrintNode.
-#: src/Admin/AdminPage.php:50
-#, php-format
-msgid "%d printer(s) found."
-msgstr "Գտնված տպիչների քանակը՝ %d"
-
-#. translators: %d: number of invoices added to the print queue.
-#: src/Admin/AdminPage.php:52
 #, php-format
 msgid "%d invoice(s) queued."
 msgstr "Հերթում ավելացված հաշիվների քանակը՝ %d"
 
-#: src/Admin/AdminPage.php:58
-msgid "You are not allowed to change these settings."
-msgstr "Այս կարգավորումները փոխելու թույլտվություն չունեք։"
+#, php-format
+msgid "%d printer(s) found."
+msgstr "Գտնված տպիչների քանակը՝ %d"
 
-#: src/Admin/AdminPage.php:61
-msgid "Invalid settings input."
-msgstr "Կարգավորումների մուտքային տվյալները սխալ են։"
+msgid "24 Market Street, Portland, OR"
+msgstr "Մարքեթ փողոց 24, Պորտլենդ, Օրեգոն"
 
-#: src/Admin/AdminPage.php:64
-msgid "Invalid settings section."
-msgstr "Կարգավորումների բաժինը սխալ է։"
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "Էվերգրին փողոց 840, Սիեթլ, Վաշինգտոն"
 
-#: src/Admin/AdminPage.php:89
-msgid "General"
-msgstr "Ընդհանուր"
+msgid "A polished full invoice for office printers."
+msgstr "Ամբողջական և կոկիկ հաշիվ՝ գրասենյակային տպիչների համար։"
 
-#: src/Admin/AdminPage.php:89
-msgid "Templates"
-msgstr "Ձևանմուշներ"
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "Տպման առաջադրանքներից մեկը չհաջողվեց ավելացնել հերթում։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
 
-#: src/Admin/AdminPage.php:89
-msgid "Automatic Printing"
-msgstr "Ավտոմատ տպում"
+msgid "A secure PDF working directory could not be created."
+msgstr "Չհաջողվեց ստեղծել անվտանգ PDF աշխատանքային պանակ։"
 
-#: src/Admin/AdminPage.php:89
-msgid "Printers"
-msgstr "Տպիչներ"
+msgid "A5 invoice for smaller sheets."
+msgstr "A5 հաշիվ փոքր թերթերի համար։"
 
-#: src/Admin/AdminPage.php:89
-msgid "Print Jobs"
-msgstr "Տպման առաջադրանքներ"
-
-#: src/Admin/AdminPage.php:92
-msgid "Create consistent invoices and send them to the right printer."
-msgstr "Ստեղծեք միասնական ձևաչափով հաշիվներ և ուղարկեք դրանք ճիշտ տպիչին։"
-
-#: src/Admin/AdminPage.php:93
-msgid "Settings saved."
-msgstr "Կարգավորումները պահպանվել են։"
-
-#: src/Admin/AdminPage.php:94
-msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
-msgstr "Ավտոմատ տպումը կմնա անջատված, մինչև կարգավորվեն PrintNode մուտքի տվյալներն ու տպիչը։"
-
-#: src/Admin/AdminPage.php:95
-msgid "Invoice Printer sections"
-msgstr "Հաշիվների տպիչի բաժիններ"
-
-#: src/Admin/AdminPage.php:116
-msgid "Invoice identity"
-msgstr "Հաշվի տվյալներ"
-
-#: src/Admin/AdminPage.php:116
-msgid "Business details shown to customers on every invoice."
-msgstr "Յուրաքանչյուր հաշվում հաճախորդներին ցուցադրվող ընկերության տվյալները։"
-
-#: src/Admin/AdminPage.php:117
-msgid "Business name"
-msgstr "Ընկերության անվանում"
-
-#: src/Admin/AdminPage.php:117
-msgid "Logo URL"
-msgstr "Պատկերանշանի URL"
-
-#: src/Admin/AdminPage.php:117
-msgid "Phone"
-msgstr "Հեռախոս"
-
-#: src/Admin/AdminPage.php:117
-msgid "Email"
-msgstr "Էլփոստ"
-
-#: src/Admin/AdminPage.php:117
-msgid "Business and tax details"
-msgstr "Ընկերության և հարկային տվյալներ"
-
-#: src/Admin/AdminPage.php:118
-msgid "Manual printing defaults"
-msgstr "Ձեռքով տպման լռելյայն կարգավորումներ"
-
-#: src/Admin/AdminPage.php:118
-msgid "Include customer notes on invoices"
-msgstr "Հաշիվներում ներառել հաճախորդի նշումները"
-
-#: src/Admin/AdminPage.php:122
-msgid "Choose an invoice layout"
-msgstr "Ընտրեք հաշվի դասավորությունը"
-
-#: src/Admin/AdminPage.php:122
-msgid "Preview uses realistic sample data and can switch to RTL."
-msgstr "Նախադիտումն օգտագործում է իրատեսական օրինակներ և կարող է փոխվել աջից ձախ ցուցադրման։"
-
-#: src/Admin/AdminPage.php:123
-msgid "Selected"
-msgstr "Ընտրված է"
-
-#: src/Admin/AdminPage.php:123
-#: src/Admin/OrderIntegration.php:56
-msgid "Preview"
-msgstr "Նախադիտում"
-
-#: src/Admin/AdminPage.php:123
-msgid "RTL preview"
-msgstr "Աջից ձախ նախադիտում"
-
-#: src/Admin/AdminPage.php:123
-msgid "Select"
-msgstr "Ընտրել"
-
-#: src/Admin/AdminPage.php:124
-msgid "Save selected template"
-msgstr "Պահպանել ընտրված ձևանմուշը"
-
-#: src/Admin/AdminPage.php:129
-msgid "Automatic printing"
-msgstr "Ավտոմատ տպում"
-
-#: src/Admin/AdminPage.php:129
 msgid "After verified payment, queue an invoice without delaying checkout."
 msgstr "Վճարումը հաստատելուց հետո հաշիվն ավելացրեք հերթում՝ առանց պատվերի ձևակերպումը դանդաղեցնելու։"
 
-#: src/Admin/AdminPage.php:129
-msgid "Enabled"
-msgstr "Միացված է"
+msgid "Agent queue"
+msgstr "Գործակալի հերթ"
 
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:153
-msgid "Provider"
-msgstr "Մատակարար"
+msgid "Agent user ID"
+msgstr "Գործակալի օգտվողի ID"
 
-#: src/Admin/AdminPage.php:129
-msgid "Connection"
-msgstr "Կապ"
+msgid "Alex Morgan"
+msgstr "Ալեքս Մորգան"
 
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:140
-msgid "Credential configured"
-msgstr "Մուտքի տվյալները կարգավորված են"
-
-#: src/Admin/AdminPage.php:129
-msgid "Not configured"
-msgstr "Կարգավորված չէ"
-
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:153
-msgid "Printer"
-msgstr "Տպիչ"
-
-#: src/Admin/AdminPage.php:129
-msgid "No printer selected"
-msgstr "Տպիչ ընտրված չէ"
-
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:179
-#: src/Admin/OrderIntegration.php:56
-msgid "Copies"
-msgstr "Օրինակներ"
-
-#: src/Admin/AdminPage.php:129
-msgid "Trigger"
-msgstr "Գործարկող իրադարձություն"
-
-#: src/Admin/AdminPage.php:129
-msgid "Payment completed"
-msgstr "Վճարումն ավարտված է"
-
-#: src/Admin/AdminPage.php:129
-msgid "Only orders WooCommerce confirms as paid are eligible."
-msgstr "Համապատասխանում են միայն այն պատվերները, որոնց վճարումը WooCommerce-ը հաստատել է։"
-
-#: src/Admin/AdminPage.php:140
-msgid "PrintNode connection"
-msgstr "PrintNode կապ"
-
-#: src/Admin/AdminPage.php:140
-msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
-msgstr "Հաշիվների PDF ֆայլերը պարունակում են հաճախորդների տվյալներ և այս ուղղությունն օգտագործելիս ուղարկվում են PrintNode։"
-
-#: src/Admin/AdminPage.php:140
-msgid "Not connected"
-msgstr "Միացված չէ"
-
-#: src/Admin/AdminPage.php:140
-msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
-msgstr "Կառավարվում է արտաքինից՝ WCIP_PRINTNODE_API_KEY-ի միջոցով, և այստեղ չի կարող խմբագրվել։"
-
-#: src/Admin/AdminPage.php:140
-msgid "The stored key is never displayed or returned to the browser."
-msgstr "Պահպանված բանալին երբեք չի ցուցադրվում կամ փոխանցվում դիտարկչին։"
-
-#: src/Admin/AdminPage.php:141
-msgid "Replace API key"
-msgstr "Փոխարինել API բանալին"
-
-#: src/Admin/AdminPage.php:141
-msgid "API key"
-msgstr "API բանալի"
-
-#: src/Admin/AdminPage.php:141
-msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
-msgstr "Նոր բանալին պահպանեք կապը ստուգելուց առաջ։ Դաշտը թողեք դատարկ՝ ընթացիկ մուտքի տվյալները պահպանելու համար։"
-
-#: src/Admin/AdminPage.php:143
-msgid "Test connection"
-msgstr "Ստուգել կապը"
-
-#: src/Admin/AdminPage.php:143
-msgid "Refresh printers"
-msgstr "Թարմացնել տպիչները"
-
-#: src/Admin/AdminPage.php:143
-msgid "Default PrintNode printer"
-msgstr "Լռելյայն PrintNode տպիչ"
-
-#: src/Admin/AdminPage.php:143
-msgid "Refresh to load printers"
-msgstr "Թարմացրեք՝ տպիչները բեռնելու համար"
-
-#: src/Admin/AdminPage.php:143
-msgid "Print test page"
-msgstr "Տպել փորձնական էջ"
-
-#: src/Admin/AdminPage.php:144
-msgid "Save printer settings"
-msgstr "Պահպանել տպիչի կարգավորումները"
-
-#: src/Admin/AdminPage.php:149
-msgid "You are not allowed to view print jobs."
-msgstr "Տպման առաջադրանքները դիտելու թույլտվություն չունեք։"
-
-#: src/Admin/AdminPage.php:151
-msgid "Print jobs"
-msgstr "Տպման առաջադրանքներ"
-
-#: src/Admin/AdminPage.php:151
-msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
-msgstr "«Ուղարկված է» նշանակում է, որ PrintNode-ն ընդունել է PDF-ը կամ դիտարկչի հաշիվը պատրաստվել է։ Դա չի հաստատում թղթի վրա տպումը։"
-
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Status"
-msgstr "Վիճակ"
-
-#: src/Admin/AdminPage.php:151
 msgid "All"
 msgstr "Բոլորը"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Source"
-msgstr "Աղբյուր"
+msgid "All invoice print states"
+msgstr "Հաշիվների տպման բոլոր վիճակները"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Automatic"
-msgstr "Ավտոմատ"
+msgid "Allowed destination hostname"
+msgstr "Թույլատրված նպատակակետի հանգույց"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Manual"
-msgstr "Ձեռքով"
-
-#: src/Admin/AdminPage.php:151
-msgid "Order ID"
-msgstr "Պատվերի ID"
-
-#: src/Admin/AdminPage.php:151
-msgid "Filter"
-msgstr "Զտել"
-
-#: src/Admin/AdminPage.php:152
-msgid "No print jobs yet"
-msgstr "Դեռ տպման առաջադրանքներ չկան"
-
-#: src/Admin/AdminPage.php:152
-msgid "Manual and automatic jobs will appear here with their delivery status."
-msgstr "Ձեռքով և ավտոմատ առաջադրանքները կցուցադրվեն այստեղ՝ ուղարկման վիճակով։"
-
-#: src/Admin/AdminPage.php:153
-msgid "Order"
-msgstr "Պատվեր"
-
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:56
-msgid "Template"
-msgstr "Ձևանմուշ"
-
-#: src/Admin/AdminPage.php:153
 msgid "Attempts"
 msgstr "Փորձեր"
 
-#: src/Admin/AdminPage.php:153
-msgid "Updated"
-msgstr "Թարմացված է"
+msgid "Automatic"
+msgstr "Ավտոմատ"
 
-#: src/Admin/AdminPage.php:153
-msgid "Details"
-msgstr "Մանրամասներ"
+msgid "Automatic Printing"
+msgstr "Ավտոմատ տպում"
 
-#: src/Admin/AdminPage.php:153
-#: src/PrintJob/PrintConfirmationService.php:35
+msgid "Automatic eligibility"
+msgstr "Ավտոմատ տպման իրավասություն"
+
+msgid "Automatic job:"
+msgstr "Ավտոմատ առաջադրանք՝"
+
+msgid "Automatic printing"
+msgstr "Ավտոմատ տպում"
+
+msgid "Automatic printing remains disabled until a print destination is configured."
+msgstr "Ավտոմատ տպումն անջատված է մինչև նպատակակետի կարգավորումը։"
+
+msgid "Automatic printing uses the local print agent or a self-hosted CUPS server. Browser printing uses your print dialog."
+msgstr "Ավտոմատ տպումն օգտագործում է տեղական գործակալ կամ ձեր CUPS սերվերը։ Բրաուզերն օգտագործում է տպման երկխոսությունը։"
+
+msgid "Awaiting confirmation"
+msgstr "Սպասում է հաստատման"
+
+msgid "Barcode & integrations"
+msgstr "Շտրիխ կոդեր և ինտեգրումներ"
+
+msgid "Barcode scanner"
+msgstr "Շտրիխ կոդի սկաներ"
+
+msgid "Bill to"
+msgstr "Հաշվի ստացող"
+
 msgid "Browser"
 msgstr "Դիտարկիչ"
 
-#: src/Admin/AdminPage.php:153
-msgid "View"
-msgstr "Դիտել"
+msgid "Browser output is combined into one document. CUPS and the print agent create controlled individual jobs."
+msgstr "Բրաուզերի ելքը միավորվում է մեկ փաստաթղթում։ CUPS-ը և գործակալը ստեղծում են առանձին վերահսկվող առաջադրանքներ։"
 
-#: src/Admin/AdminPage.php:153
-msgid "External job ID"
-msgstr "Առաջադրանքի արտաքին ID"
+msgid "Browser print dialog"
+msgstr "Դիտարկչի տպման պատուհան"
 
-#: src/Admin/AdminPage.php:153
-msgid "Error"
-msgstr "Սխալ"
+msgid "Business and tax details"
+msgstr "Ընկերության և հարկային տվյալներ"
 
-#: src/Admin/AdminPage.php:153
+msgid "Business details shown to customers on every invoice."
+msgstr "Յուրաքանչյուր հաշվում հաճախորդներին ցուցադրվող ընկերության տվյալները։"
+
+msgid "Business name"
+msgstr "Ընկերության անվանում"
+
+msgid "Business registration and tax details"
+msgstr "Ընկերության գրանցման և հարկային տվյալներ"
+
+msgid "CUPS connection"
+msgstr "CUPS կապ"
+
+msgid "CUPS connection verified."
+msgstr "CUPS կապը ստուգված է։"
+
+msgid "CUPS did not accept the requested print options. Check its queue before reprinting."
+msgstr "CUPS-ը չընդունեց տպման ընտրանքները։ Կրկնատպումից առաջ ստուգեք հերթը։"
+
+msgid "CUPS open-source automatic printing"
+msgstr "CUPS բաց կոդով ավտոմատ տպում"
+
+msgid "CUPS password"
+msgstr "CUPS գաղտնաբառ"
+
+msgid "CUPS printers"
+msgstr "CUPS տպիչներ"
+
+msgid "CUPS returned an invalid response. Check its queue before reprinting."
+msgstr "CUPS-ը տվեց անվավեր պատասխան։ Կրկնատպումից առաջ ստուգեք հերթը։"
+
+msgid "CUPS server address"
+msgstr "CUPS սերվերի հասցե"
+
+msgid "CUPS username"
+msgstr "CUPS օգտանուն"
+
+#, php-format
+msgid "CUPS: %s"
+msgstr "CUPS՝ %s"
+
 msgid "Cancel queued job"
 msgstr "Չեղարկել հերթում գտնվող առաջադրանքը"
 
-#: src/Admin/AdminPage.php:153
-msgid "Retry if safe"
-msgstr "Կրկին փորձել, եթե անվտանգ է"
+msgid "Cancelled"
+msgstr "Չեղարկված է"
 
-#: src/Admin/AdminPage.php:158
-#: src/Admin/PreviewController.php:34
-msgid "You are not allowed to print invoices."
-msgstr "Հաշիվներ տպելու թույլտվություն չունեք։"
+msgid "Choose a printer"
+msgstr "Ընտրեք տպիչ"
 
-#: src/Admin/AdminPage.php:162
-#: src/Admin/PreviewController.php:58
-msgid "Select no more than 50 orders."
-msgstr "Ընտրեք առավելագույնը 50 պատվեր։"
+msgid "Choose a valid invoice template."
+msgstr "Ընտրեք հաշվի վավեր ձևանմուշ։"
 
-#: src/Admin/AdminPage.php:164
-#: src/Admin/PreviewController.php:60
+msgid "Choose a valid print destination."
+msgstr "Ընտրեք տպման վավեր ուղղություն։"
+
+msgid "Choose a valid printer."
+msgstr "Ընտրեք վավեր տպիչ։"
+
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "Ընտրեք վավեր ձևանմուշ, տպիչ, ուղղություն և օրինակների քանակ։"
+
+msgid "Choose an invoice layout"
+msgstr "Ընտրեք հաշվի դասավորությունը"
+
+msgid "Choose between 1 and 20 copies."
+msgstr "Ընտրեք 1-ից 20 օրինակ։"
+
+msgid "Choose local printers in your browser dialog. The list below contains shared CUPS queues. Install missing local printers in your operating system."
+msgstr "Տեղային տպիչն ընտրեք բրաուզերի երկխոսությունում։ Ստորև CUPS հերթերն են։ Բացակա տպիչները տեղադրեք օպերացիոն համակարգում։"
+
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "Ընտրեք ձեր տեղային տպիչը զննարկիչի տպման երկխոսությունում։ API բանալի անհրաժեշտ չէ։"
+
+msgid "Classic"
+msgstr "Դասական"
+
+msgid "Classic A5"
+msgstr "Դասական A5"
+
+msgid "Close print dialog"
+msgstr "Փակել տպման պատուհանը"
+
+msgid "Code format"
+msgstr "Կոդի ձևաչափ"
+
+msgid "Color: Midnight / Size: Large"
+msgstr "Գույն՝ Մուգ կապույտ / Չափ՝ Մեծ"
+
+msgid "Compact"
+msgstr "Կոմպակտ"
+
+msgid "Configure a valid HTTPS CUPS server address."
+msgstr "Կարգավորեք CUPS սերվերի վավեր HTTPS հասցե։"
+
+msgid "Configure the CUPS credential before printing."
+msgstr "Տպելուց առաջ կարգավորեք CUPS մուտքի տվյալները։"
+
+msgid "Configure the CUPS password before printing."
+msgstr "Տպումից առաջ կարգավորեք CUPS գաղտնաբառը։"
+
+msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
+msgstr "Հաստատեք միայն թղթային արդյունքը ստուգելուց հետո։ Տպման երկխոսությունը փակելը չի հաստատում տպագրությունը։"
+
+msgid "Confirm printed"
+msgstr "Հաստատել տպագրությունը"
+
+msgid "Connect CUPS before printing."
+msgstr "Տպելուց առաջ միացրեք CUPS-ը։"
+
+msgid "Connection"
+msgstr "Կապ"
+
+msgid "Copies"
+msgstr "Օրինակներ"
+
+msgid "Create a user with the Print agent role and an Application Password. Pair its user ID and queue here; configure the same queue in the local agent. Keep the computer awake."
+msgstr "Ստեղծեք Տպման գործակալ դերով օգտվող և հավելվածի գաղտնաբառ։ Այստեղ կապեք նրա ID-ն և հերթը, ապա նույն հերթը կարգավորեք տեղական գործակալում։ Համակարգիչը պահեք միացված։"
+
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "Ստեղծեք միասնական ձևաչափով հաշիվներ և ուղարկեք դրանք ճիշտ տպիչին։"
+
+msgid "Credit card"
+msgstr "Վարկային քարտ"
+
+msgid "Customer"
+msgstr "Հաճախորդ"
+
+msgid "Customer note"
+msgstr "Հաճախորդի նշում"
+
+msgid "Date"
+msgstr "Ամսաթիվ"
+
+msgid "Default CUPS printer"
+msgstr "Լռելյայն CUPS տպիչ"
+
+msgid "Delivered"
+msgstr "Առաքված"
+
+msgid "Dense and readable for high-volume operations."
+msgstr "Խիտ և ընթեռնելի դասավորություն՝ մեծ ծավալների համար։"
+
+msgid "Description"
+msgstr "Նկարագրություն"
+
+msgid "Destination"
+msgstr "Ուղղություն"
+
+msgid "Details"
+msgstr "Մանրամասներ"
+
+msgid "Diagnostics"
+msgstr "Ախտորոշում"
+
+msgid "Discount"
+msgstr "Զեղչ"
+
+msgid "Discount:"
+msgstr "Զեղչ՝"
+
+msgid "Discovery interval in seconds 300 to 3600"
+msgstr "Որոնման միջակայք՝ 300–3600 վայրկյան"
+
+#, php-format
+msgid "Document printed: %1$s. Job #%2$d; confirmed by the operator."
+msgstr "Փաստաթուղթը տպված է՝ %1$s։ Առաջադրանք #%2$d՝ հաստատված օպերատորի կողմից։"
+
+msgid "Document reference"
+msgstr "Փաստաթղթի հղում"
+
+msgid "Document timezone"
+msgstr "Փաստաթղթի ժամային գոտի"
+
+msgid "Document type"
+msgstr "Փաստաթղթի տեսակ"
+
+msgid "Documents & shipping"
+msgstr "Փաստաթղթեր և առաքում"
+
+msgid "Eligible"
+msgstr "Իրավասու"
+
+msgid "Eligible without an invoice job"
+msgstr "Իրավասու՝ առանց հաշվի տպման առաջադրանքի"
+
+msgid "Email"
+msgstr "Էլփոստ"
+
+msgid "Enable generic webhook export"
+msgstr "Միացնել ընդհանուր webhook արտահանումը"
+
+msgid "Enabled"
+msgstr "Միացված է"
+
+msgid "Enabling automation starts discovery from that time. Older payments require explicit preview and selection. A gateway adapter may be needed for partial payments or missing payment dates."
+msgstr "Որոնումը սկսվում է միացման պահից։ Հին վճարումները պահանջում են նախադիտում և ընտրություն։ Մասնակի վճարումների կամ ամսաթվի բացակայության համար կարող է անհրաժեշտ լինել ադապտեր։"
+
+msgid "Enqueue selected missing invoices"
+msgstr "Հերթագրել ընտրված բացակայող հաշիվները"
+
+msgid "Error"
+msgstr "Սխալ"
+
+msgid "Existing job"
+msgstr "Առկա առաջադրանք"
+
+msgid "Export history"
+msgstr "Արտահանման պատմություն"
+
+msgid "Export on authorized scan once per reference"
+msgstr "Արտահանել լիազորված սկանավորման դեպքում մեկ անգամ յուրաքանչյուր հղման համար"
+
+msgid "Export on confirmed packed transition"
+msgstr "Արտահանել փաթեթավորված վիճակին հաստատված անցման ժամանակ"
+
+msgid "Export scanned order"
+msgstr "Արտահանել սկանավորված պատվերը"
+
+msgid "Exports are off by default. The receiver must implement the documented HMAC signature, replay protection and idempotency receipt contract. Acceptance does not prove shipping or picking. Credentials are not encrypted in the database; use WCIP_EXPORT_SIGNING_SECRET for managed configuration."
+msgstr "Արտահանումը լռելյայն անջատված է։ Ընդունիչը պետք է իրականացնի HMAC, կրկնման պաշտպանություն և իդեմպոտենտ ստացականներ։ Ընդունումը առաքման ապացույց չէ։ Բազայի գաղտնիքները գաղտնագրված չեն․ օգտագործեք WCIP_EXPORT_SIGNING_SECRET։"
+
+msgid "External job ID"
+msgstr "Առաջադրանքի արտաքին ID"
+
+msgid "Failed"
+msgstr "Ձախողված է"
+
+msgid "Filter"
+msgstr "Զտել"
+
+msgid "Fine gel pen set"
+msgstr "Բարակ գելային գրիչների հավաքածու"
+
+msgid "For 58 mm receipts choose QR. Code 128 is shown on wider paper only."
+msgstr "58 մմ անդորրագրերի համար ընտրեք QR։ Code 128-ը ցուցադրվում է միայն ավելի լայն թղթի վրա։"
+
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "Պատվերների համար մեկ հաշիվ կամ մի քանի ընտրված պատվերներ տպելիս ընտրեք զննարկիչի տպման երկխոսությունը։"
+
+msgid "From"
+msgstr "Սկսած"
+
+msgid "Fulfillment eligible including unpaid collection methods"
+msgstr "Կատարման իրավասու՝ ներառյալ չվճարված գանձման եղանակները"
+
+msgid "Fulfillment stage"
+msgstr "Կատարման փուլ"
+
+msgid "Fulfillment uses separate plugin storage. Native WooCommerce payment, order status and dates are unchanged."
+msgstr "Կատարումը պահվում է առանձին։ WooCommerce-ի վճարումը, վիճակն ու ամսաթվերը չեն փոխվում։"
+
+msgid "General"
+msgstr "Ընդհանուր"
+
+msgid "Ground shipping"
+msgstr "Ցամաքային առաքում"
+
+msgid "HTTPS export endpoint"
+msgstr "HTTPS արտահանման հասցե"
+
+msgid "I reviewed the selected orders and authorize physical print submission."
+msgstr "Ստուգել եմ ընտրված պատվերները և թույլատրում եմ ուղարկել տպման։"
+
+msgid "INVOICE"
+msgstr "Հաշիվ"
+
+msgid "Include customer notes on invoices"
+msgstr "Հաշիվներում ներառել հաճախորդի նշումները"
+
+msgid "Include opaque document codes"
+msgstr "Ավելացնել անթափանց փաստաթղթի կոդեր"
+
+msgid "Ineligible"
+msgstr "Ոչ իրավասու"
+
+msgid "Invalid invoice template."
+msgstr "Հաշվի ձևանմուշը սխալ է։"
+
 msgid "Invalid order selection."
 msgstr "Պատվերների ընտրությունը սխալ է։"
 
-#: src/Admin/AdminPage.php:166
+msgid "Invalid preview input."
+msgstr "Նախադիտման մուտքային տվյալները սխալ են։"
+
+msgid "Invalid settings input."
+msgstr "Կարգավորումների մուտքային տվյալները սխալ են։"
+
+msgid "Invalid settings section."
+msgstr "Կարգավորումների բաժինը սխալ է։"
+
+msgid "Invoice"
+msgstr "Հաշիվ"
+
+#, php-format
+msgid "Invoice %s"
+msgstr "Հաշիվ %s"
+
+msgid "Invoice PDFs contain customer data and are sent only to your configured CUPS server when this destination is used."
+msgstr "Այս նպատակակետով հաճախորդի տվյալներ պարունակող PDF-ը ուղարկվում է միայն ձեր կարգավորված CUPS սերվերին։"
+
+msgid "Invoice Printer"
+msgstr "Հաշիվների տպիչ"
+
+msgid "Invoice Printer sections"
+msgstr "Հաշիվների տպիչի բաժիններ"
+
+msgid "Invoice identity"
+msgstr "Հաշվի տվյալներ"
+
+msgid "Invoice print state"
+msgstr "Հաշվի տպման վիճակ"
+
+#, php-format
+msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
+msgstr "Հաշիվը տպված է։ Առաջադրանք № %1$d, նպատակակետ՝ %2$s, պատճենների քանակ՝ %3$d։ Հաստատված է օպերատորի կողմից։"
+
+msgid "Invoice printer test page"
+msgstr "Հաշիվների տպիչի փորձնական էջ"
+
+msgid "Invoice printing"
+msgstr "Հաշիվների տպում"
+
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "Հաշիվն ավելացվել է հերթում։ Ուղարկման վիճակը ստուգեք տպման առաջադրանքներում։"
+
+msgid "Invoice template"
+msgstr "Հաշվի ձևանմուշ"
+
+msgid "Item"
+msgstr "Ապրանք"
+
+msgid "Items and quantities without commercial amounts."
+msgstr "Ապրանքներ և քանակներ՝ առանց գումարների։"
+
+msgid "Last seen"
+msgstr "Վերջին կապը"
+
+msgid "Latest reprint failed"
+msgstr "Վերջին կրկնատպումը ձախողվեց"
+
+msgid "Local browser printing"
+msgstr "Տեղային տպում բրաուզերով"
+
+msgid "Logo URL"
+msgstr "Պատկերանշանի URL"
+
+msgid "Look up"
+msgstr "Որոնել"
+
+msgid "Manual"
+msgstr "Ձեռքով"
+
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "Ձեռքով և ավտոմատ առաջադրանքները կցուցադրվեն այստեղ՝ ուղարկման վիճակով։"
+
+msgid "Manual printing defaults"
+msgstr "Ձեռքով տպման լռելյայն կարգավորումներ"
+
+msgid "Morgan Studio"
+msgstr "Մորգան ստուդիա"
+
+msgid "Narrow receipt with paginated output."
+msgstr "Նեղ անդորրագիր՝ էջաբաժանմամբ։"
+
+msgid "Needs review"
+msgstr "Պահանջում է ստուգում"
+
 msgid "No orders selected"
 msgstr "Պատվերներ ընտրված չեն"
 
-#. translators: %d: number of selected invoices.
-#: src/Admin/AdminPage.php:169
+msgid "No print jobs yet"
+msgstr "Դեռ տպման առաջադրանքներ չկան"
+
+msgid "No printer selected"
+msgstr "Տպիչ ընտրված չէ"
+
+msgid "No printers were found. Check shared queues on your CUPS server."
+msgstr "Տպիչներ չեն գտնվել։ Ստուգեք CUPS սերվերի համօգտագործվող հերթերը։"
+
+msgid "No valid invoices were selected."
+msgstr "Վավեր հաշիվներ ընտրված չեն։"
+
+msgid "Northstar Supply Co."
+msgstr "Հյուսիսային աստղ մատակարարում"
+
+msgid "Not configured"
+msgstr "Կարգավորված չէ"
+
+msgid "Not connected"
+msgstr "Միացված չէ"
+
+msgid "Not printed"
+msgstr "Տպված չէ"
+
+msgid "Not started"
+msgstr "Չի սկսվել"
+
+msgid "Note"
+msgstr "Նշում"
+
+msgid "Note:"
+msgstr "Նշում՝"
+
+msgid "Offline"
+msgstr "Անցանց"
+
+msgid "One of the selected order IDs is invalid."
+msgstr "Ընտրված պատվերների ID-ներից մեկը սխալ է։"
+
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "Ընտրված պատվերներից մեկը գոյություն չունի կամ չի կարող տպվել։"
+
+msgid "Online"
+msgstr "Առցանց"
+
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "Համապատասխանում են միայն այն պատվերները, որոնց վճարումը WooCommerce-ը հաստատել է։"
+
+msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
+msgstr "Կարելի է հաստատել միայն պատրաստված կամ ուղարկված տպման առաջադրանքները։ Նախ ստուգեք թղթային արդյունքը։"
+
+msgid "Only queued jobs can be cancelled."
+msgstr "Կարելի է չեղարկել միայն հերթում գտնվող առաջադրանքները։"
+
+msgid "Open local test page"
+msgstr "Բացել տեղային փորձնական էջը"
+
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "Բացեք փորձնական էջը, սեղմեք «Տպել» և զննարկիչի տպման երկխոսությունում ընտրեք ձեր տպիչը։"
+
+msgid "Operation completed."
+msgstr "Գործողությունն ավարտված է։"
+
+msgid "Order"
+msgstr "Պատվեր"
+
+msgid "Order ID"
+msgstr "Պատվերի ID"
+
+msgid "Order reconciliation"
+msgstr "Պատվերների համադրում"
+
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "PDF աջակցությունն անհասանելի է։ Տեղադրեք Composer կախվածությունները։"
+
+msgid "Packed"
+msgstr "Փաթեթավորված"
+
+msgid "Packing list"
+msgstr "Փաթեթավորման ցուցակ"
+
+msgid "Payment & shipping"
+msgstr "Վճարում և առաքում"
+
+msgid "Payment / delivery"
+msgstr "Վճարում / առաքում"
+
+msgid "Payment completed"
+msgstr "Վճարումն ավարտված է"
+
+msgid "Payment date"
+msgstr "Վճարման ամսաթիվ"
+
+msgid "Payment eligibility changed"
+msgstr "Վճարման իրավասությունը փոխվել է"
+
+msgid "Phone"
+msgstr "Հեռախոս"
+
+msgid "Please leave the parcel at reception."
+msgstr "Խնդրում ենք փաթեթը թողնել ընդունարանում։"
+
+msgid "Preparing"
+msgstr "Պատրաստվում է"
+
+msgid "Preparing invoice…"
+msgstr "Հաշիվը պատրաստվում է…"
+
+msgid "Preview"
+msgstr "Նախադիտում"
+
+msgid "Preview missing automatic invoices before selecting historical orders. Nothing prints during preview. Date bounds use UTC and span at most 31 days."
+msgstr "Հին պատվերներն ընտրելուց առաջ նախադիտեք բացակայող հաշիվները։ Նախադիտումը չի տպում։ UTC միջակայքը առավելագույնը 31 օր է։"
+
+msgid "Preview missing prints"
+msgstr "Նախադիտել բացակայող տպումները"
+
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "Նախադիտումն օգտագործում է իրատեսական օրինակներ և կարող է փոխվել աջից ձախ ցուցադրման։"
+
+msgid "Price"
+msgstr "Գին"
+
+msgid "Print"
+msgstr "Տպել"
+
 #, php-format
 msgid "Print %d invoice"
 msgid_plural "Print %d invoices"
 msgstr[0] "Տպել %d հաշիվ"
 msgstr[1] "Տպել %d հաշիվ"
 
-#: src/Admin/AdminPage.php:170
-msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
-msgstr "Դիտարկչի արդյունքը միավորվում է մեկ փաստաթղթի մեջ։ PrintNode-ը ստեղծում է առանձին վերահսկվող ֆոնային առաջադրանքներ։"
+msgid "Print Jobs"
+msgstr "Տպման առաջադրանքներ"
 
-#: src/Admin/AdminPage.php:172
-#: src/Admin/OrderIntegration.php:56
-msgid "Destination"
-msgstr "Ուղղություն"
+msgid "Print agent"
+msgstr "Տպման գործակալ"
 
-#: src/Admin/AdminPage.php:172
-#: src/Admin/OrderIntegration.php:56
-msgid "Browser print dialog"
-msgstr "Դիտարկչի տպման պատուհան"
+msgid "Print failed"
+msgstr "Տպումը ձախողվեց"
 
-#. translators: %s: the selected printer's name.
-#: src/Admin/AdminPage.php:175
-#: src/Admin/OrderIntegration.php:56
-#, php-format
-msgid "PrintNode: %s"
-msgstr "PrintNode՝ %s"
-
-#: src/Admin/AdminPage.php:180
-msgid "Start bulk printing"
-msgstr "Սկսել խմբային տպումը"
-
-#: src/Admin/AdminPage.php:203
-msgid "Invoice template"
-msgstr "Հաշվի ձևանմուշ"
-
-#: src/Admin/OrderIntegration.php:24
-msgid "Invoice printing"
-msgstr "Հաշիվների տպում"
-
-#: src/Admin/OrderIntegration.php:55
-msgid "Automatic job:"
-msgstr "Ավտոմատ առաջադրանք՝"
-
-#: src/Admin/OrderIntegration.php:56
-msgid "Reprint invoice"
-msgstr "Կրկին տպել հաշիվը"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:62
 msgid "Print invoice"
 msgstr "Տպել հաշիվը"
 
-#: src/Admin/OrderIntegration.php:56
-msgid "Close print dialog"
-msgstr "Փակել տպման պատուհանը"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:87
-msgid "Your browser print dialog will open."
-msgstr "Ձեր դիտարկչի տպման պատուհանը կբացվի։"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/PreviewController.php:100
-#: src/Admin/PreviewController.php:102
-msgid "Print"
-msgstr "Տպել"
-
-#: src/Admin/OrderIntegration.php:67
 msgid "Print invoices"
 msgstr "Տպել հաշիվները"
 
-#: src/Admin/OrderIntegration.php:87
-msgid "The invoice will be queued for the configured physical printer."
-msgstr "Հաշիվը կավելացվի կարգավորված ֆիզիկական տպիչի հերթում։"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Preparing invoice…"
-msgstr "Հաշիվը պատրաստվում է…"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Queuing invoice…"
-msgstr "Հաշիվն ավելացվում է հերթում…"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Invoice queued. Check Print Jobs for delivery status."
-msgstr "Հաշիվն ավելացվել է հերթում։ Ուղարկման վիճակը ստուգեք տպման առաջադրանքներում։"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Printing failed. Review the message and try again."
-msgstr "Տպումը ձախողվեց։ Կարդացեք հաղորդագրությունը և կրկին փորձեք։"
-
-#: src/Admin/PreviewController.php:38
-msgid "Invalid preview input."
-msgstr "Նախադիտման մուտքային տվյալները սխալ են։"
-
-#: src/Admin/PreviewController.php:52
-msgid "Invalid invoice template."
-msgstr "Հաշվի ձևանմուշը սխալ է։"
-
-#: src/Admin/PreviewController.php:63
-#: src/Rest/RestController.php:114
-msgid "One of the selected orders does not exist or cannot be printed."
-msgstr "Ընտրված պատվերներից մեկը գոյություն չունի կամ չի կարող տպվել։"
-
-#: src/Admin/PreviewController.php:85
-msgid "The invoice could not be prepared. Review Print Jobs before trying again."
-msgstr "Հաշիվը չհաջողվեց պատրաստել։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
-
-#: src/Admin/PreviewController.php:88
-msgid "No valid invoices were selected."
-msgstr "Վավեր հաշիվներ ընտրված չեն։"
-
-#: src/Automation/PrintWorker.php:69
-#: src/PrintJob/PrintConfirmationService.php:33
-#: src/Rest/RestController.php:151
-msgid "The order no longer exists."
-msgstr "Պատվերն այլևս գոյություն չունի։"
-
-#: src/Automation/PrintWorker.php:72
-#: src/Automation/PrintWorker.php:85
-msgid "The order is no longer paid, so automatic printing was stopped."
-msgstr "Պատվերն այլևս վճարված չէ, ուստի ավտոմատ տպումը դադարեցվել է։"
-
-#: src/Automation/PrintWorker.php:92
-msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
-msgstr "Մատակարարն ընդունել է տպման առաջադրանքը, բայց արդյունքը չի պահպանվել։ Կրկին տպելուց առաջ ստուգեք PrintNode-ը։"
-
-#: src/Automation/PrintWorker.php:120
-#: src/Automation/Scheduler.php:80
-msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
-msgstr "Մշակումը դադարել է մինչև արդյունքի գրանցումը։ Կրկին տպելուց առաջ ստուգեք PrintNode-ը։"
-
-#: src/Automation/Scheduler.php:24
-msgid "The background queue is unavailable."
-msgstr "Ֆոնային հերթն անհասանելի է։"
-
-#: src/Automation/Scheduler.php:58
-msgid "The print job could not be queued."
-msgstr "Տպման առաջադրանքը չհաջողվեց ավելացնել հերթում։"
-
-#: src/Infrastructure/Activator.php:11
-msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
-msgstr "Հաշիվների տպիչի տվյալների շտեմարանը չհաջողվեց տեղադրել։ Ստուգեք շտեմարանի թույլտվությունները և կրկին ակտիվացրեք։"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "Business registration and tax details"
-msgstr "Ընկերության գրանցման և հարկային տվյալներ"
-
-#: src/Pdf/MpdfRenderer.php:10
-msgid "PDF support is unavailable. Install the Composer dependencies."
-msgstr "PDF աջակցությունն անհասանելի է։ Տեղադրեք Composer կախվածությունները։"
-
-#: src/Pdf/MpdfRenderer.php:16
-msgid "A secure PDF working directory could not be created."
-msgstr "Չհաջողվեց ստեղծել անվտանգ PDF աշխատանքային պանակ։"
-
-#: src/Plugin.php:84
-msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
-msgstr "WooCommerce հաշիվների տպիչի համար WooCommerce-ը պետք է տեղադրված և ակտիվ լինի։"
-
-#: src/Plugin.php:88
-msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
-msgstr "WooCommerce հաշիվների տպիչը պահանջում է WooCommerce 9.0 կամ ավելի նոր տարբերակ։"
-
-#: src/Plugin.php:92
-msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
-msgstr "PDF և PrintNode արդյունքների համար WooCommerce հաշիվների տպիչին անհրաժեշտ են Composer կախվածությունները։ Դիտարկչով տպումը մնում է հասանելի։"
-
-#: src/Plugin.php:96
-msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
-msgstr "WooCommerce հաշիվների տպիչը չհաջողեց պատրաստել իր շտեմարանը։ Տպումն անհասանելի է․ ստուգեք շտեմարանի թույլտվությունները և կրկին ակտիվացրեք հավելումը։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:30
-msgid "PrintNode account"
-msgstr "PrintNode հաշիվ"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:37
-#: src/Printing/PrintNode/PrintNodeProvider.php:108
-msgid "PrintNode is not connected."
-msgstr "PrintNode-ը միացված չէ։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:69
-msgid "Unnamed printer"
-msgstr "Անանուն տպիչ"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:85
-msgid "The selected printer is invalid."
-msgstr "Ընտրված տպիչը սխալ է։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:123
-msgid "The print request could not be encoded."
-msgstr "Տպման հարցումը չհաջողվեց կոդավորել։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:128
-msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
-msgstr "PrintNode հարցումը կարող է ընդհատված լինել։ Կրկին տպելուց առաջ ստուգեք առաջադրանքը։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:138
-msgid "PrintNode rejected the API key."
-msgstr "PrintNode-ը մերժել է API բանալին։"
-
-#. translators: %d: HTTP response status code.
-#: src/Printing/PrintNode/PrintNodeProvider.php:141
-#, php-format
-msgid "PrintNode rejected the request (HTTP %d)."
-msgstr "PrintNode-ը մերժել է հարցումը (HTTP %d)։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:144
-msgid "PrintNode may have accepted the print request. Check the job before reprinting."
-msgstr "PrintNode-ը կարող է ընդունած լինել տպման հարցումը։ Կրկին տպելուց առաջ ստուգեք առաջադրանքը։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:167
-msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
-msgstr "PrintNode-ը վերադարձրել է առաջադրանքի անընթեռնելի պատասխան։ Կրկին տպելուց առաջ ստուգեք առաջադրանքը։"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:168
-msgid "PrintNode returned an unreadable response."
-msgstr "PrintNode-ը վերադարձրել է անընթեռնելի պատասխան։"
-
-#: src/PrintJob/PrintJobRepository.php:37
-msgid "The print job could not be saved."
-msgstr "Տպման առաջադրանքը չհաջողվեց պահպանել։"
-
-#: src/PrintJob/PrintJobService.php:72
-msgid "Choose a valid invoice template."
-msgstr "Ընտրեք հաշվի վավեր ձևանմուշ։"
-
-#: src/PrintJob/PrintJobService.php:75
-msgid "Choose a valid print destination."
-msgstr "Ընտրեք տպման վավեր ուղղություն։"
-
-#: src/PrintJob/PrintJobService.php:78
-#: src/Rest/RestController.php:80
-msgid "Choose a valid printer."
-msgstr "Ընտրեք վավեր տպիչ։"
-
-#: src/PrintJob/PrintJobService.php:81
-msgid "Connect PrintNode before printing."
-msgstr "Տպելուց առաջ միացրեք PrintNode-ը։"
-
-#: src/Rest/RestController.php:85
-msgid "Invoice printer test page"
-msgstr "Հաշիվների տպիչի փորձնական էջ"
-
-#: src/Rest/RestController.php:95
-msgid "Select between 1 and 50 orders."
-msgstr "Ընտրեք 1-ից 50 պատվեր։"
-
-#: src/Rest/RestController.php:101
-msgid "Choose a valid template, printer, destination, and number of copies."
-msgstr "Ընտրեք վավեր ձևանմուշ, տպիչ, ուղղություն և օրինակների քանակ։"
-
-#: src/Rest/RestController.php:104
-msgid "Configure the PrintNode credential before printing."
-msgstr "Տպելուց առաջ կարգավորեք PrintNode մուտքի տվյալները։"
-
-#: src/Rest/RestController.php:110
-msgid "One of the selected order IDs is invalid."
-msgstr "Ընտրված պատվերների ID-ներից մեկը սխալ է։"
-
-#: src/Rest/RestController.php:124
-msgid "A print job could not be queued. Review Print Jobs before trying again."
-msgstr "Տպման առաջադրանքներից մեկը չհաջողվեց ավելացնել հերթում։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
-
-#: src/Rest/RestController.php:129
-msgid "The print request stopped. Review Print Jobs before trying again."
-msgstr "Տպման հարցումը դադարել է։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
-
-#: src/PrintJob/PrintConfirmationService.php:23
-#: src/Rest/RestController.php:145
-#: src/Rest/RestController.php:170
-#: src/Rest/RestController.php:182
 msgid "Print job not found."
 msgstr "Տպման առաջադրանքը չի գտնվել։"
 
-#: src/Rest/RestController.php:173
-msgid "Only queued jobs can be cancelled."
-msgstr "Կարելի է չեղարկել միայն հերթում գտնվող առաջադրանքները։"
+msgid "Print jobs"
+msgstr "Տպման առաջադրանքներ"
 
-#: src/Rest/RestController.php:185
-msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
-msgstr "Այս առաջադրանքի անվտանգ կրկնափորձը հնարավոր չէ։ Անհրաժեշտության դեպքում գիտակցաբար ստեղծեք նոր տպում։"
+msgid "Print test page"
+msgstr "Տպել փորձնական էջ"
 
-#: src/Rest/RestController.php:188
-msgid "The print job could not be queued. Review Print Jobs before trying again."
-msgstr "Տպման առաջադրանքը չհաջողվեց ավելացնել հերթում։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
-
-#: src/Rest/RestController.php:204
-msgid "The print operation failed. Check the configuration and try again."
-msgstr "Տպման գործողությունը ձախողվեց։ Ստուգեք կարգավորումները և կրկին փորձեք։"
-
-#: src/Template/TemplateRegistry.php:10
-msgid "Classic"
-msgstr "Դասական"
-
-#: src/Template/TemplateRegistry.php:10
-msgid "A polished full invoice for office printers."
-msgstr "Ամբողջական և կոկիկ հաշիվ՝ գրասենյակային տպիչների համար։"
-
-#: src/Template/TemplateRegistry.php:11
-msgid "Compact"
-msgstr "Կոմպակտ"
-
-#: src/Template/TemplateRegistry.php:11
-msgid "Dense and readable for high-volume operations."
-msgstr "Խիտ և ընթեռնելի դասավորություն՝ մեծ ծավալների համար։"
-
-#: src/Template/TemplateRegistry.php:12
-msgid "Thermal 80 mm"
-msgstr "Ջերմային 80 մմ"
-
-#: src/Template/TemplateRegistry.php:12
-msgid "Purpose-built for narrow receipt printers."
-msgstr "Հատուկ մշակված է նեղ կտրոնների տպիչների համար։"
-
-#: templates/classic/invoice.php:37
-#: templates/thermal/invoice.php:30
-msgid "INVOICE"
-msgstr "Հաշիվ"
-
-#: templates/classic/invoice.php:42
-msgid "Bill to"
-msgstr "Հաշվի ստացող"
-
-#: templates/classic/invoice.php:47
-msgid "Payment & shipping"
-msgstr "Վճարում և առաքում"
-
-#: templates/classic/invoice.php:53
-msgid "Item"
-msgstr "Ապրանք"
-
-#: templates/classic/invoice.php:54
-#: templates/compact/invoice.php:47
-msgid "SKU"
-msgstr "Ապրանքի կոդ"
-
-#: templates/classic/invoice.php:55
-#: templates/compact/invoice.php:48
-msgid "Qty"
-msgstr "Քանակ"
-
-#: templates/classic/invoice.php:56
-msgid "Unit"
-msgstr "Միավորի գին"
-
-#: templates/classic/invoice.php:57
-msgid "Discount"
-msgstr "Զեղչ"
-
-#: templates/classic/invoice.php:58
-msgid "Tax"
-msgstr "Հարկ"
-
-#: templates/classic/invoice.php:59
-#: templates/compact/invoice.php:50
-msgid "Total"
-msgstr "Ընդամենը"
-
-#: templates/classic/invoice.php:71
-msgid "Unit prices and discounts exclude tax; line totals include tax."
-msgstr "Միավորի գներն ու զեղչերը չեն ներառում հարկը․ տողերի գումարները ներառում են հարկը։"
-
-#: templates/classic/invoice.php:75
-msgid "Customer note"
-msgstr "Հաճախորդի նշում"
-
-#: templates/compact/invoice.php:33
-msgid "Invoice"
-msgstr "Հաշիվ"
-
-#: templates/compact/invoice.php:37
-msgid "Customer"
-msgstr "Հաճախորդ"
-
-#: templates/compact/invoice.php:40
-msgid "Payment / delivery"
-msgstr "Վճարում / առաքում"
-
-#: templates/compact/invoice.php:46
-msgid "Description"
-msgstr "Նկարագրություն"
-
-#: templates/compact/invoice.php:49
-msgid "Price"
-msgstr "Գին"
-
-#: templates/compact/invoice.php:60
-#: templates/thermal/invoice.php:45
-msgid "Unit prices exclude tax; line totals include discounts and tax."
-msgstr "Միավորի գները չեն ներառում հարկը․ տողերի գումարները ներառում են զեղչերն ու հարկը։"
-
-#: templates/compact/invoice.php:62
-msgid "Note"
-msgstr "Նշում"
-
-#: templates/thermal/invoice.php:32
-msgid "Date"
-msgstr "Ամսաթիվ"
-
-#: templates/thermal/invoice.php:50
-msgid "Note:"
-msgstr "Նշում՝"
-
-#: templates/thermal/invoice.php:51
-msgid "Thank you for your order."
-msgstr "Շնորհակալություն ձեր պատվերի համար։"
-
-#. translators: %s: WooCommerce order number.
-#: src/Automation/PrintWorker.php:90
-#, php-format
-msgid "Invoice %s"
-msgstr "Հաշիվ %s"
-
-#: src/Invoice/InvoiceFactory.php:80
-msgid "September 15, 2026"
-msgstr "15 սեպտեմբերի 2026"
-
-#: src/Invoice/InvoiceFactory.php:80
-#: src/PrintJob/JobStatus.php:27
-msgid "Processing"
-msgstr "Մշակվում է"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "Northstar Supply Co."
-msgstr "Հյուսիսային աստղ մատակարարում"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "24 Market Street, Portland, OR"
-msgstr "Մարքեթ փողոց 24, Պորտլենդ, Օրեգոն"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "Alex Morgan"
-msgstr "Ալեքս Մորգան"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "Morgan Studio"
-msgstr "Մորգան ստուդիա"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "840 Evergreen Terrace, Seattle, WA"
-msgstr "Էվերգրին փողոց 840, Սիեթլ, Վաշինգտոն"
-
-#: src/Invoice/InvoiceFactory.php:84
-msgid "Professional planning notebook with an intentionally long product name"
-msgstr "Մասնագիտական պլանավորման նոթատետր՝ միտումնավոր երկար ապրանքանունով"
-
-#: src/Invoice/InvoiceFactory.php:84
-msgid "Color: Midnight / Size: Large"
-msgstr "Գույն՝ Մուգ կապույտ / Չափ՝ Մեծ"
-
-#: src/Invoice/InvoiceFactory.php:85
-msgid "Fine gel pen set"
-msgstr "Բարակ գելային գրիչների հավաքածու"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Subtotal:"
-msgstr "Ենթագումար՝"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Discount:"
-msgstr "Զեղչ՝"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Shipping:"
-msgstr "Առաքում՝"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Tax:"
-msgstr "Հարկ՝"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Total:"
-msgstr "Ընդամենը՝"
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Credit card"
-msgstr "Վարկային քարտ"
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Ground shipping"
-msgstr "Ցամաքային առաքում"
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Please leave the parcel at reception."
-msgstr "Խնդրում ենք փաթեթը թողնել ընդունարանում։"
-
-#: src/PrintJob/JobStatus.php:26
-msgid "Queued"
-msgstr "Հերթում է"
-
-#: src/PrintJob/JobStatus.php:28
-msgid "Submitted"
-msgstr "Ուղարկված է"
-
-#: src/PrintJob/JobStatus.php:29
-msgid "Failed"
-msgstr "Ձախողված է"
-
-#: src/Admin/AdminPage.php:39
-#: src/PrintJob/JobStatus.php:30
-msgid "Unknown"
-msgstr "Անհայտ է"
-
-#: src/PrintJob/JobStatus.php:31
-msgid "Cancelled"
-msgstr "Չեղարկված է"
-
-#: src/Admin/AdminPage.php:37
-msgid "Online"
-msgstr "Առցանց"
-
-#: src/Admin/AdminPage.php:38
-msgid "Offline"
-msgstr "Անցանց"
-
-#: src/Admin/AdminPage.php:128
-msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
-msgstr "Ավտոմատ տպագրությունն աշխատում է PrintNode-ի միջոցով և պահանջում է դրա ծրագիրը տպիչին միացված համակարգչում։ Զննարկիչով տեղային տպագրության համար պետք է հաստատեք տպման երկխոսությունը։"
-
-#: src/Admin/AdminPage.php:138
-msgid "Local printer (no API key)"
-msgstr "Տեղային տպիչ (առանց API բանալու)"
-
-#: src/Admin/AdminPage.php:138
-msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
-msgstr "Զննարկիչի միջոցով օգտագործեք այս համակարգչում տեղադրված տպիչը։ PrintNode հաշիվ կամ API բանալի անհրաժեշտ չէ։"
-
-#: src/Admin/AdminPage.php:138
-msgid "Open the test page, click Print, and choose your printer in the browser dialog."
-msgstr "Բացեք փորձնական էջը, սեղմեք «Տպել» և զննարկիչի տպման երկխոսությունում ընտրեք ձեր տպիչը։"
-
-#: src/Admin/AdminPage.php:138
-msgid "Open local test page"
-msgstr "Բացել տեղային փորձնական էջը"
-
-#: src/Admin/AdminPage.php:138
-msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
-msgstr "Պատվերների համար մեկ հաշիվ կամ մի քանի ընտրված պատվերներ տպելիս ընտրեք զննարկիչի տպման երկխոսությունը։"
-
-#: src/Admin/AdminPage.php:138
-msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
-msgstr "Տեղային տպիչներն ընտրվում են զննարկիչի տպման երկխոսությունում և չեն ցուցադրվում ստորև բերված PrintNode ցանկում։ Եթե տպիչը բացակայում է երկխոսությունում, նախ այն տեղադրեք օպերացիոն համակարգում։"
-
-#: src/Admin/AdminPage.php:140
-msgid "PrintNode (optional automatic printing)"
-msgstr "PrintNode (ըստ ցանկության ավտոմատ տպագրություն)"
-
-#: src/Admin/AdminPage.php:143
-msgid "PrintNode printers"
-msgstr "PrintNode տպիչներ"
-
-#: src/Admin/AdminPage.php:143
-msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
-msgstr "Այս ցանկը պարունակում է միայն ձեր հաշվի PrintNode ծրագրի տրամադրած տպիչները։ Տեղադրեք ծրագիրը տպիչին միացված համակարգչում, մուտք գործեք ձեր հաշիվ և թարմացրեք ցանկը։"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:87
-msgid "Choose your local printer in the browser dialog. No API key is required."
-msgstr "Ընտրեք ձեր տեղային տպիչը զննարկիչի տպման երկխոսությունում։ API բանալի անհրաժեշտ չէ։"
-
-#. Author of the plugin
-#: wc-invoice-printer.php
-msgid "Shahin Ilderemi"
-msgstr "Shahin Ilderemi"
-
-#. Author URI of the plugin
-#: wc-invoice-printer.php
-msgid "https://ildrm.com"
-msgstr "https://ildrm.com"
-
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:29
-#: src/Admin/OrderIntegration.php:39
-#: src/Admin/PrintConfirmationUi.php:12
 msgid "Printed"
 msgstr "Տպված է"
 
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:39
-msgid "Not printed"
-msgstr "Տպված չէ"
-
-#: src/Admin/OrderIntegration.php:39
 msgid "Printed means an operator confirmed the paper output."
 msgstr "Տպված է նշանակում է, որ օպերատորը հաստատել է թղթային արդյունքը։"
 
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
-msgstr "Հաստատեք միայն թղթային արդյունքը ստուգելուց հետո։ Տպման երկխոսությունը փակելը չի հաստատում տպագրությունը։"
+msgid "Printer"
+msgstr "Տպիչ"
 
-#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printers"
+msgstr "Տպիչներ"
+
+msgid "Printing"
+msgstr "Տպվում է"
+
 msgid "Printing confirmed. A private order note has been added."
 msgstr "Տպագրությունը հաստատված է։ Պատվերին ավելացվել է մասնավոր նշում։"
 
-#: src/Admin/PrintConfirmationUi.php:12
-#: src/Rest/RestController.php:160
-msgid "The print confirmation could not be saved. Review Print Jobs and try again."
-msgstr "Տպագրության հաստատումը չհաջողվեց պահպանել։ Ստուգեք տպման առաջադրանքները և կրկին փորձեք։"
+msgid "Printing failed. Review the message and try again."
+msgstr "Տպումը ձախողվեց։ Կարդացեք հաղորդագրությունը և կրկին փորձեք։"
 
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Confirm printed"
-msgstr "Հաստատել տպագրությունը"
+msgid "Processing"
+msgstr "Մշակվում է"
 
-#: src/PrintJob/PrintConfirmationService.php:29
-#: src/Rest/RestController.php:147
-msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
-msgstr "Կարելի է հաստատել միայն պատրաստված կամ ուղարկված տպման առաջադրանքները։ Նախ ստուգեք թղթային արդյունքը։"
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "Մասնագիտական պլանավորման նոթատետր՝ միտումնավոր երկար ապրանքանունով"
 
-#. translators: 1: print job ID, 2: destination name, 3: number of copies.
-#: src/PrintJob/PrintConfirmationService.php:37
-#, php-format
-msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
-msgstr "Հաշիվը տպված է։ Առաջադրանք № %1$d, նպատակակետ՝ %2$s, պատճենների քանակ՝ %3$d։ Հաստատված է օպերատորի կողմից։"
+msgid "Provider"
+msgstr "Մատակարար"
 
-#: src/Rest/RestController.php:139
+msgid "Purpose-built for narrow receipt printers."
+msgstr "Հատուկ մշակված է նեղ կտրոնների տպիչների համար։"
+
+msgid "Qty"
+msgstr "Քանակ"
+
+msgid "Quantity"
+msgstr "Քանակ"
+
+msgid "Queued"
+msgstr "Հերթում է"
+
+msgid "Queuing invoice…"
+msgstr "Հաշիվն ավելացվում է հերթում…"
+
+msgid "RTL preview"
+msgstr "Աջից ձախ նախադիտում"
+
+msgid "Ready to ship"
+msgstr "Պատրաստ է ուղարկման"
+
+msgid "Recipient"
+msgstr "Ստացող"
+
+msgid "Recipient label without prices."
+msgstr "Ստացողի պիտակ՝ առանց գների։"
+
+msgid "Recipient phone"
+msgstr "Ստացողի հեռախոս"
+
+msgid "Recorded payment confirmed"
+msgstr "Գրանցված վճարումը հաստատված է"
+
+msgid "Refresh diagnostics"
+msgstr "Թարմացնել ախտորոշումը"
+
+msgid "Refresh printers"
+msgstr "Թարմացնել տպիչները"
+
+msgid "Refresh to load printers"
+msgstr "Թարմացրեք՝ տպիչները բեռնելու համար"
+
+msgid "Replace signing secret leave blank to retain"
+msgstr "Փոխարինել ստորագրման գաղտնիքը՝ դատարկ թողնել պահպանելու համար"
+
+msgid "Reprint invoice"
+msgstr "Կրկին տպել հաշիվը"
+
+msgid "Retry if safe"
+msgstr "Կրկին փորձել, եթե անվտանգ է"
+
+msgid "Review queue health, discovery progress and printer configuration. Cron-disabled sites need an external scheduled runner."
+msgstr "Ստուգեք հերթը, որոնումն ու տպիչը։ Անջատված Cron-ի դեպքում անհրաժեշտ է արտաքին պլանավորված գործարկիչ։"
+
+msgid "SKU"
+msgstr "Ապրանքի կոդ"
+
+msgid "Save printer settings"
+msgstr "Պահպանել տպիչի կարգավորումները"
+
+msgid "Save selected template"
+msgstr "Պահպանել ընտրված ձևանմուշը"
+
+msgid "Save the server settings before testing. Leave the password blank to retain it. HTTPS certificates must be trusted by WordPress."
+msgstr "Փորձից առաջ պահեք կարգավորումները։ Դատարկ գաղտնաբառը պահպանում է նախորդը։ WordPress-ը պետք է վստահի HTTPS վկայագրերին։"
+
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "WooCommerce հաշիվների անվտանգ ձեռքով և ավտոմատ տպում։"
+
+msgid "Select"
+msgstr "Ընտրել"
+
+msgid "Select between 1 and 50 orders."
+msgstr "Ընտրեք 1-ից 50 պատվեր։"
+
 msgid "Select between 1 and 50 print jobs."
 msgstr "Ընտրեք 1-ից 50 տպման առաջադրանք։"
 
-#: src/Rest/RestController.php:143
+msgid "Select no more than 50 orders."
+msgstr "Ընտրեք առավելագույնը 50 պատվեր։"
+
 msgid "Select valid print jobs."
 msgstr "Ընտրեք վավեր տպման առաջադրանքներ։"
+
+msgid "Selected"
+msgstr "Ընտրված է"
+
+msgid "Self-hosted CUPS server"
+msgstr "Ինքնատեղակայված CUPS սերվեր"
+
+msgid "September 15, 2026"
+msgstr "15 սեպտեմբերի 2026"
+
+msgid "Server configured"
+msgstr "Սերվերը կարգավորված է"
+
+msgid "Settings saved."
+msgstr "Կարգավորումները պահպանվել են։"
+
+msgid "Shahin Ilderemi"
+msgstr "Shahin Ilderemi"
+
+msgid "Share recipient data with the configured receiver"
+msgstr "Կիսվել ստացողի տվյալներով կարգավորված ընդունիչի հետ"
+
+msgid "Shipped"
+msgstr "Ուղարկված"
+
+msgid "Shipping label"
+msgstr "Առաքման պիտակ"
+
+msgid "Shipping metadata mapping as JSON"
+msgstr "Առաքման մետատվյալների համապատասխանեցում JSON ձևաչափով"
+
+msgid "Shipping:"
+msgstr "Առաքում՝"
+
+msgid "Show payment date and time"
+msgstr "Ցուցադրել վճարման ամսաթիվն ու ժամը"
+
+msgid "Show recipient phone"
+msgstr "Ցուցադրել ստացողի հեռախոսը"
+
+msgid "Show sender on labels"
+msgstr "Ցուցադրել ուղարկողին պիտակներում"
+
+msgid "Something went wrong. Check the details and try again."
+msgstr "Սխալ է տեղի ունեցել։ Ստուգեք մանրամասները և կրկին փորձեք։"
+
+msgid "Source"
+msgstr "Աղբյուր"
+
+msgid "Stage after invoice confirmation"
+msgstr "Փուլ՝ հաշվի հաստատումից հետո"
+
+msgid "Start bulk printing"
+msgstr "Սկսել խմբային տպումը"
+
+msgid "Start preparation after physical invoice confirmation"
+msgstr "Սկսել պատրաստումը թղթային հաշվի հաստատումից հետո"
+
+msgid "Status"
+msgstr "Վիճակ"
+
+msgid "Submitted"
+msgstr "Ուղարկված է"
+
+msgid "Submitted means the local spooler or CUPS accepted the PDF, or the browser invoice was prepared. It does not confirm paper output."
+msgstr "Ուղարկվածը նշանակում է, որ տեղական հերթը կամ CUPS-ն ընդունել է PDF-ը, կամ բրաուզերի հաշիվը պատրաստ է։ Դա չի հաստատում թղթի տպումը։"
+
+msgid "Submitted to CUPS."
+msgstr "Ուղարկվել է CUPS։"
+
+msgid "Subtotal:"
+msgstr "Ենթագումար՝"
+
+msgid "Tax"
+msgstr "Հարկ"
+
+msgid "Tax:"
+msgstr "Հարկ՝"
+
+msgid "Template"
+msgstr "Ձևանմուշ"
+
+msgid "Templates"
+msgstr "Ձևանմուշներ"
+
+msgid "Test connection"
+msgstr "Ստուգել կապը"
+
+msgid "Test webhook with demo data"
+msgstr "Փորձարկել webhook-ը ցուցադրական տվյալներով"
+
+msgid "Thank you for your order."
+msgstr "Շնորհակալություն ձեր պատվերի համար։"
+
+msgid "The CUPS certificate bundle is unavailable."
+msgstr "CUPS վկայագրերի փաթեթն անհասանելի է։"
+
+msgid "The CUPS password is managed with WCIP_CUPS_PASSWORD and cannot be edited here."
+msgstr "CUPS գաղտնաբառը կառավարվում է WCIP_CUPS_PASSWORD-ով և այստեղ չի խմբագրվում։"
+
+msgid "The CUPS request could not be completed. Check the server and paper output before reprinting."
+msgstr "CUPS հարցումը չավարտվեց։ Կրկնատպումից առաջ ստուգեք սերվերն ու թուղթը։"
+
+msgid "The CUPS server rejected the request or returned an uncertain result."
+msgstr "CUPS սերվերը մերժեց հարցումը կամ տվեց անորոշ արդյունք։"
+
+msgid "The background queue is unavailable."
+msgstr "Ֆոնային հերթն անհասանելի է։"
+
+msgid "The document exceeds the safe rendering limit."
+msgstr "Փաստաթուղթը գերազանցում է անվտանգ մշակման սահմանը։"
+
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "Հաշիվը չհաջողվեց պատրաստել։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
+
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "Հաշիվների տպիչի տվյալների շտեմարանը չհաջողվեց տեղադրել։ Ստուգեք շտեմարանի թույլտվությունները և կրկին ակտիվացրեք։"
+
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "Հաշիվը կավելացվի կարգավորված ֆիզիկական տպիչի հերթում։"
+
+msgid "The operation could not complete. Check permissions, input and configuration, then review diagnostics."
+msgstr "Գործողությունը չավարտվեց։ Ստուգեք իրավունքները, մուտքը, կարգավորումներն ու ախտորոշումը։"
+
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "Պատվերն այլևս վճարված չէ, ուստի ավտոմատ տպումը դադարեցվել է։"
+
+msgid "The order no longer exists."
+msgstr "Պատվերն այլևս գոյություն չունի։"
+
+msgid "The print confirmation could not be saved. Review Print Jobs and try again."
+msgstr "Տպագրության հաստատումը չհաջողվեց պահպանել։ Ստուգեք տպման առաջադրանքները և կրկին փորձեք։"
+
+msgid "The print document or copy count is invalid."
+msgstr "Փաստաթուղթը կամ պատճենների քանակն անվավեր է։"
+
+msgid "The print job could not be queued."
+msgstr "Տպման առաջադրանքը չհաջողվեց ավելացնել հերթում։"
+
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "Տպման առաջադրանքը չհաջողվեց ավելացնել հերթում։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
+
+msgid "The print job could not be saved."
+msgstr "Տպման առաջադրանքը չհաջողվեց պահպանել։"
+
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "Տպման գործողությունը ձախողվեց։ Ստուգեք կարգավորումները և կրկին փորձեք։"
+
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "Տպման հարցումը դադարել է։ Կրկին փորձելուց առաջ ստուգեք տպման առաջադրանքները։"
+
+msgid "The printing configuration migration failed. Check database permissions."
+msgstr "Տպման կարգավորումների տեղափոխումը ձախողվեց։ Ստուգեք բազայի իրավունքները։"
+
+msgid "The provider accepted the print job, but its result could not be saved. Check CUPS before reprinting."
+msgstr "Մատակարարն ընդունել է տպման առաջադրանքը, բայց արդյունքը չի պահպանվել։ Կրկին տպելուց առաջ ստուգեք CUPS-ը։"
+
+msgid "The selected printer is invalid."
+msgstr "Ընտրված տպիչը սխալ է։"
+
+msgid "The stored password is never displayed or returned to the browser."
+msgstr "Պահված գաղտնաբառը չի ցուցադրվում և չի վերադարձվում բրաուզերին։"
+
+msgid "The worker stopped before recording a result. Check CUPS before reprinting."
+msgstr "Մշակումը դադարել է մինչև արդյունքի գրանցումը։ Կրկին տպելուց առաջ ստուգեք CUPS-ը։"
+
+msgid "Thermal 58 mm"
+msgstr "Ջերմային 58 մմ"
+
+msgid "Thermal 80 mm"
+msgstr "Ջերմային 80 մմ"
+
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "Այս առաջադրանքի անվտանգ կրկնափորձը հնարավոր չէ։ Անհրաժեշտության դեպքում գիտակցաբար ստեղծեք նոր տպում։"
+
+msgid "This list contains queues shared by your CUPS server. Configure and test the printer in CUPS, save its HTTPS address here, then refresh."
+msgstr "Ցանկը CUPS սերվերի համօգտագործվող հերթերն է։ Կարգավորեք և փորձեք տպիչը CUPS-ում, պահեք HTTPS հասցեն, ապա թարմացրեք։"
+
+msgid "This order does not require a shipping label."
+msgstr "Այս պատվերը առաքման պիտակ չի պահանջում։"
+
+msgid "This order is not eligible under the configured payment policy."
+msgstr "Այս պատվերը չի համապատասխանում վճարման կարգավորված քաղաքականությանը։"
+
+msgid "To"
+msgstr "Մինչև"
+
+msgid "Total"
+msgstr "Ընդամենը"
+
+msgid "Total:"
+msgstr "Ընդամենը՝"
+
+msgid "Trigger"
+msgstr "Գործարկող իրադարձություն"
+
+msgid "Unit"
+msgstr "Միավորի գին"
+
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "Միավորի գներն ու զեղչերը չեն ներառում հարկը․ տողերի գումարները ներառում են հարկը։"
+
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "Միավորի գները չեն ներառում հարկը․ տողերի գումարները ներառում են զեղչերն ու հարկը։"
+
+msgid "Unknown"
+msgstr "Անհայտ է"
+
+msgid "Update fulfillment"
+msgstr "Թարմացնել կատարումը"
+
+msgid "Updated"
+msgstr "Թարմացված է"
+
+msgid "Use a keyboard scanner or enter the opaque reference. Scanning requires sign-in and never confirms physical printing."
+msgstr "Օգտագործեք ստեղնաշարային սկաներ կամ մուտքագրեք հղումը։ Պահանջվում է մուտք․ սկանավորումը թղթային տպում չի հաստատում։"
+
+msgid "Use a printer installed on this computer through your browser. No account or subscription is needed."
+msgstr "Բրաուզերով օգտագործեք այս համակարգչում տեղադրված տպիչը։ Հաշիվ կամ բաժանորդագրություն պետք չէ։"
+
+msgid "Use billing values for missing recipient fields"
+msgstr "Բացակայող ստացողի դաշտերի համար օգտագործել վճարային տվյալները"
+
+msgid "Use site or an IANA timezone. Map named fields to trusted order metadata keys. Extra address fields are printed only when mapped."
+msgstr "Օգտագործեք site կամ IANA գոտի։ Դաշտերը համապատասխանեցրեք վստահելի մետատվյալներին։ Լրացուցիչ հասցեային դաշտերը տպվում են միայն համապատասխանեցնելուց հետո։"
+
+msgid "Use the free local print agent on Windows, Linux or macOS. It connects to this site over HTTPS and works with shared hosting, VPS and dedicated servers."
+msgstr "Օգտագործեք անվճար տեղական գործակալը Windows, Linux կամ macOS համակարգում։ Այն HTTPS-ով կապվում է կայքին և աշխատում է համօգտագործվող հոսթինգի, VPS-ի և առանձնացված սերվերի հետ։"
+
+msgid "View"
+msgstr "Դիտել"
+
+msgid "Weight"
+msgstr "Քաշ"
+
+msgid "Weight in kg"
+msgstr "Քաշը կգ-ով"
+
+msgid "WooCommerce Invoice Printer"
+msgstr "WooCommerce հաշիվների տպիչ"
+
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "WooCommerce հաշիվների տպիչը չհաջողեց պատրաստել իր շտեմարանը։ Տպումն անհասանելի է․ ստուգեք շտեմարանի թույլտվությունները և կրկին ակտիվացրեք հավելումը։"
+
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and automatic printing. Browser printing remains available."
+msgstr "PDF-ի և ավտոմատ տպման համար պետք են Composer կախվածությունները։ Բրաուզերով տպումը մնում է հասանելի։"
+
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "WooCommerce հաշիվների տպիչը պահանջում է WooCommerce 9.0 կամ ավելի նոր տարբերակ։"
+
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "WooCommerce հաշիվների տպիչի համար WooCommerce-ը պետք է տեղադրված և ակտիվ լինի։"
+
+msgid "Working…"
+msgstr "Մշակվում է…"
+
+msgid "You are not allowed to change these settings."
+msgstr "Այս կարգավորումները փոխելու թույլտվություն չունեք։"
+
+msgid "You are not allowed to print invoices."
+msgstr "Հաշիվներ տպելու թույլտվություն չունեք։"
+
+msgid "You are not allowed to view print jobs."
+msgstr "Տպման առաջադրանքները դիտելու թույլտվություն չունեք։"
+
+msgid "Your browser print dialog will open."
+msgstr "Ձեր դիտարկչի տպման պատուհանը կբացվի։"
+
+msgid "https://ildrm.com"
+msgstr "https://ildrm.com"
 

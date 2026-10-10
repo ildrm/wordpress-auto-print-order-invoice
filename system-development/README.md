@@ -1,6 +1,6 @@
 # System development documentation
 
-Development and template-customization guides for **WooCommerce Invoice Printer 1.1.2**, reviewed against commit `5f26fa77a9f1fea9acb520a2b5e7ddd5063376a5` on **8 October 2026**. This folder contains documentation and an optional companion-plugin example; it is not loaded by the main plugin.
+Development and template-customization guides for **WooCommerce Invoice Printer 1.4.0**, reviewed against the remediation working tree based on commit `c894eb05d2120a4bba09aa3500fe2842a0e48d74` on **10 October 2026**. This folder contains documentation and an optional companion-plugin example; it is not loaded by the main plugin.
 
 The plugin has 13 supported languages and 14 bundled locale catalogs. Every locale has a complete DOCX guide with localized explanations and shared code examples, API references, hook signatures and commands. The English edition gives additional background. Technical identifiers remain unchanged so examples can be copied. Translation wording has not been independently reviewed by native-language editors.
 
@@ -23,6 +23,8 @@ The plugin has 13 supported languages and 14 bundled locale catalogs. Every loca
 
 Each guide explains the development environment, architecture, merchant settings, persistent template customization, invoice fields, hooks, provider limitations, protected REST API, payment triggers, job recovery, translations, tests, security and release preparation.
 
+The 1.4.0 editions also cover confirmed-payment eligibility, bounded reconciliation and historical preview, seven document formats, document-specific confirmation, opt-in warehouse stages, opaque codes, authenticated scanning, signed exports, added hooks/routes and the additive schema. The detailed English operator/receiver contract is in [docs/operations.md](../docs/operations.md); executed tests and remaining external acceptance work are in [the remediation record](../REMEDIATION_TRACEABILITY.md).
+
 [Verification record](VERIFICATION.md) documents the review scope and checks. [Document manifest](manifest.json) records each edition's direction, rendered page count and SHA-256 checksum.
 
 Persian and Arabic use Word paragraph/run language metadata, RTL text and mirrored tables. Logical `start` alignment places prose at the right edge. Code blocks and technical identifiers retain LTR direction. Chinese/Japanese use East Asian fonts and horizontal LTR; Hindi uses a Devanagari font. Word may substitute a font on computers where the selected typeface is unavailable; preserve script coverage and verify rendering after substitution.
@@ -33,10 +35,14 @@ Copy [examples/wcip-customization](examples/wcip-customization/) into a disposab
 
 ## Maintain the guides
 
-Edit the DOCX files directly in Microsoft Word or LibreOffice. The generation scripts and translation inputs were removed after the finished guides were validated; the documents are self-contained.
+Edit the DOCX files directly in LibreOffice. The generation scripts and translation inputs were removed after the finished guides were validated; the documents are self-contained.
+
+The previously requested `source/` cleanup remains complete. No authoring inputs or render intermediates are needed to use these documents.
 
 Keep every edition synchronized after changes to template/data/provider contracts, routes, queue behavior or release requirements. Preserve paragraph and run language metadata, RTL prose and mirrored tables in Persian/Arabic, and LTR code and technical identifiers in every edition.
 
 Export revised documents to PDF and inspect every page for font coverage, text direction, table flow and clipping before distribution. Keep temporary render outputs outside this folder. Update the relevant SHA-256 checksum and rendered page count in [manifest.json](manifest.json), and record new checks in [VERIFICATION.md](VERIFICATION.md).
 
 The Chinese and Japanese editions select **Arial Unicode MS**; their render QA used the locally installed font. Font files are not redistributed here. Keep a compatible CJK font installed when editing or rendering those editions. Source review and document/example validation are distinct from running the plugin's full tests or proving physical delivery.
+
+The guides cover outbound local-agent printing on Windows with SumatraPDF and Linux/macOS with CUPS lp, shared/VPS/dedicated hosting requirements, scoped pairing, Windows startup and crash recovery. WordPress hosting installs no printer software or Python. Direct HTTPS CUPS and manual browser printing remain available. See [cross-platform setup](../docs/cross-platform-printing.md) and [open-source migration](../docs/open-source-printing.md).

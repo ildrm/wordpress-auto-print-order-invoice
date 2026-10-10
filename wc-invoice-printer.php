@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WooCommerce Invoice Printer
  * Description: Secure manual and automatic invoice printing for WooCommerce.
- * Version: 1.1.2
+ * Version: 1.4.0
  * Author: Shahin Ilderemi
  * Author URI:  https://ildrm.com
  * Requires at least: 6.6
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WCIP_VERSION', '1.1.2' );
+define( 'WCIP_VERSION', '1.4.0' );
 define( 'WCIP_FILE', __FILE__ );
 define( 'WCIP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WCIP_URL', plugin_dir_url( __FILE__ ) );

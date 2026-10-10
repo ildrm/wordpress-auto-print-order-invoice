@@ -34,12 +34,12 @@ final class MpdfRendererTest extends TestCase {
 		$pdf = ( new MpdfRenderer() )->render( $html, $templates->get( $id ) );
 		self::assertStringStartsWith( '%PDF-', $pdf );
 		self::assertSame( 1, preg_match( '/\/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]/', $pdf, $dimensions ) );
-		self::assertEqualsWithDelta( 'thermal' === $id ? 80 : 210, (float) $dimensions[1] * 25.4 / 72, 0.02 );
-		self::assertEqualsWithDelta( 'thermal' === $id ? 199 : 297, (float) $dimensions[2] * 25.4 / 72, 0.02 );
+		self::assertEqualsWithDelta( array( 'thermal' => 80, 'thermal58' => 58, 'classic-a5' => 148, 'shipping-label' => 105 )[ $id ] ?? 210, (float) $dimensions[1] * 25.4 / 72, 0.02 );
+		self::assertEqualsWithDelta( 'shipping-label' === $id ? 148 : ( 'classic-a5' === $id ? 210 : 297 ), (float) $dimensions[2] * 25.4 / 72, 0.02 );
 	}
 
 	public static function built_in_templates(): array {
-		return array( array( 'classic', false ), array( 'compact', false ), array( 'thermal', false ), array( 'classic', true ), array( 'compact', true ), array( 'thermal', true ) );
+		return array( array( 'classic', false ), array( 'compact', false ), array( 'thermal', false ), array( 'classic', true ), array( 'compact', true ), array( 'thermal', true ), array( 'thermal58', false ), array( 'thermal58', true ), array( 'classic-a5', false ), array( 'classic-a5', true ), array( 'shipping-label', false ), array( 'shipping-label', true ), array( 'packing-list', false ), array( 'packing-list', true ) );
 	}
 
 	public function test_large_receipt_height_is_bounded_and_keeps_the_80mm_width(): void {
@@ -51,8 +51,23 @@ final class MpdfRendererTest extends TestCase {
 		$pdf = ( new MpdfRenderer() )->render( $html, $templates->get( 'thermal' ) );
 		self::assertSame( 1, preg_match( '/\/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]/', $pdf, $dimensions ) );
 		self::assertEqualsWithDelta( 80, (float) $dimensions[1] * 25.4 / 72, 0.02 );
-		self::assertEqualsWithDelta( 1000, (float) $dimensions[2] * 25.4 / 72, 0.02 );
+		self::assertEqualsWithDelta( 297, (float) $dimensions[2] * 25.4 / 72, 0.02 );
 	}
+
+	/** @dataProvider long_document_formats */
+	public function test_long_mixed_rtl_document_paginates_without_losing_valid_output( string $id ): void {
+		$templates = new TemplateRegistry(); $sample = ( new InvoiceFactory( new SettingsRepository() ) )->sample( true );
+		$item = $sample->items[0]; $item['name'] = 'محصول آزمایشی — Long product with SKU-42 and fractional quantity';
+		$fields = $sample->fulfillment; $fields['note'] = str_repeat( 'Deliver carefully — یادداشت مشتری. ', 30 );
+		$invoice = new InvoiceData( $sample->order, $sample->store, $sample->customer, array_fill( 0, 120, $item ), $sample->totals, $fields, true );
+		$pdf = ( new MpdfRenderer() )->render( ( new HtmlRenderer( $templates ) )->render( $invoice, $id ), $templates->get( $id ) );
+		self::assertStringStartsWith( '%PDF-', $pdf );
+		self::assertLessThan( 20 * MB_IN_BYTES, strlen( $pdf ) );
+		if ( 'shipping-label' !== $id ) { self::assertGreaterThan( 1, preg_match_all( '/\/Type\s*\/Page\b/', $pdf ) ); }
+		if ( getenv( 'WCIP_RENDER_OUTPUT' ) ) { file_put_contents( getenv( 'WCIP_RENDER_OUTPUT' ) . '/long-' . $id . '.pdf', $pdf ); }
+	}
+
+	public static function long_document_formats(): array { return array_map( static fn( string $id ): array => array( $id ), array( 'classic', 'compact', 'classic-a5', 'thermal', 'thermal58', 'shipping-label', 'packing-list' ) ); }
 
 	public function test_pdf_temporary_files_are_removed_after_success(): void {
 		$directory = sys_get_temp_dir() . '/wcip-pdf-test-' . bin2hex( random_bytes( 8 ) );

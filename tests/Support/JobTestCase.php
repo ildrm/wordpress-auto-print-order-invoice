@@ -20,7 +20,7 @@ abstract class JobTestCase extends TestCase {
 	protected function setUp(): void {
 		$this->db = new InMemoryWpdb();
 		$GLOBALS['wpdb'] = $this->db;
-		$GLOBALS['wcip_test_options'] = array( 'wcip_settings' => array( 'automatic_enabled' => true, 'printnode_api_key' => 'test-key', 'printnode_printer_id' => '7' ) );
+		$GLOBALS['wcip_test_options'] = array( 'wcip_settings' => array( 'automatic_enabled' => true, 'cups_endpoint' => 'https://cups.example.test', 'cups_printer_id' => '7' ) );
 		$GLOBALS['wcip_test_orders'] = array();
 		$GLOBALS['wcip_test_filters'] = array();
 		$GLOBALS['wcip_test_hooks'] = array();
@@ -42,6 +42,6 @@ abstract class JobTestCase extends TestCase {
 	}
 
 	protected function job( array $changes = array() ): array {
-		return $this->jobs->create( array_merge( array( 'order_id' => 42, 'trigger_type' => 'automatic', 'idempotency_key' => hash( 'sha256', 'job-' . count( $this->db->rows ) ), 'template_id' => 'classic', 'provider_id' => 'printnode', 'printer_id' => '7', 'copies' => 1 ), $changes ) );
+		return $this->jobs->create( array_merge( array( 'order_id' => 42, 'trigger_type' => 'automatic', 'idempotency_key' => hash( 'sha256', 'job-' . count( $this->db->rows ) ), 'template_id' => 'classic', 'provider_id' => 'cups', 'printer_id' => '7', 'copies' => 1 ), $changes ) );
 	}
 }

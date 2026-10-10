@@ -12,10 +12,16 @@ final class InvoiceFactory {
 	}
 
 	public function from_order( \WC_Order $order ): InvoiceData {
+		$recipient = ( new RecipientResolver( $this->settings ) )->resolve( $order );
 		$items = array();
 		foreach ( $order->get_items() as $item ) {
 			$product = $item->get_product();
 			$items[] = array(
+				'item_id' => method_exists( $item, 'get_id' ) ? $item->get_id() : null,
+				'product_id' => method_exists( $item, 'get_product_id' ) ? $item->get_product_id() : null,
+				'variation_id' => method_exists( $item, 'get_variation_id' ) ? $item->get_variation_id() : null,
+				'refunded_quantity' => method_exists( $order, 'get_qty_refunded_for_item' ) && method_exists( $item, 'get_id' ) ? abs( (float) $order->get_qty_refunded_for_item( $item->get_id() ) ) : null,
+				'weight' => ( new WeightCalculator() )->line( $item, (float) $item->get_quantity() ),
 				'name'       => $item->get_name(),
 				'variation'  => $this->variation_text( $item ),
 				'sku'        => $product ? $product->get_sku() : '',
@@ -42,8 +48,8 @@ final class InvoiceFactory {
 			array(
 				'id'             => $order->get_id(),
 				'number'         => $order->get_order_number(),
-				'date'           => $order->get_date_created() ? wc_format_datetime( $order->get_date_created() ) : '',
-				'paid_date'      => $order->get_date_paid() ? wc_format_datetime( $order->get_date_paid() ) : '',
+				'date'           => $order->get_date_created() ? $this->date_time( $order->get_date_created() ) : '',
+				'paid_date'      => $order->get_date_paid() ? $this->date_time( $order->get_date_paid() ) : '',
 				'currency'       => $order->get_currency(),
 				'status'         => wc_get_order_status_name( $order->get_status() ),
 			),
@@ -58,14 +64,22 @@ final class InvoiceFactory {
 			array(
 				'name'             => $order->get_formatted_billing_full_name(),
 				'company'          => $order->get_billing_company(),
+				'billing_components' => method_exists( $order, 'get_address' ) ? $order->get_address( 'billing' ) : array(),
 				'billing_address'  => $this->plain_address( $order->get_formatted_billing_address() ),
-				'shipping_address' => $this->plain_address( $order->get_formatted_shipping_address() ),
+				'shipping_address' => $recipient['formatted_address'],
+				'shipping_phone' => $recipient['phone'],
+				'recipient' => $recipient,
 				'phone'            => $order->get_billing_phone(),
 				'email'            => $order->get_billing_email(),
 			),
 			$items,
 			$totals,
 			array(
+				'document_codes' => $this->document_codes( $order->get_id() ),
+				'payment_confirmed' => ( new \WCInvoicePrinter\Automation\PaymentEligibilityPolicy( $this->settings ) )->confirmed( $order ),
+				'show_paid_date' => (bool) $this->settings->get( 'show_paid_date', true ),
+				'show_shipping_phone' => (bool) $this->settings->get( 'show_shipping_phone', true ),
+				'label_show_sender' => (bool) $this->settings->get( 'label_show_sender', true ),
 				'payment_method' => $order->get_payment_method_title(),
 				'shipping_method'=> $order->get_shipping_method(),
 				'note'           => $this->settings->get( 'show_customer_note' ) ? $order->get_customer_note() : '',
@@ -79,7 +93,13 @@ final class InvoiceFactory {
 		return new InvoiceData(
 			array( 'id' => 1042, 'number' => '1042', 'date' => __( 'September 15, 2026', 'wc-invoice-printer' ), 'paid_date' => __( 'September 15, 2026', 'wc-invoice-printer' ), 'currency' => 'USD', 'status' => __( 'Processing', 'wc-invoice-printer' ) ),
 			array( 'name' => __( 'Northstar Supply Co.', 'wc-invoice-printer' ), 'details' => __( 'Business registration and tax details', 'wc-invoice-printer' ), 'phone' => '+1 555 0142', 'email' => 'billing@example.com', 'logo_data_uri' => '', 'address' => __( '24 Market Street, Portland, OR', 'wc-invoice-printer' ) ),
-			array( 'name' => __( 'Alex Morgan', 'wc-invoice-printer' ), 'company' => __( 'Morgan Studio', 'wc-invoice-printer' ), 'billing_address' => __( '840 Evergreen Terrace, Seattle, WA', 'wc-invoice-printer' ), 'shipping_address' => '', 'phone' => '+1 555 0199', 'email' => 'alex@example.com' ),
+			array(
+				'name' => __( 'Alex Morgan', 'wc-invoice-printer' ), 'company' => __( 'Morgan Studio', 'wc-invoice-printer' ),
+				'billing_address' => __( '840 Evergreen Terrace, Seattle, WA', 'wc-invoice-printer' ),
+				'shipping_address' => __( '840 Evergreen Terrace, Seattle, WA', 'wc-invoice-printer' ),
+				'phone' => '+1 555 0199', 'shipping_phone' => '+1 555 0199', 'email' => 'alex@example.com',
+				'recipient' => array( 'formatted_address' => __( 'Alex Morgan', 'wc-invoice-printer' ) . "\n" . __( 'Morgan Studio', 'wc-invoice-printer' ) . "\n" . __( '840 Evergreen Terrace, Seattle, WA', 'wc-invoice-printer' ), 'phone' => '+1 555 0199', 'extra' => array() ),
+			),
 			array(
 				array( 'name' => __( 'Professional planning notebook with an intentionally long product name', 'wc-invoice-printer' ), 'variation' => __( 'Color: Midnight / Size: Large', 'wc-invoice-printer' ), 'sku' => 'PLAN-XL-01', 'quantity' => 2, 'unit_price' => '$42.00', 'subtotal' => '$84.00', 'discount' => '$8.40', 'tax' => '$6.05', 'total' => '$81.65' ),
 				array( 'name' => __( 'Fine gel pen set', 'wc-invoice-printer' ), 'variation' => '', 'sku' => 'PEN-06', 'quantity' => 1, 'unit_price' => '$18.00', 'subtotal' => '$18.00', 'discount' => '$0.00', 'tax' => '$1.44', 'total' => '$19.44' ),
@@ -88,6 +108,23 @@ final class InvoiceFactory {
 			array( 'payment_method' => __( 'Credit card', 'wc-invoice-printer' ), 'shipping_method' => __( 'Ground shipping', 'wc-invoice-printer' ), 'note' => __( 'Please leave the parcel at reception.', 'wc-invoice-printer' ) ),
 			$rtl
 		);
+	}
+
+	private function document_codes( int $order_id ): array {
+		if ( ! $this->settings->get( 'barcode_enabled' ) ) { return array(); }
+		$service = new DocumentCodeService(); $codes = array();
+		foreach ( array( 'invoice', 'shipping_label', 'packing_list' ) as $type ) {
+			$reference = $service->reference( $order_id, $type );
+			$codes[ $type ] = array( 'reference' => $reference, 'type' => $this->settings->get( 'barcode_type' ), 'image' => $service->image( $reference, $this->settings->get( 'barcode_type' ) ) );
+		}
+		return $codes;
+	}
+
+	private function date_time( $date ): string {
+		$format = get_option( 'date_format', 'Y-m-d' ) . ' ' . get_option( 'time_format', 'H:i' );
+		$zone = (string) $this->settings->get( 'document_timezone', 'site' );
+		if ( $date instanceof \DateTimeInterface && function_exists( 'wp_date' ) ) { return wp_date( $format, $date->getTimestamp(), 'site' === $zone ? wp_timezone() : new \DateTimeZone( $zone ) ); }
+		return wc_format_datetime( $date );
 	}
 
 	/** @param float|string $amount */

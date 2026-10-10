@@ -1,5 +1,7 @@
 # PHP compatibility review
 
+This is a historical review of the retired cloud provider. Version 1.4.0 uses the open-source local agent or direct CUPS; the commercial provider was removed in 1.3.0. Provider-specific findings below are historical evidence, not current setup instructions. Current 1.4.0 changes and executed results are recorded in [the remediation report](../REMEDIATION_TRACEABILITY.md). Its earlier counts and archive statements describe that review only.
+
 Review date: October 7, 2026. Target: PHP 7.4 and currently available PHP 8 releases through 8.5.
 
 ## Scope and findings
@@ -57,3 +59,5 @@ The [CI workflow](../.github/workflows/php-compatibility.yml) runs installation,
 `JobStatus::FAILED` and the other constants now return strings. Remove `->value` from extension code, iterate `JobStatus::cases()` directly, and call `JobStatus::is_terminal( $status )` instead of an enum instance method. Value objects keep their constructor parameters and property-read syntax, but their fields are now private; public-property reflection, `get_object_vars()` outside the class, and object-to-array casts have different visibility behavior. Use property reads or JSON serialization for the exposed data.
 
 The committed historical ZIP was not rebuilt. Prepare a fresh production package using the updated lock file before distribution. The existing opt-in real WordPress/WooCommerce smoke test was made PHP 7.4-compatible, but was not rerun against a real site during this compatibility review. Physical delivery, complete WordPress/WooCommerce/gateway matrices, multisite, and future PHP releases remain outside these runtime checks.
+
+The 1.4.0 cross-platform agent runs separately from hosting PHP. Its Windows/Linux/macOS backend setup and Python 3.10+ requirements are in [cross-platform printing](cross-platform-printing.md); executed results and native hardware limits are in [the current remediation record](../REMEDIATION_TRACEABILITY.md).

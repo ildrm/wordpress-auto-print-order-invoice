@@ -49,9 +49,11 @@ foreach ( $locales as $locale => $label ) {
 		$templates = new \WCInvoicePrinter\Template\TemplateRegistry();
 		$invoice = ( new \WCInvoicePrinter\Invoice\InvoiceFactory( new \WCInvoicePrinter\Settings\SettingsRepository() ) )->sample( is_rtl() );
 		$renderer = new \WCInvoicePrinter\Template\HtmlRenderer( $templates );
-		foreach ( array( 'classic', 'compact', 'thermal' ) as $id ) {
+		foreach ( array( 'classic', 'classic-a5', 'compact', 'thermal', 'thermal58', 'shipping-label', 'packing-list' ) as $id ) {
 			$html = $renderer->render( $invoice, $id );
 			$title = 'compact' === $id ? $label : __( 'INVOICE', 'wc-invoice-printer' );
+			if ( 'shipping-label' === $id ) { $title = __( 'Shipping label', 'wc-invoice-printer' ); }
+			if ( 'packing-list' === $id ) { $title = __( 'Packing list', 'wc-invoice-printer' ); }
 			if ( false === strpos( $html, $title ) || false === strpos( $html, 'lang="' . str_replace( '_', '-', $locale ) . '"' ) || false === strpos( $html, 'dir="' . ( $rtl ? 'rtl' : 'ltr' ) . '"' ) ) {
 				throw new RuntimeException( 'The invoice was not localized: ' . $locale . '/' . $id );
 			}
@@ -82,7 +84,7 @@ foreach ( $locales as $locale => $label ) {
 				}
 			}
 			if ( 'printers' === $section ) {
-				foreach ( array( 'Local printer (no API key)', 'Open local test page', 'PrintNode (optional automatic printing)' ) as $message ) {
+				foreach ( array( 'Local browser printing', 'Open local test page', 'CUPS open-source automatic printing' ) as $message ) {
 					if ( false === strpos( $screen, esc_html__( $message, 'wc-invoice-printer' ) ) || ( 'en_US' !== $locale && $message === __( $message, 'wc-invoice-printer' ) ) ) {
 						throw new RuntimeException( 'Local printer screen not translated: ' . $locale . '/' . $message );
 					}
@@ -150,4 +152,4 @@ try {
 	if ( $switched ) { restore_previous_locale(); }
 	remove_filter( 'pre_wp_mail', $block_mail, 100 );
 }
-WP_CLI::success( 'All 14 locale catalogs and 42 invoice layouts passed.' );
+WP_CLI::success( 'All 14 locale catalogs and 98 document layouts passed.' );

@@ -9,9 +9,9 @@ use WCInvoicePrinter\Template\TemplateDefinition;
 final class TemplateRegistryTest extends TestCase {
 	protected function setUp(): void { $GLOBALS['wcip_test_filters'] = array(); }
 	protected function tearDown(): void { $GLOBALS['wcip_test_filters'] = array(); }
-	public function test_three_distinct_built_in_templates_are_registered(): void {
+	public function test_existing_and_typed_built_in_templates_are_registered(): void {
 		$templates = ( new TemplateRegistry() )->all();
-		self::assertSame( array( 'classic', 'compact', 'thermal' ), array_keys( $templates ) );
+		self::assertSame( array( 'classic', 'compact', 'thermal', 'classic-a5', 'thermal58', 'shipping-label', 'packing-list' ), array_keys( $templates ) );
 		self::assertSame( '80mm', $templates['thermal']->paper_size );
 		self::assertTrue( $templates['classic']->supports_rtl );
 	}

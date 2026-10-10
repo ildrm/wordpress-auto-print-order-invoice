@@ -11,7 +11,8 @@ use WCInvoicePrinter\Support\ReadOnlyProperties;
  * @property-read string $paper_size
  * @property-read string $orientation
  * @property-read bool $supports_rtl
- * @property-read string $path
+ * @property-read string $path,
+		string $document_type = 'invoice'
  */
 final class TemplateDefinition implements \JsonSerializable {
 	use ReadOnlyProperties;
@@ -23,6 +24,7 @@ final class TemplateDefinition implements \JsonSerializable {
 	private string $orientation;
 	private bool $supports_rtl;
 	private string $path;
+	private string $document_type;
 
 	public function __construct(
 		string $id,
@@ -31,7 +33,8 @@ final class TemplateDefinition implements \JsonSerializable {
 		string $paper_size,
 		string $orientation,
 		bool $supports_rtl,
-		string $path
+		string $path,
+		string $document_type = 'invoice'
 	) {
 		$this->assert_uninitialized();
 		$this->id = $id;
@@ -41,5 +44,7 @@ final class TemplateDefinition implements \JsonSerializable {
 		$this->orientation = $orientation;
 		$this->supports_rtl = $supports_rtl;
 		$this->path = $path;
+		if ( ! in_array( $document_type, array( 'invoice', 'shipping_label', 'packing_list' ), true ) ) { throw new \InvalidArgumentException( 'Invalid document type.' ); }
+		$this->document_type = $document_type;
 	}
 }

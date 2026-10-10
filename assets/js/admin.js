@@ -80,7 +80,7 @@
           url.searchParams.set('print', '1');
           window.open(url.toString(), '_blank', 'noopener');
         } else {
-          const data = await request('/print', { method: 'POST', body: JSON.stringify({ order_ids: orderIds, template_id: templateId, provider_id: 'printnode', printer_id: wcipAdmin.printerId, copies }) });
+          const data = await request('/print', { method: 'POST', body: JSON.stringify({ order_ids: orderIds, template_id: templateId, provider_id: output, printer_id: output === 'agent' ? wcipAdmin.agentQueue : wcipAdmin.printerId, copies }) });
           setNotice(wcipAdmin.strings.jobsQueued.replace('%d', data.queued), 'success');
         }
       }

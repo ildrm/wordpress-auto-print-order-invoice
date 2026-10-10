@@ -27,7 +27,7 @@ final class PrintWorkerTest extends JobTestCase {
 			public array $submissions = array();
 			public ?\Throwable $exception = null;
 			public $callback = null;
-			public function id(): string { return 'printnode'; }
+			public function id(): string { return 'cups'; }
 			public function test_connection(): array { return array(); }
 			public function printers( bool $force_refresh = false ): array { return array(); }
 			public function submit( string $pdf_bytes, string $printer_id, int $copies, string $title ): SubmissionResult {

@@ -2,18 +2,19 @@
 /**
  * Real authenticated HTTP checks; run only on a disposable, loopback-accessible site.
  * WCIP_RUN_INTEGRATION_TESTS=1 wp eval-file tests/Integration/local-printing.php
- * No browser scripts execute and no physical print or PrintNode request is made.
+ * No browser scripts execute and no physical print or CUPS request is made.
  */
 if ( '1' !== getenv( 'WCIP_RUN_INTEGRATION_TESTS' ) || ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 	throw new RuntimeException( 'Run this test explicitly on a disposable WordPress site.' );
 }
-if ( ! class_exists( \WCInvoicePrinter\Plugin::class ) || ! class_exists( 'WooCommerce' ) || defined( 'WCIP_PRINTNODE_API_KEY' ) ) {
-	throw new RuntimeException( 'Activate WooCommerce and this plugin without an external PrintNode key.' );
+if ( ! class_exists( \WCInvoicePrinter\Plugin::class ) || ! class_exists( 'WooCommerce' ) || defined( 'WCIP_CUPS_PASSWORD' ) ) {
+	throw new RuntimeException( 'Activate WooCommerce and this plugin without an external CUPS password.' );
 }
 global $wpdb;
 $settings = get_option( 'wcip_settings', array() );
 $cookies = $_COOKIE;
 $previous_user = get_current_user_id();
+add_filter( 'pre_wp_mail', '__return_true' );
 $order = null;
 $other_orders = array();
 $sessions = WP_Session_Tokens::get_instance( 1 );
@@ -37,7 +38,7 @@ try {
 	$_COOKIE[ LOGGED_IN_COOKIE ] = $logged_in;
 	// Ignore WooCommerce's first-admin-visit activation redirect on a fresh test site.
 	delete_transient( '_wc_activation_redirect' );
-	update_option( 'wcip_settings', array( 'default_template' => 'thermal', 'automatic_enabled' => false, 'printnode_api_key' => '' ) );
+	update_option( 'wcip_settings', array( 'default_template' => 'thermal', 'automatic_enabled' => false, 'cups_endpoint' => '' ) );
 	$jobs_before = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wc_invoice_print_jobs" );
 	list( $status, $screen, $location ) = $request( add_query_arg( array( 'page' => 'wc-invoice-printer', 'tab' => 'printers' ), admin_url( 'admin.php' ) ) );
 	if ( 200 !== $status || ! preg_match( '/class="button button-primary"[^>]*href="([^"]+)"/', $screen, $match ) ) {
@@ -48,8 +49,8 @@ try {
 	if ( 'wcip_preview' !== ( $args['action'] ?? '' ) || '1' !== ( $args['sample'] ?? '' ) || 'thermal' !== ( $args['template'] ?? '' ) || empty( $args['_wpnonce'] ) ) {
 		throw new RuntimeException( 'The local test link does not use the configured template and protected sample route.' );
 	}
-	if ( false !== strpos( $screen, '<details class="wcip-printnode-setup" open' ) || false === strpos( $screen, 'data-wcip-action="refresh-printers" disabled' ) ) {
-		throw new RuntimeException( 'Unconfigured PrintNode must be optional and discovery disabled.' );
+	if ( false !== strpos( $screen, '<details class="wcip-cups-setup" open' ) || false === strpos( $screen, 'data-wcip-action="refresh-printers" disabled' ) ) {
+		throw new RuntimeException( 'Unconfigured CUPS must be optional and discovery disabled.' );
 	}
 	list( $status, $sample ) = $request( $sample_url );
 	if ( 200 !== $status || false === strpos( $sample, 'onclick="window.print()"' ) || false === strpos( $sample, 'width:72mm' ) || false !== strpos( $sample, 'addEventListener("load"' ) ) {
@@ -58,12 +59,12 @@ try {
 	if ( $jobs_before !== (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wc_invoice_print_jobs" ) ) {
 		throw new RuntimeException( 'Opening a local test page must not create print jobs.' );
 	}
-	update_option( 'wcip_settings', array( 'printnode_api_key' => 'wcip-isolated-fake-credential', 'printnode_printer_id' => '5', 'printnode_printer_name' => 'Office & Kitchen' ) );
+	update_option( 'wcip_settings', array( 'cups_endpoint' => 'https://cups.example.test', 'cups_username' => 'fixture', 'cups_password' => 'wcip-isolated-fake-credential', 'cups_printer_id' => 'Office_A4', 'cups_printer_name' => 'Office & Kitchen' ) );
 	list( $status, $configured ) = $request( add_query_arg( array( 'page' => 'wc-invoice-printer', 'tab' => 'printers' ), admin_url( 'admin.php' ) ) );
-	if ( 200 !== $status || false === strpos( $configured, '<details class="wcip-printnode-setup" open' ) || false !== strpos( $configured, 'wcip-isolated-fake-credential' ) || false !== strpos( $configured, 'data-wcip-action="refresh-printers" disabled' ) || false === strpos( $configured, 'wcip-local-printer' ) ) {
-		throw new RuntimeException( 'Configured PrintNode must remain usable alongside local printing without exposing the credential.' );
+	if ( 200 !== $status || false === strpos( $configured, '<details class="wcip-cups-setup" open' ) || false !== strpos( $configured, 'wcip-isolated-fake-credential' ) || false !== strpos( $configured, 'data-wcip-action="refresh-printers" disabled' ) || false === strpos( $configured, 'wcip-local-printer' ) ) {
+		throw new RuntimeException( 'Configured CUPS must remain usable alongside local printing without exposing the credential.' );
 	}
-	update_option( 'wcip_settings', array( 'automatic_enabled' => false, 'printnode_api_key' => '' ) );
+	update_option( 'wcip_settings', array( 'automatic_enabled' => false, 'cups_endpoint' => '' ) );
 	list( $status ) = $request( add_query_arg( '_wpnonce', 'invalid', $sample_url ) );
 	if ( 403 !== $status ) { throw new RuntimeException( 'The local test route accepted an invalid nonce.' ); }
 	$order = wc_create_order();
@@ -116,7 +117,7 @@ try {
 	ob_start();
 	do_action( $column . '_custom_column', 'wcip_printed', 'manage_shop_order_posts' === $column ? $order->get_id() : $order );
 	$label = ob_get_clean();
-	if ( false === strpos( $label, '>Not printed<' ) ) { throw new RuntimeException( 'An unconfirmed invoice was labelled printed.' ); }
+	if ( false === strpos( $label, '>Awaiting confirmation<' ) || false !== strpos( $label, '>Printed<' ) ) { throw new RuntimeException( 'A prepared invoice must await physical confirmation.' ); }
 	$endpoint = rest_url( 'wc-invoice-printer/v1/printed' );
 	$options = array( 'method' => 'POST', 'headers' => array( 'Content-Type' => 'application/json' ), 'body' => wp_json_encode( array( 'job_ids' => array( (int) $job['id'] ) ) ) );
 	list( $status ) = $request( $endpoint, $options );

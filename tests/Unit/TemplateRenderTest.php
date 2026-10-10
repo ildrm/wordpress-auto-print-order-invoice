@@ -60,6 +60,21 @@ final class TemplateRenderTest extends TestCase {
 		}
 	}
 
+	public function test_label_visibility_settings_control_sender_and_recipient_phone(): void {
+		$sample = ( new InvoiceFactory( new SettingsRepository() ) )->sample( true );
+		$renderer = new HtmlRenderer( new TemplateRegistry() );
+		foreach ( array( false, true ) as $visible ) {
+			$fields = $sample->fulfillment;
+			$fields['label_show_sender'] = $visible;
+			$fields['show_shipping_phone'] = $visible;
+			$invoice = new InvoiceData( $sample->order, $sample->store, $sample->customer, $sample->items, $sample->totals, $fields, true );
+			$html = $renderer->render( $invoice, 'shipping-label' );
+			self::assertSame( $visible, false !== strpos( $html, esc_html( $sample->store['name'] ) ) );
+			self::assertSame( $visible, false !== strpos( $html, $sample->customer['shipping_phone'] ) );
+			self::assertStringContainsString( '<bdi dir="ltr">#1042</bdi>', $html );
+		}
+	}
+
 	public static function templates(): array {
 		return array( array( 'classic' ), array( 'compact' ), array( 'thermal' ) );
 	}

@@ -55,6 +55,8 @@ final class PrintWorker {
 	}
 
 	private function process_job( int $job_id ): void {
+		$pending = $this->jobs->find( $job_id );
+		if ( ! $pending || 'agent' === $pending['provider_id'] ) { return; }
 		if ( ! $this->jobs->claim( $job_id ) ) {
 			return;
 		}
@@ -68,8 +70,8 @@ final class PrintWorker {
 			if ( ! $order instanceof \WC_Order ) {
 				throw new \RuntimeException( __( 'The order no longer exists.', 'wc-invoice-printer' ) );
 			}
-			if ( 'automatic' === $job['trigger_type'] && ! $order->is_paid() ) {
-				throw new \RuntimeException( __( 'The order is no longer paid, so automatic printing was stopped.', 'wc-invoice-printer' ) );
+			if ( 'automatic' === $job['trigger_type'] && ! ( new PaymentEligibilityPolicy( new \WCInvoicePrinter\Settings\SettingsRepository() ) )->eligible( $order ) ) {
+				throw new \RuntimeException( $order->is_paid() ? __( 'This order is not eligible under the configured payment policy.', 'wc-invoice-printer' ) : __( 'The order is no longer paid, so automatic printing was stopped.', 'wc-invoice-printer' ) );
 			}
 			$template = $this->templates->get( $job['template_id'] );
 			$html     = $this->html->render( $this->invoices->from_order( $order ), $template->id );
@@ -81,15 +83,15 @@ final class PrintWorker {
 				// Refresh immediately before dispatch rather than using the snapshot
 				// that was loaded before generating the invoice.
 				$current_order = wc_get_order( (int) $job['order_id'] );
-				if ( ! $current_order instanceof \WC_Order || ! $current_order->is_paid() ) {
-					throw new \RuntimeException( __( 'The order is no longer paid, so automatic printing was stopped.', 'wc-invoice-printer' ) );
+				if ( ! $current_order instanceof \WC_Order || ! ( new PaymentEligibilityPolicy( new \WCInvoicePrinter\Settings\SettingsRepository() ) )->eligible( $current_order ) ) {
+					throw new \RuntimeException( $current_order instanceof \WC_Order && $current_order->is_paid() ? __( 'This order is not eligible under the configured payment policy.', 'wc-invoice-printer' ) : __( 'The order is no longer paid, so automatic printing was stopped.', 'wc-invoice-printer' ) );
 				}
 			}
 			$submission_started = true;
 			/* translators: %s: WooCommerce order number. */
-			$result = $provider->submit( $pdf, $job['printer_id'], (int) $job['copies'], sprintf( __( 'Invoice %s', 'wc-invoice-printer' ), $order->get_order_number() ) );
+			$result = $provider->submit( $pdf, $job['printer_id'], (int) $job['copies'], ( 'invoice' === $template->document_type ? sprintf( __( 'Invoice %s', 'wc-invoice-printer' ), $order->get_order_number() ) : sprintf( '%s %s', $template->name, $order->get_order_number() ) ) );
 			if ( ! $this->jobs->submitted( $job_id, $result->external_job_id ) ) {
-				throw new \RuntimeException( __( 'The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting.', 'wc-invoice-printer' ) );
+				throw new \RuntimeException( __( 'The provider accepted the print job, but its result could not be saved. Check CUPS before reprinting.', 'wc-invoice-printer' ) );
 			}
 		} catch ( ProviderException $exception ) {
 			$attempt = (int) ( $job['attempt_count'] ?? 1 );
@@ -117,7 +119,7 @@ final class PrintWorker {
 
 	public function interrupted( int $action_id ): void {
 		$job = $this->jobs->find_by_action( $action_id );
-		if ( $job && $this->jobs->fail( (int) $job['id'], JobStatus::UNKNOWN, 'worker_interrupted', __( 'The worker stopped before recording a result. Check PrintNode before reprinting.', 'wc-invoice-printer' ) ) ) {
+		if ( $job && $this->jobs->fail( (int) $job['id'], JobStatus::UNKNOWN, 'worker_interrupted', __( 'The worker stopped before recording a result. Check CUPS before reprinting.', 'wc-invoice-printer' ) ) ) {
 			do_action( 'wcip_print_failure', (int) $job['id'], 'worker_interrupted', JobStatus::UNKNOWN );
 		}
 	}

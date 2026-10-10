@@ -4,6 +4,21 @@ namespace WCInvoicePrinter\PrintJob;
 
 final class PrintJobRepository {
 	private string $table;
+	private array $state_cache = array();
+
+	/** Prime at most one visible admin page with two indexed history queries. */
+	public function prime_states( array $ids ): void {
+		global $wpdb;
+		$ids = array_slice( array_values( array_unique( array_filter( array_map( 'absint', $ids ) ) ) ), 0, 200 );
+		if ( ! $ids ) { return; }
+		$in = implode( ',', $ids );
+		foreach ( $ids as $id ) { $this->state_cache[ $id ] = array( 'latest' => null, 'confirmed' => null ); }
+		foreach ( array( 'latest' => 'created_at', 'confirmed' => 'printed_at' ) as $kind => $date ) {
+			$confirmed = 'confirmed' === $kind ? ' AND j.printed_at IS NOT NULL' : '';
+			$sql = "SELECT j.* FROM {$this->table} j WHERE j.order_id IN ({$in}) AND j.document_type = 'invoice'{$confirmed} AND NOT EXISTS (SELECT 1 FROM {$this->table} newer WHERE newer.order_id = j.order_id AND newer.document_type = 'invoice' AND (newer.{$date} > j.{$date} OR (newer.{$date} = j.{$date} AND newer.id > j.id)))";
+			foreach ( $wpdb->get_results( $sql, ARRAY_A ) ?: array() as $row ) { $this->state_cache[ (int) $row['order_id'] ][ $kind ] = $row; }
+		}
+	}
 
 	public function __construct() {
 		global $wpdb;
@@ -11,6 +26,7 @@ final class PrintJobRepository {
 	}
 
 	public function create( array $data ): array {
+		$this->state_cache = array();
 		global $wpdb;
 		$now = current_time( 'mysql', true );
 		$key = sanitize_text_field( $data['idempotency_key'] );
@@ -19,6 +35,7 @@ final class PrintJobRepository {
 			array(
 				'order_id'       => absint( $data['order_id'] ),
 				'trigger_type'    => sanitize_key( $data['trigger_type'] ),
+				'document_type' => sanitize_key( $data['document_type'] ?? 'invoice' ),
 				'idempotency_key' => $key,
 				'template_id'     => sanitize_key( $data['template_id'] ),
 				'provider_id'     => sanitize_key( $data['provider_id'] ),
@@ -28,7 +45,7 @@ final class PrintJobRepository {
 				'created_at'      => $now,
 				'updated_at'      => $now,
 			),
-			array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
+			array( '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
 		);
 		// A concurrent insert may have won the unique-key race. Return that job,
 		// but never pretend a database failure created a printable job.
@@ -53,14 +70,15 @@ final class PrintJobRepository {
 		return is_array( $row ) ? $row : null;
 	}
 
-	public function latest_for_order( int $order_id, ?string $trigger = null ): ?array {
+	public function latest_for_order( int $order_id, ?string $trigger = null, string $document_type = 'invoice' ): ?array {
+		if ( null === $trigger && 'invoice' === $document_type && isset( $this->state_cache[ $order_id ] ) ) { return $this->state_cache[ $order_id ]['latest']; }
 		global $wpdb;
 		if ( $trigger ) {
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-			$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND trigger_type = %s ORDER BY created_at DESC, id DESC LIMIT 1", $order_id, $trigger ), ARRAY_A );
+			$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND document_type = %s AND trigger_type = %s ORDER BY created_at DESC, id DESC LIMIT 1", $order_id, $document_type, $trigger ), ARRAY_A );
 		} else {
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-			$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d ORDER BY created_at DESC, id DESC LIMIT 1", $order_id ), ARRAY_A );
+			$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND document_type = %s ORDER BY created_at DESC, id DESC LIMIT 1", $order_id, $document_type ), ARRAY_A );
 		}
 		return is_array( $row ) ? $row : null;
 	}
@@ -75,6 +93,7 @@ final class PrintJobRepository {
 	}
 
 	public function record_confirmation( int $id, int $note_id, int $user_id ): bool {
+		$this->state_cache = array();
 		global $wpdb;
 		// Print tracking lives in this table. Never save the order or alter its dates.
 		return 1 === $wpdb->update( $this->table,
@@ -83,10 +102,11 @@ final class PrintJobRepository {
 		);
 	}
 
-	public function latest_confirmed_for_order( int $order_id ): ?array {
+	public function latest_confirmed_for_order( int $order_id, string $document_type = 'invoice' ): ?array {
+		if ( 'invoice' === $document_type && isset( $this->state_cache[ $order_id ] ) ) { return $this->state_cache[ $order_id ]['confirmed']; }
 		global $wpdb;
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND printed_at IS NOT NULL ORDER BY printed_at DESC, id DESC LIMIT 1", $order_id ), ARRAY_A );
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE order_id = %d AND document_type = %s AND printed_at IS NOT NULL ORDER BY printed_at DESC, id DESC LIMIT 1", $order_id, $document_type ), ARRAY_A );
 		return is_array( $row ) ? $row : null;
 	}
 
@@ -129,6 +149,7 @@ final class PrintJobRepository {
 	}
 
 	public function cancel( int $id ): bool {
+		$this->state_cache = array();
 		global $wpdb;
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
 		return 1 === $wpdb->query( $wpdb->prepare( "UPDATE {$this->table} SET status = %s, updated_at = %s, completed_at = %s WHERE id = %d AND status = %s", JobStatus::CANCELLED, current_time( 'mysql', true ), current_time( 'mysql', true ), $id, JobStatus::QUEUED ) );
@@ -147,7 +168,7 @@ final class PrintJobRepository {
 		global $wpdb;
 		// Browser jobs have no background action and must not be sent to a provider.
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Trusted table name.
-		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE status IN (%s, %s) AND provider_id = %s AND id > %d ORDER BY id ASC LIMIT %d", JobStatus::QUEUED, JobStatus::PROCESSING, 'printnode', $after_id, max( 1, min( 100, $limit ) ) ), ARRAY_A );
+		$rows = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$this->table} WHERE status IN (%s, %s) AND provider_id = %s AND id > %d ORDER BY id ASC LIMIT %d", JobStatus::QUEUED, JobStatus::PROCESSING, 'cups', $after_id, max( 1, min( 100, $limit ) ) ), ARRAY_A );
 		return is_array( $rows ) ? $rows : array();
 	}
 
@@ -172,6 +193,7 @@ final class PrintJobRepository {
 			$where[]  = 'trigger_type = %s';
 			$values[] = $filters['trigger'];
 		}
+		if ( ! empty( $filters['document_type'] ) && in_array( $filters['document_type'], array( 'invoice', 'shipping_label', 'packing_list' ), true ) ) { $where[] = 'document_type = %s'; $values[] = $filters['document_type']; }
 		if ( ! empty( $filters['order_id'] ) ) {
 			$where[]  = 'order_id = %d';
 			$values[] = absint( $filters['order_id'] );
@@ -187,6 +209,7 @@ final class PrintJobRepository {
 	}
 
 	private function set_status( int $id, string $status, string $expected, array $extra = array() ): bool {
+		$this->state_cache = array();
 		if ( ! in_array( $status, JobStatus::cases(), true ) || ! in_array( $expected, JobStatus::cases(), true ) ) {
 			throw new \InvalidArgumentException( 'Invalid print job status.' );
 		}

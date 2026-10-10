@@ -24,7 +24,9 @@ final class SchemaInstallationTest extends TestCase {
 	private function run_case( string $scenario ): array {
 		$script = <<<'PHP'
 define( 'ABSPATH', $argv[1] . '/' );
+define( 'ARRAY_A', 'ARRAY_A' );
 require $argv[2];
+require dirname( $argv[2] ) . '/PrintingMigration.php';
 $scenario = $argv[3];
 $options = array();
 function get_option( string $key, $default = false ) { global $options; return $options[$key] ?? $default; }
@@ -40,20 +42,25 @@ class TestRole {
 $roles = array( 'administrator' => new TestRole(), 'shop_manager' => new TestRole() );
 function get_role( string $name ) { global $roles; return $roles[$name] ?? null; }
 class TestDatabase {
+    public string $options = 'wp_options';
     public string $prefix = 'wp_';
     public string $last_error = '';
     public bool $exists = false;
     public string $mode = '';
     public array $ddl = array();
+    public array $tables = array();
+    public function get_row( string $sql, $format = null ): array { return array( 'Collation' => 'ascii_bin' ); }
     public function get_charset_collate(): string { return ''; }
     public function esc_like( string $value ): string { return addcslashes( $value, '_%\\' ); }
-    public function prepare( string $sql, string $value ): string { return str_replace( '%s', "'" . $value . "'", $sql ); }
-    public function get_var( string $sql ): ?string { $this->last_error = ''; return $this->exists ? 'wp_wc_invoice_print_jobs' : null; }
+    public function prepare( string $sql, ...$values ): string { foreach ($values as $value) { $sql = preg_replace('/%s/', "'" . $value . "'", $sql, 1); } return $sql; }
+    public function get_var( string $sql ): ?string { $this->last_error = ''; if ( false !== strpos( $sql, 'SHOW COLUMNS' ) ) { preg_match("/LIKE '([a-z_]+)'/", $sql, $column); return $this->exists ? ($column[1] ?? null) : null; } foreach ( $this->tables as $table ) { if ( false !== strpos( stripslashes( $sql ), "'" . $table . "'" ) ) { return $table; } } return $this->exists ? 'wp_wc_invoice_print_jobs' : null; }
     public function query( string $sql ): bool {
+        if ( 0 !== strpos( $sql, 'CREATE TABLE' ) && 0 !== strpos( $sql, 'ALTER TABLE' ) ) { return true; }
         $this->ddl[] = $sql;
         if ( 'thrown_failure' === $this->mode ) { throw new RuntimeException( 'CREATE failed' ); }
         if ( in_array( $this->mode, array( 'create_failure', 'activation_failure', 'alter_failure' ), true ) ) { $this->last_error = 'CREATE/ALTER denied'; return false; }
         if ( 'silent_failure' === $this->mode ) { return false; }
+        preg_match( '/CREATE TABLE ([a-z_]+)/', $sql, $match ); $this->tables[] = $match[1];
         $this->exists = true;
         $this->last_error = '';
         return true;
@@ -65,8 +72,8 @@ if ( 'alter_failure' === $scenario ) { $wpdb->exists = true; $options['wcip_db_v
 if ( 'lost_table' === $scenario ) { $options['wcip_db_version'] = '1.0.0'; }
 if ( 'missing_role' === $scenario ) { unset( $roles['shop_manager'] ); }
 if ( 'already_provisioned' === $scenario ) {
-    $roles['administrator']->caps = array( 'wcip_print_invoices' => true, 'wcip_view_print_jobs' => true, 'wcip_manage_settings' => true );
-    $roles['shop_manager']->caps = array( 'wcip_print_invoices' => true, 'wcip_view_print_jobs' => true );
+    $roles['administrator']->caps = array( 'wcip_print_invoices' => true, 'wcip_view_print_jobs' => true, 'wcip_manage_settings' => true, 'wcip_export_orders' => true, 'wcip_scan_orders' => true, 'wcip_manage_fulfillment' => true );
+    $roles['shop_manager']->caps = array( 'wcip_print_invoices' => true, 'wcip_view_print_jobs' => true, 'wcip_scan_orders' => true, 'wcip_manage_fulfillment' => true );
 }
 $exception = null;
 try {
@@ -116,25 +123,25 @@ PHP;
 		$result = $this->run_case( 'success' );
 		self::assertTrue( $result['ready'] );
 		self::assertTrue( $result['exists'] );
-		self::assertSame( '1.1.2', $result['options']['wcip_db_version'] );
-		self::assertSame( '1.0.0', $result['options']['wcip_capabilities_version'] );
+		self::assertSame( '1.4.0', $result['options']['wcip_db_version'] );
+		self::assertSame( '1.4.0', $result['options']['wcip_capabilities_version'] );
 	}
 
 	public function test_missing_table_is_repaired_even_if_a_previous_install_stamped_version(): void {
 		$result = $this->run_case( 'lost_table' );
 		self::assertTrue( $result['ready'] );
 		self::assertTrue( $result['exists'] );
-		self::assertCount( 1, $result['ddl'] );
+		self::assertCount( 6, $result['ddl'] );
 	}
 
 	public function test_missing_shop_manager_role_is_provisioned_on_a_later_request(): void {
 		$result = $this->run_case( 'missing_role' );
 		self::assertArrayNotHasKey( 'wcip_capabilities_version', $result['first_options'] );
-		self::assertSame( '1.0.0', $result['options']['wcip_capabilities_version'] );
+		self::assertSame( '1.4.0', $result['options']['wcip_capabilities_version'] );
 		self::assertTrue( $result['roles']['shop_manager']['caps']['wcip_print_invoices'] );
 		self::assertTrue( $result['roles']['shop_manager']['caps']['wcip_view_print_jobs'] );
-		self::assertCount( 1, $result['ddl'] );
-		self::assertSame( 3, $result['roles']['administrator']['writes'] );
+		self::assertCount( 6, $result['ddl'] );
+		self::assertSame( 6, $result['roles']['administrator']['writes'] );
 	}
 
 	public function test_existing_capabilities_are_not_written_again(): void {
@@ -142,6 +149,6 @@ PHP;
 		self::assertTrue( $result['ready'] );
 		self::assertSame( 0, $result['roles']['administrator']['writes'] );
 		self::assertSame( 0, $result['roles']['shop_manager']['writes'] );
-		self::assertCount( 1, $result['ddl'] );
+		self::assertCount( 6, $result['ddl'] );
 	}
 }

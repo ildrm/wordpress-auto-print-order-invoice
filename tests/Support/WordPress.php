@@ -49,7 +49,11 @@ class WP_REST_Response {
 	}
 	public function get_data() { return $this->data; }
 	public function get_status(): int { return $this->status; }
+	public function header( string $key, string $value ): void {}
 }
+
+function is_ssl(): bool { return (bool) ( $GLOBALS['wcip_test_ssl'] ?? false ); }
+function rest_get_authenticated_app_password() { return $GLOBALS['wcip_test_app_password'] ?? null; }
 
 class ActionScheduler {
 	public static bool $initialized = true;
@@ -81,7 +85,7 @@ class WC_Order {
 	public function get_item_subtotal( $item, bool $inc_tax = false, bool $round = true ): float { return 0.0; }
 	public function get_formatted_line_subtotal( $item ): string { return ''; }
 	public function get_date_created() { return null; }
-	public function get_date_paid() { return null; }
+	public function get_date_paid() { return $this->is_paid() ? '2026-10-10' : null; }
 	public function get_currency(): string { return 'USD'; }
 	public function get_formatted_billing_full_name(): string { return 'Test Customer'; }
 	public function get_billing_company(): string { return ''; }
@@ -102,7 +106,8 @@ class WC_Order {
 
 class WC_Order_Item_Product {}
 
-function wc_get_order( $id ) { return $GLOBALS['wcip_test_orders'][ (int) $id ] ?? false; }
+function wc_get_order( $id ) { return isset( $GLOBALS['wcip_order_lookup'] ) ? ( $GLOBALS['wcip_order_lookup'] )( (int) $id ) : ( $GLOBALS['wcip_test_orders'][ (int) $id ] ?? false ); }
+function wc_get_orders( array $args ): array { return isset( $GLOBALS['wcip_order_query'] ) ? ( $GLOBALS['wcip_order_query'] )( $args ) : array(); }
 function get_current_user_id(): int { return $GLOBALS['wcip_test_user_id'] ?? 42; }
 function wp_delete_comment( int $id, bool $force = false ): bool { unset( $GLOBALS['wcip_test_notes'][ $id ] ); return true; }
 function clean_comment_cache( int $id ): void {}

@@ -1,0 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
+<?php if ( ( $invoice->fulfillment['show_paid_date'] ?? true ) && ( $invoice->fulfillment['payment_confirmed'] ?? true ) && '' !== $invoice->order['paid_date'] ) : ?><p><strong><?php esc_html_e( 'Payment date', 'wc-invoice-printer' ); ?>:</strong> <?php echo esc_html( $invoice->order['paid_date'] ); ?></p><?php endif; ?>
+<?php if ( ( $invoice->fulfillment['show_shipping_phone'] ?? true ) && ( $invoice->customer['shipping_phone'] ?? '' ) ) : ?><p><strong><?php esc_html_e( 'Recipient phone', 'wc-invoice-printer' ); ?>:</strong> <bdi dir="ltr"><?php echo esc_html( $invoice->customer['shipping_phone'] ); ?></bdi></p><?php endif; ?>
+<?php foreach ( $invoice->customer['recipient']['extra'] ?? array() as $name => $value ) : ?><p><?php echo esc_html( $name . ': ' . $value ); ?></p><?php endforeach; ?>

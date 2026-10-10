@@ -25,7 +25,7 @@ final class RestControllerTest extends TestCase {
 	protected function setUp(): void {
 		$this->database = new InMemoryWpdb();
 		$GLOBALS['wpdb'] = $this->database;
-		$GLOBALS['wcip_test_options'] = array( 'wcip_settings' => array( 'printnode_api_key' => 'secret', 'printnode_printer_id' => '123' ) );
+		$GLOBALS['wcip_test_options'] = array( 'wcip_settings' => array( 'cups_endpoint' => 'https://cups.example.test', 'cups_printer_id' => '123' ) );
 		$GLOBALS['wcip_test_capabilities'] = array();
 		$GLOBALS['wcip_test_routes'] = array();
 		$GLOBALS['wcip_test_orders'] = array( 1 => new \WC_Order( 1 ), 2 => new \WC_Order( 2 ) );
@@ -43,7 +43,7 @@ final class RestControllerTest extends TestCase {
 
 	private function request( array $changes = array() ): \WP_REST_Request {
 		$request = new \WP_REST_Request( 'POST' );
-		$request->set_body_params( array_merge( array( 'order_ids' => array( 1 ), 'template_id' => 'classic', 'provider_id' => 'printnode', 'printer_id' => '123', 'copies' => 1 ), $changes ) );
+		$request->set_body_params( array_merge( array( 'order_ids' => array( 1 ), 'template_id' => 'classic', 'provider_id' => 'cups', 'printer_id' => '123', 'copies' => 1 ), $changes ) );
 		return $request;
 	}
 
@@ -66,7 +66,7 @@ final class RestControllerTest extends TestCase {
 	}
 
 	public static function invalid_print_requests(): array {
-		return array( array( array( 'order_ids' => array() ) ), array( array( 'order_ids' => '1' ) ), array( array( 'order_ids' => array_fill( 0, 51, 1 ) ) ), array( array( 'order_ids' => array( -1 ) ) ), array( array( 'order_ids' => array( 1.5 ) ) ), array( array( 'template_id' => 'missing' ) ), array( array( 'template_id' => array() ) ), array( array( 'provider_id' => 'browser' ) ), array( array( 'printer_id' => '0' ) ), array( array( 'printer_id' => '-123' ) ), array( array( 'copies' => 0 ) ), array( array( 'copies' => 21 ) ), array( array( 'copies' => 1.5 ) ) );
+		return array( array( array( 'order_ids' => array() ) ), array( array( 'order_ids' => '1' ) ), array( array( 'order_ids' => array_fill( 0, 51, 1 ) ) ), array( array( 'order_ids' => array( -1 ) ) ), array( array( 'order_ids' => array( 1.5 ) ) ), array( array( 'template_id' => 'missing' ) ), array( array( 'template_id' => array() ) ), array( array( 'provider_id' => 'browser' ) ), array( array( 'printer_id' => '../bad' ) ), array( array( 'printer_id' => '-123' ) ), array( array( 'copies' => 0 ) ), array( array( 'copies' => 21 ) ), array( array( 'copies' => 1.5 ) ) );
 	}
 
 	public function test_draft_and_trashed_orders_cannot_be_printed(): void {
@@ -90,7 +90,7 @@ final class RestControllerTest extends TestCase {
 	}
 
 	public function test_missing_credentials_do_not_create_jobs(): void {
-		$this->settings->update( array( 'printnode_api_key' => '' ) );
+		$this->settings->update( array( 'cups_endpoint' => '' ) );
 		$response = $this->controller->manual_print( $this->request() );
 		self::assertInstanceOf( \WP_Error::class, $response );
 		self::assertSame( 'wcip_not_configured', $response->get_error_code() );
@@ -173,7 +173,7 @@ final class RestControllerTest extends TestCase {
 
 	public function test_unexpected_provider_exception_does_not_expose_internals(): void {
 		$provider = $this->createMock( PrintProviderInterface::class );
-		$provider->method( 'id' )->willReturn( 'printnode' );
+		$provider->method( 'id' )->willReturn( 'cups' );
 		$provider->method( 'test_connection' )->willThrowException( new \RuntimeException( 'secret password /private/path' ) );
 		$this->providers->register( $provider );
 		$response = $this->controller->test_connection();

@@ -75,7 +75,7 @@ final class ReadOnlyDataTest extends TestCase {
 	public static function serialized_models(): array {
 		return array(
 			array( 'invoice', array( 'order', 'store', 'customer', 'items', 'totals', 'fulfillment', 'rtl' ) ),
-			array( 'template', array( 'id', 'name', 'description', 'paper_size', 'orientation', 'supports_rtl', 'path' ) ),
+			array( 'template', array( 'id', 'name', 'description', 'paper_size', 'orientation', 'supports_rtl', 'path', 'document_type' ) ),
 			array( 'submission', array( 'external_job_id', 'state' ) ),
 		);
 	}

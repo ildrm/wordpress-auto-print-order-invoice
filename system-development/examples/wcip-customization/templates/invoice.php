@@ -49,6 +49,8 @@ td { border-bottom:1px solid #dcdcde; padding:10px 6px; vertical-align:top }
 <?php echo esc_html( $invoice->fulfillment['shipping_method'] ); ?>
 <?php if ( $invoice->customer['shipping_address'] ) : ?><br><?php echo nl2br( esc_html( $invoice->customer['shipping_address'] ) ); ?><?php endif; ?>
 </td></tr></table>
+<?php if ( ! empty( $invoice->order['purchase_order'] ) ) : ?><p><strong><?php esc_html_e( 'Purchase order', 'wcip-customization' ); ?></strong> <bdi dir="ltr"><?php echo esc_html( $invoice->order['purchase_order'] ); ?></bdi></p><?php endif; ?>
+<?php include WCIP_PATH . 'templates/shared/details.php'; ?>
 <table><thead><tr>
 <th><?php esc_html_e( 'Item', 'wc-invoice-printer' ); ?></th>
 <th><?php esc_html_e( 'SKU', 'wc-invoice-printer' ); ?></th>
@@ -60,8 +62,8 @@ td { border-bottom:1px solid #dcdcde; padding:10px 6px; vertical-align:top }
 </tr></thead><tbody>
 <?php foreach ( $invoice->items as $item ) : ?><tr>
 <td><div class="item-name"><?php echo esc_html( $item['name'] ); ?></div><div class="item-meta"><?php echo esc_html( $item['variation'] ); ?></div></td>
-<td><?php echo esc_html( $item['sku'] ); ?></td>
-<td class="num"><?php echo esc_html( (string) $item['quantity'] ); ?></td>
+<td><bdi dir="ltr"><?php echo esc_html( $item['sku'] ); ?></bdi></td>
+<td class="num"><bdi dir="ltr"><?php echo esc_html( (string) $item['quantity'] ); ?></bdi></td>
 <td class="num"><?php echo wp_kses_post( $item['unit_price'] ); ?></td>
 <td class="num"><?php echo wp_kses_post( $item['discount'] ); ?></td>
 <td class="num"><?php echo wp_kses_post( $item['tax'] ); ?></td>
@@ -74,5 +76,5 @@ td { border-bottom:1px solid #dcdcde; padding:10px 6px; vertical-align:top }
 </table>
 <?php if ( $invoice->fulfillment['note'] ) : ?><div class="notes"><strong><?php esc_html_e( 'Customer note', 'wc-invoice-printer' ); ?></strong><br><?php echo nl2br( esc_html( $invoice->fulfillment['note'] ) ); ?></div><?php endif; ?>
 <div class="footer"><bdi dir="ltr"><?php echo esc_html( $invoice->store['phone'] ); ?> · <?php echo esc_html( $invoice->store['email'] ); ?></bdi></div>
-<?php if ( ! empty( $invoice->order["purchase_order"] ) ) : ?><p><strong><?php esc_html_e( "Purchase order", "wcip-customization" ); ?></strong> <bdi dir="ltr"><?php echo esc_html( $invoice->order["purchase_order"] ); ?></bdi></p><?php endif; ?>
+<?php include WCIP_PATH . 'templates/shared/code.php'; ?>
 </body></html>

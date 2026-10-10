@@ -42,6 +42,7 @@ td { border-bottom:1px solid #ddd; padding:5px 4px; vertical-align:top }
 <?php echo esc_html( $invoice->fulfillment['shipping_method'] ); ?>
 <?php if ( $invoice->customer['shipping_address'] ) : ?><br><?php echo nl2br( esc_html( $invoice->customer['shipping_address'] ) ); ?><?php endif; ?>
 </td></tr></table>
+<?php include WCIP_PATH . 'templates/shared/details.php'; ?>
 <table><thead><tr>
 <th><?php esc_html_e( 'Description', 'wc-invoice-printer' ); ?></th>
 <th><?php esc_html_e( 'SKU', 'wc-invoice-printer' ); ?></th>
@@ -51,8 +52,8 @@ td { border-bottom:1px solid #ddd; padding:5px 4px; vertical-align:top }
 </tr></thead><tbody>
 <?php foreach ( $invoice->items as $item ) : ?><tr>
 <td><strong><?php echo esc_html( $item['name'] ); ?></strong><div class="meta"><?php echo esc_html( $item['variation'] ); ?></div></td>
-<td><?php echo esc_html( $item['sku'] ); ?></td>
-<td class="num"><?php echo esc_html( (string) $item['quantity'] ); ?></td>
+<td><bdi dir="ltr"><?php echo esc_html( $item['sku'] ); ?></bdi></td>
+<td class="num"><bdi dir="ltr"><?php echo esc_html( (string) $item['quantity'] ); ?></bdi></td>
 <td class="num"><?php echo wp_kses_post( $item['unit_price'] ); ?></td>
 <td class="num"><?php echo wp_kses_post( $item['total'] ); ?></td>
 </tr><?php endforeach; ?>
@@ -63,4 +64,5 @@ td { border-bottom:1px solid #ddd; padding:5px 4px; vertical-align:top }
 </td><td><table class="totals">
 <?php foreach ( $invoice->totals as $total ) : ?><tr><td><?php echo esc_html( $total['label'] ); ?></td><td class="num"><?php echo wp_kses_post( $total['value'] ); ?></td></tr><?php endforeach; ?>
 </table></td></tr></table>
+<?php include WCIP_PATH . 'templates/shared/code.php'; ?>
 </body></html>

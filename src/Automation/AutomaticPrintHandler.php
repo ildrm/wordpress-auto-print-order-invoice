@@ -14,7 +14,7 @@ final class AutomaticPrintHandler {
 	public function payment_complete( int $order_id ): void {
 		try {
 			$order = wc_get_order( $order_id );
-			if ( $order instanceof \WC_Order ) {
+			if ( $order instanceof \WC_Order && $this->after_cutoff( $order ) ) {
 				$this->jobs->create_automatic( $order );
 			}
 		} catch ( \Throwable $exception ) {
@@ -25,12 +25,17 @@ final class AutomaticPrintHandler {
 	public function paid_status_fallback( int $order_id, string $from, string $to, \WC_Order $order ): void {
 		try {
 			$enabled = apply_filters( 'wcip_enable_paid_status_fallback', true, $order, $from, $to );
-			if ( $enabled && $order->is_paid() && in_array( $to, wc_get_is_paid_statuses(), true ) ) {
+			if ( $enabled && $order->is_paid() && in_array( $to, wc_get_is_paid_statuses(), true ) && $this->after_cutoff( $order ) ) {
 				$this->jobs->create_automatic( $order );
 			}
 		} catch ( \Throwable $exception ) {
 			$this->report_error( $order_id, $exception );
 		}
+	}
+
+	private function after_cutoff( \WC_Order $order ): bool {
+		$paid = $order->get_date_paid();
+		return ! $paid instanceof \DateTimeInterface || $paid->getTimestamp() >= (int) get_option( 'wcip_discovery_since', 0 );
 	}
 
 	private function report_error( int $order_id, \Throwable $exception ): void {

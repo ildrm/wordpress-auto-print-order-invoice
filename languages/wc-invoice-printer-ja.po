@@ -1,1043 +1,1007 @@
-# Copyright (C) 2026 WooCommerce Invoice Printer contributors
-# Distributed under GPL-2.0-or-later.
 msgid ""
-msgstr ""
-"Project-Id-Version: WooCommerce Invoice Printer 1.1.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-07 09:00+0330\n"
-"PO-Revision-Date: 2026-10-07 09:00+0330\n"
-"Last-Translator: WooCommerce Invoice Printer contributors\n"
-"Language-Team: Japanese\n"
-"Language: ja\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Domain: wc-invoice-printer\n"
+msgstr "Project-Id-Version: WooCommerce Invoice Printer 1.4.0\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-10 12:00+0330\nPO-Revision-Date: 2026-10-10 12:00+0330\nLast-Translator: WooCommerce Invoice Printer contributors\nLanguage-Team: Japanese\nLanguage: ja\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nX-Domain: wc-invoice-printer\n"
 
-#. Plugin Name of the plugin
-#: wc-invoice-printer.php
-msgid "WooCommerce Invoice Printer"
-msgstr "WooCommerce 請求書プリンター"
-
-#. Description of the plugin
-#: wc-invoice-printer.php
-msgid "Secure manual and automatic invoice printing for WooCommerce."
-msgstr "WooCommerce の請求書を安全に手動・自動印刷します。"
-
-#: src/Admin/AdminPage.php:24
-#: src/Admin/AdminPage.php:92
-msgid "Invoice Printer"
-msgstr "請求書プリンター"
-
-#: src/Admin/AdminPage.php:42
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Working…"
-msgstr "処理中…"
-
-#: src/Admin/AdminPage.php:43
-#: src/Admin/OrderIntegration.php:87
-#: src/Admin/PreviewController.php:48
-#: src/PrintJob/PrintJobService.php:84
-msgid "Choose between 1 and 20 copies."
-msgstr "部数は1～20の範囲で選択してください。"
-
-#: src/Admin/AdminPage.php:44
-msgid "Something went wrong. Check the details and try again."
-msgstr "エラーが発生しました。詳細を確認して再試行してください。"
-
-#: src/Admin/AdminPage.php:45
-msgid "Choose a printer"
-msgstr "プリンターを選択"
-
-#: src/Admin/AdminPage.php:46
-msgid "No printers were found. Confirm that the PrintNode client is online."
-msgstr "プリンターが見つかりません。PrintNode クライアントがオンラインか確認してください。"
-
-#: src/Admin/AdminPage.php:47
-msgid "Submitted to PrintNode."
-msgstr "PrintNode に送信しました。"
-
-#: src/Admin/AdminPage.php:48
-msgid "PrintNode connection verified."
-msgstr "PrintNode への接続を確認しました。"
-
-#. translators: %d: number of printers returned by PrintNode.
-#: src/Admin/AdminPage.php:50
-#, php-format
-msgid "%d printer(s) found."
-msgstr "見つかったプリンター数：%d"
-
-#. translators: %d: number of invoices added to the print queue.
-#: src/Admin/AdminPage.php:52
 #, php-format
 msgid "%d invoice(s) queued."
 msgstr "キューに追加した請求書数：%d"
 
-#: src/Admin/AdminPage.php:58
-msgid "You are not allowed to change these settings."
-msgstr "この設定を変更する権限がありません。"
+#, php-format
+msgid "%d printer(s) found."
+msgstr "見つかったプリンター数：%d"
 
-#: src/Admin/AdminPage.php:61
-msgid "Invalid settings input."
-msgstr "設定の入力が無効です。"
+msgid "24 Market Street, Portland, OR"
+msgstr "米国オレゴン州ポートランド、マーケット通り24番地"
 
-#: src/Admin/AdminPage.php:64
-msgid "Invalid settings section."
-msgstr "設定セクションが無効です。"
+msgid "840 Evergreen Terrace, Seattle, WA"
+msgstr "米国ワシントン州シアトル、エバーグリーン通り840番地"
 
-#: src/Admin/AdminPage.php:89
-msgid "General"
-msgstr "一般"
+msgid "A polished full invoice for office printers."
+msgstr "オフィス用プリンター向けの洗練された詳細な請求書。"
 
-#: src/Admin/AdminPage.php:89
-msgid "Templates"
-msgstr "テンプレート"
+msgid "A print job could not be queued. Review Print Jobs before trying again."
+msgstr "印刷ジョブをキューに追加できませんでした。再試行する前に印刷ジョブを確認してください。"
 
-#: src/Admin/AdminPage.php:89
-msgid "Automatic Printing"
-msgstr "自動印刷"
+msgid "A secure PDF working directory could not be created."
+msgstr "安全な PDF 作業ディレクトリを作成できませんでした。"
 
-#: src/Admin/AdminPage.php:89
-msgid "Printers"
-msgstr "プリンター"
+msgid "A5 invoice for smaller sheets."
+msgstr "小さい用紙用のA5請求書。"
 
-#: src/Admin/AdminPage.php:89
-msgid "Print Jobs"
-msgstr "印刷ジョブ"
-
-#: src/Admin/AdminPage.php:92
-msgid "Create consistent invoices and send them to the right printer."
-msgstr "統一された請求書を作成し、適切なプリンターに送信します。"
-
-#: src/Admin/AdminPage.php:93
-msgid "Settings saved."
-msgstr "設定を保存しました。"
-
-#: src/Admin/AdminPage.php:94
-msgid "Automatic printing remains disabled until a PrintNode credential and printer are configured."
-msgstr "PrintNode の認証情報とプリンターを設定するまで、自動印刷は無効のままです。"
-
-#: src/Admin/AdminPage.php:95
-msgid "Invoice Printer sections"
-msgstr "請求書プリンターのセクション"
-
-#: src/Admin/AdminPage.php:116
-msgid "Invoice identity"
-msgstr "請求書の基本情報"
-
-#: src/Admin/AdminPage.php:116
-msgid "Business details shown to customers on every invoice."
-msgstr "すべての請求書でお客様に表示する事業者情報。"
-
-#: src/Admin/AdminPage.php:117
-msgid "Business name"
-msgstr "事業者名"
-
-#: src/Admin/AdminPage.php:117
-msgid "Logo URL"
-msgstr "ロゴの URL"
-
-#: src/Admin/AdminPage.php:117
-msgid "Phone"
-msgstr "電話番号"
-
-#: src/Admin/AdminPage.php:117
-msgid "Email"
-msgstr "メールアドレス"
-
-#: src/Admin/AdminPage.php:117
-msgid "Business and tax details"
-msgstr "事業者・税務情報"
-
-#: src/Admin/AdminPage.php:118
-msgid "Manual printing defaults"
-msgstr "手動印刷の既定値"
-
-#: src/Admin/AdminPage.php:118
-msgid "Include customer notes on invoices"
-msgstr "請求書にお客様のメモを含める"
-
-#: src/Admin/AdminPage.php:122
-msgid "Choose an invoice layout"
-msgstr "請求書のレイアウトを選択"
-
-#: src/Admin/AdminPage.php:122
-msgid "Preview uses realistic sample data and can switch to RTL."
-msgstr "プレビューでは実際に近いサンプルデータを使用し、右から左への表示に切り替えられます。"
-
-#: src/Admin/AdminPage.php:123
-msgid "Selected"
-msgstr "選択済み"
-
-#: src/Admin/AdminPage.php:123
-#: src/Admin/OrderIntegration.php:56
-msgid "Preview"
-msgstr "プレビュー"
-
-#: src/Admin/AdminPage.php:123
-msgid "RTL preview"
-msgstr "右から左のプレビュー"
-
-#: src/Admin/AdminPage.php:123
-msgid "Select"
-msgstr "選択"
-
-#: src/Admin/AdminPage.php:124
-msgid "Save selected template"
-msgstr "選択したテンプレートを保存"
-
-#: src/Admin/AdminPage.php:129
-msgid "Automatic printing"
-msgstr "自動印刷"
-
-#: src/Admin/AdminPage.php:129
 msgid "After verified payment, queue an invoice without delaying checkout."
 msgstr "支払い確認後、購入手続きを遅らせずに請求書をキューに追加します。"
 
-#: src/Admin/AdminPage.php:129
-msgid "Enabled"
-msgstr "有効"
+msgid "Agent queue"
+msgstr "エージェントキュー"
 
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:153
-msgid "Provider"
-msgstr "プロバイダー"
+msgid "Agent user ID"
+msgstr "エージェントユーザーID"
 
-#: src/Admin/AdminPage.php:129
-msgid "Connection"
-msgstr "接続"
+msgid "Alex Morgan"
+msgstr "アレックス・モーガン"
 
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:140
-msgid "Credential configured"
-msgstr "認証情報を設定済み"
-
-#: src/Admin/AdminPage.php:129
-msgid "Not configured"
-msgstr "未設定"
-
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:153
-msgid "Printer"
-msgstr "プリンター"
-
-#: src/Admin/AdminPage.php:129
-msgid "No printer selected"
-msgstr "プリンター未選択"
-
-#: src/Admin/AdminPage.php:129
-#: src/Admin/AdminPage.php:179
-#: src/Admin/OrderIntegration.php:56
-msgid "Copies"
-msgstr "部数"
-
-#: src/Admin/AdminPage.php:129
-msgid "Trigger"
-msgstr "トリガー"
-
-#: src/Admin/AdminPage.php:129
-msgid "Payment completed"
-msgstr "支払い完了"
-
-#: src/Admin/AdminPage.php:129
-msgid "Only orders WooCommerce confirms as paid are eligible."
-msgstr "WooCommerce が支払い済みと確認した注文のみが対象です。"
-
-#: src/Admin/AdminPage.php:140
-msgid "PrintNode connection"
-msgstr "PrintNode 接続"
-
-#: src/Admin/AdminPage.php:140
-msgid "Invoice PDFs contain customer data and are sent to PrintNode when this destination is used."
-msgstr "請求書 PDF にはお客様の情報が含まれます。この出力先を使用すると PrintNode に送信されます。"
-
-#: src/Admin/AdminPage.php:140
-msgid "Not connected"
-msgstr "未接続"
-
-#: src/Admin/AdminPage.php:140
-msgid "Managed externally with WCIP_PRINTNODE_API_KEY; it cannot be edited here."
-msgstr "WCIP_PRINTNODE_API_KEY により外部で管理されています。ここでは編集できません。"
-
-#: src/Admin/AdminPage.php:140
-msgid "The stored key is never displayed or returned to the browser."
-msgstr "保存したキーは表示されず、ブラウザーにも返されません。"
-
-#: src/Admin/AdminPage.php:141
-msgid "Replace API key"
-msgstr "API キーを変更"
-
-#: src/Admin/AdminPage.php:141
-msgid "API key"
-msgstr "API キー"
-
-#: src/Admin/AdminPage.php:141
-msgid "Save a new key before testing the connection. Leave the field blank to retain the existing credential."
-msgstr "接続をテストする前に新しいキーを保存してください。現在の認証情報を保持するには、空欄のままにしてください。"
-
-#: src/Admin/AdminPage.php:143
-msgid "Test connection"
-msgstr "接続をテスト"
-
-#: src/Admin/AdminPage.php:143
-msgid "Refresh printers"
-msgstr "プリンターを更新"
-
-#: src/Admin/AdminPage.php:143
-msgid "Default PrintNode printer"
-msgstr "既定の PrintNode プリンター"
-
-#: src/Admin/AdminPage.php:143
-msgid "Refresh to load printers"
-msgstr "更新してプリンターを読み込む"
-
-#: src/Admin/AdminPage.php:143
-msgid "Print test page"
-msgstr "テストページを印刷"
-
-#: src/Admin/AdminPage.php:144
-msgid "Save printer settings"
-msgstr "プリンター設定を保存"
-
-#: src/Admin/AdminPage.php:149
-msgid "You are not allowed to view print jobs."
-msgstr "印刷ジョブを表示する権限がありません。"
-
-#: src/Admin/AdminPage.php:151
-msgid "Print jobs"
-msgstr "印刷ジョブ"
-
-#: src/Admin/AdminPage.php:151
-msgid "Submitted means PrintNode accepted the PDF or the browser invoice was prepared. It does not confirm paper output."
-msgstr "「送信済み」は PrintNode が PDF を受け付けた、またはブラウザー用の請求書が準備されたことを意味します。紙への印刷完了を確認するものではありません。"
-
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Status"
-msgstr "状態"
-
-#: src/Admin/AdminPage.php:151
 msgid "All"
 msgstr "すべて"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Source"
-msgstr "作成元"
+msgid "All invoice print states"
+msgstr "すべての請求書印刷状態"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Automatic"
-msgstr "自動"
+msgid "Allowed destination hostname"
+msgstr "許可する送信先ホスト名"
 
-#: src/Admin/AdminPage.php:151
-#: src/Admin/AdminPage.php:153
-msgid "Manual"
-msgstr "手動"
-
-#: src/Admin/AdminPage.php:151
-msgid "Order ID"
-msgstr "注文 ID"
-
-#: src/Admin/AdminPage.php:151
-msgid "Filter"
-msgstr "絞り込む"
-
-#: src/Admin/AdminPage.php:152
-msgid "No print jobs yet"
-msgstr "印刷ジョブはまだありません"
-
-#: src/Admin/AdminPage.php:152
-msgid "Manual and automatic jobs will appear here with their delivery status."
-msgstr "手動・自動のジョブとその送信状態がここに表示されます。"
-
-#: src/Admin/AdminPage.php:153
-msgid "Order"
-msgstr "注文"
-
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:56
-msgid "Template"
-msgstr "テンプレート"
-
-#: src/Admin/AdminPage.php:153
 msgid "Attempts"
 msgstr "試行回数"
 
-#: src/Admin/AdminPage.php:153
-msgid "Updated"
-msgstr "更新日時"
+msgid "Automatic"
+msgstr "自動"
 
-#: src/Admin/AdminPage.php:153
-msgid "Details"
-msgstr "詳細"
+msgid "Automatic Printing"
+msgstr "自動印刷"
 
-#: src/Admin/AdminPage.php:153
-#: src/PrintJob/PrintConfirmationService.php:35
+msgid "Automatic eligibility"
+msgstr "自動印刷の条件"
+
+msgid "Automatic job:"
+msgstr "自動ジョブ："
+
+msgid "Automatic printing"
+msgstr "自動印刷"
+
+msgid "Automatic printing remains disabled until a print destination is configured."
+msgstr "印刷先が設定されるまで自動印刷は無効です。"
+
+msgid "Automatic printing uses the local print agent or a self-hosted CUPS server. Browser printing uses your print dialog."
+msgstr "自動印刷はローカルエージェントまたは自前のCUPSサーバーを使用します。ブラウザー印刷は印刷ダイアログを使用します。"
+
+msgid "Awaiting confirmation"
+msgstr "確認待ち"
+
+msgid "Barcode & integrations"
+msgstr "バーコードと連携"
+
+msgid "Barcode scanner"
+msgstr "バーコードスキャナー"
+
+msgid "Bill to"
+msgstr "請求先"
+
 msgid "Browser"
 msgstr "ブラウザー"
 
-#: src/Admin/AdminPage.php:153
-msgid "View"
-msgstr "表示"
+msgid "Browser output is combined into one document. CUPS and the print agent create controlled individual jobs."
+msgstr "ブラウザー出力は一つの文書に統合されます。CUPSとエージェントは管理された個別ジョブを作成します。"
 
-#: src/Admin/AdminPage.php:153
-msgid "External job ID"
-msgstr "外部ジョブ ID"
+msgid "Browser print dialog"
+msgstr "ブラウザーの印刷ダイアログ"
 
-#: src/Admin/AdminPage.php:153
-msgid "Error"
-msgstr "エラー"
+msgid "Business and tax details"
+msgstr "事業者・税務情報"
 
-#: src/Admin/AdminPage.php:153
+msgid "Business details shown to customers on every invoice."
+msgstr "すべての請求書でお客様に表示する事業者情報。"
+
+msgid "Business name"
+msgstr "事業者名"
+
+msgid "Business registration and tax details"
+msgstr "事業者の登録・税務情報"
+
+msgid "CUPS connection"
+msgstr "CUPS 接続"
+
+msgid "CUPS connection verified."
+msgstr "CUPS への接続を確認しました。"
+
+msgid "CUPS did not accept the requested print options. Check its queue before reprinting."
+msgstr "CUPSは印刷オプションを受け入れませんでした。再印刷前にキューを確認してください。"
+
+msgid "CUPS open-source automatic printing"
+msgstr "CUPSオープンソース自動印刷"
+
+msgid "CUPS password"
+msgstr "CUPSパスワード"
+
+msgid "CUPS printers"
+msgstr "CUPS プリンター"
+
+msgid "CUPS returned an invalid response. Check its queue before reprinting."
+msgstr "CUPSが無効な応答を返しました。再印刷前にキューを確認してください。"
+
+msgid "CUPS server address"
+msgstr "CUPSサーバーアドレス"
+
+msgid "CUPS username"
+msgstr "CUPSユーザー名"
+
+#, php-format
+msgid "CUPS: %s"
+msgstr "CUPS：%s"
+
 msgid "Cancel queued job"
 msgstr "待機中のジョブをキャンセル"
 
-#: src/Admin/AdminPage.php:153
-msgid "Retry if safe"
-msgstr "安全な場合に再試行"
+msgid "Cancelled"
+msgstr "キャンセル済み"
 
-#: src/Admin/AdminPage.php:158
-#: src/Admin/PreviewController.php:34
-msgid "You are not allowed to print invoices."
-msgstr "請求書を印刷する権限がありません。"
+msgid "Choose a printer"
+msgstr "プリンターを選択"
 
-#: src/Admin/AdminPage.php:162
-#: src/Admin/PreviewController.php:58
-msgid "Select no more than 50 orders."
-msgstr "選択できる注文は50件までです。"
+msgid "Choose a valid invoice template."
+msgstr "有効な請求書テンプレートを選択してください。"
 
-#: src/Admin/AdminPage.php:164
-#: src/Admin/PreviewController.php:60
+msgid "Choose a valid print destination."
+msgstr "有効な印刷先を選択してください。"
+
+msgid "Choose a valid printer."
+msgstr "有効なプリンターを選択してください。"
+
+msgid "Choose a valid template, printer, destination, and number of copies."
+msgstr "有効なテンプレート、プリンター、出力先、部数を選択してください。"
+
+msgid "Choose an invoice layout"
+msgstr "請求書のレイアウトを選択"
+
+msgid "Choose between 1 and 20 copies."
+msgstr "部数は1～20の範囲で選択してください。"
+
+msgid "Choose local printers in your browser dialog. The list below contains shared CUPS queues. Install missing local printers in your operating system."
+msgstr "ローカルプリンターはブラウザーのダイアログで選択します。下の一覧はCUPS共有キューです。不足するプリンターをOSに追加してください。"
+
+msgid "Choose your local printer in the browser dialog. No API key is required."
+msgstr "ブラウザーの印刷ダイアログでローカルプリンターを選択してください。API キーは不要です。"
+
+msgid "Classic"
+msgstr "クラシック"
+
+msgid "Classic A5"
+msgstr "クラシック A5"
+
+msgid "Close print dialog"
+msgstr "印刷ダイアログを閉じる"
+
+msgid "Code format"
+msgstr "コード形式"
+
+msgid "Color: Midnight / Size: Large"
+msgstr "色：ミッドナイトブルー / サイズ：大"
+
+msgid "Compact"
+msgstr "コンパクト"
+
+msgid "Configure a valid HTTPS CUPS server address."
+msgstr "有効なHTTPS CUPSサーバーアドレスを設定してください。"
+
+msgid "Configure the CUPS credential before printing."
+msgstr "印刷する前に CUPS の認証情報を設定してください。"
+
+msgid "Configure the CUPS password before printing."
+msgstr "印刷前にCUPSパスワードを設定してください。"
+
+msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
+msgstr "用紙への出力を確認してから確定してください。印刷ダイアログを閉じても、印刷の確認にはなりません。"
+
+msgid "Confirm printed"
+msgstr "印刷済みを確認"
+
+msgid "Connect CUPS before printing."
+msgstr "印刷する前に CUPS に接続してください。"
+
+msgid "Connection"
+msgstr "接続"
+
+msgid "Copies"
+msgstr "部数"
+
+msgid "Create a user with the Print agent role and an Application Password. Pair its user ID and queue here; configure the same queue in the local agent. Keep the computer awake."
+msgstr "印刷エージェント権限のユーザーとアプリケーションパスワードを作成します。ここでユーザーIDとキューを登録し、ローカル側も同じキューを設定してください。コンピューターをスリープさせないでください。"
+
+msgid "Create consistent invoices and send them to the right printer."
+msgstr "統一された請求書を作成し、適切なプリンターに送信します。"
+
+msgid "Credit card"
+msgstr "クレジットカード"
+
+msgid "Customer"
+msgstr "お客様"
+
+msgid "Customer note"
+msgstr "お客様のメモ"
+
+msgid "Date"
+msgstr "日付"
+
+msgid "Default CUPS printer"
+msgstr "既定の CUPS プリンター"
+
+msgid "Delivered"
+msgstr "配達済み"
+
+msgid "Dense and readable for high-volume operations."
+msgstr "大量の処理に適した、コンパクトで読みやすいレイアウト。"
+
+msgid "Description"
+msgstr "説明"
+
+msgid "Destination"
+msgstr "出力先"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "Diagnostics"
+msgstr "診断"
+
+msgid "Discount"
+msgstr "割引"
+
+msgid "Discount:"
+msgstr "割引："
+
+msgid "Discovery interval in seconds 300 to 3600"
+msgstr "検出間隔 300～3600秒"
+
+#, php-format
+msgid "Document printed: %1$s. Job #%2$d; confirmed by the operator."
+msgstr "印刷済み文書：%1$s。ジョブ #%2$d、担当者が確認。"
+
+msgid "Document reference"
+msgstr "文書参照コード"
+
+msgid "Document timezone"
+msgstr "文書のタイムゾーン"
+
+msgid "Document type"
+msgstr "文書の種類"
+
+msgid "Documents & shipping"
+msgstr "文書と配送"
+
+msgid "Eligible"
+msgstr "対象"
+
+msgid "Eligible without an invoice job"
+msgstr "対象で請求書ジョブなし"
+
+msgid "Email"
+msgstr "メールアドレス"
+
+msgid "Enable generic webhook export"
+msgstr "汎用Webhookエクスポートを有効化"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Enabling automation starts discovery from that time. Older payments require explicit preview and selection. A gateway adapter may be needed for partial payments or missing payment dates."
+msgstr "有効化時点から検出します。過去の支払はプレビューと明示選択が必要です。部分払い・日時欠落には決済アダプターが必要な場合があります。"
+
+msgid "Enqueue selected missing invoices"
+msgstr "選択した未処理請求書をキューへ"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Existing job"
+msgstr "既存ジョブ"
+
+msgid "Export history"
+msgstr "エクスポート履歴"
+
+msgid "Export on authorized scan once per reference"
+msgstr "認証済みスキャン時に参照ごとに一度送信"
+
+msgid "Export on confirmed packed transition"
+msgstr "梱包済みへの確定遷移時に送信"
+
+msgid "Export scanned order"
+msgstr "スキャンした注文を送信"
+
+msgid "Exports are off by default. The receiver must implement the documented HMAC signature, replay protection and idempotency receipt contract. Acceptance does not prove shipping or picking. Credentials are not encrypted in the database; use WCIP_EXPORT_SIGNING_SECRET for managed configuration."
+msgstr "送信は既定で無効です。受信側はHMAC署名、リプレイ防止、冪等な受領票契約を実装します。受理は発送・ピッキングの証明ではありません。DBの秘密は暗号化されません。WCIP_EXPORT_SIGNING_SECRETを使用してください。"
+
+msgid "External job ID"
+msgstr "外部ジョブ ID"
+
+msgid "Failed"
+msgstr "失敗"
+
+msgid "Filter"
+msgstr "絞り込む"
+
+msgid "Fine gel pen set"
+msgstr "極細ゲルペンセット"
+
+msgid "For 58 mm receipts choose QR. Code 128 is shown on wider paper only."
+msgstr "58mmレシートはQRを選択。Code 128は幅広用紙のみ表示。"
+
+msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
+msgstr "注文の請求書を個別または一括で印刷する場合は、「ブラウザーの印刷ダイアログ」を選択してください。"
+
+msgid "From"
+msgstr "開始"
+
+msgid "Fulfillment eligible including unpaid collection methods"
+msgstr "未回収の支払方法を含む出荷準備対象"
+
+msgid "Fulfillment stage"
+msgstr "出荷準備段階"
+
+msgid "Fulfillment uses separate plugin storage. Native WooCommerce payment, order status and dates are unchanged."
+msgstr "出荷準備は別の保存領域を使います。WooCommerceの支払・注文状態・日時は変わりません。"
+
+msgid "General"
+msgstr "一般"
+
+msgid "Ground shipping"
+msgstr "陸上配送"
+
+msgid "HTTPS export endpoint"
+msgstr "HTTPS送信先"
+
+msgid "I reviewed the selected orders and authorize physical print submission."
+msgstr "選択した注文を確認し、印刷送信を承認します。"
+
+msgid "INVOICE"
+msgstr "請求書"
+
+msgid "Include customer notes on invoices"
+msgstr "請求書にお客様のメモを含める"
+
+msgid "Include opaque document codes"
+msgstr "不透明な文書コードを含める"
+
+msgid "Ineligible"
+msgstr "対象外"
+
+msgid "Invalid invoice template."
+msgstr "請求書テンプレートが無効です。"
+
 msgid "Invalid order selection."
 msgstr "注文の選択が無効です。"
 
-#: src/Admin/AdminPage.php:166
+msgid "Invalid preview input."
+msgstr "プレビューの入力が無効です。"
+
+msgid "Invalid settings input."
+msgstr "設定の入力が無効です。"
+
+msgid "Invalid settings section."
+msgstr "設定セクションが無効です。"
+
+msgid "Invoice"
+msgstr "請求書"
+
+#, php-format
+msgid "Invoice %s"
+msgstr "請求書 %s"
+
+msgid "Invoice PDFs contain customer data and are sent only to your configured CUPS server when this destination is used."
+msgstr "この出力先では顧客情報を含むPDFを設定済みのCUPSサーバーだけに送信します。"
+
+msgid "Invoice Printer"
+msgstr "請求書プリンター"
+
+msgid "Invoice Printer sections"
+msgstr "請求書プリンターのセクション"
+
+msgid "Invoice identity"
+msgstr "請求書の基本情報"
+
+msgid "Invoice print state"
+msgstr "請求書印刷状態"
+
+#, php-format
+msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
+msgstr "請求書を印刷しました。ジョブ #%1$d、送信先：%2$s、部数：%3$d。担当者が確認しました。"
+
+msgid "Invoice printer test page"
+msgstr "請求書プリンターのテストページ"
+
+msgid "Invoice printing"
+msgstr "請求書の印刷"
+
+msgid "Invoice queued. Check Print Jobs for delivery status."
+msgstr "請求書をキューに追加しました。印刷ジョブで送信状態を確認してください。"
+
+msgid "Invoice template"
+msgstr "請求書テンプレート"
+
+msgid "Item"
+msgstr "商品"
+
+msgid "Items and quantities without commercial amounts."
+msgstr "金額を含まない商品と数量。"
+
+msgid "Last seen"
+msgstr "最終接続"
+
+msgid "Latest reprint failed"
+msgstr "最新の再印刷が失敗"
+
+msgid "Local browser printing"
+msgstr "ローカルブラウザー印刷"
+
+msgid "Logo URL"
+msgstr "ロゴの URL"
+
+msgid "Look up"
+msgstr "検索"
+
+msgid "Manual"
+msgstr "手動"
+
+msgid "Manual and automatic jobs will appear here with their delivery status."
+msgstr "手動・自動のジョブとその送信状態がここに表示されます。"
+
+msgid "Manual printing defaults"
+msgstr "手動印刷の既定値"
+
+msgid "Morgan Studio"
+msgstr "モーガン・スタジオ"
+
+msgid "Narrow receipt with paginated output."
+msgstr "ページ分割した細幅レシート。"
+
+msgid "Needs review"
+msgstr "確認が必要"
+
 msgid "No orders selected"
 msgstr "注文が選択されていません"
 
-#. translators: %d: number of selected invoices.
-#: src/Admin/AdminPage.php:169
+msgid "No print jobs yet"
+msgstr "印刷ジョブはまだありません"
+
+msgid "No printer selected"
+msgstr "プリンター未選択"
+
+msgid "No printers were found. Check shared queues on your CUPS server."
+msgstr "プリンターが見つかりません。CUPSサーバーの共有キューを確認してください。"
+
+msgid "No valid invoices were selected."
+msgstr "有効な請求書が選択されていません。"
+
+msgid "Northstar Supply Co."
+msgstr "ノーススター・サプライ"
+
+msgid "Not configured"
+msgstr "未設定"
+
+msgid "Not connected"
+msgstr "未接続"
+
+msgid "Not printed"
+msgstr "未印刷"
+
+msgid "Not started"
+msgstr "未開始"
+
+msgid "Note"
+msgstr "メモ"
+
+msgid "Note:"
+msgstr "メモ："
+
+msgid "Offline"
+msgstr "オフライン"
+
+msgid "One of the selected order IDs is invalid."
+msgstr "選択した注文 ID のいずれかが無効です。"
+
+msgid "One of the selected orders does not exist or cannot be printed."
+msgstr "選択した注文のいずれかが存在しないか、印刷できません。"
+
+msgid "Online"
+msgstr "オンライン"
+
+msgid "Only orders WooCommerce confirms as paid are eligible."
+msgstr "WooCommerce が支払い済みと確認した注文のみが対象です。"
+
+msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
+msgstr "準備済みまたは送信済みの印刷ジョブのみ確認できます。まず用紙への出力を確認してください。"
+
+msgid "Only queued jobs can be cancelled."
+msgstr "待機中のジョブのみキャンセルできます。"
+
+msgid "Open local test page"
+msgstr "ローカルテストページを開く"
+
+msgid "Open the test page, click Print, and choose your printer in the browser dialog."
+msgstr "テストページを開き、「印刷」をクリックして、ブラウザーの印刷ダイアログでプリンターを選択してください。"
+
+msgid "Operation completed."
+msgstr "操作が完了しました。"
+
+msgid "Order"
+msgstr "注文"
+
+msgid "Order ID"
+msgstr "注文 ID"
+
+msgid "Order reconciliation"
+msgstr "注文照合"
+
+msgid "PDF support is unavailable. Install the Composer dependencies."
+msgstr "PDF 機能を利用できません。Composer の依存パッケージをインストールしてください。"
+
+msgid "Packed"
+msgstr "梱包済み"
+
+msgid "Packing list"
+msgstr "梱包明細"
+
+msgid "Payment & shipping"
+msgstr "支払いと配送"
+
+msgid "Payment / delivery"
+msgstr "支払い / お届け"
+
+msgid "Payment completed"
+msgstr "支払い完了"
+
+msgid "Payment date"
+msgstr "支払日時"
+
+msgid "Payment eligibility changed"
+msgstr "支払条件が変更"
+
+msgid "Phone"
+msgstr "電話番号"
+
+msgid "Please leave the parcel at reception."
+msgstr "荷物は受付にお預けください。"
+
+msgid "Preparing"
+msgstr "準備中"
+
+msgid "Preparing invoice…"
+msgstr "請求書を準備中…"
+
+msgid "Preview"
+msgstr "プレビュー"
+
+msgid "Preview missing automatic invoices before selecting historical orders. Nothing prints during preview. Date bounds use UTC and span at most 31 days."
+msgstr "過去の注文を選ぶ前に未処理請求書を確認します。プレビューでは印刷しません。UTCの日付範囲は最大31日です。"
+
+msgid "Preview missing prints"
+msgstr "未処理印刷のプレビュー"
+
+msgid "Preview uses realistic sample data and can switch to RTL."
+msgstr "プレビューでは実際に近いサンプルデータを使用し、右から左への表示に切り替えられます。"
+
+msgid "Price"
+msgstr "価格"
+
+msgid "Print"
+msgstr "印刷"
+
 #, php-format
 msgid "Print %d invoice"
 msgid_plural "Print %d invoices"
 msgstr[0] "請求書を%d件印刷"
 
-#: src/Admin/AdminPage.php:170
-msgid "Browser output is combined into one document. PrintNode creates controlled individual background jobs."
-msgstr "ブラウザーの出力は1つの文書にまとめられます。PrintNode は個別に制御されたバックグラウンドジョブを作成します。"
+msgid "Print Jobs"
+msgstr "印刷ジョブ"
 
-#: src/Admin/AdminPage.php:172
-#: src/Admin/OrderIntegration.php:56
-msgid "Destination"
-msgstr "出力先"
+msgid "Print agent"
+msgstr "印刷エージェント"
 
-#: src/Admin/AdminPage.php:172
-#: src/Admin/OrderIntegration.php:56
-msgid "Browser print dialog"
-msgstr "ブラウザーの印刷ダイアログ"
+msgid "Print failed"
+msgstr "印刷失敗"
 
-#. translators: %s: the selected printer's name.
-#: src/Admin/AdminPage.php:175
-#: src/Admin/OrderIntegration.php:56
-#, php-format
-msgid "PrintNode: %s"
-msgstr "PrintNode：%s"
-
-#: src/Admin/AdminPage.php:180
-msgid "Start bulk printing"
-msgstr "一括印刷を開始"
-
-#: src/Admin/AdminPage.php:203
-msgid "Invoice template"
-msgstr "請求書テンプレート"
-
-#: src/Admin/OrderIntegration.php:24
-msgid "Invoice printing"
-msgstr "請求書の印刷"
-
-#: src/Admin/OrderIntegration.php:55
-msgid "Automatic job:"
-msgstr "自動ジョブ："
-
-#: src/Admin/OrderIntegration.php:56
-msgid "Reprint invoice"
-msgstr "請求書を再印刷"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:62
 msgid "Print invoice"
 msgstr "請求書を印刷"
 
-#: src/Admin/OrderIntegration.php:56
-msgid "Close print dialog"
-msgstr "印刷ダイアログを閉じる"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:87
-msgid "Your browser print dialog will open."
-msgstr "ブラウザーの印刷ダイアログが開きます。"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/PreviewController.php:100
-#: src/Admin/PreviewController.php:102
-msgid "Print"
-msgstr "印刷"
-
-#: src/Admin/OrderIntegration.php:67
 msgid "Print invoices"
 msgstr "請求書を印刷"
 
-#: src/Admin/OrderIntegration.php:87
-msgid "The invoice will be queued for the configured physical printer."
-msgstr "設定された実際のプリンターのキューに請求書を追加します。"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Preparing invoice…"
-msgstr "請求書を準備中…"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Queuing invoice…"
-msgstr "請求書をキューに追加中…"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Invoice queued. Check Print Jobs for delivery status."
-msgstr "請求書をキューに追加しました。印刷ジョブで送信状態を確認してください。"
-
-#: src/Admin/OrderIntegration.php:87
-msgid "Printing failed. Review the message and try again."
-msgstr "印刷に失敗しました。メッセージを確認して再試行してください。"
-
-#: src/Admin/PreviewController.php:38
-msgid "Invalid preview input."
-msgstr "プレビューの入力が無効です。"
-
-#: src/Admin/PreviewController.php:52
-msgid "Invalid invoice template."
-msgstr "請求書テンプレートが無効です。"
-
-#: src/Admin/PreviewController.php:63
-#: src/Rest/RestController.php:114
-msgid "One of the selected orders does not exist or cannot be printed."
-msgstr "選択した注文のいずれかが存在しないか、印刷できません。"
-
-#: src/Admin/PreviewController.php:85
-msgid "The invoice could not be prepared. Review Print Jobs before trying again."
-msgstr "請求書を準備できませんでした。再試行する前に印刷ジョブを確認してください。"
-
-#: src/Admin/PreviewController.php:88
-msgid "No valid invoices were selected."
-msgstr "有効な請求書が選択されていません。"
-
-#: src/Automation/PrintWorker.php:69
-#: src/PrintJob/PrintConfirmationService.php:33
-#: src/Rest/RestController.php:151
-msgid "The order no longer exists."
-msgstr "注文はもう存在しません。"
-
-#: src/Automation/PrintWorker.php:72
-#: src/Automation/PrintWorker.php:85
-msgid "The order is no longer paid, so automatic printing was stopped."
-msgstr "注文が支払い済みではなくなったため、自動印刷を停止しました。"
-
-#: src/Automation/PrintWorker.php:92
-msgid "The provider accepted the print job, but its result could not be saved. Check PrintNode before reprinting."
-msgstr "プロバイダーが印刷ジョブを受け付けましたが、結果を保存できませんでした。再印刷する前に PrintNode を確認してください。"
-
-#: src/Automation/PrintWorker.php:120
-#: src/Automation/Scheduler.php:80
-msgid "The worker stopped before recording a result. Check PrintNode before reprinting."
-msgstr "結果を記録する前に処理が停止しました。再印刷する前に PrintNode を確認してください。"
-
-#: src/Automation/Scheduler.php:24
-msgid "The background queue is unavailable."
-msgstr "バックグラウンドキューを利用できません。"
-
-#: src/Automation/Scheduler.php:58
-msgid "The print job could not be queued."
-msgstr "印刷ジョブをキューに追加できませんでした。"
-
-#: src/Infrastructure/Activator.php:11
-msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
-msgstr "請求書プリンターのデータベースをインストールできませんでした。データベースの権限を確認し、再度有効化してください。"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "Business registration and tax details"
-msgstr "事業者の登録・税務情報"
-
-#: src/Pdf/MpdfRenderer.php:10
-msgid "PDF support is unavailable. Install the Composer dependencies."
-msgstr "PDF 機能を利用できません。Composer の依存パッケージをインストールしてください。"
-
-#: src/Pdf/MpdfRenderer.php:16
-msgid "A secure PDF working directory could not be created."
-msgstr "安全な PDF 作業ディレクトリを作成できませんでした。"
-
-#: src/Plugin.php:84
-msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
-msgstr "WooCommerce 請求書プリンターには WooCommerce のインストールと有効化が必要です。"
-
-#: src/Plugin.php:88
-msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
-msgstr "WooCommerce 請求書プリンターには WooCommerce 9.0 以降が必要です。"
-
-#: src/Plugin.php:92
-msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and PrintNode output. Browser printing remains available."
-msgstr "PDF と PrintNode の出力には Composer の依存パッケージが必要です。ブラウザーからの印刷は引き続き利用できます。"
-
-#: src/Plugin.php:96
-msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
-msgstr "WooCommerce 請求書プリンターのデータベースを準備できませんでした。印刷を利用できません。データベースの権限を確認し、プラグインを再度有効化してください。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:30
-msgid "PrintNode account"
-msgstr "PrintNode アカウント"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:37
-#: src/Printing/PrintNode/PrintNodeProvider.php:108
-msgid "PrintNode is not connected."
-msgstr "PrintNode に接続されていません。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:69
-msgid "Unnamed printer"
-msgstr "名前のないプリンター"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:85
-msgid "The selected printer is invalid."
-msgstr "選択したプリンターは無効です。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:123
-msgid "The print request could not be encoded."
-msgstr "印刷リクエストをエンコードできませんでした。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:128
-msgid "The PrintNode request may have been interrupted. Check the job before reprinting."
-msgstr "PrintNode へのリクエストが中断された可能性があります。再印刷する前にジョブを確認してください。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:138
-msgid "PrintNode rejected the API key."
-msgstr "PrintNode が API キーを拒否しました。"
-
-#. translators: %d: HTTP response status code.
-#: src/Printing/PrintNode/PrintNodeProvider.php:141
-#, php-format
-msgid "PrintNode rejected the request (HTTP %d)."
-msgstr "PrintNode がリクエストを拒否しました（HTTP %d）。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:144
-msgid "PrintNode may have accepted the print request. Check the job before reprinting."
-msgstr "PrintNode が印刷リクエストを受け付けた可能性があります。再印刷する前にジョブを確認してください。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:167
-msgid "PrintNode returned an unreadable job response. Check the job before reprinting."
-msgstr "PrintNode が読み取れないジョブ応答を返しました。再印刷する前にジョブを確認してください。"
-
-#: src/Printing/PrintNode/PrintNodeProvider.php:168
-msgid "PrintNode returned an unreadable response."
-msgstr "PrintNode が読み取れない応答を返しました。"
-
-#: src/PrintJob/PrintJobRepository.php:37
-msgid "The print job could not be saved."
-msgstr "印刷ジョブを保存できませんでした。"
-
-#: src/PrintJob/PrintJobService.php:72
-msgid "Choose a valid invoice template."
-msgstr "有効な請求書テンプレートを選択してください。"
-
-#: src/PrintJob/PrintJobService.php:75
-msgid "Choose a valid print destination."
-msgstr "有効な印刷先を選択してください。"
-
-#: src/PrintJob/PrintJobService.php:78
-#: src/Rest/RestController.php:80
-msgid "Choose a valid printer."
-msgstr "有効なプリンターを選択してください。"
-
-#: src/PrintJob/PrintJobService.php:81
-msgid "Connect PrintNode before printing."
-msgstr "印刷する前に PrintNode に接続してください。"
-
-#: src/Rest/RestController.php:85
-msgid "Invoice printer test page"
-msgstr "請求書プリンターのテストページ"
-
-#: src/Rest/RestController.php:95
-msgid "Select between 1 and 50 orders."
-msgstr "1～50件の注文を選択してください。"
-
-#: src/Rest/RestController.php:101
-msgid "Choose a valid template, printer, destination, and number of copies."
-msgstr "有効なテンプレート、プリンター、出力先、部数を選択してください。"
-
-#: src/Rest/RestController.php:104
-msgid "Configure the PrintNode credential before printing."
-msgstr "印刷する前に PrintNode の認証情報を設定してください。"
-
-#: src/Rest/RestController.php:110
-msgid "One of the selected order IDs is invalid."
-msgstr "選択した注文 ID のいずれかが無効です。"
-
-#: src/Rest/RestController.php:124
-msgid "A print job could not be queued. Review Print Jobs before trying again."
-msgstr "印刷ジョブをキューに追加できませんでした。再試行する前に印刷ジョブを確認してください。"
-
-#: src/Rest/RestController.php:129
-msgid "The print request stopped. Review Print Jobs before trying again."
-msgstr "印刷リクエストが停止しました。再試行する前に印刷ジョブを確認してください。"
-
-#: src/PrintJob/PrintConfirmationService.php:23
-#: src/Rest/RestController.php:145
-#: src/Rest/RestController.php:170
-#: src/Rest/RestController.php:182
 msgid "Print job not found."
 msgstr "印刷ジョブが見つかりません。"
 
-#: src/Rest/RestController.php:173
-msgid "Only queued jobs can be cancelled."
-msgstr "待機中のジョブのみキャンセルできます。"
+msgid "Print jobs"
+msgstr "印刷ジョブ"
 
-#: src/Rest/RestController.php:185
-msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
-msgstr "このジョブは安全に再試行できません。必要に応じて、意図的に新しい印刷を作成してください。"
+msgid "Print test page"
+msgstr "テストページを印刷"
 
-#: src/Rest/RestController.php:188
-msgid "The print job could not be queued. Review Print Jobs before trying again."
-msgstr "印刷ジョブをキューに追加できませんでした。再試行する前に印刷ジョブを確認してください。"
-
-#: src/Rest/RestController.php:204
-msgid "The print operation failed. Check the configuration and try again."
-msgstr "印刷処理に失敗しました。設定を確認して再試行してください。"
-
-#: src/Template/TemplateRegistry.php:10
-msgid "Classic"
-msgstr "クラシック"
-
-#: src/Template/TemplateRegistry.php:10
-msgid "A polished full invoice for office printers."
-msgstr "オフィス用プリンター向けの洗練された詳細な請求書。"
-
-#: src/Template/TemplateRegistry.php:11
-msgid "Compact"
-msgstr "コンパクト"
-
-#: src/Template/TemplateRegistry.php:11
-msgid "Dense and readable for high-volume operations."
-msgstr "大量の処理に適した、コンパクトで読みやすいレイアウト。"
-
-#: src/Template/TemplateRegistry.php:12
-msgid "Thermal 80 mm"
-msgstr "80 mm サーマル"
-
-#: src/Template/TemplateRegistry.php:12
-msgid "Purpose-built for narrow receipt printers."
-msgstr "幅の狭いレシートプリンター専用のレイアウト。"
-
-#: templates/classic/invoice.php:37
-#: templates/thermal/invoice.php:30
-msgid "INVOICE"
-msgstr "請求書"
-
-#: templates/classic/invoice.php:42
-msgid "Bill to"
-msgstr "請求先"
-
-#: templates/classic/invoice.php:47
-msgid "Payment & shipping"
-msgstr "支払いと配送"
-
-#: templates/classic/invoice.php:53
-msgid "Item"
-msgstr "商品"
-
-#: templates/classic/invoice.php:54
-#: templates/compact/invoice.php:47
-msgid "SKU"
-msgstr "商品コード"
-
-#: templates/classic/invoice.php:55
-#: templates/compact/invoice.php:48
-msgid "Qty"
-msgstr "数量"
-
-#: templates/classic/invoice.php:56
-msgid "Unit"
-msgstr "単価"
-
-#: templates/classic/invoice.php:57
-msgid "Discount"
-msgstr "割引"
-
-#: templates/classic/invoice.php:58
-msgid "Tax"
-msgstr "税"
-
-#: templates/classic/invoice.php:59
-#: templates/compact/invoice.php:50
-msgid "Total"
-msgstr "合計"
-
-#: templates/classic/invoice.php:71
-msgid "Unit prices and discounts exclude tax; line totals include tax."
-msgstr "単価と割引は税抜きです。明細の合計には税が含まれます。"
-
-#: templates/classic/invoice.php:75
-msgid "Customer note"
-msgstr "お客様のメモ"
-
-#: templates/compact/invoice.php:33
-msgid "Invoice"
-msgstr "請求書"
-
-#: templates/compact/invoice.php:37
-msgid "Customer"
-msgstr "お客様"
-
-#: templates/compact/invoice.php:40
-msgid "Payment / delivery"
-msgstr "支払い / お届け"
-
-#: templates/compact/invoice.php:46
-msgid "Description"
-msgstr "説明"
-
-#: templates/compact/invoice.php:49
-msgid "Price"
-msgstr "価格"
-
-#: templates/compact/invoice.php:60
-#: templates/thermal/invoice.php:45
-msgid "Unit prices exclude tax; line totals include discounts and tax."
-msgstr "単価は税抜きです。明細の合計には割引と税が反映されています。"
-
-#: templates/compact/invoice.php:62
-msgid "Note"
-msgstr "メモ"
-
-#: templates/thermal/invoice.php:32
-msgid "Date"
-msgstr "日付"
-
-#: templates/thermal/invoice.php:50
-msgid "Note:"
-msgstr "メモ："
-
-#: templates/thermal/invoice.php:51
-msgid "Thank you for your order."
-msgstr "ご注文ありがとうございます。"
-
-#. translators: %s: WooCommerce order number.
-#: src/Automation/PrintWorker.php:90
-#, php-format
-msgid "Invoice %s"
-msgstr "請求書 %s"
-
-#: src/Invoice/InvoiceFactory.php:80
-msgid "September 15, 2026"
-msgstr "2026年9月15日"
-
-#: src/Invoice/InvoiceFactory.php:80
-#: src/PrintJob/JobStatus.php:27
-msgid "Processing"
-msgstr "処理中"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "Northstar Supply Co."
-msgstr "ノーススター・サプライ"
-
-#: src/Invoice/InvoiceFactory.php:81
-msgid "24 Market Street, Portland, OR"
-msgstr "米国オレゴン州ポートランド、マーケット通り24番地"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "Alex Morgan"
-msgstr "アレックス・モーガン"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "Morgan Studio"
-msgstr "モーガン・スタジオ"
-
-#: src/Invoice/InvoiceFactory.php:82
-msgid "840 Evergreen Terrace, Seattle, WA"
-msgstr "米国ワシントン州シアトル、エバーグリーン通り840番地"
-
-#: src/Invoice/InvoiceFactory.php:84
-msgid "Professional planning notebook with an intentionally long product name"
-msgstr "商品名を意図的に長くしたプロフェッショナルな計画ノート"
-
-#: src/Invoice/InvoiceFactory.php:84
-msgid "Color: Midnight / Size: Large"
-msgstr "色：ミッドナイトブルー / サイズ：大"
-
-#: src/Invoice/InvoiceFactory.php:85
-msgid "Fine gel pen set"
-msgstr "極細ゲルペンセット"
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Subtotal:"
-msgstr "小計："
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Discount:"
-msgstr "割引："
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Shipping:"
-msgstr "配送："
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Tax:"
-msgstr "税："
-
-#: src/Invoice/InvoiceFactory.php:87
-msgid "Total:"
-msgstr "合計："
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Credit card"
-msgstr "クレジットカード"
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Ground shipping"
-msgstr "陸上配送"
-
-#: src/Invoice/InvoiceFactory.php:88
-msgid "Please leave the parcel at reception."
-msgstr "荷物は受付にお預けください。"
-
-#: src/PrintJob/JobStatus.php:26
-msgid "Queued"
-msgstr "待機中"
-
-#: src/PrintJob/JobStatus.php:28
-msgid "Submitted"
-msgstr "送信済み"
-
-#: src/PrintJob/JobStatus.php:29
-msgid "Failed"
-msgstr "失敗"
-
-#: src/Admin/AdminPage.php:39
-#: src/PrintJob/JobStatus.php:30
-msgid "Unknown"
-msgstr "不明"
-
-#: src/PrintJob/JobStatus.php:31
-msgid "Cancelled"
-msgstr "キャンセル済み"
-
-#: src/Admin/AdminPage.php:37
-msgid "Online"
-msgstr "オンライン"
-
-#: src/Admin/AdminPage.php:38
-msgid "Offline"
-msgstr "オフライン"
-
-#: src/Admin/AdminPage.php:128
-msgid "Automatic printing runs through PrintNode and needs its client on the printer's computer. Local browser printing requires you to confirm the print dialog."
-msgstr "自動印刷は PrintNode を使用するため、プリンターに接続されたパソコンにクライアントが必要です。ブラウザーからのローカル印刷では、印刷ダイアログでの確認が必要です。"
-
-#: src/Admin/AdminPage.php:138
-msgid "Local printer (no API key)"
-msgstr "ローカルプリンター（API キー不要）"
-
-#: src/Admin/AdminPage.php:138
-msgid "Use a printer installed on this computer through your browser. No PrintNode account or API key is needed."
-msgstr "このパソコンにインストールされたプリンターをブラウザーから使用できます。PrintNode アカウントや API キーは不要です。"
-
-#: src/Admin/AdminPage.php:138
-msgid "Open the test page, click Print, and choose your printer in the browser dialog."
-msgstr "テストページを開き、「印刷」をクリックして、ブラウザーの印刷ダイアログでプリンターを選択してください。"
-
-#: src/Admin/AdminPage.php:138
-msgid "Open local test page"
-msgstr "ローカルテストページを開く"
-
-#: src/Admin/AdminPage.php:138
-msgid "For orders, choose Browser print dialog when printing an invoice or a bulk selection."
-msgstr "注文の請求書を個別または一括で印刷する場合は、「ブラウザーの印刷ダイアログ」を選択してください。"
-
-#: src/Admin/AdminPage.php:138
-msgid "Local printers are selected in the browser print dialog and do not appear in the PrintNode list below. If a printer is missing from the dialog, install it in your operating system first."
-msgstr "ローカルプリンターはブラウザーの印刷ダイアログで選択します。下の PrintNode 一覧には表示されません。ダイアログにプリンターがない場合は、まず OS にインストールしてください。"
-
-#: src/Admin/AdminPage.php:140
-msgid "PrintNode (optional automatic printing)"
-msgstr "PrintNode（任意の自動印刷）"
-
-#: src/Admin/AdminPage.php:143
-msgid "PrintNode printers"
-msgstr "PrintNode プリンター"
-
-#: src/Admin/AdminPage.php:143
-msgid "This list only contains printers shared by the PrintNode client on your account. Install and sign in to that client on the printer's computer, then refresh the list."
-msgstr "この一覧には、ご利用のアカウントの PrintNode クライアントが共有するプリンターのみが表示されます。プリンターに接続されたパソコンにクライアントをインストールしてログインし、一覧を更新してください。"
-
-#: src/Admin/OrderIntegration.php:56
-#: src/Admin/OrderIntegration.php:87
-msgid "Choose your local printer in the browser dialog. No API key is required."
-msgstr "ブラウザーの印刷ダイアログでローカルプリンターを選択してください。API キーは不要です。"
-
-#. Author of the plugin
-#: wc-invoice-printer.php
-msgid "Shahin Ilderemi"
-msgstr "Shahin Ilderemi"
-
-#. Author URI of the plugin
-#: wc-invoice-printer.php
-msgid "https://ildrm.com"
-msgstr "https://ildrm.com"
-
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:29
-#: src/Admin/OrderIntegration.php:39
-#: src/Admin/PrintConfirmationUi.php:12
 msgid "Printed"
 msgstr "印刷済み"
 
-#: src/Admin/AdminPage.php:153
-#: src/Admin/OrderIntegration.php:39
-msgid "Not printed"
-msgstr "未印刷"
-
-#: src/Admin/OrderIntegration.php:39
 msgid "Printed means an operator confirmed the paper output."
 msgstr "印刷済みは、担当者が用紙への出力を確認したことを意味します。"
 
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Confirm only after checking the paper output. Closing the print dialog does not confirm printing."
-msgstr "用紙への出力を確認してから確定してください。印刷ダイアログを閉じても、印刷の確認にはなりません。"
+msgid "Printer"
+msgstr "プリンター"
 
-#: src/Admin/PrintConfirmationUi.php:12
+msgid "Printers"
+msgstr "プリンター"
+
+msgid "Printing"
+msgstr "印刷中"
+
 msgid "Printing confirmed. A private order note has been added."
 msgstr "印刷を確認しました。注文に非公開メモを追加しました。"
 
-#: src/Admin/PrintConfirmationUi.php:12
-#: src/Rest/RestController.php:160
-msgid "The print confirmation could not be saved. Review Print Jobs and try again."
-msgstr "印刷の確認を保存できませんでした。印刷ジョブを確認して、もう一度お試しください。"
+msgid "Printing failed. Review the message and try again."
+msgstr "印刷に失敗しました。メッセージを確認して再試行してください。"
 
-#: src/Admin/PrintConfirmationUi.php:12
-msgid "Confirm printed"
-msgstr "印刷済みを確認"
+msgid "Processing"
+msgstr "処理中"
 
-#: src/PrintJob/PrintConfirmationService.php:29
-#: src/Rest/RestController.php:147
-msgid "Only prepared or submitted print jobs can be confirmed. Check the paper output first."
-msgstr "準備済みまたは送信済みの印刷ジョブのみ確認できます。まず用紙への出力を確認してください。"
+msgid "Professional planning notebook with an intentionally long product name"
+msgstr "商品名を意図的に長くしたプロフェッショナルな計画ノート"
 
-#. translators: 1: print job ID, 2: destination name, 3: number of copies.
-#: src/PrintJob/PrintConfirmationService.php:37
-#, php-format
-msgid "Invoice printed. Job #%1$d; destination: %2$s; copies: %3$d. Confirmed by the operator."
-msgstr "請求書を印刷しました。ジョブ #%1$d、送信先：%2$s、部数：%3$d。担当者が確認しました。"
+msgid "Provider"
+msgstr "プロバイダー"
 
-#: src/Rest/RestController.php:139
+msgid "Purpose-built for narrow receipt printers."
+msgstr "幅の狭いレシートプリンター専用のレイアウト。"
+
+msgid "Qty"
+msgstr "数量"
+
+msgid "Quantity"
+msgstr "数量"
+
+msgid "Queued"
+msgstr "待機中"
+
+msgid "Queuing invoice…"
+msgstr "請求書をキューに追加中…"
+
+msgid "RTL preview"
+msgstr "右から左のプレビュー"
+
+msgid "Ready to ship"
+msgstr "発送準備完了"
+
+msgid "Recipient"
+msgstr "受取人"
+
+msgid "Recipient label without prices."
+msgstr "価格なしの宛先ラベル。"
+
+msgid "Recipient phone"
+msgstr "受取人の電話"
+
+msgid "Recorded payment confirmed"
+msgstr "記録済み支払を確認"
+
+msgid "Refresh diagnostics"
+msgstr "診断を更新"
+
+msgid "Refresh printers"
+msgstr "プリンターを更新"
+
+msgid "Refresh to load printers"
+msgstr "更新してプリンターを読み込む"
+
+msgid "Replace signing secret leave blank to retain"
+msgstr "署名シークレットを変更、空欄で保持"
+
+msgid "Reprint invoice"
+msgstr "請求書を再印刷"
+
+msgid "Retry if safe"
+msgstr "安全な場合に再試行"
+
+msgid "Review queue health, discovery progress and printer configuration. Cron-disabled sites need an external scheduled runner."
+msgstr "キュー、検出進捗、プリンターを確認します。Cron無効のサイトは外部の定期実行が必要です。"
+
+msgid "SKU"
+msgstr "商品コード"
+
+msgid "Save printer settings"
+msgstr "プリンター設定を保存"
+
+msgid "Save selected template"
+msgstr "選択したテンプレートを保存"
+
+msgid "Save the server settings before testing. Leave the password blank to retain it. HTTPS certificates must be trusted by WordPress."
+msgstr "テスト前にサーバー設定を保存します。パスワードを空欄にすると保持されます。WordPressがHTTPS証明書を信頼する必要があります。"
+
+msgid "Secure manual and automatic invoice printing for WooCommerce."
+msgstr "WooCommerce の請求書を安全に手動・自動印刷します。"
+
+msgid "Select"
+msgstr "選択"
+
+msgid "Select between 1 and 50 orders."
+msgstr "1～50件の注文を選択してください。"
+
 msgid "Select between 1 and 50 print jobs."
 msgstr "1～50 件の印刷ジョブを選択してください。"
 
-#: src/Rest/RestController.php:143
+msgid "Select no more than 50 orders."
+msgstr "選択できる注文は50件までです。"
+
 msgid "Select valid print jobs."
 msgstr "有効な印刷ジョブを選択してください。"
+
+msgid "Selected"
+msgstr "選択済み"
+
+msgid "Self-hosted CUPS server"
+msgstr "自己ホスト型CUPSサーバー"
+
+msgid "September 15, 2026"
+msgstr "2026年9月15日"
+
+msgid "Server configured"
+msgstr "サーバー設定済み"
+
+msgid "Settings saved."
+msgstr "設定を保存しました。"
+
+msgid "Shahin Ilderemi"
+msgstr "Shahin Ilderemi"
+
+msgid "Share recipient data with the configured receiver"
+msgstr "設定した送信先に宛先情報を共有"
+
+msgid "Shipped"
+msgstr "発送済み"
+
+msgid "Shipping label"
+msgstr "配送ラベル"
+
+msgid "Shipping metadata mapping as JSON"
+msgstr "配送メタデータのJSONマッピング"
+
+msgid "Shipping:"
+msgstr "配送："
+
+msgid "Show payment date and time"
+msgstr "支払日時を表示"
+
+msgid "Show recipient phone"
+msgstr "受取人の電話を表示"
+
+msgid "Show sender on labels"
+msgstr "ラベルに差出人を表示"
+
+msgid "Something went wrong. Check the details and try again."
+msgstr "エラーが発生しました。詳細を確認して再試行してください。"
+
+msgid "Source"
+msgstr "作成元"
+
+msgid "Stage after invoice confirmation"
+msgstr "請求書確認後の段階"
+
+msgid "Start bulk printing"
+msgstr "一括印刷を開始"
+
+msgid "Start preparation after physical invoice confirmation"
+msgstr "紙の請求書確認後に準備開始"
+
+msgid "Status"
+msgstr "状態"
+
+msgid "Submitted"
+msgstr "送信済み"
+
+msgid "Submitted means the local spooler or CUPS accepted the PDF, or the browser invoice was prepared. It does not confirm paper output."
+msgstr "送信済みはローカルスプーラーまたはCUPSがPDFを受け付けたか、ブラウザーの請求書が準備された状態です。用紙への出力確認ではありません。"
+
+msgid "Submitted to CUPS."
+msgstr "CUPS に送信しました。"
+
+msgid "Subtotal:"
+msgstr "小計："
+
+msgid "Tax"
+msgstr "税"
+
+msgid "Tax:"
+msgstr "税："
+
+msgid "Template"
+msgstr "テンプレート"
+
+msgid "Templates"
+msgstr "テンプレート"
+
+msgid "Test connection"
+msgstr "接続をテスト"
+
+msgid "Test webhook with demo data"
+msgstr "デモデータでWebhookテスト"
+
+msgid "Thank you for your order."
+msgstr "ご注文ありがとうございます。"
+
+msgid "The CUPS certificate bundle is unavailable."
+msgstr "CUPS証明書バンドルが利用できません。"
+
+msgid "The CUPS password is managed with WCIP_CUPS_PASSWORD and cannot be edited here."
+msgstr "CUPSパスワードはWCIP_CUPS_PASSWORDで管理され、ここでは編集できません。"
+
+msgid "The CUPS request could not be completed. Check the server and paper output before reprinting."
+msgstr "CUPS要求を完了できませんでした。再印刷前にサーバーと用紙出力を確認してください。"
+
+msgid "The CUPS server rejected the request or returned an uncertain result."
+msgstr "CUPSサーバーが要求を拒否したか不確かな結果を返しました。"
+
+msgid "The background queue is unavailable."
+msgstr "バックグラウンドキューを利用できません。"
+
+msgid "The document exceeds the safe rendering limit."
+msgstr "文書が安全な描画上限を超えています。"
+
+msgid "The invoice could not be prepared. Review Print Jobs before trying again."
+msgstr "請求書を準備できませんでした。再試行する前に印刷ジョブを確認してください。"
+
+msgid "The invoice printer database could not be installed. Check database permissions and try activation again."
+msgstr "請求書プリンターのデータベースをインストールできませんでした。データベースの権限を確認し、再度有効化してください。"
+
+msgid "The invoice will be queued for the configured physical printer."
+msgstr "設定された実際のプリンターのキューに請求書を追加します。"
+
+msgid "The operation could not complete. Check permissions, input and configuration, then review diagnostics."
+msgstr "操作を完了できませんでした。権限、入力、設定を確認し、診断を参照してください。"
+
+msgid "The order is no longer paid, so automatic printing was stopped."
+msgstr "注文が支払い済みではなくなったため、自動印刷を停止しました。"
+
+msgid "The order no longer exists."
+msgstr "注文はもう存在しません。"
+
+msgid "The print confirmation could not be saved. Review Print Jobs and try again."
+msgstr "印刷の確認を保存できませんでした。印刷ジョブを確認して、もう一度お試しください。"
+
+msgid "The print document or copy count is invalid."
+msgstr "印刷文書または部数が無効です。"
+
+msgid "The print job could not be queued."
+msgstr "印刷ジョブをキューに追加できませんでした。"
+
+msgid "The print job could not be queued. Review Print Jobs before trying again."
+msgstr "印刷ジョブをキューに追加できませんでした。再試行する前に印刷ジョブを確認してください。"
+
+msgid "The print job could not be saved."
+msgstr "印刷ジョブを保存できませんでした。"
+
+msgid "The print operation failed. Check the configuration and try again."
+msgstr "印刷処理に失敗しました。設定を確認して再試行してください。"
+
+msgid "The print request stopped. Review Print Jobs before trying again."
+msgstr "印刷リクエストが停止しました。再試行する前に印刷ジョブを確認してください。"
+
+msgid "The printing configuration migration failed. Check database permissions."
+msgstr "印刷設定の移行に失敗しました。データベース権限を確認してください。"
+
+msgid "The provider accepted the print job, but its result could not be saved. Check CUPS before reprinting."
+msgstr "プロバイダーが印刷ジョブを受け付けましたが、結果を保存できませんでした。再印刷する前に CUPS を確認してください。"
+
+msgid "The selected printer is invalid."
+msgstr "選択したプリンターは無効です。"
+
+msgid "The stored password is never displayed or returned to the browser."
+msgstr "保存したパスワードは表示せずブラウザーにも返しません。"
+
+msgid "The worker stopped before recording a result. Check CUPS before reprinting."
+msgstr "結果を記録する前に処理が停止しました。再印刷する前に CUPS を確認してください。"
+
+msgid "Thermal 58 mm"
+msgstr "サーマル 58 mm"
+
+msgid "Thermal 80 mm"
+msgstr "80 mm サーマル"
+
+msgid "This job is not eligible for a safe retry. Reprint intentionally instead."
+msgstr "このジョブは安全に再試行できません。必要に応じて、意図的に新しい印刷を作成してください。"
+
+msgid "This list contains queues shared by your CUPS server. Configure and test the printer in CUPS, save its HTTPS address here, then refresh."
+msgstr "CUPSサーバーの共有キュー一覧です。CUPSで設定とテストを行い、HTTPSアドレスを保存して更新します。"
+
+msgid "This order does not require a shipping label."
+msgstr "この注文には配送ラベルが不要です。"
+
+msgid "This order is not eligible under the configured payment policy."
+msgstr "この注文は設定された支払ポリシーの対象外です。"
+
+msgid "To"
+msgstr "終了"
+
+msgid "Total"
+msgstr "合計"
+
+msgid "Total:"
+msgstr "合計："
+
+msgid "Trigger"
+msgstr "トリガー"
+
+msgid "Unit"
+msgstr "単価"
+
+msgid "Unit prices and discounts exclude tax; line totals include tax."
+msgstr "単価と割引は税抜きです。明細の合計には税が含まれます。"
+
+msgid "Unit prices exclude tax; line totals include discounts and tax."
+msgstr "単価は税抜きです。明細の合計には割引と税が反映されています。"
+
+msgid "Unknown"
+msgstr "不明"
+
+msgid "Update fulfillment"
+msgstr "出荷準備を更新"
+
+msgid "Updated"
+msgstr "更新日時"
+
+msgid "Use a keyboard scanner or enter the opaque reference. Scanning requires sign-in and never confirms physical printing."
+msgstr "キーボード型スキャナーか参照コードを入力します。ログインが必要で、紙の印刷確認にはなりません。"
+
+msgid "Use a printer installed on this computer through your browser. No account or subscription is needed."
+msgstr "このコンピューターにインストールされたプリンターをブラウザーで使用します。アカウントや購読は不要です。"
+
+msgid "Use billing values for missing recipient fields"
+msgstr "不足する宛先項目に請求先情報を使用"
+
+msgid "Use site or an IANA timezone. Map named fields to trusted order metadata keys. Extra address fields are printed only when mapped."
+msgstr "siteまたはIANAタイムゾーンを指定。信頼する注文メタデータに項目を対応付けます。追加の住所項目は対応付けた場合のみ印刷します。"
+
+msgid "Use the free local print agent on Windows, Linux or macOS. It connects to this site over HTTPS and works with shared hosting, VPS and dedicated servers."
+msgstr "Windows、Linux、macOSで無料のローカル印刷エージェントを使用できます。HTTPSでサイトに接続し、共有ホスティング、VPS、専用サーバーに対応します。"
+
+msgid "View"
+msgstr "表示"
+
+msgid "Weight"
+msgstr "重量"
+
+msgid "Weight in kg"
+msgstr "重量 kg"
+
+msgid "WooCommerce Invoice Printer"
+msgstr "WooCommerce 請求書プリンター"
+
+msgid "WooCommerce Invoice Printer could not prepare its database. Printing is unavailable; check database permissions and reactivate the plugin."
+msgstr "WooCommerce 請求書プリンターのデータベースを準備できませんでした。印刷を利用できません。データベースの権限を確認し、プラグインを再度有効化してください。"
+
+msgid "WooCommerce Invoice Printer needs its Composer dependencies for PDF and automatic printing. Browser printing remains available."
+msgstr "PDFと自動印刷にはComposer依存パッケージが必要です。ブラウザー印刷は引き続き使用できます。"
+
+msgid "WooCommerce Invoice Printer requires WooCommerce 9.0 or newer."
+msgstr "WooCommerce 請求書プリンターには WooCommerce 9.0 以降が必要です。"
+
+msgid "WooCommerce Invoice Printer requires WooCommerce to be installed and active."
+msgstr "WooCommerce 請求書プリンターには WooCommerce のインストールと有効化が必要です。"
+
+msgid "Working…"
+msgstr "処理中…"
+
+msgid "You are not allowed to change these settings."
+msgstr "この設定を変更する権限がありません。"
+
+msgid "You are not allowed to print invoices."
+msgstr "請求書を印刷する権限がありません。"
+
+msgid "You are not allowed to view print jobs."
+msgstr "印刷ジョブを表示する権限がありません。"
+
+msgid "Your browser print dialog will open."
+msgstr "ブラウザーの印刷ダイアログが開きます。"
+
+msgid "https://ildrm.com"
+msgstr "https://ildrm.com"
 

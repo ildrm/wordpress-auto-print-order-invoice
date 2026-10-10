@@ -39,7 +39,7 @@ function environment({ restUrl = 'https://example.test/wp-json/wc-invoice-printe
     '[data-auto-settings]': dependent
   };
   const root = { querySelector(selector) { return fields[selector]; }, addEventListener(name, callback) { listeners[name] = callback; } };
-  const config = { restUrl, nonce: 'nonce', printerId, printerStates, strings: { working: 'Working', failed: 'Failed', noPrinters: 'No printers', selectPrinter: 'Choose a printer', submitted: 'Submitted', connectionOk: 'Connected', printersFound: '%d printers', jobsQueued: '%d queued', invalidCopies: 'Choose between 1 and 20 copies.' } };
+  const config = { restUrl, nonce: 'nonce', printerId, agentQueue: 'Office', printerStates, strings: { working: 'Working', failed: 'Failed', noPrinters: 'No printers', selectPrinter: 'Choose a printer', submitted: 'Submitted', connectionOk: 'Connected', printersFound: '%d printers', jobsQueued: '%d queued', invalidCopies: 'Choose between 1 and 20 copies.' } };
   const context = { document: { querySelector() { return root; } }, window: { wcipAdmin: config, location: { reload() {} }, open(url) { opened.push(url); } }, wcipAdmin: config, URL, Option, Event: class { constructor(type, options = {}) { this.type = type; this.bubbles = !!options.bubbles; } }, fetch: async (url, options) => { requests.push({ url, options }); return { ok: true, async json() { return { printers, queued: 2 }; } }; } };
   vm.runInNewContext(source, context);
   async function click(dataset) {
@@ -95,7 +95,7 @@ test('empty printer refresh clears stale printer name', async () => {
   assert.equal(env.notice.textContent, 'No printers');
 });
 
-test('PrintNode test printing requires an explicitly selected printer', async () => {
+test('CUPS test printing requires an explicitly selected printer', async () => {
   const env = environment({ printerId: '' });
   await env.click({ wcipAction: 'test-print' });
   assert.equal(env.requests.length, 0);
@@ -116,8 +116,16 @@ test('bulk browser printing requests the print dialog and preserves copies', asy
 });
 
 test('invalid copy count does not send print requests', async () => {
-  const env = environment({ copies: '1.5', output: 'printnode' });
+  const env = environment({ copies: '1.5', output: 'cups' });
   await env.click({ wcipBulkPrint: '', orderIds: '1', previewUrl: 'https://example.test/wp-admin/admin-post.php' });
   assert.equal(env.requests.length, 0);
   assert.equal(env.notice.textContent, 'Choose between 1 and 20 copies.');
+});
+
+test('bulk agent printing uses the paired route instead of a CUPS device', async () => {
+  const env = environment({ output: 'agent' });
+  await env.click({ wcipBulkPrint: '', orderIds: '1,2', previewUrl: 'https://example.test/wp-admin/admin-post.php' });
+  const body = JSON.parse(env.requests[0].options.body);
+  assert.deepEqual(body, { order_ids: [1, 2], template_id: 'classic', provider_id: 'agent', printer_id: 'Office', copies: 2 });
+  assert.equal(env.opened.length, 0);
 });

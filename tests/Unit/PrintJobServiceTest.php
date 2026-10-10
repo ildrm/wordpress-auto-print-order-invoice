@@ -14,7 +14,7 @@ final class PrintJobServiceTest extends JobTestCase {
 	}
 
 	public function test_missing_credentials_invalid_printer_template_and_filter_stop_automatic_printing(): void {
-		foreach ( array( array( 'printnode_api_key' => '' ), array( 'printnode_printer_id' => '0' ), array( 'printnode_printer_id' => '-2' ), array( 'automatic_template' => 'missing' ) ) as $changes ) {
+		foreach ( array( array( 'cups_endpoint' => '' ), array( 'cups_printer_id' => '../bad' ), array( 'cups_printer_id' => '-2' ), array( 'automatic_template' => 'missing' ) ) as $changes ) {
 			$before = $GLOBALS['wcip_test_options']['wcip_settings'];
 			$this->settings->update( $changes );
 			self::assertNull( $this->service->create_automatic( new \WC_Order( 42 ) ) );
@@ -62,7 +62,7 @@ final class PrintJobServiceTest extends JobTestCase {
 	}
 
 	public function test_manual_jobs_are_unique_and_browser_jobs_do_not_need_credentials(): void {
-		$this->settings->update( array( 'printnode_api_key' => '' ) );
+		$this->settings->update( array( 'cups_endpoint' => '' ) );
 		$first = $this->service->create_manual( new \WC_Order( 42, 'pending' ), 'classic', 'browser', '', 2 );
 		$second = $this->service->create_manual( new \WC_Order( 42, 'pending' ), 'classic', 'browser', '', 2 );
 		self::assertNotSame( $first['idempotency_key'], $second['idempotency_key'] );
@@ -72,13 +72,13 @@ final class PrintJobServiceTest extends JobTestCase {
 
 	public function test_manual_print_requires_configuration_and_valid_copy_count(): void {
 		$this->expectException( \InvalidArgumentException::class );
-		$this->service->create_manual( new \WC_Order( 42 ), 'classic', 'printnode', '0', 1 );
+		$this->service->create_manual( new \WC_Order( 42 ), 'classic', 'cups', '../bad', 1 );
 	}
 
 	public function test_manual_print_rejects_missing_credentials(): void {
-		$this->settings->update( array( 'printnode_api_key' => '' ) );
+		$this->settings->update( array( 'cups_endpoint' => '' ) );
 		$this->expectException( \InvalidArgumentException::class );
-		$this->service->create_manual( new \WC_Order( 42 ), 'classic', 'printnode', '7', 1 );
+		$this->service->create_manual( new \WC_Order( 42 ), 'classic', 'cups', '7', 1 );
 	}
 
 	public function test_manual_print_rejects_invalid_copy_count(): void {
@@ -88,7 +88,7 @@ final class PrintJobServiceTest extends JobTestCase {
 
 	public function test_manual_service_returns_the_actual_scheduler_failure_state(): void {
 		$GLOBALS['wcip_async_action_result'] = 0;
-		$job = $this->service->create_manual( new \WC_Order( 42 ), 'classic', 'printnode', '7', 1 );
+		$job = $this->service->create_manual( new \WC_Order( 42 ), 'classic', 'cups', '7', 1 );
 		self::assertSame( 'failed', $job['status'] );
 		self::assertSame( 'schedule_failed', $job['error_code'] );
 	}

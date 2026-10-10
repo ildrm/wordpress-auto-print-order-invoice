@@ -59,6 +59,7 @@ if ( ! function_exists( 'get_transient' ) ) { function get_transient( string $ke
 if ( ! function_exists( 'set_transient' ) ) { function set_transient( string $key, $value ): bool { $GLOBALS['wcip_test_transients'][ $key ] = $value; return true; } }
 if ( ! function_exists( 'wp_json_encode' ) ) { function wp_json_encode( $value, int $flags = 0, int $depth = 512 ) { return json_encode( $value, $flags, $depth ); } }
 if ( ! function_exists( 'wp_safe_remote_request' ) ) { function wp_safe_remote_request( string $url, array $args ) { $GLOBALS['wcip_last_http'] = array( $url, $args ); if ( isset( $GLOBALS['wcip_http_callback'] ) ) { return ( $GLOBALS['wcip_http_callback'] )( $url, $args ); } return $GLOBALS['wcip_http_response']; } }
+if ( ! function_exists( 'wp_remote_request' ) ) { function wp_remote_request( string $url, array $args ) { return wp_safe_remote_request( $url, $args ); } }
 if ( ! function_exists( 'is_wp_error' ) ) { function is_wp_error( $value ): bool { return $value instanceof WP_Error; } }
 if ( ! function_exists( 'wp_remote_retrieve_response_code' ) ) { function wp_remote_retrieve_response_code( array $response ): int { return (int) ( $response['response']['code'] ?? 0 ); } }
 if ( ! function_exists( 'wp_remote_retrieve_body' ) ) { function wp_remote_retrieve_body( array $response ): string { return (string) ( $response['body'] ?? '' ); } }

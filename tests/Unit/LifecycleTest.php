@@ -40,14 +40,14 @@ final class LifecycleTest extends TestCase {
 		self::assertSame( array(), $GLOBALS['wpdb']->queries );
 		self::assertSame( 'Retained', $GLOBALS['wcip_test_options']['wcip_settings']['business_name'] );
 		self::assertContains( 'wcip_manage_settings', $administrator_role->removed );
-		self::assertCount( 1, $GLOBALS['wcip_unscheduled_actions'] );
+		self::assertCount( 4, $GLOBALS['wcip_unscheduled_actions'] );
 	}
 
 	public function test_opted_in_uninstall_removes_only_plugin_table_and_options(): void {
 		$GLOBALS['wcip_test_options'] = array( 'wcip_delete_data_on_uninstall' => true, 'wcip_settings' => array(), 'wcip_db_version' => '1.0.0', 'woocommerce_currency' => 'USD' );
 		defined( 'WP_UNINSTALL_PLUGIN' ) || define( 'WP_UNINSTALL_PLUGIN', 'wc-invoice-printer.php' );
 		require WCIP_PATH . 'uninstall.php';
-		self::assertSame( array( 'DROP TABLE IF EXISTS wp_wc_invoice_print_jobs' ), $GLOBALS['wpdb']->queries );
+		self::assertSame( array_map( static fn( $table ) => 'DROP TABLE IF EXISTS wp_' . $table, array( 'wc_invoice_print_jobs', 'wcip_runtime_leases', 'wcip_document_references', 'wcip_fulfillment', 'wcip_fulfillment_events', 'wcip_export_outbox' ) ), $GLOBALS['wpdb']->queries );
 		self::assertSame( array( 'woocommerce_currency' => 'USD' ), $GLOBALS['wcip_test_options'] );
 	}
 }

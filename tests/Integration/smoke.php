@@ -19,20 +19,21 @@ $user_before     = get_current_user_id();
 $orders          = array();
 $product         = null;
 $submissions     = 0;
-$http_status     = 201;
+$http_status     = 200;
 $assertions      = 0;
 $check           = static function ( bool $condition, string $message ) use ( &$assertions ): void {
 	++$assertions;
 	if ( ! $condition ) { throw new RuntimeException( $message ); }
 };
 $http_mock = static function ( $preempt, array $args, string $url ) use ( &$submissions, &$http_status ) {
-	if ( 'https://api.printnode.com/printjobs' === $url ) {
+	if ( 'https://cups.example.test/printers/123' === $url ) {
 		++$submissions;
-		$payload = json_decode( $args['body'], true );
-		if ( 0 !== strpos( base64_decode( $payload['content'], true ) ?: '', '%PDF-' ) ) {
+		if ( false === strpos( $args['body'], "\x03%PDF-" ) ) {
 			throw new RuntimeException( 'The provider did not receive a real PDF.' );
 		}
-		return array( 'headers' => array(), 'response' => array( 'code' => $http_status, 'message' => 'Mocked' ), 'body' => 201 === $http_status ? '9001' : '{}' );
+		$id = unpack( 'N', substr( $args['body'], 4, 4 ) )[1];
+		$codec = \WCInvoicePrinter\Printing\Cups\IppCodec::class;
+		return array( 'headers' => array( 'content-type' => 'application/ipp' ), 'response' => array( 'code' => $http_status, 'message' => 'Mocked' ), 'body' => 200 === $http_status ? pack( 'CCnN', 1, 1, 0, $id ) . "\x01" . $codec::attribute( 0x47, 'attributes-charset', 'utf-8' ) . "\x02" . $codec::attribute( 0x21, 'job-id', pack( 'N', 9001 ) ) . "\x03" : '{}' );
 	}
 	// Prevent mail/service/update requests from contacting external systems during the test.
 	return new WP_Error( 'wcip_test_http_blocked', 'Outbound HTTP is disabled for this integration test.' );
@@ -43,7 +44,7 @@ add_filter( 'pre_wp_mail', $mail_mock, PHP_INT_MAX );
 
 try {
 	$settings = new \WCInvoicePrinter\Settings\SettingsRepository();
-	$settings->update( array( 'automatic_enabled' => true, 'automatic_template' => 'classic', 'automatic_copies' => 2, 'printnode_api_key' => 'integration-test-dummy-key', 'printnode_printer_id' => '123', 'logo_url' => '' ) );
+	$settings->update( array( 'automatic_enabled' => true, 'automatic_template' => 'classic', 'automatic_copies' => 2, 'cups_endpoint' => 'https://cups.example.test', 'cups_printer_id' => '123', 'logo_url' => '' ) );
 	$repository = new \WCInvoicePrinter\PrintJob\PrintJobRepository();
 	$scheduler  = new \WCInvoicePrinter\Automation\Scheduler( $repository );
 	$templates  = new \WCInvoicePrinter\Template\TemplateRegistry();
@@ -87,8 +88,8 @@ try {
 	$check( $price_text( wc_price( 20, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['discount'] ), 'Stored line discount must be reflected on invoice.' );
 	$check( $price_text( wc_price( 88, array( 'currency' => $order->get_currency() ) ) ) === $price_text( $invoice->items[0]['total'] ), 'Discounted line total must include stored tax.' );
 	$check( false === strpos( $invoice->items[0]['variation'], 'DO_NOT_SHOW' ), 'Private item metadata must not appear.' );
-	$parallel_one = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
-	$parallel_two = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$parallel_one = $service->create_manual( $order, 'classic', 'cups', '123', 1 );
+	$parallel_two = $service->create_manual( $order, 'classic', 'cups', '123', 1 );
 	$check( 'queued' === $parallel_one['status'] && 'queued' === $parallel_two['status'] && (int) $parallel_one['action_id'] > 0 && (int) $parallel_two['action_id'] > 0 && $parallel_one['action_id'] !== $parallel_two['action_id'], 'Independent jobs must queue while another invoice is pending.' );
 	foreach ( array( $parallel_one, $parallel_two ) as $parallel_job ) {
 		$repository->cancel( (int) $parallel_job['id'] );
@@ -106,13 +107,13 @@ try {
 	$check( ! $repository->cancel( (int) $job['id'] ), 'An accepted job must not be cancelled.' );
 
 	$http_status = 503;
-	$uncertain = $service->create_manual( $order, 'compact', 'printnode', '123', 1 );
+	$uncertain = $service->create_manual( $order, 'compact', 'cups', '123', 1 );
 	ActionScheduler::runner()->process_action( (int) $uncertain['action_id'], 'WCIP integration' );
 	$check( 'unknown' === $repository->find( (int) $uncertain['id'] )['status'], 'Submission HTTP 503 must be unknown.' );
 	$check( ! $repository->retry_failed( (int) $uncertain['id'] ), 'Unknown jobs must not become safe retries.' );
 
 	$http_status = 429;
-	$limited = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$limited = $service->create_manual( $order, 'classic', 'cups', '123', 1 );
 	ActionScheduler::runner()->process_action( (int) $limited['action_id'], 'WCIP integration' );
 	$limited = $repository->find( (int) $limited['id'] );
 	$check( 'queued' === $limited['status'] && 1 === (int) $limited['attempt_count'], 'Definite rate-limit rejection must requeue once.' );
@@ -124,7 +125,7 @@ try {
 	$check( 'failed' === $limited['status'] && 3 === (int) $limited['attempt_count'], 'Real queue retries must stop at three attempts.' );
 	$check( ! $repository->retry_failed( (int) $limited['id'] ), 'Exhausted rate-limit job must not be retried.' );
 
-	$repair = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$repair = $service->create_manual( $order, 'classic', 'cups', '123', 1 );
 	as_unschedule_all_actions( \WCInvoicePrinter\Automation\Scheduler::HOOK, array( 'job_id' => (int) $repair['id'] ), \WCInvoicePrinter\Automation\Scheduler::GROUP );
 	update_option( 'wcip_recovery_cursor', 0, false );
 	$scheduler->recover();
@@ -132,7 +133,7 @@ try {
 	$check( $repository->cancel( (int) $repair['id'] ), 'Queued jobs must be cancellable.' );
 	$history = $repository->list( array( 'order_id' => $order->get_id(), 'status' => 'submitted' ) );
 	$check( 1 === $history['total'] && 1 === count( $history['items'] ), 'Real database history filters/count must match.' );
-	$resume = $service->create_manual( $order, 'classic', 'printnode', '123', 1 );
+	$resume = $service->create_manual( $order, 'classic', 'cups', '123', 1 );
 	\WCInvoicePrinter\Infrastructure\Activator::deactivate();
 	$check( 'queued' === $repository->find( (int) $resume['id'] )['status'] && null === $repository->find( (int) $resume['id'] )['action_id'], 'Deactivation must preserve a queued row and release its action reference.' );
 	update_option( 'wcip_recovery_cursor', 0, false );
@@ -141,7 +142,7 @@ try {
 
 	wp_set_current_user( 0 );
 	$request = new WP_REST_Request( 'POST', '/wc-invoice-printer/v1/print' );
-	$request->set_body_params( array( 'order_ids' => array( $order->get_id() ), 'template_id' => 'classic', 'provider_id' => 'printnode', 'printer_id' => '123', 'copies' => 1 ) );
+	$request->set_body_params( array( 'order_ids' => array( $order->get_id() ), 'template_id' => 'classic', 'provider_id' => 'cups', 'printer_id' => '123', 'copies' => 1 ) );
 	$response = rest_do_request( $request );
 	$check( 401 === $response->get_status(), 'Unauthenticated REST printing must be denied.' );
 	$admins = get_users( array( 'role' => 'administrator', 'number' => 1 ) );

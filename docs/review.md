@@ -1,5 +1,7 @@
 # Code review and verification
 
+This is a historical review of the retired cloud provider. Version 1.4.0 uses the open-source local agent or direct CUPS; the commercial provider was removed in 1.3.0. Provider-specific findings below are historical evidence, not current setup instructions. Current 1.4.0 changes and executed results are recorded in [the remediation report](../REMEDIATION_TRACEABILITY.md). Its earlier counts and archive statements describe that review only.
+
 Review date: October 6, 2026. Scope: the complete shipped PHP, invoice templates, admin JavaScript/CSS, lifecycle code, existing tests, and documentation. Automatic printing remains restricted to WooCommerce-confirmed paid orders, as requested.
 
 ## Findings fixed
@@ -47,3 +49,5 @@ No live PrintNode account/client or physical printer was exercised. There is no 
 The checked-in historical ZIP was not regenerated. These changes are in source; prepare and verify a fresh archive before release.
 
 The subsequent [PHP compatibility review](php-compatibility.md), dated October 7, 2026, records the PHP 7.4 changes, dependency resolution, and verification on PHP 7.4 and PHP 8.0–8.5.
+
+The 1.4.0 cross-platform agent runs separately from hosting PHP. Its Windows/Linux/macOS backend setup and Python 3.10+ requirements are in [cross-platform printing](cross-platform-printing.md); executed results and native hardware limits are in [the current remediation record](../REMEDIATION_TRACEABILITY.md).
